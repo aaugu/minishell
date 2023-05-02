@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_command_input.c                               :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:44:00 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/02 15:50:54 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/02 11:15:38 by lvogt             #+#    #+#             */
+/*   Updated: 2023/05/02 14:44:19 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-void	init_command_input(t_data *data)
+void	ft_title(void)
 {
-	parse_user_input(data, data->input);
+	printf("----------------------- \033[0;34m");
+	printf("aaugu & lvogt \033[0;31m----------");
+	printf("-----------------\n\n\033[0m");
 }

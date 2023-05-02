@@ -3,13 +3,19 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror
 
 INCLUDE = -I includes -I libft
-LIB = -Llibft -lft
+LIB = -Llibft -lft -lreadline
 LIBFT = libft/libft.a
+
+LDFLAGS = -L$(HOME)/.brew/opt/readline/lib
+CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
 
 RM = rm -f
 
 SRCS_FILES = 	main.c \
 				parsing/parsing.c \
+				tools/signal.c \
+				tools/utils.c \
+				
 
 SRCS = $(addprefix ./src/, $(SRCS_FILES))
 OBJS = $(SRCS:%.c=%.o)
@@ -21,7 +27,7 @@ all:		$(NAME)
 
 $(NAME):	$(LIBFT) $(OBJS)
 			@echo " [ .. ] | Compiling minishell.."
-			@($(CC) $(FLAGS) $(INCLUDE) $(OBJS) $(LIB) -o $(NAME))
+			@($(CC) $(FLAGS) $(INCLUDE) $(OBJS) $(LIB) $(LDFLAGS) $(CPPFLAGS) -o $(NAME))
 			@echo " [ OK ] | minishell ready!"
 
 $(LIBFT):
