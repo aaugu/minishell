@@ -9,6 +9,7 @@ LIBFT = libft/libft.a
 RM = rm -f
 
 SRCS_FILES = 	main.c \
+				parsing/parsing.c \
 
 SRCS = $(addprefix ./src/, $(SRCS_FILES))
 OBJS = $(SRCS:%.c=%.o)
