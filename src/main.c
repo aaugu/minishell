@@ -6,12 +6,11 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/02 14:41:54 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/02 15:12:35 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-int			g_exit_code;
 
 char	**ft_copy_env(char **env)
 {
@@ -49,11 +48,8 @@ static void	ft_good_input(t_data *data)
 	}
 }
 
-static void	ft_readline(char **envp)
+static void	ft_readline(char **envp, t_data *data)
 {
-	t_data	*data;
-
-	data = malloc(sizeof(t_data));
 	data->envp = ft_copy_env(envp);
 	data->exit_code = 0;
 	signal(SIGINT, ft_ctrlc);
@@ -77,6 +73,8 @@ int	main(int ac, char **av, char **envp)
 {
 	(void)ac;
 	(void)av;
+	t_data	data;
+	data = (t_data){0};
     ft_title();
-	ft_readline(envp);
+	ft_readline(envp, &data);
 }

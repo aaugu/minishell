@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:41:22 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/02 14:43:04 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/02 15:13:11 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	ft_ctrld(t_data *data)
 	printf("exit\n");
 	rl_clear_history();
 	ft_free_double(data->envp);
-	free(data);
 	exit(EXIT_SUCCESS);
 }
 
