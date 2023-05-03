@@ -55,11 +55,7 @@
 *							 GLOBAL VARIABLE		  						  *
 ******************************************************************************/
 
-<<<<<<< HEAD
-int				g_exit_code;
-=======
 int					g_exit_code;
->>>>>>> bed03e4cafa7935a92b68363c41600bae697214a
 
 /******************************************************************************
 *								STRUCTS									      *
@@ -73,13 +69,6 @@ typedef struct s_parsing
 
 typedef struct s_data
 {
-<<<<<<< HEAD
-	char        **envp;
-	char		*user_input;
-	char        **input;
-	t_parsing   parsing;
-	int         exit_code;
-=======
     char			**envp;
     char			*input;
     int				exit_code;
@@ -88,7 +77,6 @@ typedef struct s_data
 	int				pipe_nbr;
 	char			**all_path;
 	int				*fd_array;
->>>>>>> bed03e4cafa7935a92b68363c41600bae697214a
 }					t_data;
 
 typedef struct s_token
@@ -108,11 +96,7 @@ typedef struct s_token
 void				ft_title(void);
 //signal.c
 void				ft_ctrlc(int sig);
-<<<<<<< HEAD
-void                ft_ctrld(t_data *data);
-=======
 void				ft_ctrld(t_data *data);
->>>>>>> bed03e4cafa7935a92b68363c41600bae697214a
 
 /* ---------------------------- EXECUTION -----------------------------------*/
 //exemple1.c
