@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/02 15:49:57 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/03 11:55:31 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ char	**ft_copy_env(char **env)
 
 static void	ft_good_input(t_data *data)
 {
-	if (ft_strlen(data->input) > 0)
+	if (ft_strlen(data->user_input) > 0)
 	{
-		add_history(data->input);
+		add_history(data->user_input);
 		//ft_parser(data);
 		if (data->input)
 			free(data->input);

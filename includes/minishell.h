@@ -44,17 +44,25 @@ typedef t_uint8_t			t_bool;
 *							 GLOBAL VARIABLE		  						  *
 ******************************************************************************/
 
-int			g_exit_code;
+int				g_exit_code;
 
 /******************************************************************************
 *								STRUCTS									      *
 ******************************************************************************/
 
+typedef struct s_parsing
+{
+	int			save;
+	int			size;
+}				t_parsing;
+
 typedef struct s_data
 {
-    char			**envp;
-    char			*input;
-    int				exit_code;
+	char        **envp;
+	char		*user_input;
+	char        **input;
+	t_parsing   parsing;
+	int         exit_code;
 }					t_data;
 
 /******************************************************************************
@@ -66,7 +74,7 @@ typedef struct s_data
 void				ft_title(void);
 //signal.c
 void				ft_ctrlc(int sig);
-void	            ft_ctrld(t_data *data);
+void                ft_ctrld(t_data *data);
 
 /* ---------------------------- EXECUTION -----------------------------------*/
 //exemple1.c
