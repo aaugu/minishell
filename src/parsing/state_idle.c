@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 14:22:38 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/05 14:25:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,13 @@ needed */
 void	state_idle(char c, t_state_machine *sm, t_token *tokens)
 {
 	if (c == '<' || c == '>' | c == '|')
-		from_idle(c, sm, tokens);
+		finish_add(c, sm, tokens);
+	if (c == '<')
+		sm->current_state = less_than;
+	if (c == '>')
+		sm->current_state = greater_than;
+	if (c == '|')
+		sm->current_state = pipe;
 	if (c == '\\')
 		sm->current_state = backslash;
 	if (c == '\'')
@@ -37,14 +43,8 @@ void	state_idle(char c, t_state_machine *sm, t_token *tokens)
 		add_to_buf(c, sm, tokens);
 }
 
-void	from_idle(char c, t_state_machine *sm, t_token *tokens)
+void	finish_add(char c, t_state_machine *sm, t_token *tokens)
 {
 	finish_and_reset_buf(sm, tokens);
 	add_to_buf(c, sm, tokens);
-	if (c == '<')
-		sm->current_state = less_than;
-	if (c == '>')
-		sm->current_state = greater_than;
-	if (c == '|')
-		sm->current_state = pipe;
 }
