@@ -6,45 +6,34 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 14:25:35 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/05 15:45:37 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/state_machine.h"
 
-void	from_idle(char c, t_state_machine *sm, t_token *tokens);
-
-/* Will set current state according to char and add to/finish buffer if 
-needed */
+/* Will set current state according to char and decide which action to perform
+if needed */
 void	state_idle(char c, t_state_machine *sm, t_token *tokens)
 {
-	if (c == '<' || c == '>' | c == '|')
+	if (c == '<' || c == '>' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == '<')
 		sm->current_state = less_than;
-	if (c == '>')
+	else if (c == '>')
 		sm->current_state = greater_than;
-	if (c == '|')
+	else if (c == '|')
 		sm->current_state = pipe;
-	if (c == '\\')
+	else if (c == '\\')
 		sm->current_state = backslash;
-	if (c == '\'')
+	else if (c == '\'')
 		sm->current_state = quote_s;
-	if (c == '\"')
+	else if (c == '\"')
 		sm->current_state = quote_d;
-	if (c == '\0')
-	{
-		finish_and_reset_buf(sm, tokens);
-		sm->current_state = stop;
-	}
-	if (c == ' ')
-		finish_and_reset_buf(sm, tokens);
+	else if (c == '\0')
+		finish_stop(sm, tokens);
+	else if (c == ' ')
+		finish_buf(sm, tokens);
 	else
 		add_to_buf(c, sm, tokens);
-}
-
-void	finish_add(char c, t_state_machine *sm, t_token *tokens)
-{
-	finish_and_reset_buf(sm, tokens);
-	add_to_buf(c, sm, tokens);
 }

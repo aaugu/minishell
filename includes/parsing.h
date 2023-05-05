@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 13:41:38 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/05 15:35:36 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_state_machine
 {
 	char			*buf;
 	int				buf_size;
-	enum t_state	current_state;
+	enum e_state	current_state;
 }					t_state_machine;
 
 /* Chained list where each parsed elements are stored */
