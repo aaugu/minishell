@@ -32,6 +32,7 @@
 # include <sys/wait.h>
 
 # include "../libft/libft.h"
+# include "parsing.h"
 
 /******************************************************************************
 *								MACROS										  *
@@ -55,37 +56,23 @@
 *							 GLOBAL VARIABLE		  						  *
 ******************************************************************************/
 
-int					g_exit_code;
+int			g_exit_code;
 
 /******************************************************************************
 *								STRUCTS									      *
 ******************************************************************************/
 
-typedef struct s_parsing
-{
-	int			save;
-	int			size;
-}				t_parsing;
-
 typedef struct s_data
 {
-    char			**envp;
-    char			*input;
-    int				exit_code;
-	char			**cmd;
-	int				cmd_nbr;
-	int				pipe_nbr;
-	char			**all_path;
-	int				*fd_array;
+    char	**envp;
+    char	*input;
+    int		exit_code;
+	char	**cmd;
+	int		cmd_nbr;
+	int		pipe_nbr;
+	char	**all_path;
+	int		*fd_array;
 }					t_data;
-
-typedef struct s_token
-{
-	char			*str;
-	int				type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
 
 /******************************************************************************
 *							    FUNCTIONS									  *

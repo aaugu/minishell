@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_command_input.c                               :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:44:00 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 10:41:07 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/05 10:42:28 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/05 12:07:54 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/parsing.h"
 
-void	init_command_input(t_data *data)
+int	main(void)
 {
+	char	*input = "<<EOF cat|ls>outfile";
+	t_token	*tokens;
+
+	tokens = parsing(input);
 }

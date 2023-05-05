@@ -1,17 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_command_input.c                               :+:      :+:    :+:   */
+/*   state_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/02 15:44:00 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 10:41:07 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/05 09:55:39 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/05 11:08:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-void	init_command_input(t_data *data)
-{
-}
+#include "../includes/parsing.h"
