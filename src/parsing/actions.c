@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/08 15:37:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/08 15:41:41 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	finish_buf(t_state_machine *sm, t_token *tokens)
 			
 	}
 	sm->quotes_d = false;
-	free(sm->buf)
+	free(sm->buf);
 }
 
 /* Add char to current buffer */
