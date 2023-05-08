@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 15:45:37 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/08 14:15:33 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,10 @@ void	state_idle(char c, t_state_machine *sm, t_token *tokens)
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')
+	{
+		sm->quotes_d = true;
 		sm->current_state = quote_d;
+	}
 	else if (c == '\0')
 		finish_stop(sm, tokens);
 	else if (c == ' ')

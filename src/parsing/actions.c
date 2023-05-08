@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 16:17:29 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/08 15:37:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@
 the buffer. */
 void	finish_buf(t_state_machine *sm, t_token *tokens)
 {
+	t_token	*new_token;
+
+	sm->buf[sm->buf_size] = '\0';
+	new_token = create_node(sm->buf);
+	if (sm->quotes_d = true)
+	{
+		if (ft_strchr(sm->buf, '$'))
+			
+	}
+	sm->quotes_d = false;
+	free(sm->buf)
 }
 
 /* Add char to current buffer */

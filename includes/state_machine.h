@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 16:10:36 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/08 15:40:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 /******************************************************************************
 *							    FUNCTIONS									  *
 ******************************************************************************/
+
+void	init_state_machine(t_state_machine *sm, char *input);
 
 /* Each function will set current state and decide to perform an action if 
 needed */
@@ -40,5 +42,10 @@ void	add_to_buf(char c, t_state_machine *sm, t_token *tokens);
 void	finish_add(char c, t_state_machine *sm, t_token *tokens);
 void	finish_add_idle(char c, t_state_machine *sm, t_token *tokens);
 void	finish_stop(t_state_machine *sm, t_token *tokens);
+void	parsing_error(t_state_machine *sm, t_token *tokens, char c);
+
+/* ----------------------------- UTILS ------------------------------------*/
+
+t_token	*create_node(char *buffer, t_token *prev);
 
 #endif

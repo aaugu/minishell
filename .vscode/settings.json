@@ -1,6 +1,8 @@
 {
 	"files.associations": {
 		"minishell.h": "c",
-		"parsing.h": "c"
+		"parsing.h": "c",
+		"iterator": "c",
+		"state_machine.h": "c"
 	}
 }

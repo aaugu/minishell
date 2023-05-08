@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 16:20:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/08 14:01:14 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	state_greater_than(char c, t_state_machine *sm, t_token *tokens)
 {
 	if (c == '<' || c == '|')
 		finish_add(c, sm, tokens);
-	if (c == ' ' || c == '\\' | c == '\'' || c == '\"')
+	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buff(c, sm, tokens);
 	if (c == '>')
 	{
@@ -29,8 +29,6 @@ void	state_greater_than(char c, t_state_machine *sm, t_token *tokens)
 		sm->current_state = less_than;
 	else if (c == '|')
 		sm->current_state = pipe;
-	else if (c == '\\')
-		sm->current_state = backslash;
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')
@@ -49,16 +47,14 @@ void	state_greater_than_d(char c, t_state_machine *sm, t_token *tokens)
 {
 	if (c == '<' || c == '|')
 		finish_add(c, sm, tokens);
-	if (c == ' ' || c == '\\' | c == '\'' || c == '\"')
+	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buff(c, sm, tokens);
 	if (c == '>')
-		sm->current_state = error;
+		parsing_error(sm, tokens, c);
 	else if (c == '<')
 		sm->current_state = less_than;
 	else if (c == '|')
 		sm->current_state = pipe;
-	else if (c == '\\')
-		sm->current_state = backslash;
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')

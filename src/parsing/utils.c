@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_backslash.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/05 11:08:01 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 15:57:01 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/08 09:20:19 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/08 15:35:23 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parsing.h"
+#include "../includes/state_machine.h"
 
-/* Will set current state according to char and decide which action to perform
-if needed */
-void	state_backslash(char c, t_state_machine *sm, t_token *tokens)
+
+t_token	*create_node(char *buffer, t_token *prev)
 {
-	if (c == '\0')
-		sm->current_state = error;
-	else
-	{
-		add_to_buf(c, sm, tokens);
-		sm->current_state = idle;
-	}
+	t_token	*token;
+
+	token = (t_token *)malloc(sizeof(t_token));
+	if (!token)
+		return (NULL);
+	token->content = ft_strdup(buffer);
+	if (!token->content)
+		exit(EXIT_FAILURE);
+	token->next = NULL;
+	token->prev = prev;
+	token->type = undefined;
+	return (token);
 }

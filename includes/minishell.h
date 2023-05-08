@@ -38,15 +38,6 @@
 *								MACROS										  *
 ******************************************************************************/
 
-// Define pour les type d'élement dans l'input pour t_token
-# define CMD 1
-# define GREAT 2
-# define GREAT_GREAT 3
-# define LESS 4
-# define LESS_LESS 5
-# define PIPE 6
-# define FILE 7
-
 // Standard fd
 # define STDIN 0
 # define STDOUT 1

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/05 13:46:29 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/08 15:39:37 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_list	*parsing(char *input)
 	t_token			*tokens;
 
 	init_state_machine(&sm, input);
+	sm.current_state = idle;
 	tokens = state_machine(&sm, input);
 	if (!tokens)
 		exit(EXIT_FAILURE);
@@ -32,7 +33,7 @@ t_list	*parsing(char *input)
 /* Initialize start values of state machine */
 void	init_state_machine(t_state_machine *sm, char *input)
 {
-	sm->current_state = idle;
+	sm->quotes_d = false;
 	sm->buf_size = 0;
 	sm->buf = (char *)ft_calloc(ft_strlen(input), sizeof(char));
 	if (!sm->buf)
