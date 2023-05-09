@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 11:23:29 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 14:35:02 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_idle(char c, t_state_machine *sm, t_token *tokens)
+void	state_idle(char c, t_state_machine *sm, t_token **tokens)
 {
 	if (c == '<' || c == '>' || c == '|')
 		finish_add(c, sm, tokens);
@@ -34,7 +34,7 @@ void	state_idle(char c, t_state_machine *sm, t_token *tokens)
 	else if (c == '\0')
 		finish_stop(sm, tokens);
 	else if (c == ' ')
-		finish_buf(sm, &tokens);
+		finish_buf(sm, tokens);
 	else
 		add_to_buf(c, sm);
 }

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 13:18:52 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 14:34:58 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_greater_than(char c, t_state_machine *sm, t_token *tokens)
+void	state_greater_than(char c, t_state_machine *sm, t_token **tokens)
 {
 	if (c == '<' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
-		finish_buf(sm, &tokens);
+		finish_buf(sm, tokens);
 	if (c == '>')
 	{
 		add_to_buf(c, sm);
@@ -43,14 +43,14 @@ void	state_greater_than(char c, t_state_machine *sm, t_token *tokens)
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_greater_than_d(char c, t_state_machine *sm, t_token *tokens)
+void	state_greater_than_d(char c, t_state_machine *sm, t_token **tokens)
 {
 	if (c == '<' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
-		finish_buf(sm, &tokens);
+		finish_buf(sm, tokens);
 	if (c == '>')
-		parsing_error(sm, &tokens, c);
+		parsing_error(sm, tokens, c);
 	else if (c == '<')
 		sm->current_state = less_than;
 	else if (c == '|')

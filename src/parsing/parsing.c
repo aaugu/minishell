@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 13:55:34 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 15:15:58 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 /* Parsing to retrieve each separate elements (tokens) of user input as an 
 element of the command and store them in a chained list. */
-t_token	*parsing(char *input)
+t_token	**parsing(char *input)
 {
 	t_state_machine	sm;
-	t_token			*tokens;
+	t_token			**tokens;
 
 	tokens = NULL;
 	sm = (t_state_machine){0};
@@ -30,7 +30,7 @@ t_token	*parsing(char *input)
 }
 
 /* Initialize start values of state machine */
-void	init_state_machine(t_state_machine *sm, t_token *tokens)
+void	init_state_machine(t_state_machine *sm, t_token **tokens)
 {
 	if (sm->buf)
 		free(sm->buf);
@@ -38,5 +38,5 @@ void	init_state_machine(t_state_machine *sm, t_token *tokens)
 	sm->buf_size = 0;
 	sm->buf = (char *)ft_calloc(sm->input_size, sizeof(char));
 	if (!sm->buf)
-		parsing_error(sm, &tokens, 0);
+		parsing_error(sm, tokens, 0);
 }
