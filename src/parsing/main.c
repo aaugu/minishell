@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:28 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 11:34:03 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 13:56:24 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ int	main(void)
 	t_token	*tokens;
 
 	tokens = parsing(input);
+	printf("%p\n", tokens);
+	fflush(stdout);
 	while (tokens->next)
 	{
-		printf("ici\n");
 		printf("%s\n", tokens->content);
 		tokens = tokens->next;
 	}

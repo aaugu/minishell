@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 10:42:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 13:18:44 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	state_less_than_d(char c, t_state_machine *sm, t_token *tokens)
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(sm, &tokens);
 	if (c == '<')
-		parsing_error(sm, c);
+		parsing_error(sm, &tokens, c);
 	else if (c == '>')
 		sm->current_state = greater_than;
 	else if (c == '|')

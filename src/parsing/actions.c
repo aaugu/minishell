@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 11:52:10 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 13:50:34 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,20 @@ void	finish_buf(t_state_machine *sm, t_token **tokens)
 	if (sm->buf_size != 0)
 	{
 		sm->buf[sm->buf_size] = '\0';
-		prev = lst_last(*tokens);
-		new_token = create_node(sm->buf, prev);
+		new_token = create_node(sm->buf, sm, tokens);
+		if (!new_token)
+			parsing_error(sm, tokens, 0);
+		if (*tokens)
+		{
+			prev = lst_last(*tokens);
+			prev->next = new_token;
+		}
 		if (sm->quotes_d == true)
 		{
 			if (ft_strchr(sm->buf, '$'))
 				new_token->meta = true;
 		}
-		prev->next = new_token;
-		init_state_machine(sm);
+		init_state_machine(sm, *tokens);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:39 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 10:43:20 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 13:19:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,24 @@
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_quote_s(char c, t_state_machine *sm)
+void	state_quote_s(char c, t_state_machine *sm, t_token *tokens)
 {
 	if (c == '\'')
 		sm->current_state = idle;
 	else if (c == '\0')
-		parsing_error(sm, '\'');
+		parsing_error(sm, &tokens, '\'');
 	else
 		add_to_buf(c, sm);
 }
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_quote_d(char c, t_state_machine *sm)
+void	state_quote_d(char c, t_state_machine *sm, t_token *tokens)
 {
 	if (c == '\"')
 		sm->current_state = idle;
 	else if (c == '\0')
-		parsing_error(sm, '\"');
+		parsing_error(sm, &tokens, '\"');
 	else
 		add_to_buf(c, sm);
 }
