@@ -56,7 +56,7 @@ int			g_exit_code;
 typedef struct s_data
 {
     char	**envp;
-    char	*input;
+    char	*user_input;
     int		exit_code;
 	char	**cmd;
 	int		cmd_nbr;

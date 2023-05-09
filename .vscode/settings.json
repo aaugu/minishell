@@ -3,6 +3,8 @@
 		"minishell.h": "c",
 		"parsing.h": "c",
 		"iterator": "c",
-		"state_machine.h": "c"
+		"state_machine.h": "c",
+		"stdlib.h": "c",
+		"stdbool.h": "c"
 	}
 }

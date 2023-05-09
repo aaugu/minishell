@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/03 11:55:31 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 14:02:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ static void	ft_good_input(t_data *data)
 	{
 		add_history(data->user_input);
 		//ft_parser(data);
-		if (data->input)
-			free(data->input);
+		if (data->user_input)
+			free(data->user_input);
 	}
 }
 
@@ -57,8 +57,8 @@ static void	ft_readline(char **envp, t_data *data)
 	while (1)
 	{
 		g_exit_code = 0;
-		data->input = readline("minishell > ");
-		if (data->input)
+		data->user_input = readline("minishell > ");
+		if (data->user_input)
 		{
 			if (g_exit_code != 0)
 				data->exit_code = g_exit_code;
