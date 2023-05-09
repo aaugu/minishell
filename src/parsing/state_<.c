@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/08 14:00:42 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 10:42:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parsing.h"
+#include "../../includes/state_machine.h"
 
 /* Will set current state according to char and decide which action to perform
 if needed */
@@ -19,16 +19,16 @@ void	state_less_than(char c, t_state_machine *sm, t_token *tokens)
 	if (c == '>' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
-		finish_buff(c, sm, tokens);
+		finish_buf(sm, &tokens);
 	if (c == '<')
 	{
-		add_to_buf(c, sm, tokens);
+		add_to_buf(c, sm);
 		sm->current_state = less_than_d;
 	}
 	else if (c == '>')
 		sm->current_state = greater_than;
 	else if (c == '|')
-		sm->current_state = pipe;
+		sm->current_state = pipes;
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')
@@ -46,13 +46,13 @@ void	state_less_than_d(char c, t_state_machine *sm, t_token *tokens)
 	if (c == '>' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
-		finish_buff(c, sm, tokens);
+		finish_buf(sm, &tokens);
 	if (c == '<')
-		parsing_error(sm, tokens, c);
+		parsing_error(sm, c);
 	else if (c == '>')
 		sm->current_state = greater_than;
 	else if (c == '|')
-		sm->current_state = pipe;
+		sm->current_state = pipes;
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')

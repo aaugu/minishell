@@ -6,15 +6,15 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/08 14:45:57 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 11:14:38 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/state_machine.h"
+#include "../../includes/state_machine.h"
 
-void	parsing_error(t_state_machine *sm, t_token *tokens, char c)
+void	parsing_error(t_state_machine *sm, char c)
 {
-	printf("minishell: syntax error near unexpected token `%c'", c);
+	printf("minishell: syntax error near unexpected token `%c'\n", c);
 	sm->current_state = error;
 }
 
@@ -22,6 +22,7 @@ void	clear_state_machine(t_state_machine *sm)
 {
 	if (sm->buf)
 		free(sm->buf);
+	sm = (t_state_machine *){0};
 }
 
 void	clear_tokens(t_token **tokens)

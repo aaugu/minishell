@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/08 14:15:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 11:23:29 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/state_machine.h"
+#include "../../includes/state_machine.h"
 
 /* Will set current state according to char and decide which action to perform
 if needed */
@@ -23,9 +23,7 @@ void	state_idle(char c, t_state_machine *sm, t_token *tokens)
 	else if (c == '>')
 		sm->current_state = greater_than;
 	else if (c == '|')
-		sm->current_state = pipe;
-	else if (c == '\\')
-		sm->current_state = backslash;
+		sm->current_state = pipes;
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')
@@ -36,7 +34,7 @@ void	state_idle(char c, t_state_machine *sm, t_token *tokens)
 	else if (c == '\0')
 		finish_stop(sm, tokens);
 	else if (c == ' ')
-		finish_buf(sm, tokens);
+		finish_buf(sm, &tokens);
 	else
-		add_to_buf(c, sm, tokens);
+		add_to_buf(c, sm);
 }

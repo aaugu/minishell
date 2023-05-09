@@ -6,12 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:20:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/08 15:35:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/09 11:52:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/state_machine.h"
-
+#include "../../includes/state_machine.h"
 
 t_token	*create_node(char *buffer, t_token *prev)
 {
@@ -27,4 +26,11 @@ t_token	*create_node(char *buffer, t_token *prev)
 	token->prev = prev;
 	token->type = undefined;
 	return (token);
+}
+
+t_token	*lst_last(t_token *lst)
+{
+	while (lst != NULL && lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }
