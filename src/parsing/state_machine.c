@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 15:16:13 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/11 14:24:19 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,12 @@ t_token	**state_machine(t_state_machine *sm, char *input)
 	t_token	**tokens;
 	int		i;
 
-	tokens = NULL;
+	tokens = (t_token **)malloc(sizeof(t_token *));
+	if (!tokens)
+		return (NULL);
+	*tokens = NULL;
 	i = 0;
-	while (input[i])
+	while (i <= (int)ft_strlen(input))
 	{
 		execute_state_machine(input[i], sm, tokens);
 		if (sm->current_state == error)
@@ -32,8 +35,7 @@ t_token	**state_machine(t_state_machine *sm, char *input)
 			clear_parsing(sm, tokens);
 			return (NULL);
 		}
-		printf("char : %c / current state : %d / buffer : %s\n", input[i], sm->current_state, sm->buf);
-		fflush(stdout);
+		// printf("char : %c / current state : %d / buffer : %s\n", input[i], sm->current_state, sm->buf);
 		i++;
 	}
 	clear_state_machine(sm);

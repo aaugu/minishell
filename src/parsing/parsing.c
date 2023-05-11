@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 15:15:58 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/11 14:30:21 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ t_token	**parsing(char *input)
 	init_state_machine(&sm, tokens);
 	sm.current_state = idle;
 	tokens = state_machine(&sm, input);
+	if (!tokens)
+		return (NULL);
 	return (tokens);
 }
 
