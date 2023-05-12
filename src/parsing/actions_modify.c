@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 14:17:51 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:32:31 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,13 @@ void	state_type_add_buf(t_state state, t_type type, char *c, t_sm *sm)
 }
 
 /* Define type of element depending on previous type saved */
-void	get_type(t_sm *sm)
+void	get_next_type(t_sm *sm, char *c)
 {
 	if (sm->type == redir_in || sm->type == heredoc || sm->type == redir_out \
 		|| sm->type == redir_out_ap)
 	{
+		if (sm->type == redir_in && c == '>')
+			sm->type = redir_out;
 		if (sm->type == redir_in)
 			sm->type = infile;
 		else if (sm->type == heredoc)
@@ -55,6 +57,6 @@ void	get_type(t_sm *sm)
 /* Combination of get_type() and add_to_buf() */
 void	set_type_add_buf(char *c, t_sm *sm)
 {
-	get_type(sm);
+	get_type(sm, c);
 	add_to_buf(c, sm);
 }

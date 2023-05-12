@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:31:56 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:32:09 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	state_pipe(char c, t_sm *sm, t_token **tokens)
 	if (c == '<' || c == '>')
 		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\\' || c == '\'' || c == '\"')
-		finish_buf(sm, tokens);
+		finish_buf(sm, tokens, c);
 	if (c == '<')
 		sm->current_state = less_than;
 	else if (c == '>')
@@ -31,7 +31,7 @@ void	state_pipe(char c, t_sm *sm, t_token **tokens)
 	else if (c == '\"')
 		sm->current_state = quote_d;
 	else if (c == '\0')
-		finish_stop(sm, tokens);
+		finish_stop(sm, tokens, c);
 	else if (c == ' ')
 		sm->current_state = idle;
 	else

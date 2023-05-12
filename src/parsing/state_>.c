@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:31:56 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:36:37 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	state_greater_than(char c, t_sm *sm, t_token **tokens)
 	if (c == '<' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
-		finish_buf(sm, tokens);
+		finish_buf(sm, tokens, c);
 	if (c == '>')
 	{
 		add_to_buf(c, sm);
@@ -34,7 +34,7 @@ void	state_greater_than(char c, t_sm *sm, t_token **tokens)
 	else if (c == '\"')
 		sm->current_state = quote_d;
 	else if (c == '\0')
-		finish_stop(sm, tokens);
+		finish_stop(sm, tokens, c);
 	else if (c == ' ')
 		sm->current_state = idle;
 	else
@@ -48,7 +48,7 @@ void	state_greater_than_d(char c, t_sm *sm, t_token **tokens)
 	if (c == '<' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
-		finish_buf(sm, tokens);
+		finish_buf(sm, tokens, c);
 	if (c == '>')
 		parsing_error(sm, tokens, &c);
 	else if (c == '<')
@@ -60,7 +60,7 @@ void	state_greater_than_d(char c, t_sm *sm, t_token **tokens)
 	else if (c == '\"')
 		sm->current_state = quote_d;
 	else if (c == '\0')
-		finish_stop(sm, tokens);
+		finish_stop(sm, tokens, c);
 	else if (c == ' ')
 		sm->current_state = idle;
 	else

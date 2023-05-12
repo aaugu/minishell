@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:31:56 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:27:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Finish buffer, create a node of tokens list and set its content. Then reset
 the buffer. */
-void	finish_buf(t_sm *sm, t_token **tokens)
+void	finish_buf(t_sm *sm, t_token **tokens, char *c)
 {
 	t_token	*new_token;
 	t_token	*prev;
@@ -37,19 +37,20 @@ void	finish_buf(t_sm *sm, t_token **tokens)
 			new_token->meta = false;
 		init_state_machine(sm, tokens);
 	}
+	get_next_type(sm, c);
 }
 
 /* Combination of finish_buf() and add_to_buff() */
 void	finish_add(char c, t_sm *sm, t_token **tokens)
 {
-	finish_buf(sm, tokens);
+	finish_buf(sm, tokens, c);
 	add_to_buf(c, sm);
 }
 
 /* Combination of finish_buff() and set current state to stop */
-void	finish_stop(t_sm *sm, t_token **tokens)
+void	finish_stop(t_sm *sm, t_token **tokens, char *c)
 {
-	finish_buf(sm, tokens);
+	finish_buf(sm, tokens, c);
 	sm->current_state = stop;
 }
 

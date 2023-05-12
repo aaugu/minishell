@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 14:07:51 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:32:37 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,12 @@ void	state_pipe(char c, t_sm *sm, t_token **tokens);
 void	add_to_buf(char c, t_sm *sm);
 void	change_state_and_type(t_state state, t_type type, t_sm *sm);
 void	state_type_add_buf(t_state state, t_type type, char *c, t_sm *sm);
-void	get_type(t_sm *sm);
-void	set_type_change_state_type_add(t_state st, t_type t, char *c, t_sm *sm);
+void	get_next_type(t_sm *sm, char *c);
 
-void	finish_buf(t_sm *sm, t_token **tokens);
+void	finish_buf(t_sm *sm, t_token **tokens, char *c);
 void	finish_add(char c, t_sm *sm, t_token **tokens);
 void	finish_add_idle(char c, t_sm *sm, t_token **tokens);
-void	finish_stop(t_sm *sm, t_token **tokens);
+void	finish_stop(t_sm *sm, t_token **tokens, char *c);
 
 /* ---------------------------------- UTILS ----------------------------------*/
 t_token	*create_node(char *buffer, t_type type, t_sm *sm, t_token **tokens);
