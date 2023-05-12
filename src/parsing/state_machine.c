@@ -6,18 +6,18 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 11:50:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 14:00:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
 
-void	execute_state_machine(char c, t_state_machine *sm, t_token **tokens);
+void	execute_state_machine(char c, t_sm *sm, t_token **tokens);
 
 /* State machine to know how to separate each token in a lineary way. Method 
 flexible, as it is easy to modify and add conditions based on the state you're
 in. */
-t_token	**state_machine(t_state_machine *sm, char *input)
+t_token	**state_machine(t_sm *sm, char *input)
 {
 	t_token	**tokens;
 	int		i;
@@ -32,7 +32,6 @@ t_token	**state_machine(t_state_machine *sm, char *input)
 		execute_state_machine(input[i], sm, tokens);
 		if (sm->current_state == error)
 			return (NULL);
-		// printf("char : %c / current state : %d / buffer : %s\n", input[i], sm->current_state, sm->buf);
 		i++;
 	}
 	clear_state_machine(sm);
@@ -40,9 +39,10 @@ t_token	**state_machine(t_state_machine *sm, char *input)
 		return (tokens);
 	return (NULL);
 }
+// printf("char : %c / current state : %d / buffer : %s / type : \n", input[i], sm->current_state, sm->buf);
 
 /* Tells what to do depending on current state */
-void	execute_state_machine(char c, t_state_machine *sm, t_token **tokens)
+void	execute_state_machine(char c, t_sm *sm, t_token **tokens)
 {
 	if (sm->current_state == idle)
 		state_idle(c, sm, tokens);

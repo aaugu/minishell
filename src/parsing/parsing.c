@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 10:58:48 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 13:31:56 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 element of the command and store them in a chained list. */
 t_token	**parsing(char *input)
 {
-	t_state_machine	sm;
+	t_sm	sm;
 	t_token			**tokens;
 
 	tokens = NULL;
-	sm = (t_state_machine){0};
+	sm = (t_sm){0};
 	sm.input_size = ft_strlen(input);
 	init_state_machine(&sm, tokens);
 	sm.current_state = idle;
@@ -32,7 +32,7 @@ t_token	**parsing(char *input)
 }
 
 /* Initialize start values of state machine */
-void	init_state_machine(t_state_machine *sm, t_token **tokens)
+void	init_state_machine(t_sm *sm, t_token **tokens)
 {
 	if (sm->buf)
 		free(sm->buf);
