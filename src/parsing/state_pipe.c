@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 14:35:21 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 10:24:55 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	state_pipe(char c, t_state_machine *sm, t_token **tokens)
 	else if (c == '>')
 		sm->current_state = greater_than;
 	else if (c == '|')
-		parsing_error(sm, tokens, c);
+		parsing_error(sm, tokens, &c);
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')

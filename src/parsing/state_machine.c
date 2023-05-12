@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/11 14:24:19 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 11:50:23 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ t_token	**state_machine(t_state_machine *sm, char *input)
 	{
 		execute_state_machine(input[i], sm, tokens);
 		if (sm->current_state == error)
-		{
-			clear_parsing(sm, tokens);
 			return (NULL);
-		}
 		// printf("char : %c / current state : %d / buffer : %s\n", input[i], sm->current_state, sm->buf);
 		i++;
 	}
@@ -63,4 +60,6 @@ void	execute_state_machine(char c, t_state_machine *sm, t_token **tokens)
 		state_quote_d(c, sm, tokens);
 	else if (sm->current_state == pipes)
 		state_pipe(c, sm, tokens);
+	else if (sm->current_state == minus)
+		state_minus(c, sm, tokens);
 }

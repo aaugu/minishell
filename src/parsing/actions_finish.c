@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions.c                                          :+:      :+:    :+:   */
+/*   actions_finish.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/11 14:29:19 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 11:02:14 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,10 @@ void	finish_buf(t_state_machine *sm, t_token **tokens)
 			prev->next = new_token;
 			new_token->prev = prev;
 		}
-		if (sm->quotes_d == true)
-		{
-			if (ft_strchr(sm->buf, '$'))
-				new_token->meta = true;
-		}
+		if (sm->meta == false)
+			new_token->meta = false;
 		init_state_machine(sm, tokens);
 	}
-}
-
-/* Add char to current buffer */
-void	add_to_buf(char c, t_state_machine *sm)
-{
-	sm->buf[sm->buf_size] = c;
-	sm->buf_size++;
 }
 
 /* Combination of finish_buf() and add_to_buff() */

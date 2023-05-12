@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/11 14:24:00 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 11:49:02 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,24 @@ void	state_idle(char c, t_state_machine *sm, t_token **tokens)
 	if (c == '<' || c == '>' || c == '|')
 		finish_add(c, sm, tokens);
 	if (c == '<')
-		sm->current_state = less_than;
+		change_state_and_type(less_than, redir_in, sm);
 	else if (c == '>')
-		sm->current_state = greater_than;
+		change_state_and_type(greater_than, redir_out, sm);
 	else if (c == '|')
-		sm->current_state = pipes;
+		change_state_and_type(pipes, t_pipe, sm);
 	else if (c == '\'')
-		sm->current_state = quote_s;
-	else if (c == '\"')
 	{
-		sm->quotes_d = true;
-		sm->current_state = quote_d;
+		sm->meta = false;
+		change_state_and_type(quote_s, undefined, sm);
 	}
+	else if (c == '\"')
+		change_state_and_type(quote_d, undefined, sm);
 	else if (c == '\0')
 		finish_stop(sm, tokens);
 	else if (c == ' ')
 		finish_buf(sm, tokens);
+	else if (c == '-' && sm->type == cmd)
+		state_type_add_buf(minus, option, c, sm);
 	else
-		add_to_buf(c, sm);
+		state_type_add_buf(idle, cmd, c, sm);
 }

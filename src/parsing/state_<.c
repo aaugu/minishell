@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 14:34:41 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 10:37:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,33 @@
 if needed */
 void	state_less_than(char c, t_state_machine *sm, t_token **tokens)
 {
-	if (c == '>' || c == '|')
-		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(sm, tokens);
-	if (c == '<')
+	if (c == '|')
+		parsing_error(sm, tokens, &c);
+	else if (c == '\0' || c == '>')
+		parsing_error(sm, tokens, "newline");
+	else if (c == '<')
 	{
 		add_to_buf(c, sm);
 		sm->current_state = less_than_d;
 	}
-	else if (c == '>')
-		sm->current_state = greater_than;
-	else if (c == '|')
-		sm->current_state = pipes;
+	else if (c == ' ')
+		return ;
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')
 		sm->current_state = quote_d;
-	else if (c == '\0')
-		finish_stop(sm, tokens);
-	else if (c == ' ')
-		sm->current_state = idle;
 	else
 		finish_add_idle(c, sm, tokens);
 }
 
 void	state_less_than_d(char c, t_state_machine *sm, t_token **tokens)
 {
-	if (c == '>' || c == '|')
-		finish_add(c, sm, tokens);
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(sm, tokens);
-	if (c == '<')
-		parsing_error(sm, tokens, c);
-	else if (c == '>')
-		sm->current_state = greater_than;
-	else if (c == '|')
-		sm->current_state = pipes;
+	if (c == '<' || c == '>' || c == '|')
+		parsing_error(sm, tokens, &c);
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')
@@ -60,7 +50,7 @@ void	state_less_than_d(char c, t_state_machine *sm, t_token **tokens)
 	else if (c == '\0')
 		finish_stop(sm, tokens);
 	else if (c == ' ')
-		sm->current_state = idle;
+		return ;
 	else
 		finish_add_idle(c, sm, tokens);
 }

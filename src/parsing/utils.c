@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:20:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 13:46:02 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 11:02:23 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token	*create_node(char *buffer, t_state_machine *sm, t_token **tokens)
 	if (!token->content)
 		parsing_error(sm, tokens, 0);
 	token->type = undefined;
-	token->meta = false;
+	token->meta = true;
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);

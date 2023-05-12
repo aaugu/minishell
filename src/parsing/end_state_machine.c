@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 13:48:00 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 10:31:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	clear_parsing(t_state_machine *sm, t_token **tokens);
 void	clear_state_machine(t_state_machine *sm);
 void	clear_tokens(t_token **tokens);
 
-void	parsing_error(t_state_machine *sm, t_token **tokens, char c)
+void	parsing_error(t_state_machine *sm, t_token **tokens, char *s)
 {
-	if (c)
-		printf("minishell: syntax error near unexpected token `%c'\n", c);
+	if (s)
+		printf("minishell: syntax error near unexpected token `%s'\n", s);
 	else
 		printf("minishell: malloc: malloc failed\n");
 	clear_parsing(sm, tokens);
@@ -53,4 +53,5 @@ void	clear_tokens(t_token **tokens)
 		free(*tokens);
 		*tokens = next;
 	}
+	free(tokens);
 }

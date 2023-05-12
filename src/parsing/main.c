@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:28 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/11 14:38:24 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 10:30:44 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,18 @@
 
 int	main(void)
 {
-	char	*input = "<<EOF \'$PATH\' cat|ls>outfile";
+	char	*input = "<";
 	t_token	**tokens;
 
 	tokens = NULL;
 	tokens = parsing(input);
-	while ((*tokens))
+	if (tokens)
 	{
-		printf("%s\n", (*tokens)->content);
-		(*tokens) = (*tokens)->next;
+		while ((*tokens))
+		{
+			printf("%s\n", (*tokens)->content);
+			(*tokens) = (*tokens)->next;
+		}
 	}
 	return (0);
 }
