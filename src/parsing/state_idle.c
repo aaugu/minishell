@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:39:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 14:10:58 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,5 @@ void	state_idle(char c, t_sm *sm, t_token **tokens)
 	else if (c == '-' && sm->type == cmd)
 		state_type_add_buf(minus, option, c, sm);
 	else
-	{
-		get_type(sm);
-		state_type_add_buf(idle, sm->type, c, sm);
-	}
+		set_type_add_buf(c, sm);
 }

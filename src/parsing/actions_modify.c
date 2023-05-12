@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:39:55 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/12 14:17:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,42 @@ void	add_to_buf(char c, t_sm *sm)
 	sm->buf_size++;
 }
 
-/* Change state and add on going type */
+/* Change state and add on-going type */
 void	change_state_and_type(t_state state, t_type type, t_sm *sm)
 {
 	sm->current_state = state;
 	sm->type = type;
 }
 
-void	state_type_add_buf(t_state s, t_type t, char *c, t_sm *sm)
+/* Combination of change_state_and_type() and add_to_buf() */
+void	state_type_add_buf(t_state state, t_type type, char *c, t_sm *sm)
 {
-	change_state_and_type(s, t, sm);
+	change_state_and_type(state, type, sm);
 	add_to_buf(c, sm);
 }
 
+/* Define type of element depending on previous type saved */
 void	get_type(t_sm *sm)
 {
-	if (sm->type == redir_in)
-		sm->type = infile;
-	else if (sm->type == heredoc)
-		sm->type = limiter;
-	else if (sm->type == redir_out)
-		sm->type = outfile;
-	else if (sm->type == redir_out_ap)
-		sm->type = outfile;
-	else
-		sm->type = cmd;
+	if (sm->type == redir_in || sm->type == heredoc || sm->type == redir_out \
+		|| sm->type == redir_out_ap)
+	{
+		if (sm->type == redir_in)
+			sm->type = infile;
+		else if (sm->type == heredoc)
+			sm->type = limiter;
+		else if (sm->type == redir_out)
+			sm->type = outfile;
+		else if (sm->type == redir_out_ap)
+			sm->type = outfile;
+		else
+			sm->type = cmd;
+	}
+}
+
+/* Combination of get_type() and add_to_buf() */
+void	set_type_add_buf(char *c, t_sm *sm)
+{
+	get_type(sm);
+	add_to_buf(c, sm);
 }
