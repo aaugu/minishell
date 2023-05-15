@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:28 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 13:51:44 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 14:26:20 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ int	main(int ac, char **av)
 	(void) ac;
 	tokens = NULL;
 	printf("0-cmd\n1-option\n2-redir_in\n3-infile\n4-heredoc\n5-limiter\n6-redir_out\n7-redir_out_ap\n8-outfile\n9-t_pipe\n\n");
-	printf("Input : '%s'\n", av[1]);
+	printf("Input : \"%s\"\n", av[1]);
 	tokens = parsing(av[1]);
 	if (tokens)
 	{
 		while ((*tokens))
 		{
-			printf("%d : '%s'\n", (*tokens)->type, (*tokens)->content);
+			printf("%d : \"%s\"\n", (*tokens)->type, (*tokens)->content);
 			(*tokens) = (*tokens)->next;
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 13:54:18 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 14:29:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ typedef struct s_sm
 	char			*buf;
 	int				buf_size;
 	int				input_size;
-	enum e_type		type;
 	int				meta;
-	int				outfile;
+	enum e_type		type;
 }					t_sm;
 
 /* Chained list where each parsed elements and their infos are stored */

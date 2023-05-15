@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 13:57:11 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 14:35:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	state_idle(t_sm *sm, t_token **tokens, char c)
 	else if (c == '|')
 		change_state_and_type(sm, s_pipe, t_pipe, c);
 	else if (c == '\'')
-		change_state_and_type(sm, quote_s, -1, c);
+		sm->current_state = quote_s;
 	else if (c == '\"')
-		change_state_and_type(sm, quote_d, -1, c);
+		sm->current_state = quote_d;
 	else if (c == '\0')
 		finish_stop(sm, tokens, c);
 	else if (c == ' ')

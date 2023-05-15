@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 13:50:52 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 14:36:02 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,6 @@ void	get_next_type(t_sm *sm, char c)
 	if (sm->type == redir_in || sm->type == heredoc || sm->type == redir_out \
 		|| sm->type == redir_out_ap)
 	{
-		if (sm->type == redir_out || sm->type == redir_out_ap)
-			sm->outfile = true;
 		if (sm->type == redir_in && c == '>')
 			sm->type = redir_out;
 		else if (sm->type == redir_in)
