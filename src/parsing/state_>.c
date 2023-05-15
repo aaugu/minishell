@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 10:46:11 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 13:38:47 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,22 @@
 if needed */
 void	state_greater_than(t_sm *sm, t_token **tokens, char c)
 {
-	if (c == '<' || c == '|')
-		finish_add(sm, tokens, c);
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(sm, tokens, c);
-	if (c == '>')
-	{
-		add_to_buf(sm, c);
-		sm->current_state = greater_than_d;
-	}
-	else if (c == '<')
-		sm->current_state = less_than;
+	if (c == '<')
+		parsing_error(sm, tokens, &c);
+	else if (c == '>')
+		state_type_add_buf(sm, greater_than_d, redir_out_ap, c);
 	else if (c == '|')
-		sm->current_state = s_pipe;
+		return ;
 	else if (c == '\'')
 		sm->current_state = quote_s;
 	else if (c == '\"')
 		sm->current_state = quote_d;
-	else if (c == '\0')
-		finish_stop(sm, tokens, c);
 	else if (c == ' ')
 		sm->current_state = idle;
+	else if (c == '\0')
+		parsing_error(sm, tokens, "newline");
 	else
 		finish_add_idle(sm, tokens, c);
 }

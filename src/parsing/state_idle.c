@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 11:31:04 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 13:26:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,19 @@
 if needed */
 void	state_idle(t_sm *sm, t_token **tokens, char c)
 {
-	if (c == '<' || c == '>' || c == '|' || c == '-')
+	if (c == '<' || c == '>' || c == '|')
 		finish_add(sm, tokens, c);
 	if (c == '<')
 		change_state_and_type(sm, less_than, redir_in, c);
 	else if (c == '>')
+	{
 		change_state_and_type(sm, greater_than, redir_out, c);
+	}
+	else if (c == '-' && sm->buf_size == 0)
+	{
+		finish_add(sm, tokens, c);
+		change_state_and_type(sm, minus, option, c);
+	}
 	else if (c == '|')
 		change_state_and_type(sm, s_pipe, t_pipe, c);
 	else if (c == '\'')
@@ -32,8 +39,6 @@ void	state_idle(t_sm *sm, t_token **tokens, char c)
 		finish_stop(sm, tokens, c);
 	else if (c == ' ')
 		finish_buf(sm, tokens, c);
-	else if (c == '-' && (sm->type == cmd || sm->type == option))
-		change_state_and_type(sm, minus, option, c);
 	else
-		state_type_add_buf(sm, idle, cmd, c);
+		add_to_buf(sm, c);
 }
