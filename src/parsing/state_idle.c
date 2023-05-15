@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 14:35:26 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:00:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ void	state_idle(t_sm *sm, t_token **tokens, char c)
 		change_state_and_type(sm, less_than, redir_in, c);
 	else if (c == '>')
 		change_state_and_type(sm, greater_than, redir_out, c);
-	else if (c == '-' && sm->buf_size == 0)
-	{
-		finish_add(sm, tokens, c);
-		change_state_and_type(sm, minus, option, c);
-	}
 	else if (c == '|')
 		change_state_and_type(sm, s_pipe, t_pipe, c);
 	else if (c == '\'')

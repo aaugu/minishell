@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 10:46:18 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:02:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,4 @@ void	execute_state_machine(t_sm *sm, t_token **tokens, char c)
 		state_quote_d(sm, tokens, c);
 	else if (sm->current_state == s_pipe)
 		state_pipe(sm, tokens, c);
-	else if (sm->current_state == minus)
-		state_minus(sm, tokens, c);
 }

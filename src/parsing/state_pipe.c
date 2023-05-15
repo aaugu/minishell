@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 14:43:01 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:02:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	state_pipe(t_sm *sm, t_token **tokens, char c)
 	else if (c == ' ')
 		sm->current_state = idle;
 	else if (c == '\0')
-		finish_stop(sm, tokens, "newline");
+		parsing_error(sm, tokens, "newline");
 	else
 		finish_add_idle(sm, tokens, c);
 }

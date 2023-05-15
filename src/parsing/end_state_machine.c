@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 10:29:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:34:47 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	parsing_error(t_sm *sm, t_token **tokens, char *s)
 {
 	if (s)
 	{
-		printf("minishell: syntax error near unexpected token `%s'\n", s);
+		if (!ft_strncmp(s, "newline", 7))
+			printf("minishell: syntax error near unexpected token `%s'\n", s);
+		else
+			printf("minishell: syntax error near unexpected token `%c'\n", s[0]);
 		g_exit_code = 258;
 	}
 	else
