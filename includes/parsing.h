@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:34:54 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 13:54:18 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef enum e_state
 	greater_than_d,
 	quote_s,
 	quote_d,
-	pipes,
+	s_pipe,
 	minus,
 	error,
 	stop,
@@ -54,7 +54,6 @@ typedef enum e_type
 	redir_out_ap,
 	outfile,
 	t_pipe,
-	undefined,
 }			t_type;
 
 /******************************************************************************
@@ -70,6 +69,7 @@ typedef struct s_sm
 	int				input_size;
 	enum e_type		type;
 	int				meta;
+	int				outfile;
 }					t_sm;
 
 /* Chained list where each parsed elements and their infos are stored */
@@ -87,7 +87,7 @@ typedef struct s_token
 ******************************************************************************/
 
 t_token	**parsing(char *input);
-void	init_sm(t_sm *sm, t_token **tokens);
+void	init_state_machine(t_sm *sm, t_token **tokens);
 t_token	**state_machine(t_sm *sm, char *input);
 
 /* ------------------------------ PARSING ERROR -----------------------------*/
