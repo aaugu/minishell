@@ -6,11 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 15:02:42 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:45:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
+#include "../../includes/parsing.h"
 
 void	execute_state_machine(t_sm *sm, t_token **tokens, char c);
 

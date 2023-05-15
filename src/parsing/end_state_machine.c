@@ -6,10 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 15:34:47 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:45:56 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/state_machine.h"
 #include "../../includes/parsing.h"
 #include "../../includes/minishell.h"
 

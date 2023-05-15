@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 11:04:06 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:02:53 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	state_less_than(t_sm *sm, t_token **tokens, char c);
 void	state_less_than_d(t_sm *sm, t_token **tokens, char c);
 void	state_greater_than(t_sm *sm, t_token **tokens, char c);
 void	state_greater_than_d(t_sm *sm, t_token **tokens, char c);
-void	state_minus(t_sm *sm, t_token **tokens, char c);
 void	state_quote_s(t_sm *sm, t_token **tokens, char c);
 void	state_quote_d(t_sm *sm, t_token **tokens, char c);
 void	state_pipe(t_sm *sm, t_token **tokens, char c);

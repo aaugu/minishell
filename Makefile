@@ -13,6 +13,16 @@ RM = rm -f
 
 SRCS_FILES = 	main.c \
 				parsing/parsing.c \
+				parsing/state_machine.c \
+				parsing/state_<.c \
+				parsing/state_>.c \
+				parsing/state_idle.c \
+				parsing/state_pipe.c \
+				parsing/state_quotes.c \
+				parsing/actions_finish.c \
+				parsing/actions_modify.c \
+				parsing/end_state_machine.c \
+				parsing/utils.c \
 				tools/signal.c \
 				tools/utils.c \
 				

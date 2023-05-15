@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 15:03:43 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:46:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,19 @@ t_token	**parsing(char *input)
 	sm.current_state = idle;
 	sm.type = cmd;
 	tokens = state_machine(&sm, input);
+	/*
+	printf("0-cmd\n1-option\n2-redir_in\n3-infile\n4-heredoc\n5-limiter\n6-redir_out\n7-redir_out_ap\n8-outfile\n9-t_pipe\n\n");
+	printf("Input : \"%s\"\n", input);
+	if (tokens)
+	{
+		while ((*tokens))
+		{
+			printf("%d : \"%s\"\n", (*tokens)->type, (*tokens)->content);
+			(*tokens) = (*tokens)->next;
+		}
+	}
+	return (0);
+	*/
 	if (!tokens)
 		return (NULL);
 	return (tokens);

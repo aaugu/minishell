@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 14:29:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:40:03 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 ******************************************************************************/
 
 # include "../libft/libft.h"
+# include "state_machine.h"
 # include <stdbool.h>
 # include <stdio.h>
 
@@ -36,7 +37,6 @@ typedef enum e_state
 	quote_s,
 	quote_d,
 	s_pipe,
-	minus,
 	error,
 	stop,
 }			t_state;
@@ -54,6 +54,7 @@ typedef enum e_type
 	redir_out_ap,
 	outfile,
 	t_pipe,
+	undefined,
 }			t_type;
 
 /******************************************************************************

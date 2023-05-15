@@ -6,11 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:20:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:37:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:45:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
+#include "../../includes/parsing.h"
 
 t_token	*create_node(char *buffer, t_type type, t_sm *sm, t_token **tokens)
 {

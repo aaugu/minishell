@@ -6,11 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 15:04:06 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 15:46:04 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
+#include "../../includes/parsing.h"
 
 void	get_next_type(t_sm *sm, char c);
 
