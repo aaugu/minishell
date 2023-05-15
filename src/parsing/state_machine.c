@@ -6,17 +6,16 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 14:00:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 10:46:18 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
 
-void	execute_state_machine(char c, t_sm *sm, t_token **tokens);
+void	execute_state_machine(t_sm *sm, t_token **tokens, char c);
 
-/* State machine to know how to separate each token in a lineary way. Method 
-flexible, as it is easy to modify and add conditions based on the state you're
-in. */
+/* State machine. Will loop on each char to know how to separate each token in 
+a lineary way. */
 t_token	**state_machine(t_sm *sm, char *input)
 {
 	t_token	**tokens;
@@ -29,7 +28,7 @@ t_token	**state_machine(t_sm *sm, char *input)
 	i = 0;
 	while (i <= (int)ft_strlen(input))
 	{
-		execute_state_machine(input[i], sm, tokens);
+		execute_state_machine(sm, tokens, input[i]);
 		if (sm->current_state == error)
 			return (NULL);
 		i++;
@@ -39,27 +38,29 @@ t_token	**state_machine(t_sm *sm, char *input)
 		return (tokens);
 	return (NULL);
 }
-// printf("char : %c / current state : %d / buffer : %s / type : \n", input[i], sm->current_state, sm->buf);
+// printf("char : %c / current state : %d / buffer : %s / type : \n", input[i], 
+//sm->current_state, sm->buf);
 
-/* Tells what to do depending on current state */
-void	execute_state_machine(char c, t_sm *sm, t_token **tokens)
+/* Tells state machine what to do depending on current state. Method flexible,
+as it is easy to modify and add conditions based on the state you're in. */
+void	execute_state_machine(t_sm *sm, t_token **tokens, char c)
 {
 	if (sm->current_state == idle)
-		state_idle(c, sm, tokens);
+		state_idle(sm, tokens, c);
 	else if (sm->current_state == less_than)
-		state_less_than(c, sm, tokens);
+		state_less_than(sm, tokens, c);
 	else if (sm->current_state == less_than_d)
-		state_less_than_d(c, sm, tokens);
+		state_less_than_d(sm, tokens, c);
 	else if (sm->current_state == greater_than)
-		state_greater_than(c, sm, tokens);
+		state_greater_than(sm, tokens, c);
 	else if (sm->current_state == greater_than_d)
-		state_greater_than_d(c, sm, tokens);
+		state_greater_than_d(sm, tokens, c);
 	else if (sm->current_state == quote_s)
-		state_quote_s(c, sm, tokens);
+		state_quote_s(sm, tokens, c);
 	else if (sm->current_state == quote_d)
-		state_quote_d(c, sm, tokens);
-	else if (sm->current_state == pipes)
-		state_pipe(c, sm, tokens);
+		state_quote_d(sm, tokens, c);
+	else if (sm->current_state == s_pipe)
+		state_pipe(sm, tokens, c);
 	else if (sm->current_state == minus)
-		state_minus(c, sm, tokens);
+		state_minus(sm, tokens, c);
 }

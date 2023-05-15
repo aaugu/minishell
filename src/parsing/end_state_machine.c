@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/12 13:56:01 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/15 10:29:14 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	clear_parsing(t_sm *sm, t_token **tokens)
 	clear_tokens(tokens);
 }
 
-void	clear_sm(t_sm *sm)
+void	clear_state_machine(t_sm *sm)
 {
 	if (sm->buf)
 		free(sm->buf);
