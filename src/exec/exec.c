@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/05 13:02:48 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/12 15:02:56 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
 	}
 }
 
+void	ft_wait(pid_t *pid, t_data *data)
+{
+	pid_t	wpid;
+	int		i;
+	int		status;
+
+	i = 0;
+	while (i < data->pipe_nbr + 1)
+	{
+		wpid = waitpid(pid[i], &status, 0);
+		if (WIFEXITED(status))
+			data->exit_code = WEXITSTATUS(status);
+		i++;
+	}
+}
+
 static void	ft_command(t_token *token, t_data *data)
 {
 	pid_t	*pid;
@@ -61,6 +77,19 @@ static void	ft_command(t_token *token, t_data *data)
 		free(data->fd_array);
 }
 
+void	ft_check_pwd(t_data *data)
+{
+	char	pwd[1024];
+
+	if (getcwd(pwd, sizeof(pwd)) == NULL)
+	{
+		if (chdir(data->trash_path) == -1)
+			return ;
+	}
+	else
+		return ;
+}
+
 void	ft_executor(t_token *token, t_data *data)
 {
 	data->pipe_nbr = ft_pipe_count(token);
@@ -68,5 +97,4 @@ void	ft_executor(t_token *token, t_data *data)
 	data->all_path = ft_find_path(data);
 	ft_command(token, data);
 	ft_check_pwd(data);
-	ft_free_double(data->all_path);
 }

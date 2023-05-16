@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:41:22 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/02 15:13:11 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/05 11:41:30 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,10 @@ void	ft_quit(int sig)
 	rl_on_new_line();
 	rl_redisplay();
 	exit(3);
+}
+
+void	ft_sig_n_input(t_data *data)
+{
+	signal(SIGINT, ft_quit);
+	data->heredoc.str = readline(">");
 }
