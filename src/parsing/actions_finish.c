@@ -6,12 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 15:46:04 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/16 13:15:56 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
-#include "../../includes/parsing.h"
 
 void	get_next_type(t_sm *sm, char c);
 
@@ -25,9 +24,9 @@ void	finish_buf(t_sm *sm, t_token **tokens, char c)
 	if (sm->buf_size != 0)
 	{
 		sm->buf[sm->buf_size] = '\0';
-		new_token = create_node(sm->buf, sm->type, sm, tokens);
+		new_token = create_node(sm->buf, sm->type, sm);
 		if (!new_token)
-			parsing_error(sm, tokens, 0);
+			parsing_error(sm, 0);
 		if (*tokens == NULL)
 			*tokens = new_token;
 		else
@@ -38,7 +37,7 @@ void	finish_buf(t_sm *sm, t_token **tokens, char c)
 		}
 		if (sm->meta == false)
 			new_token->meta = false;
-		init_state_machine(sm, tokens);
+		init_state_machine(sm);
 		get_next_type(sm, c);
 	}
 }

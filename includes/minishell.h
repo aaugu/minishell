@@ -47,7 +47,7 @@
 *							 GLOBAL VARIABLE		  						  *
 ******************************************************************************/
 
-int			g_exit_code;
+int	g_exit_code;
 
 /******************************************************************************
 *								STRUCTS									      *
@@ -71,15 +71,17 @@ typedef struct s_data
 
 /* ------------------------------ TOOLS -------------------------------------*/
 //utils.c
-void				ft_title(void);
+void		ft_title(void);
 //signal.c
-void				ft_ctrlc(int sig);
-void				ft_ctrld(t_data *data);
+void		ft_ctrlc(int sig);
+void		ft_ctrld(t_data *data);
 
 /* ---------------------------- EXECUTION -----------------------------------*/
 //exemple1.c
 
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
+void		rl_replace_line(const char *, int);
+void		rl_clear_history(void);
 
 #endif

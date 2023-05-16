@@ -12,20 +12,21 @@ CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
 RM = rm -f
 
 SRCS_FILES = 	main.c \
-				parsing/parsing.c \
-				parsing/state_machine.c \
-				parsing/state_<.c \
-				parsing/state_>.c \
-				parsing/state_idle.c \
-				parsing/state_pipe.c \
-				parsing/state_quotes.c \
-				parsing/actions_finish.c \
-				parsing/actions_modify.c \
-				parsing/end_state_machine.c \
-				parsing/utils.c \
 				tools/signal.c \
 				tools/utils.c \
-				
+				free/clear_tokens.c \
+				parsing/parsing.c \
+                parsing/state_machine.c \
+                parsing/state_machine_utils.c \
+                parsing/state_less.c \
+                parsing/state_greater.c \
+                parsing/state_idle.c \
+                parsing/state_pipe.c \
+                parsing/state_quotes.c \
+                parsing/actions_finish.c \
+                parsing/actions_modify.c \
+                parsing/lists_utils.c \
+				parsing/parsing_error.c \
 
 SRCS = $(addprefix ./src/, $(SRCS_FILES))
 OBJS = $(SRCS:%.c=%.o)
@@ -48,7 +49,7 @@ $(LIBFT):
 clean:
 			@echo " [ .. ] | Cleaning objects.."
 			@make -s -C libft clean
-			@($(RM) $(OBJS) $(BONUS_OBJS))
+			@($(RM) $(OBJS))
 			@echo " [ OK ] | Objects removed!"
 
 fclean: 	clean

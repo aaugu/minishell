@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 15:40:03 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/16 10:58:45 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,8 @@
 # define PARSING_H
 
 /******************************************************************************
-*							    INCLUDE										  *
-******************************************************************************/
-
-# include "../libft/libft.h"
-# include "state_machine.h"
-# include <stdbool.h>
-# include <stdio.h>
-
-/******************************************************************************
 *								ENUM									      *
 ******************************************************************************/
-
-/* Differents possible states of state machine */
-typedef enum e_state
-{
-	idle,
-	less_than,
-	less_than_d,
-	greater_than,
-	greater_than_d,
-	quote_s,
-	quote_d,
-	s_pipe,
-	error,
-	stop,
-}			t_state;
 
 /* Differents possible types of each token */
 typedef enum e_type
@@ -61,17 +37,6 @@ typedef enum e_type
 *								STRUCTS									      *
 ******************************************************************************/
 
-/* State machine */
-typedef struct s_sm
-{
-	enum e_state	current_state;
-	char			*buf;
-	int				buf_size;
-	int				input_size;
-	int				meta;
-	enum e_type		type;
-}					t_sm;
-
 /* Chained list where each parsed elements and their infos are stored */
 typedef struct s_token
 {
@@ -87,10 +52,8 @@ typedef struct s_token
 ******************************************************************************/
 
 t_token	**parsing(char *input);
-void	init_state_machine(t_sm *sm, t_token **tokens);
-t_token	**state_machine(t_sm *sm, char *input);
 
 /* ------------------------------ PARSING ERROR -----------------------------*/
-void	parsing_error(t_sm *sm, t_token **tokens, char *c);
+void	clear_tokens(t_token **tokens);
 
 #endif

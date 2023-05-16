@@ -6,11 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/09 14:02:11 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/16 13:01:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/parsing.h"
 
 char	**ft_copy_env(char **env)
 {
@@ -42,7 +43,7 @@ static void	ft_good_input(t_data *data)
 	if (ft_strlen(data->user_input) > 0)
 	{
 		add_history(data->user_input);
-		//ft_parser(data);
+		parsing(data->user_input);
 		if (data->user_input)
 			free(data->user_input);
 	}
@@ -71,10 +72,11 @@ static void	ft_readline(char **envp, t_data *data)
 
 int	main(int ac, char **av, char **envp)
 {
+	t_data	data;
+
 	(void)ac;
 	(void)av;
-	t_data	data;
 	data = (t_data){0};
-    ft_title();
+	ft_title();
 	ft_readline(envp, &data);
 }

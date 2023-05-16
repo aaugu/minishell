@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_state_machine.c                                :+:      :+:    :+:   */
+/*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/15 15:45:56 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/16 11:06:33 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
-#include "../../includes/parsing.h"
 #include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 
-void	clear_parsing(t_sm *sm, t_token **tokens);
-void	clear_state_machine(t_sm *sm);
-void	clear_tokens(t_token **tokens);
-
-void	parsing_error(t_sm *sm, t_token **tokens, char *s)
+/* Handles error in state machine : Delivers error message and set state of 
+state machine to error */
+void	parsing_error(t_sm *sm, char *s)
 {
 	if (s)
 	{
@@ -33,36 +31,5 @@ void	parsing_error(t_sm *sm, t_token **tokens, char *s)
 		printf("minishell: malloc() failed: %s\n", strerror(errno));
 		g_exit_code = errno;
 	}
-	clear_parsing(sm, tokens);
 	sm->current_state = error;
-}
-
-void	clear_parsing(t_sm *sm, t_token **tokens)
-{
-	clear_state_machine(sm);
-	clear_tokens(tokens);
-}
-
-void	clear_state_machine(t_sm *sm)
-{
-	if (sm->buf)
-		free(sm->buf);
-	sm = (t_sm *){0};
-}
-
-void	clear_tokens(t_token **tokens)
-{
-	t_token	*next;
-
-	if (!*tokens)
-		return ;
-	while (*tokens != NULL)
-	{
-		next = (*tokens)->next;
-		if ((*tokens)->content)
-			free((*tokens)->content);
-		free(*tokens);
-		*tokens = next;
-	}
-	free(tokens);
 }
