@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 11:04:34 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/16 14:00:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	change_state_and_type(t_sm *sm, t_state state, t_type type, char c)
 {
 	if (state == idle && c == '\'')
 		sm->meta = false;
-	if (state >= 0)
-	sm->current_state = state;
-	if (type >= 0)
+	if (state)
+		sm->current_state = state;
+	if (type)
 		sm->type = type;
 }
 
