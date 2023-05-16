@@ -32,19 +32,11 @@
 # include <sys/wait.h>
 
 # include "../libft/libft.h"
+# include "parsing.h"
 
 /******************************************************************************
 *								MACROS										  *
 ******************************************************************************/
-
-// Define pour les type d'élement dans l'input pour t_token
-# define CMD 1
-# define GREAT 2
-# define GREAT_GREAT 3
-# define LESS 4
-# define LESS_LESS 5
-# define PIPE 6
-# define FILE 7
 
 // Standard fd
 # define STDIN 0
@@ -55,7 +47,7 @@
 *							 GLOBAL VARIABLE		  						  *
 ******************************************************************************/
 
-int					g_exit_code;
+int	g_exit_code;
 
 /******************************************************************************
 *								STRUCTS									      *
@@ -63,23 +55,15 @@ int					g_exit_code;
 
 typedef struct s_data
 {
-    char			**envp;
-    char			*input;
-    int				exit_code;
-	char			**cmd;
-	int				cmd_nbr;
-	int				pipe_nbr;
-	char			**all_path;
-	int				*fd_array;
+    char	**envp;
+    char	*user_input;
+    int		exit_code;
+	char	**cmd;
+	int		cmd_nbr;
+	int		pipe_nbr;
+	char	**all_path;
+	int		*fd_array;
 }					t_data;
-
-typedef struct s_token
-{
-	char			*str;
-	int				type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
 
 /******************************************************************************
 *							    FUNCTIONS									  *
@@ -87,15 +71,17 @@ typedef struct s_token
 
 /* ------------------------------ TOOLS -------------------------------------*/
 //utils.c
-void				ft_title(void);
+void		ft_title(void);
 //signal.c
-void				ft_ctrlc(int sig);
-void				ft_ctrld(t_data *data);
+void		ft_ctrlc(int sig);
+void		ft_ctrld(t_data *data);
 
 /* ---------------------------- EXECUTION -----------------------------------*/
 //exemple1.c
 
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
+void		rl_replace_line(const char *, int);
+void		rl_clear_history(void);
 
 #endif

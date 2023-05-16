@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/02 15:12:35 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/16 13:01:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include "../includes/parsing.h"
 
 char	**ft_copy_env(char **env)
 {
@@ -39,12 +40,12 @@ char	**ft_copy_env(char **env)
 
 static void	ft_good_input(t_data *data)
 {
-	if (ft_strlen(data->input) > 0)
+	if (ft_strlen(data->user_input) > 0)
 	{
-		add_history(data->input);
-		//ft_parser(data);
-		if (data->input)
-			free(data->input);
+		add_history(data->user_input);
+		parsing(data->user_input);
+		if (data->user_input)
+			free(data->user_input);
 	}
 }
 
@@ -57,8 +58,8 @@ static void	ft_readline(char **envp, t_data *data)
 	while (1)
 	{
 		g_exit_code = 0;
-		data->input = readline("minishell > ");
-		if (data->input)
+		data->user_input = readline("minishell > ");
+		if (data->user_input)
 		{
 			if (g_exit_code != 0)
 				data->exit_code = g_exit_code;
@@ -71,10 +72,11 @@ static void	ft_readline(char **envp, t_data *data)
 
 int	main(int ac, char **av, char **envp)
 {
+	t_data	data;
+
 	(void)ac;
 	(void)av;
-	t_data	data;
 	data = (t_data){0};
-    ft_title();
+	ft_title();
 	ft_readline(envp, &data);
 }
