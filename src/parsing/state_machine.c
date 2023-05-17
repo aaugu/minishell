@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 12:51:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:54:55 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_sm	create_state_machine(char *input)
 	sm = (t_sm){0};
 	sm.input_size = ft_strlen(input);
 	sm.current_state = idle;
-	sm.type = cmd;
+	sm.type = command;
 	return (sm);
 }
 
