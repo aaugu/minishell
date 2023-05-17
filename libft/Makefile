@@ -15,7 +15,7 @@ SRC			= ft_abs.c ft_atod.c ft_atoi.c ft_bzero.c ft_calloc.c ft_fibonacci.c \
 			  ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c \
 			  get_next_line.c \
 			  ft_printf.c ft_printf_utils.c ft_print_ptr.c ft_print_unsigned.c ft_print_hex.c \
-
+			  ft_strs_utils.c \
 
 OBJ		= $(SRC:.c=.o)
 CC		= gcc
