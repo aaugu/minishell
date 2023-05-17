@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/08 15:39:40 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:36:37 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	ft_is_builtins(t_token *token)
 	tmp = token;
 	if (tmp && tmp->type == PIPE)
 		tmp = tmp->next;
-	while ((tmp && tmp->type != CMD) && (tmp && tmp->type != PIPE))
+	while ((tmp && tmp->type != cmd) && (tmp && tmp->type != PIPE))
 		tmp = tmp->next;
 	if (tmp && tmp->str && tmp->type == CMD)
 	{

@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/08 15:03:42 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:40:01 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_free_child(t_token *token, t_data *d)
 	ft_free_double(d->envp);
 	while (token && token->prev)
 		token = token->prev;
-	ft_free_list(token);
+	clear_tokens(token);
 	rl_clear_history();
 	free(d->input);
 }

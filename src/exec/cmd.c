@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/11 14:58:13 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/16 19:16:18 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,4 +131,20 @@ char	**ft_find_cmd(t_token *token)
 			return (cmd);
 	}
 	return (NULL);
+}
+
+int	ft_is_cmd(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	if (tmp->type == PIPE)
+		tmp = tmp->next;
+	while (tmp && tmp->type != PIPE)
+	{
+		if (tmp->type == CMD)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

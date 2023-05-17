@@ -16,6 +16,7 @@
 /******************************************************************************
 *							    INCLUDE										  *
 ******************************************************************************/
+
 # include <unistd.h>
 # include <errno.h>
 # include <stdio.h>
@@ -32,19 +33,11 @@
 # include <sys/wait.h>
 
 # include "../libft/libft.h"
+# include "parsing.h"
 
 /******************************************************************************
 *								MACROS										  *
 ******************************************************************************/
-
-// Define pour les type d'élement dans l'input pour t_token
-# define CMD 1
-# define GREAT 2
-# define GREAT_GREAT 3
-# define LESS 4
-# define LESS_LESS 5
-# define PIPE 6
-# define FILE 7
 
 // Standard fd
 # define STDIN 0
@@ -62,7 +55,7 @@
 *							 GLOBAL VARIABLE		  						  *
 ******************************************************************************/
 
-int					g_exit_code;
+int	g_exit_code;
 
 /******************************************************************************
 *								STRUCTS									      *
@@ -79,7 +72,7 @@ typedef struct s_heredoc
 typedef struct s_data
 {
 	char			**envp;
-	char			*input;
+	char			*user_input;
 	int				exit_code;
 	char			**cmd;
 	int				cmd_nbr;
@@ -97,14 +90,6 @@ typedef struct s_data
 
 }					t_data;
 
-typedef struct s_token
-{
-	char			*str;
-	int				type;
-	struct s_token	*next;
-	struct s_token	*prev;
-}					t_token;
-
 /******************************************************************************
 *							    FUNCTIONS									  *
 ******************************************************************************/
@@ -113,6 +98,15 @@ typedef struct s_token
 int					ft_is_builtins(t_token *token);
 void				ft_which_builtins(t_data *data, t_token *token, pid_t *pid);
 
+int					ft_env(t_data *data);
+int					ft_cd(t_data *data);
+int					ft_pwd(void);
+int					ft_unset(t_data *data);
+int					ft_export(t_data *data);
+void				ft_exit();
+void				ft_echo(t_data *data);
+
+
 /* ---------------------------- EXECUTION -----------------------------------*/
 //child.c
 void				ft_process_child(t_data *d, t_token *tmp, pid_t *p);
@@ -120,11 +114,13 @@ void				ft_process_child(t_data *d, t_token *tmp, pid_t *p);
 void				ft_builtins_or_cmd(t_data *d, t_token *tmp, pid_t *pid);
 char				**ft_find_cmd(t_token *token);
 char				*ft_getenv(char **envp, char *var);
+int					ft_is_cmd(t_token *token);
 //count.c
 int					ft_pipe_count(t_token *token);
 int					ft_cmd_count(t_token *token);
 //error.c
 void				ft_exit_doc(t_token *token, t_data *data);
+void				ft_cmd_error(t_data *data);
 //exec.c
 void				ft_executor(t_token *token, t_data *data);
 //file.c
@@ -141,7 +137,7 @@ int					*ft_set_pipe(t_data *data);
 
 /* ------------------------------ TOOLS -------------------------------------*/
 //utils.c
-void				ft_title(void);
+void		ft_title(void);
 //signal.c
 void				*ft_free_double(char **str);
 void				ft_ctrlc(int sig);
@@ -152,5 +148,7 @@ void				ft_free_child(t_token *token, t_data *d);
 
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
+void		rl_replace_line(const char *, int);
+void		rl_clear_history(void);
 
 #endif
