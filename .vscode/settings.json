@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
     "files.associations": {
         "unistd.h": "c",
         "readline.h": "c",
@@ -25,9 +24,4 @@
         "stdarg.h": "c",
         "libft.h": "c"
     }
-=======
-	"files.associations": {
-		"minishell.h": "c"
-	}
->>>>>>> 826c3fae16066bcf8db7ea8e42892c7f9b07f4e1
 }
