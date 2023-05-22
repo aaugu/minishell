@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/17 15:07:16 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef enum e_state
 ******************************************************************************/
 
 /* State machine */
-typedef struct s_sm
+typedef struct s_fsm
 {
 	enum e_state	current_state;
 	char			*buf;
@@ -49,41 +49,41 @@ typedef struct s_sm
 	int				input_size;
 	int				meta;
 	enum e_type		type;
-}					t_sm;
+}					t_fsm;
 
 /******************************************************************************
 *							    FUNCTIONS									  *
 ******************************************************************************/
 
 t_token	**state_machine(char *input);
-void	init_state_machine(t_sm *sm);
+void	init_state_machine(t_fsm *fsm);
 
 /* Each function will set current state and decide to perform an action if 
 needed */
-void	state_idle(t_sm *sm, t_token **tokens, char c);
-void	state_less_than(t_sm *sm, t_token **tokens, char c);
-void	state_less_than_d(t_sm *sm, t_token **tokens, char c);
-void	state_greater_than(t_sm *sm, t_token **tokens, char c);
-void	state_greater_than_d(t_sm *sm, t_token **tokens, char c);
-void	state_quote_s(t_sm *sm, char c);
-void	state_quote_d(t_sm *sm, char c);
-void	state_pipe(t_sm *sm, t_token **tokens, char c);
+void	state_idle(t_fsm *fsm, t_token **tokens, char c);
+void	state_less_than(t_fsm *fsm, t_token **tokens, char c);
+void	state_less_than_d(t_fsm *fsm, t_token **tokens, char c);
+void	state_greater_than(t_fsm *fsm, t_token **tokens, char c);
+void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c);
+void	state_quote_s(t_fsm *fsm, char c);
+void	state_quote_d(t_fsm *fsm, char c);
+void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
 
 /* --------------------------------- ACTIONS ---------------------------------*/
-void	add_to_buf(t_sm *sm, char c);
-void	change_state_and_type(t_sm *sm, t_state state, t_type type, char c);
-void	state_type_add_buf(t_sm *sm, t_state state, t_type type, char c);
+void	add_to_buf(t_fsm *fsm, char c);
+void	change_state_and_type(t_fsm *fsm, t_state state, t_type type, char c);
+void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c);
 
-void	finish_buf(t_sm *sm, t_token **tokens, char c);
-void	finish_add(t_sm *sm, t_token **tokens, char c);
-void	finish_add_idle(t_sm *sm, t_token **tokens, char c);
-void	finish_stop(t_sm *sm, t_token **tokens, char c);
+void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
+void	finish_add(t_fsm *fsm, t_token **tokens, char c);
+void	finish_add_idle(t_fsm *fsm, t_token **tokens, char c);
+void	finish_stop(t_fsm *fsm, t_token **tokens, char c);
 
 /* ---------------------------------- UTILS ----------------------------------*/
-t_token	*create_node(char *buffer, t_type type, t_sm *sm);
+t_token	*create_node(char *buffer, t_type type, t_fsm *fsm);
 t_token	*lst_last(t_token *lst);
 
 /* ------------------------------ ERROR MESSAGES -----------------------------*/
-void	parsing_error(t_sm *sm, char *c);
+void	parsing_error(t_fsm *fsm, char *c);
 
 #endif

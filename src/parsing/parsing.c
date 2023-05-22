@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 10:03:30 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:23:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ t_token	**parsing(char *input)
 {
 	t_token	**tokens;
 
-	tokens = NULL;
 	tokens = state_machine(input);
 	if (!tokens)
 		return (NULL);

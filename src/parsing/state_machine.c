@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/17 15:16:00 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:24:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 #include "../../includes/state_machine.h"
 #include "../../includes/minishell.h"
 
-t_sm	create_state_machine(char *input);
-void	execute_state_machine(t_sm *sm, t_token **tokens, char c);
-void	clear_state_machine(t_sm *sm);
-void	clear_parsing_error(t_sm *sm, t_token **tokens);
+t_fsm	create_state_machine(char *input);
+void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c);
+void	clear_state_machine(t_fsm *fsm);
+void	clear_parsing_error(t_fsm *fsm, t_token **tokens);
 
-/* State machine. Will loop on each char to know how to separate each token in 
-a lineary way. */
+/* Finite state machine. Will loop on each char to know how to separate each
+token in a lineary way. */
 t_token	**state_machine(char *input)
 {
 	t_token	**tokens;
-	t_sm	sm;
+	t_fsm	fsm;
 	int		i;
 
-	sm = create_state_machine(input);
-	init_state_machine(&sm);
+	fsm = create_state_machine(input);
+	init_state_machine(&fsm);
 	tokens = (t_token **)malloc(sizeof(t_token *));
 	if (!tokens)
 		return (NULL);
@@ -36,62 +36,62 @@ t_token	**state_machine(char *input)
 	i = 0;
 	while (i <= (int)ft_strlen(input))
 	{
-		execute_state_machine(&sm, tokens, input[i]);
-		if ((&sm)->current_state == error)
+		execute_state_machine(&fsm, tokens, input[i]);
+		if (fsm.current_state == error)
 		{
-			clear_parsing_error(&sm, tokens);
+			clear_parsing_error(&fsm, tokens);
 			return (NULL);
 		}
 		i++;
 	}
-	clear_state_machine(&sm);
-	if ((&sm)->current_state == stop)
+	clear_state_machine(&fsm);
+	if (fsm.current_state == stop)
 		return (tokens);
 	return (NULL);
 }
 
 /* Tells state machine what to do depending on current state. Method flexible,
 as it is easy to modify and add conditions based on the state you're in. */
-void	execute_state_machine(t_sm *sm, t_token **tokens, char c)
+void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c)
 {
-	if (sm->current_state == idle)
-		state_idle(sm, tokens, c);
-	else if (sm->current_state == less_than)
-		state_less_than(sm, tokens, c);
-	else if (sm->current_state == less_than_d)
-		state_less_than_d(sm, tokens, c);
-	else if (sm->current_state == greater_than)
-		state_greater_than(sm, tokens, c);
-	else if (sm->current_state == greater_than_d)
-		state_greater_than_d(sm, tokens, c);
-	else if (sm->current_state == quote_s)
-		state_quote_s(sm, c);
-	else if (sm->current_state == quote_d)
-		state_quote_d(sm, c);
-	else if (sm->current_state == s_pipe)
-		state_pipe(sm, tokens, c);
+	if (fsm->current_state == idle)
+		state_idle(fsm, tokens, c);
+	else if (fsm->current_state == less_than)
+		state_less_than(fsm, tokens, c);
+	else if (fsm->current_state == less_than_d)
+		state_less_than_d(fsm, tokens, c);
+	else if (fsm->current_state == greater_than)
+		state_greater_than(fsm, tokens, c);
+	else if (fsm->current_state == greater_than_d)
+		state_greater_than_d(fsm, tokens, c);
+	else if (fsm->current_state == quote_s)
+		state_quote_s(fsm, c);
+	else if (fsm->current_state == quote_d)
+		state_quote_d(fsm, c);
+	else if (fsm->current_state == s_pipe)
+		state_pipe(fsm, tokens, c);
 }
 
-t_sm	create_state_machine(char *input)
+t_fsm	create_state_machine(char *input)
 {
-	t_sm	sm;
+	t_fsm	fsm;
 
-	sm = (t_sm){0};
-	sm.input_size = ft_strlen(input);
-	sm.current_state = idle;
-	sm.type = command;
-	return (sm);
+	fsm = (t_fsm){0};
+	fsm.input_size = ft_strlen(input);
+	fsm.current_state = idle;
+	fsm.type = command;
+	return (fsm);
 }
 
-void	clear_state_machine(t_sm *sm)
+void	clear_state_machine(t_fsm *fsm)
 {
-	if (sm->buf)
-		free(sm->buf);
-	sm = (t_sm *){0};
+	if (fsm->buf)
+		free(fsm->buf);
+	fsm = (t_fsm *){0};
 }
 
-void	clear_parsing_error(t_sm *sm, t_token **tokens)
+void	clear_parsing_error(t_fsm *fsm, t_token **tokens)
 {
-	clear_state_machine(sm);
+	clear_state_machine(fsm);
 	clear_tokens(tokens);
 }
