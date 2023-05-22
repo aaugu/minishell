@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 11:26:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_pipe(t_sm *sm, t_token **tokens, char c)
+void	state_pipe(t_fsm *fsm, t_token **tokens, char c)
 {
 	if (c == ' ' || c == '\'' || c == '\"')
-		finish_buf(sm, tokens, c);
+		finish_buf(fsm, tokens, c);
 	if (c == '<' || c == '>')
-		finish_add(sm, tokens, c);
+		finish_add(fsm, tokens, c);
 	if (c == '<')
-		sm->current_state = less_than;
+		fsm->current_state = less_than;
 	else if (c == '>')
-		sm->current_state = greater_than;
+		fsm->current_state = greater_than;
 	else if (c == '|')
-		parsing_error(sm, &c);
+		parsing_error(fsm, &c);
 	else if (c == '\'')
-		sm->current_state = quote_s;
+		fsm->current_state = quote_s;
 	else if (c == '\"')
-		sm->current_state = quote_d;
+		fsm->current_state = quote_d;
 	else if (c == ' ')
-		sm->current_state = idle;
+		fsm->current_state = idle;
 	else if (c == '\0')
-		parsing_error(sm, "newline");
+		parsing_error(fsm, "newline");
 	else
-		finish_add_idle(sm, tokens, c);
+		finish_add_idle(fsm, tokens, c);
 }
