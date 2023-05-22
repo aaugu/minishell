@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:44:02 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/03 15:03:48 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:27:20 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,9 @@ int				ft_find_next_prime(int nb);
 char			*ft_ltoa(long n);
 int				ft_putnbr_base_fd(long num, char *base, int fd);
 char			*ft_strrev(char *str);
+
+int				ft_strs_len(char **strs);
+void			ft_strs_free(char **strs, int size);
+char			**ft_strs_copy(const char **src, int size);
 
 #endif

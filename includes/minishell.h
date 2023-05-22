@@ -154,4 +154,6 @@ void				ft_free_child(t_token *token, t_data *d);
 void		rl_replace_line(const char *, int);
 void		rl_clear_history(void);
 
+void		clear_minishell(t_data *data);
+
 #endif
