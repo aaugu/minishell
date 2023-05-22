@@ -6,27 +6,27 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/17 13:54:55 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:21:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
 
-void	get_next_type(t_sm *sm, char c);
+void	get_next_type(t_fsm *fsm, char c);
 
 /* Finish buffer, create a node of tokens list and set its content. Then reset 
 the buffer. Get next type if needed.*/
-void	finish_buf(t_sm *sm, t_token **tokens, char c)
+void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 {
 	t_token	*new_token;
 	t_token	*prev;
 
-	if (sm->buf_size != 0)
+	if (fsm->buf_size != 0)
 	{
-		sm->buf[sm->buf_size] = '\0';
-		new_token = create_node(sm->buf, sm->type, sm);
+		fsm->buf[fsm->buf_size] = '\0';
+		new_token = create_node(fsm->buf, fsm->type, fsm);
 		if (!new_token)
-			parsing_error(sm, 0);
+			parsing_error(fsm, 0);
 		if (*tokens == NULL)
 			*tokens = new_token;
 		else
@@ -35,53 +35,53 @@ void	finish_buf(t_sm *sm, t_token **tokens, char c)
 			prev->next = new_token;
 			new_token->prev = prev;
 		}
-		if (sm->meta == false)
+		if (fsm->meta == false)
 			new_token->meta = false;
-		init_state_machine(sm);
-		get_next_type(sm, c);
+		init_state_machine(fsm);
+		get_next_type(fsm, c);
 	}
 }
 
 /* Combination of finish_buf() and add_to_buff() */
-void	finish_add(t_sm *sm, t_token **tokens, char c)
+void	finish_add(t_fsm *fsm, t_token **tokens, char c)
 {
-	finish_buf(sm, tokens, c);
-	add_to_buf(sm, c);
+	finish_buf(fsm, tokens, c);
+	add_to_buf(fsm, c);
 }
 
 /* Combination of finish_buff() and set current state to stop */
-void	finish_stop(t_sm *sm, t_token **tokens, char c)
+void	finish_stop(t_fsm *fsm, t_token **tokens, char c)
 {
-	finish_buf(sm, tokens, c);
-	sm->current_state = stop;
+	finish_buf(fsm, tokens, c);
+	fsm->current_state = stop;
 }
 
 /* Combination of finish_add() and set current state to idle */
-void	finish_add_idle(t_sm *sm, t_token **tokens, char c)
+void	finish_add_idle(t_fsm *fsm, t_token **tokens, char c)
 {
-	finish_add(sm, tokens, c);
-	sm->current_state = idle;
+	finish_add(fsm, tokens, c);
+	fsm->current_state = idle;
 }
 
 /* Define type of element depending on previous type saved */
-void	get_next_type(t_sm *sm, char c)
+void	get_next_type(t_fsm *fsm, char c)
 {
-	if (sm->type == redir_in || sm->type == heredoc || sm->type == redir_out \
-		|| sm->type == redir_out_ap)
+	if (fsm->type == redir_in || fsm->type == heredoc || fsm->type == redir_out \
+		|| fsm->type == redir_out_ap)
 	{
-		if (sm->type == redir_in && c == '>')
-			sm->type = redir_out;
-		else if (sm->type == redir_in)
-			sm->type = infile;
-		else if (sm->type == heredoc)
-			sm->type = limiter;
-		else if (sm->type == redir_out)
-			sm->type = outfile;
-		else if (sm->type == redir_out_ap)
-			sm->type = outfile;
+		if (fsm->type == redir_in && c == '>')
+			fsm->type = redir_out;
+		else if (fsm->type == redir_in)
+			fsm->type = infile;
+		else if (fsm->type == heredoc)
+			fsm->type = limiter;
+		else if (fsm->type == redir_out)
+			fsm->type = outfile;
+		else if (fsm->type == redir_out_ap)
+			fsm->type = outfile;
 	}
-	else if (sm->type == command || sm->type == option)
-		sm->type = option;
+	else if (fsm->type == command || fsm->type == option)
+		fsm->type = option;
 	else
-		sm->type = command;
+		fsm->type = command;
 }
