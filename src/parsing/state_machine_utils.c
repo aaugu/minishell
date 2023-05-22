@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 11:56:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:16:00 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../../libft/libft.h"
 #include "../../includes/state_machine.h"
+#include "../../includes/minishell.h"
 
 /* Initialize start values of t_sm state machine */
 void	init_state_machine(t_sm *sm)

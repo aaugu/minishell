@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/17 13:24:02 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:22:23 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_good_input(t_data *data)
 	{
 		add_history(data->user_input);
 		token = *parsing(data->user_input);
-		//ft_executor(token, data);
+		ft_executor(token, data);
 		if (data->user_input)
 			free(data->user_input);
 	}

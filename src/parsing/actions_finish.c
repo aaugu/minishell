@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   actions_finish.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 13:15:56 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:15:40 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
+#include "../../includes/minishell.h"
 
 void	get_next_type(t_sm *sm, char c);
 
@@ -80,8 +81,8 @@ void	get_next_type(t_sm *sm, char c)
 		else if (sm->type == redir_out_ap)
 			sm->type = outfile;
 	}
-	else if (sm->type == cmd || sm->type == option)
+	else if (sm->type == command || sm->type == option)
 		sm->type = option;
 	else
-		sm->type = cmd;
+		sm->type = command;
 }

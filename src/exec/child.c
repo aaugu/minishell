@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/16 19:40:01 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:32:29 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_exec_cmd(t_token *tmp, t_data *data)
 	if ((data->is_builtin > 0 && data->is_builtin < 3)
 		|| (data->is_builtin == 3 && !data->cmd[1]))
 		return ;
-	while (tmp->type != CMD)
+	while (tmp->type != command)
 		tmp = tmp->next;
 	if (data->is_builtin > 3 || (data->is_builtin == 3 && data->cmd[1]))
 		ft_which_builtins_child(data, tmp);
@@ -38,14 +38,14 @@ void	ft_fd_error(t_token *token, t_data *d, int flag)
 {
 	if (flag == ERR_OPEN_LESS)
 	{
-		write(2, token->next->str, ft_strlen(token->next->str));
+		write(2, token->next->content, ft_strlen(token->next->content));
 		write(2, ": No such file or directory\n", 28);
 		ft_free_child(token, d);
 		exit(4);
 	}
 	else if (flag == ERR_OPEN_GREAT)
 	{
-		write(2, token->next->str, ft_strlen(token->next->str));
+		write(2, token->next->content, ft_strlen(token->next->content));
 		write(2, ": Permission denied\n", 20);
 		ft_free_child(token, d);
 		exit(4);
@@ -78,9 +78,9 @@ void	ft_free_child(t_token *token, t_data *d)
 	ft_free_double(d->envp);
 	while (token && token->prev)
 		token = token->prev;
-	clear_tokens(token);
+	clear_tokens(&token);
 	rl_clear_history();
-	free(d->input);
+	free(d->user_input);
 }
 
 
@@ -106,9 +106,9 @@ void	ft_less_child(t_data *d, t_token *tmp, int less)
 	int		fd;
 
 	fd = -1;
-	if (tmp->type == LESS)
+	if (tmp->type == redir_in)
 	{
-		fd = open(tmp->next->str, O_RDONLY);
+		fd = open(tmp->next->content, O_RDONLY);
 		if (fd == -1)
 			ft_child_error(tmp, d, ERR_OPEN_LESS);
 		if (less == d->less_mark)
@@ -128,10 +128,10 @@ void	ft_great_child(t_data *d, t_token *token, int great)
 	int		fd;
 
 	fd = -1;
-	if (token->type == GREAT_GREAT)
-		fd = open(token->next->str, O_WRONLY | O_APPEND | O_CREAT, 0640);
-	else if (token->type == GREAT)
-		fd = open(token->next->str, O_WRONLY | O_TRUNC | O_CREAT, 0640);
+	if (token->type == redir_out_ap)
+		fd = open(token->next->content, O_WRONLY | O_APPEND | O_CREAT, 0640);
+	else if (token->type == redir_out)
+		fd = open(token->next->content, O_WRONLY | O_TRUNC | O_CREAT, 0640);
 	if (fd == -1)
 		ft_child_error(token, d, ERR_OPEN_GREAT);
 	if (great == d->great_mark)
@@ -154,14 +154,14 @@ void	ft_less_n_great(t_data *data, t_token *tmp)
 	tmp2 = tmp;
 	great = 0;
 	less = 0;
-	while (tmp2 && tmp2->type != PIPE)
+	while (tmp2 && tmp2->type != t_pipe)
 	{
-		if (tmp2->type == GREAT || tmp2->type == GREAT_GREAT)
+		if (tmp2->type == redir_out || tmp2->type == redir_out_ap)
 		{
 			great++;
 			ft_great_child(data, tmp2, great);
 		}
-		else if (tmp2->type == LESS)
+		else if (tmp2->type == redir_in)
 		{
 			less++;
 			ft_less_child(data, tmp2, less);
@@ -172,9 +172,9 @@ void	ft_less_n_great(t_data *data, t_token *tmp)
 
 void	ft_redirection(t_token *tmp, t_data *data)
 {
-	data->great_mark = ft_mark_count(tmp, GREAT);
-	data->great_mark += ft_mark_count(tmp, GREAT_GREAT);
-	data->less_mark = ft_mark_count(tmp, LESS);
+	data->great_mark = ft_mark_count(tmp, redir_out);
+	data->great_mark += ft_mark_count(tmp, redir_out_ap);
+	data->less_mark = ft_mark_count(tmp, redir_in);
 	if (data->less_mark > 0 || data->great_mark > 0)
 		ft_less_n_great(data, tmp);
 	if (data->heredoc.flag_doc == 1)
@@ -197,7 +197,7 @@ void	ft_exec_child(t_data *data, t_token *tmp)
 	t_token	*tmp2;
 
 	tmp2 = tmp;
-	if (tmp2->type == PIPE)
+	if (tmp2->type == t_pipe)
 		tmp2 = tmp2->next;
 	ft_redirection(tmp2, data);
 	if (data->pipe_nbr > 0)

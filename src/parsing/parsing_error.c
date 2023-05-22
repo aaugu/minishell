@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 11:06:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:14:24 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
 #include "../../includes/minishell.h"
-#include "../../libft/libft.h"
 
 /* Handles error in state machine : Delivers error message and set state of 
 state machine to error */

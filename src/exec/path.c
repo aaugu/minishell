@@ -6,11 +6,26 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:27:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/05 11:33:51 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:57:58 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	**ft_join(char **path)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (path[i])
+	{
+		tmp = ft_strjoin(path[i], "/");
+		free(path[i]);
+		path[i++] = tmp;
+	}
+	return (path);
+}
 
 char	**ft_find_path(t_data *data)
 {

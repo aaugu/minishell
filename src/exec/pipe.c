@@ -6,20 +6,32 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:52:13 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/08 14:41:02 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 10:31:55 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static int	ft_is_next_pipe(t_token *token)
+{
+	t_token	*tmp;
+
+	tmp = token;
+	while (tmp && tmp->type != t_pipe)
+		tmp = tmp->next;
+	if (tmp && tmp->type == t_pipe)
+		return (1);
+	return (0);
+}
 
 int	ft_is_prev_pipe(t_token *token)
 {
 	t_token	*tmp;
 
 	tmp = token;
-	while (tmp && tmp->type != PIPE)
+	while (tmp && tmp->type != t_pipe)
 		tmp = tmp->prev;
-	if (tmp && tmp->type == PIPE)
+	if (tmp && tmp->type == t_pipe)
 		return (1);
 	return (0);
 }
@@ -28,13 +40,13 @@ void	ft_pipe_child(t_data *data, t_token *token)
 {
 	if (data->great_mark == 0 && ft_is_next_pipe(token) == 1)
 	{
-		if (dup2(data->fd_array[data->j], STDOUT) == -1)
+		if (dup2(data->fd_array[data->child * 2], STDOUT) == -1)
 			ft_child_error(token, data, ERR_DUP2);
 	}
 	if (data->less_mark == 0 && data->heredoc.flag_doc == 0
 		&& ft_is_prev_pipe(token) == 1)
 	{
-		if (dup2(data->fd_array[data->j - 1], STDIN) == -1)
+		if (dup2(data->fd_array[(data->child * 2) - 1], STDIN) == -1)
 			ft_child_error(token, data, ERR_DUP2);
 	}
 }

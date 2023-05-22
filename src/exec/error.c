@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:10:58 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/17 12:29:55 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 11:24:05 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ft_free_child_doc(t_data *data, t_token *token)
 		free(data->fd_array);
 	while (token && token->prev)
 		token = token->prev;
-	clear_tokens(token);
+	clear_tokens(&token);
 	clear_history();
 }
 

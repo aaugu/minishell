@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/12 15:31:12 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/17 14:27:00 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	ft_do_heredoc(t_token *tmp, t_data *data, int i)
 		{
 			if (ft_strlen(data->heredoc.str) > 0)
 			{
-				if (ft_strncmp(data->heredoc.str, tmp->next->str,
-						ft_strlen(tmp->next->str)) == 0
-					&& ft_strlen(tmp->next->str)
+				if (ft_strncmp(data->heredoc.str, tmp->next->content,
+						ft_strlen(tmp->next->content)) == 0
+					&& ft_strlen(tmp->next->content)
 					== ft_strlen(data->heredoc.str))
 					break ;
 				if (data->heredoc.flag_doc == 1
@@ -47,16 +47,16 @@ int	ft_is_doc_last(t_token *token)
 	int		type;
 
 	tmp = token;
-	if (tmp->type == PIPE)
+	if (tmp->type == t_pipe)
 		tmp = tmp->next;
 	type = -1;
-	while (tmp && tmp->type != PIPE)
+	while (tmp && tmp->type != t_pipe)
 	{
-		if (tmp->type == LESS || tmp->type == LESS_LESS)
+		if (tmp->type == redir_in || tmp->type == heredoc)
 			type = tmp->type;
 		tmp = tmp->next;
 	}
-	if (type == LESS_LESS)
+	if (type == heredoc)
 		return (1);
 	return (0);
 }
@@ -68,11 +68,11 @@ int	ft_heredoc_nbr(t_token *t)
 
 	tmp = t;
 	i = 0;
-	if (tmp->type == PIPE)
+	if (tmp->type == t_pipe)
 		tmp = tmp->next;
-	while (tmp && tmp->type != PIPE)
+	while (tmp && tmp->type != t_pipe)
 	{
-		if (tmp->type == LESS_LESS)
+		if (tmp->type == heredoc)
 			i++;
 		tmp = tmp->next;
 	}
@@ -101,7 +101,7 @@ static void	ft_heredoc_child(t_data *c, pid_t *p, t_token *tmp, pid_t *p2)
 	i = 0;
 	while (i < c->heredoc.here_doc_nbr)
 	{
-		while (tmp->type != LESS_LESS)
+		while (tmp->type != heredoc)
 			tmp = tmp->next;
 		p[i] = fork();
 		if (p[i] < 0)

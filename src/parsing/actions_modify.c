@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   actions_modify.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 14:00:51 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:16:00 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
+#include "../../includes/minishell.h"
 
 /* Add char to current buffer */
 void	add_to_buf(t_sm *sm, char c)

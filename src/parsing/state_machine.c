@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 12:51:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:16:00 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../../includes/state_machine.h"
-#include "../../libft/libft.h"
+#include "../../includes/minishell.h"
 
 t_sm	create_state_machine(char *input);
 void	execute_state_machine(t_sm *sm, t_token **tokens, char c);
@@ -79,7 +79,7 @@ t_sm	create_state_machine(char *input)
 	sm = (t_sm){0};
 	sm.input_size = ft_strlen(input);
 	sm.current_state = idle;
-	sm.type = cmd;
+	sm.type = command;
 	return (sm);
 }
 

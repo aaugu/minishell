@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   state_quotes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:39 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 12:50:05 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 15:15:12 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
+#include "../../includes/minishell.h"
 
 /* Will set current state according to char and decide which action to perform
 if needed */

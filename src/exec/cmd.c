@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/16 19:16:18 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:17:41 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,23 +93,21 @@ void	ft_builtins_or_cmd(t_data *d, t_token *tmp, pid_t *pid)
 	}
 }
 
-char	**ft_creat_cmd(t_token *token)
+char	*ft_full_str(t_token *token)
 {
 	t_token	*tmp;
-	char	**cmd;
-	int		i;
+	char	*str;
 
-	i = 0;
 	tmp = token;
-	if (tmp && tmp->type == CMD)
-		cmd[i] = tmp->str;
-	while (tmp->next == ABC)  //ABC place holder
+	str = ft_strdup(tmp->content);
+	while (tmp->next && tmp->next->type == option)
 	{
 		tmp = tmp->next;
-		cmd[++i] = tmp->str;
+		str = ft_strjoin(str, " ");
+		str = ft_strjoin(str, tmp->content);
 	}
-	if (cmd)
-			return (cmd);
+	if (str)
+			return (str);
 	return (NULL);
 }
 
@@ -117,16 +115,18 @@ char	**ft_find_cmd(t_token *token)
 {
 	t_token	*tmp;
 	char	**cmd;
+	char	*str;
 
 	tmp = token;
-	if (tmp && tmp->type == PIPE)
+	if (tmp && tmp->type == t_pipe)
 		tmp = tmp->next;
-	while (tmp && tmp->type != PIPE && tmp->type != CMD)
+	while (tmp && tmp->type != t_pipe && tmp->type != command)
 		tmp = tmp->next;
-	if (tmp && tmp->type == CMD)
+	if (tmp && tmp->type == command)
 	{
-		//cmd = ft_split(tmp->str, ' '); modif ici
-		cmd = ft_creat_cmd(tmp);
+		str = ft_full_str(tmp);
+		cmd = ft_split(str, ' ');
+		free(str);
 		if (cmd)
 			return (cmd);
 	}
@@ -138,11 +138,11 @@ int	ft_is_cmd(t_token *token)
 	t_token	*tmp;
 
 	tmp = token;
-	if (tmp->type == PIPE)
+	if (tmp->type == t_pipe)
 		tmp = tmp->next;
-	while (tmp && tmp->type != PIPE)
+	while (tmp && tmp->type != t_pipe)
 	{
-		if (tmp->type == CMD)
+		if (tmp->type == command)
 			return (1);
 		tmp = tmp->next;
 	}

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 14:01:47 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 10:03:30 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 #include "../../includes/state_machine.h"
-#include "../../libft/libft.h"
+#include "../../includes/minishell.h"
 
 /* Parsing to retrieve each separate elements (tokens) of user input as an 
 element of the command and store them in a chained list. */
@@ -28,7 +28,7 @@ t_token	**parsing(char *input)
 }
 
 /* Pour afficher chaque élément séparé avec son type
-printf("0-cmd\n1-option\n2-redir_in\n3-infile\n4-heredoc\n5-limiter\n\
+printf("0-command\n1-option\n2-redir_in\n3-infile\n4-heredoc\n5-limiter\n\
 6-redir_out\n7-redir_out_ap\n8-outfile\n9-t_pipe\n\n");
 if (tokens)
 {

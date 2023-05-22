@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/17 12:08:41 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:25:12 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	ft_executor(t_token *token, t_data *data)
 	data->pipe_nbr = ft_pipe_count(token);
 	data->cmd_nbr = ft_cmd_count(token);
 	data->all_path = ft_find_path(data);
+	data->cmd_path = NULL;
+	data->child = 0;
 	ft_command(token, data);
 	ft_check_pwd(data);
 }
