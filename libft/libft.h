@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:44:02 by lvogt             #+#    #+#             */
-/*   Updated: 2023/03/16 15:58:17 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/17 10:52:45 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,5 +143,9 @@ int				ft_find_next_prime(int nb);
 char			*ft_ltoa(long n);
 int				ft_putnbr_base_fd(long num, char *base, int fd);
 char			*ft_strrev(char *str);
+
+int				ft_strs_len(char **strs);
+void			ft_strs_free(char **strs, int size);
+char			**ft_strs_copy(const char **src, int size);
 
 #endif

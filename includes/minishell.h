@@ -63,6 +63,7 @@ typedef struct s_data
 	int		pipe_nbr;
 	char	**all_path;
 	int		*fd_array;
+	t_token	**tokens;
 }					t_data;
 
 /******************************************************************************
@@ -83,5 +84,7 @@ void		ft_ctrld(t_data *data);
 //exemple2.c
 void		rl_replace_line(const char *, int);
 void		rl_clear_history(void);
+
+void		clear_minishell(t_data *data);
 
 #endif
