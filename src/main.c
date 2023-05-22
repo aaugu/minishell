@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 13:01:35 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:22:23 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 #include "../includes/parsing.h"
 
-char	**ft_copy_env(char **env)
+static char	**ft_copy_env(char **env)
 {
 	char	**copy_env;
 	int		i;
@@ -40,18 +40,51 @@ char	**ft_copy_env(char **env)
 
 static void	ft_good_input(t_data *data)
 {
+	t_token *token;
+
 	if (ft_strlen(data->user_input) > 0)
 	{
 		add_history(data->user_input);
-		parsing(data->user_input);
+		token = *parsing(data->user_input);
+		ft_executor(token, data);
 		if (data->user_input)
 			free(data->user_input);
 	}
 }
 
+static char	*find_trash_path(char **envp)
+{
+	char	*user;
+	char	*home;
+	char	*trash_path;
+	char	*tmp;
+
+	user = ft_getenv(envp, "USER=");
+	if (user != NULL)
+	{
+		tmp = ft_strdup("/Users/");
+		trash_path = ft_strjoin(tmp, user);
+		free(tmp);
+		free(user);
+		tmp = ft_strjoin(trash_path, "/.Trash");
+		free(trash_path);
+		return (tmp);
+	}
+	else
+	{
+		free(user);
+		home = ft_getenv(envp, "HOME=");
+		if (home != NULL)
+			return (home);
+	}
+	free(user);
+	return (NULL);
+}
+
 static void	ft_readline(char **envp, t_data *data)
 {
 	data->envp = ft_copy_env(envp);
+	data->trash_path = find_trash_path(data->envp);
 	data->exit_code = 0;
 	signal(SIGINT, ft_ctrlc);
 	signal(SIGQUIT, SIG_IGN);

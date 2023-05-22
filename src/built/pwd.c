@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_machine_utils.c                              :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/09 11:19:52 by lvogt             #+#    #+#             */
+/*   Updated: 2023/05/09 12:46:13 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../../includes/state_machine.h"
 #include "../../includes/minishell.h"
 
-/* Initialize start values of t_fsm state machine */
-void	init_state_machine(t_fsm *fsm)
+int	ft_pwd(void)
 {
-	if (fsm->buf)
-		free(fsm->buf);
-	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
-	if (!fsm->buf)
-		parsing_error(fsm, 0);
-	fsm->buf_size = 0;
-	fsm->meta = true;
+	char	cwd[1024];
+
+	if (getcwd(cwd, sizeof(cwd)) != NULL)
+		printf("%s\n", cwd);
+	else
+	{
+		write(2, "minishell: pwd: can't find pwd\n", 31);
+		return (1);
+	}
+	return (0);
 }

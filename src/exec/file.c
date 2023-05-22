@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_machine_utils.c                              :+:      :+:    :+:   */
+/*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/05 11:35:41 by lvogt             #+#    #+#             */
+/*   Updated: 2023/05/05 11:35:59 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../../includes/state_machine.h"
 #include "../../includes/minishell.h"
 
-/* Initialize start values of t_fsm state machine */
-void	init_state_machine(t_fsm *fsm)
+void	ft_close_fd(int *fd_array, int pipe_nbr)
 {
-	if (fsm->buf)
-		free(fsm->buf);
-	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
-	if (!fsm->buf)
-		parsing_error(fsm, 0);
-	fsm->buf_size = 0;
-	fsm->meta = true;
+	int	i;
+	int	index;
+
+	index = 0;
+	i = 0;
+	if (pipe_nbr > 0 && fd_array)
+	{
+		while (index < pipe_nbr)
+		{
+			if (fd_array[i] > 0)
+				close(fd_array[i]);
+			if (fd_array[i + 1] > 0)
+				close(fd_array[i + 1]);
+			i += 2;
+			index++;
+		}
+	}
 }

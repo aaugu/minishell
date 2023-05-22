@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   state_idle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
 /*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../includes/state_machine.h"
+#include "../../includes/minishell.h"
 
 /* Will set current state according to char and decide which action to perform
 if needed */

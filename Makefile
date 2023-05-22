@@ -14,6 +14,20 @@ RM = rm -f
 SRCS_FILES = 	main.c \
 				tools/signal.c \
 				tools/utils.c \
+				built/builtins.c\
+				built/cd.c\
+				built/echo.c\
+				built/export.c\
+				built/pwd.c\
+				exec/child.c \
+				exec/cmd.c \
+				exec/count.c \
+				exec/error.c \
+				exec/exec.c \
+				exec/file.c \
+				exec/heredoc.c \
+				exec/path.c \
+				exec/pipe.c \
 				free/clear_tokens.c \
 				parsing/parsing.c \
                 parsing/state_machine.c \

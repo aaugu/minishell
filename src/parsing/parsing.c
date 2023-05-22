@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
 /*   Updated: 2023/05/22 14:23:49 by aaugu            ###   ########.fr       */
@@ -12,7 +12,7 @@
 
 #include "../../includes/parsing.h"
 #include "../../includes/state_machine.h"
-#include "../../libft/libft.h"
+#include "../../includes/minishell.h"
 
 /* Parsing to retrieve each separate elements (tokens) of user input as an 
 element of the command and store them in a chained list. */
