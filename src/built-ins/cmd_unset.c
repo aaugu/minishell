@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 13:13:19 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:31:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 
 int		remove_env_variable(char ***env, int env_size, char *variable);
 int		print_err(char *message, int errnum);
+
+/*
+Unset in bash : Each variable or function specified by name shall be unset.
+
+If neither -f nor -v is specified, name refers to a variable.
+Unsetting a variable or function that was not previously set shall not be 
+considered an error and does not cause the shell to abort.
+ */
 
 void	cmd_unset(char **env, int env_size, char **cmd_args)
 {

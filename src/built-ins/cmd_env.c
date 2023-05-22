@@ -6,13 +6,20 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:10 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/17 14:05:30 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:42:22 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../../includes/minishell.h"
 #include "../../libft/libft.h"
+
+/*
+Env in bash : Displays the current environment or sets the environment for the
+execution of a command.
+If no flags or parameters are specified, the env command displays your current
+environment, showing one Name=Value pair per line.
+*/
 
 void	cmd_env(char **env, int env_size, char **cmd_args)
 {
