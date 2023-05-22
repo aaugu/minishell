@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 14:21:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	get_next_type(t_fsm *fsm, char c)
 		else if (fsm->type == redir_out_ap)
 			fsm->type = outfile;
 	}
-	else if (fsm->type == cmd || fsm->type == option)
+	else if (fsm->type == command || fsm->type == option)
 		fsm->type = option;
 	else
-		fsm->type = cmd;
+		fsm->type = command;
 }

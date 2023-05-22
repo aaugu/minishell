@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 10:58:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/17 13:53:58 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 /* Differents possible types of each token */
 typedef enum e_type
 {
-	cmd,
+	command,
 	option,
 	redir_in,
 	infile,
