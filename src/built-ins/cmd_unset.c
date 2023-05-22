@@ -6,76 +6,80 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/17 14:39:35 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:13:19 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
 #include "../../libft/libft.h"
 #include "../../includes/minishell.h"
 
-int		env_variable_present(char **env, int env_size, char *variable);
-void	remove_env_variable(char ***env, int env_size, char *variable);
-
-void	cmd_env(char **env, int env_size, char **cmd_args);
+int		remove_env_variable(char ***env, int env_size, char *variable);
+int		print_err(char *message, int errnum);
 
 void	cmd_unset(char **env, int env_size, char **cmd_args)
 {
-	int	i;
-	int	exit_code;
+	int		i;
+	int		res;
 
-	exit_code = 0;
 	if (ft_strs_len(cmd_args) <= 1)
-	{
-		printf("unset: not enough arguments\n");
-		exit_code++;
-	}
+		g_exit_code = print_err("unset: not enough arguments\n", 0);
 	else
 	{
-		i = 1;
-		while (i++ < ft_strs_len(cmd_args))
+		i = 0;
+		while (++i < ft_strs_len(cmd_args))
 		{
-			if (env_variable_present(env, env_size, cmd_args[i]) == true)
-				remove_env_variable(&env, env_size, cmd_args[i]);
-			else
+			res = remove_env_variable(&env, env_size, cmd_args[i]);
+			if (res == -1)
 			{
-				printf("unset: %s:Environment variable is not set\n", cmd_args[i]);
-				exit_code++;
+				g_exit_code = print_err("minishell: malloc() failed: %s\n", \
+				errno);
+				break ;
 			}
 		}
 	}
-	g_exit_code = exit_code;
 }
 
-int	env_variable_present(char **env, int env_size, char *variable)
+int	print_err(char *message, int errnum)
 {
-	int	i;
-
-	i = 0;
-	while (i++ < env_size)
+	if (errnum != 0)
 	{
-		if (ft_strnstr(env[i], variable, ft_strlen(variable)))
-			return (true);
+		printf(message, strerror(errnum));
+		return (errnum);
 	}
-	return (false);
+	else
+	{
+		printf("%s", message);
+		return (1);
+	}
 }
 
-void	remove_env_variable(char ***env, int env_size, char *variable)
+int	remove_env_variable(char ***env, int env_size, char *variable)
 {
-	int	i;
+	int		i;
+	char	*var;
 
 	i = 0;
-	while (i++ < env_size)
+	var = ft_strjoin(variable, "=");
+	if (!var)
+		return (-1);
+	while (i < env_size)
 	{
-		if (ft_strnstr((*env)[i], variable, ft_strlen(variable)))
+		if (ft_strnstr((*env)[i], var, ft_strlen(var)))
 		{
 			free((*env)[i]);
 			(*env)[i] = NULL;
 		}
+		i++;
 	}
+	free(var);
+	return (0);
 }
 
-#include <stdio.h>
+/*
+void	cmd_env(char **env, int env_size, char **cmd_args);
 
 int	main(int ac, char **av, char **envp)
 {
@@ -97,13 +101,14 @@ int	main(int ac, char **av, char **envp)
 	}
 
 	env = ft_strs_copy((const char **)envp, ft_strs_len(envp));
-	cmd_unset(envp, ft_strs_len(env), cmd_args);
+	cmd_unset(env, ft_strs_len(env), cmd_args);
 
 	char *cmd[2];
 	cmd[0] = ft_strdup("env");
 	cmd[1] = NULL;
-	
-	cmd_env(env, ft_strs_len(env), cmd);
+
+	cmd_env(env, 34, cmd);
 	printf("\ng_exit_code : %d\n", g_exit_code);
 	return (0);
 }
+*/
