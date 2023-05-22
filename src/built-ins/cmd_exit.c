@@ -6,10 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 13:37:54 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/22 13:47:43 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../../includes/minishell.h"
 
 /*
