@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions_finish.c                                   :+:      :+:    :+:   */
+/*   actions_finish_buf.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:41:37 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:44:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../includes/state_machine.h"
+#include "../../includes/parsing_input_state_machine.h"
+#include "../../includes/parsing_meta_state_machine.h"
 
+char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta);
 void	get_next_type(t_fsm *fsm, char c);
 
 /* Finish buffer, create a node of tokens list and set its content. Then reset 
@@ -22,11 +24,14 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 {
 	t_token	*new_token;
 	t_token	*prev;
+	char	*buf;
 
 	if (fsm->buf_size != 0)
 	{
-		fsm->buf[fsm->buf_size] = '\0';
-		new_token = create_node(fsm->buf, fsm->type, fsm);
+		buf = get_final_buffer(fsm->buf, fsm->buf_size, fsm->type, fsm->meta);
+		if (!buf)
+			parsing_error(fsm, 0);
+		new_token = create_node(buf, fsm->type, fsm);
 		if (!new_token)
 			parsing_error(fsm, 0);
 		if (*tokens == NULL)
@@ -37,32 +42,26 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 			prev->next = new_token;
 			new_token->prev = prev;
 		}
-		if (fsm->meta == false)
-			new_token->meta = false;
 		init_state_machine(fsm);
 		get_next_type(fsm, c);
 	}
 }
 
-/* Combination of finish_buf() and add_to_buff() */
-void	finish_add(t_fsm *fsm, t_token **tokens, char c)
+/* Modify buffer if meta characters should be interpreted */
+char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta)
 {
-	finish_buf(fsm, tokens, c);
-	add_to_buf(fsm, c);
-}
+	char	*buffer;
 
-/* Combination of finish_buff() and set current state to stop */
-void	finish_stop(t_fsm *fsm, t_token **tokens, char c)
-{
-	finish_buf(fsm, tokens, c);
-	fsm->current_state = stop;
-}
-
-/* Combination of finish_add() and set current state to idle */
-void	finish_add_idle(t_fsm *fsm, t_token **tokens, char c)
-{
-	finish_add(fsm, tokens, c);
-	fsm->current_state = idle;
+	buf[buf_size] = '\0';
+	if (meta == true && type != limiter)
+	{
+		buffer = meta_interpret(buf);
+		if (!buffer)
+			return (NULL);
+	}
+	else
+		buffer = buf;
+	return (buffer);
 }
 
 /* Define type of element depending on previous type saved */

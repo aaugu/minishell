@@ -11,7 +11,7 @@
         "type_traits": "c",
         "history.h": "c",
         "fcntl.h": "c",
-        "state_machine.h": "c",
+        "input_state_machine.h": "c",
         "__bit_reference": "c",
         "__hash_table": "c",
         "__string": "c",

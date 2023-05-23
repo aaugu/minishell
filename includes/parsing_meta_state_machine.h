@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_tokens.c                                     :+:      :+:    :+:   */
+/*   parsing_meta_state_machine.h                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 10:42:21 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:18:29 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 14:08:12 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/23 14:19:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../../includes/parsing_input.h"
+#ifndef PARSING_META_STATE_MACHINE_H
+# define PARSING_META_STATE_MACHINE_H
 
-void	clear_tokens(t_token **tokens)
+typedef enum e_m_state
 {
-	t_token	*next;
+	idle,
+	dollar,
+	chars,
+	error,
+	stop,
+}			t_m_state;
 
-	if (!*tokens)
-		return ;
-	while (*tokens != NULL)
-	{
-		next = (*tokens)->next;
-		if ((*tokens)->content)
-			free((*tokens)->content);
-		free(*tokens);
-		*tokens = next;
-	}
-}
+typedef struct s_m_fsm
+{
+	enum e_m_state	current_state;
+	char			*buf;
+	int				buf_size;
+}					t_m_fsm;
+
+#endif

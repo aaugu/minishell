@@ -6,13 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 13:31:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:24:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
+#include "print_error.h"
 #include "../../libft/libft.h"
 #include "../../includes/minishell.h"
 
@@ -50,19 +51,6 @@ void	cmd_unset(char **env, int env_size, char **cmd_args)
 	}
 }
 
-int	print_err(char *message, int errnum)
-{
-	if (errnum != 0)
-	{
-		printf(message, strerror(errnum));
-		return (errnum);
-	}
-	else
-	{
-		printf("%s", message);
-		return (1);
-	}
-}
 
 int	remove_env_variable(char ***env, int env_size, char *variable)
 {

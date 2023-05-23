@@ -33,7 +33,7 @@
 # include <sys/wait.h>
 
 # include "../libft/libft.h"
-# include "parsing.h"
+# include "parsing_input.h"
 
 /******************************************************************************
 *								MACROS										  *

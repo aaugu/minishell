@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_machine_utils.c                              :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:01:22 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 15:23:09 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/23 15:23:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include "../../includes/state_machine.h"
-#include "../../libft/libft.h"
+#include "print_error.h"
 
-/* Initialize start values of t_fsm state machine */
-void	init_state_machine(t_fsm *fsm)
+int	print_err(char *message, int errnum)
 {
-	if (fsm->buf)
-		free(fsm->buf);
-	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
-	if (!fsm->buf)
-		parsing_error(fsm, 0);
-	fsm->buf_size = 0;
-	fsm->meta = true;
+	if (errnum != 0)
+	{
+		printf(message, strerror(errnum));
+		return (errnum);
+	}
+	else
+	{
+		printf("%s", message);
+		return (1);
+	}
 }

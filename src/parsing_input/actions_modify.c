@@ -6,12 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:00:47 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
-#include "../../includes/state_machine.h"
+#include "../../includes/parsing_input_state_machine.h"
 
 /* Add char to current buffer */
 void	add_to_buf(t_fsm *fsm, char c)

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing_input.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:35:38 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:14:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARSING_INPUT_H
+# define PARSING_INPUT_H
 
 /******************************************************************************
 *								ENUM									      *
@@ -43,6 +43,7 @@ typedef struct s_token
 	char			*content;
 	enum e_type		type;
 	int				meta;
+	int				quotes;
 	struct s_token	*next;
 	struct s_token	*prev;
 }					t_token;

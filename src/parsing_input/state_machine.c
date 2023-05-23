@@ -6,13 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:41:39 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:14:04 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../../includes/state_machine.h"
-#include "../../includes/parsing.h"
+#include <stdbool.h>
+#include "../../includes/parsing_input_state_machine.h"
+#include "../../includes/parsing_input.h"
 #include "../../libft/libft.h"
 
 t_fsm	create_state_machine(char *input);
@@ -78,6 +79,7 @@ t_fsm	create_state_machine(char *input)
 	fsm.input_size = ft_strlen(input);
 	fsm.current_state = idle;
 	fsm.type = command;
+	fsm.quotes = false;
 	return (fsm);
 }
 

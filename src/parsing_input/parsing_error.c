@@ -6,12 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:00:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../includes/state_machine.h"
+#include "../../includes/parsing_input_state_machine.h"
 #include "../../includes/minishell.h"
 
 /* Handles error in state machine : Delivers error message and set state of 
