@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:42:21 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/16 12:54:41 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:34:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,4 @@ void	clear_tokens(t_token **tokens)
 		free(*tokens);
 		*tokens = next;
 	}
-	free(tokens);
 }

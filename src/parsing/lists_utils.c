@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:20:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:37:39 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_token	*create_node(char *buffer, t_type type, t_fsm *fsm)
 }
 
 /* Get the last element of a chained list */
-t_token	*lst_last(t_token *lst)
+t_token	*lst_last(t_token *token)
 {
-	while (lst != NULL && lst->next != NULL)
-		lst = lst->next;
-	return (lst);
+	while (token != NULL && token->next != NULL)
+		token = token->next;
+	return (token);
 }

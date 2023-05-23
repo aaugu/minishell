@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/17 15:13:54 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:35:38 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_token
 *							    FUNCTIONS									  *
 ******************************************************************************/
 
-t_token	**parsing(char *input);
+t_token	*parsing(char *input);
 
 /* ------------------------------ PARSING ERROR -----------------------------*/
 void	clear_tokens(t_token **tokens);

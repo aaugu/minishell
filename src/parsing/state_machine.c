@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:24:42 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:41:39 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,25 +21,22 @@ void	clear_parsing_error(t_fsm *fsm, t_token **tokens);
 
 /* Finite state machine. Will loop on each char to know how to separate each
 token in a lineary way. */
-t_token	**state_machine(char *input)
+t_token	*state_machine(char *input)
 {
-	t_token	**tokens;
+	t_token	*tokens;
 	t_fsm	fsm;
 	int		i;
 
 	fsm = create_state_machine(input);
 	init_state_machine(&fsm);
-	tokens = (t_token **)malloc(sizeof(t_token *));
-	if (!tokens)
-		return (NULL);
-	*tokens = NULL;
+	tokens = NULL;
 	i = 0;
 	while (i <= (int)ft_strlen(input))
 	{
-		execute_state_machine(&fsm, tokens, input[i]);
+		execute_state_machine(&fsm, &tokens, input[i]);
 		if (fsm.current_state == error)
 		{
-			clear_parsing_error(&fsm, tokens);
+			clear_parsing_error(&fsm, &tokens);
 			return (NULL);
 		}
 		i++;
