@@ -12,7 +12,8 @@
 
 #include <stdlib.h>
 #include "../../includes/state_machine.h"
-#include "../../includes/minishell.h"
+#include "../../includes/parsing.h"
+#include "../../libft/libft.h"
 
 t_fsm	create_state_machine(char *input);
 void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c);

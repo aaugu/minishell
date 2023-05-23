@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdbool.h>
 #include "../../includes/state_machine.h"
-#include "../../includes/minishell.h"
 
 void	get_next_type(t_fsm *fsm, char c);
 

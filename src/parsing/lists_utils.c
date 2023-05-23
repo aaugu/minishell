@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "../../includes/minishell.h"
+#include <stdbool.h>
 #include "../../includes/state_machine.h"
 #include "../../includes/parsing.h"
+#include "../../libft/libft.h"
 
 /* Create a node of chained list (token) */
 t_token	*create_node(char *buffer, t_type type, t_fsm *fsm)

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   actions_modify.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:05:07 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:00:47 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdbool.h>
 #include "../../includes/state_machine.h"
-#include "../../includes/minishell.h"
 
 /* Add char to current buffer */
 void	add_to_buf(t_fsm *fsm, char c)

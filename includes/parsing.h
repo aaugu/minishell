@@ -52,8 +52,6 @@ typedef struct s_token
 ******************************************************************************/
 
 t_token	*parsing(char *input);
-
-/* ------------------------------ PARSING ERROR -----------------------------*/
 void	clear_tokens(t_token **tokens);
 
 #endif
