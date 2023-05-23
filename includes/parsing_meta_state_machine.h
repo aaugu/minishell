@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:08:12 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 16:44:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:59:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,8 @@ typedef struct s_m_fsm
 
 t_meta	*meta_state_machine(char *str);
 
-void	state_idle_meta(t_m_fsm *fsm, t_meta **meta_chars, char *s);
-void	state_dollar(t_m_fsm *fsm, t_meta **meta_chars, char *s);
-void	state_chars(t_m_fsm *fsm, t_meta **meta_chars, char *s);
-
+void	state_idle_meta(t_m_fsm *fsm, t_meta **meta_chars, char c);
+void	state_dollar(t_m_fsm *fsm, t_meta **meta_chars, char c);
+void	state_chars(t_m_fsm *fsm, t_meta **meta_chars, char c);
 
 #endif

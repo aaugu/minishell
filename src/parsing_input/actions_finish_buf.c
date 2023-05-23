@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 16:21:21 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 17:09:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta)
 	}
 	else
 		buffer = buf;
+	if (ft_strlen(buffer) == 0 && (type == infile || type == outfile))
+		printf("minishell: %s: ambiguous redirect");
 	return (buffer);
 }
 
