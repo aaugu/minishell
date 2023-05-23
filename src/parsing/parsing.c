@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:03:29 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:13:18 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,12 @@ t_token	**parsing(char *input)
 	tokens = state_machine(input);
 	if (!tokens)
 		return (NULL);
-	printf("0-command\n1-option\n2-redir_in\n3-infile\n4-heredoc\n5-limiter\n6-redir_out\n7-redir_out_ap\n8-outfile\n9-t_pipe\n\n");
+	return (tokens);
+}
+
+/* Pour afficher chaque élément séparé avec son type
+	printf("0-command\n1-option\n2-redir_in\n3-infile\n4-heredoc\n5-limiter\n\
+	6-redir_out\n7-redir_out_ap\n8-outfile\n9-t_pipe\n\n");
 	if (tokens)
 	{
 		while ((*tokens))
@@ -32,18 +37,4 @@ t_token	**parsing(char *input)
 			(*tokens) = (*tokens)->next;
 		}
 	}
-	return (tokens);
-}
-
-/* Pour afficher chaque élément séparé avec son type
-printf("0-command\n1-option\n2-redir_in\n3-infile\n4-heredoc\n5-limiter\n\
-6-redir_out\n7-redir_out_ap\n8-outfile\n9-t_pipe\n\n");
-if (tokens)
-{
-	while ((*tokens))
-	{
-		printf("%d : %s\n", (*tokens)->type, (*tokens)->content);
-		(*tokens) = (*tokens)->next;
-	}
-}
 */
