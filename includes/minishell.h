@@ -87,7 +87,6 @@ typedef struct s_data
 	char			*trash_path;
 	int				is_exit_last_cmd;
 	t_heredoc		heredoc;
-	t_token			*tokens;
 
 }					t_data;
 
