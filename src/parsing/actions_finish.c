@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   actions_finish.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:21:11 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:00:43 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <stdbool.h>
 #include "../../includes/state_machine.h"
-#include "../../includes/minishell.h"
 
 void	get_next_type(t_fsm *fsm, char c);
 

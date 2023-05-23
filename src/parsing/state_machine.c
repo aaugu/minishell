@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 14:24:42 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:01:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "../../includes/state_machine.h"
-#include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 
 t_fsm	create_state_machine(char *input);
 void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c);
