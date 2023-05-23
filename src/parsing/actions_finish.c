@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:00:43 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 10:41:37 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	get_next_type(t_fsm *fsm, char c);
 
 /* Finish buffer, create a node of tokens list and set its content. Then reset 
-the buffer. Get next type if needed.*/
+the buffer. Get type of next node.*/
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 {
 	t_token	*new_token;
