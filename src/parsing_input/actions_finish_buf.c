@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 15:44:49 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:21:21 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 #include <stdbool.h>
 #include "../../includes/parsing_input_state_machine.h"
 #include "../../includes/parsing_meta_state_machine.h"
+#include "../../libft/libft.h"
 
 char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta);
+t_token	*create_node(char *buffer, t_type type, t_fsm *fsm);
+t_token	*lst_last(t_token *token);
 void	get_next_type(t_fsm *fsm, char c);
 
 /* Finish buffer, create a node of tokens list and set its content. Then reset 
-the buffer. Get type of next node.*/
+state machine. Get type of next node.*/
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 {
 	t_token	*new_token;
@@ -62,6 +65,34 @@ char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta)
 	else
 		buffer = buf;
 	return (buffer);
+}
+
+/* Create a node of chained list (token) */
+t_token	*create_node(char *buffer, t_type type, t_fsm *fsm)
+{
+	t_token	*token;
+
+	token = NULL;
+	token = (t_token *)malloc(sizeof(t_token));
+	if (!token)
+		parsing_error(fsm, 0);
+	if (buffer)
+		token->content = ft_strdup(buffer);
+	if (!token->content)
+		parsing_error(fsm, 0);
+	token->type = type;
+	token->meta = fsm->meta;
+	token->next = NULL;
+	token->prev = NULL;
+	return (token);
+}
+
+/* Get the last element of a chained list */
+t_token	*lst_last(t_token *token)
+{
+	while (token != NULL && token->next != NULL)
+		token = token->next;
+	return (token);
 }
 
 /* Define type of element depending on previous type saved */

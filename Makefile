@@ -39,7 +39,6 @@ SRCS_FILES = 	main.c \
                 parsing_input/state_quotes.c \
                 parsing_input/actions_finish.c \
                 parsing_input/actions_modify.c \
-                parsing_input/lists_utils.c \
 				parsing_input/parsing_error.c \
 
 SRCS = $(addprefix ./src/, $(SRCS_FILES))

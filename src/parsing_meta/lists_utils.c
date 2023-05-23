@@ -6,13 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:47:47 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 15:20:01 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:22:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdlib.h>
 #include "parsing_meta.h"
+#include "../../libft/libft.h"
 
 /* Create a node of chained list (meta) */
 t_meta	*create_node(char *buffer)

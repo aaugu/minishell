@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 15:13:01 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/23 16:20:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,6 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add_idle(t_fsm *fsm, t_token **tokens, char c);
 void	finish_stop(t_fsm *fsm, t_token **tokens, char c);
-
-/* ---------------------------------- UTILS ----------------------------------*/
-t_token	*create_node(char *buffer, t_type type, t_fsm *fsm);
-t_token	*lst_last(t_token *token);
 
 /* ------------------------------ ERROR MESSAGES -----------------------------*/
 void	parsing_error(t_fsm *fsm, char *c);
