@@ -23,6 +23,8 @@
         "get_next_line.h": "c",
         "stdarg.h": "c",
         "libft.h": "c",
-        "parsing_meta_state_machine.h": "c"
+        "parsing_meta_state_machine.h": "c",
+        "errno.h": "c",
+        "__locale": "c"
     }
 }

@@ -6,48 +6,63 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 16:48:10 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/25 14:01:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing_meta.h"
-#include "parsing_meta_state_machine.h"
+#include <errno.h>
+#include "../../includes/minishell.h"
+#include "../../includes/parsing_meta.h"
+#include "../../includes/parsing_meta_state_machine.h"
 #include "../../libft/libft.h"
 
-void	execute_state_machine_meta(t_m_fsm *fsm, t_meta **meta_chars, char c);
-void	clear_state_machine(t_m_fsm *fsm);
+void	exe_meta_state_mach(t_m_fsm *fsm, t_meta **metas, char c);
+void	clear_meta_state_machine(t_m_fsm *fsm);
 
-t_meta	*meta_state_machine(char *str)
+t_meta	*meta_state_machine(char *str, char **env, int env_size)
 {
 	t_m_fsm	fsm;
-	t_meta	*meta_chars;
+	t_meta	*meta_strs;
 	int		i;
 
 	fsm.current_state = idle;
+	fsm.env_size = env_size;
+	fsm.env = ft_strs_copy(env, env_size);
+	if (!fsm.env)
+	{
+		g_exit_code = print_err("minishell: malloc() failed: %s\n", errno);
+		return (NULL);
+	}
 	init_meta_state_machine(&fsm, ft_strlen(str));
-	meta_chars = NULL;
+	meta_strs = NULL;
 	i = 0;
 	while (i++ <= ft_strlen(str))
-		execute_state_machine_meta(&fsm, &meta_chars, str[i]);
-	clear_state_machine(&fsm);
+	{
+		exe_meta_state_mach(&fsm, &meta_strs, str[i]);
+		if (fsm.current_state == error)
+			break ;
+	}
+	clear_meta_state_machine(&fsm);
 	if (fsm.current_state == stop)
-		return (meta_chars);
+		return (meta_strs);
 	return (NULL);
 }
 
-void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **meta_chars, char c)
+void	exe_meta_state_mach(t_m_fsm *fsm, t_meta **metas, char c)
 {
 	if (fsm->current_state == idle)
-		state_idle_meta(fsm, meta_chars, c);
+		state_idle_meta(fsm, metas, c);
 	else if (fsm->current_state == dollar)
-		state_dollar(fsm, meta_chars, c);
+		state_dollar(fsm, metas, c);
 	else if (fsm->current_state == chars)
-		state_chars(fsm, meta_chars, c);
+		state_chars(fsm, metas, c);
 }
 
-void	clear_state_machine(t_m_fsm *fsm)
+void	clear_meta_state_machine(t_m_fsm *fsm)
 {
 	if (fsm->buf)
 		free(fsm->buf);
+	if (fsm->env)
+		ft_strs_free(fsm->env, fsm->env_size);
 	fsm = (t_m_fsm *){0};
 }

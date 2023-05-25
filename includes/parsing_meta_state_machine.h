@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:08:12 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 16:59:00 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/25 13:43:53 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,22 @@ typedef struct s_m_fsm
 	enum e_m_state	current_state;
 	char			*buf;
 	int				buf_size;
+	char			**env;
+	char			env_size;
 }					t_m_fsm;
 
 /******************************************************************************
 *							    FUNCTIONS									  *
 ******************************************************************************/
 
-t_meta	*meta_state_machine(char *str);
+t_meta	*meta_state_machine(char *str, char **env, int env_size);
 
-void	state_idle_meta(t_m_fsm *fsm, t_meta **meta_chars, char c);
-void	state_dollar(t_m_fsm *fsm, t_meta **meta_chars, char c);
-void	state_chars(t_m_fsm *fsm, t_meta **meta_chars, char c);
+/* ---------------------------------- STATES ---------------------------------*/
+void	state_idle_meta(t_m_fsm *fsm, t_meta **meta_strs, char c);
+void	state_dollar(t_m_fsm *fsm, t_meta **meta_strs, char c);
+void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c);
+
+/* --------------------------------- ACTIONS ---------------------------------*/
+void	add_to_buf_meta(t_m_fsm *fsm, char c);
 
 #endif

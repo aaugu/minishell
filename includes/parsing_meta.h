@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:04 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:57:06 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/25 13:44:40 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ typedef struct s_meta
 	t_meta	*next;
 }			t_meta;
 
-char	*meta_interpret(char *s);
+char	*meta_interpret(char *s, char **env, int env_size);
 
 #endif
