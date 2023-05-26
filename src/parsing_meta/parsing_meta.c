@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 15:00:19 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:24:58 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
-	interpreted_str = meta_interpret("$$bla$PATH$NOPE bouh$LANG", env, 34);
+	interpreted_str = parsing_meta("$$bla$PATH$NOPE bouh$LANG", env, 34);
 	printf("BEFORE :%s\nAFTER :%s\n", "$$bla$PATH$NOPE bouh$LANG", interpreted_str);
 	return (0);
 }

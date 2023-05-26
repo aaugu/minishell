@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 14:24:44 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:23:44 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../../libft/libft.h"
 
 void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *s);
-void	exe_meta_state_mach(t_m_fsm *fsm, t_meta **metas, char c);
+void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c);
 void	clear_meta_state_machine(t_m_fsm *fsm);
 
 t_meta	*meta_state_machine(char *str, char **env, int env_size)
@@ -34,7 +34,7 @@ t_meta	*meta_state_machine(char *str, char **env, int env_size)
 	i = 0;
 	while (i <= (int)ft_strlen(str))
 	{
-		exe_meta_state_mach(&fsm, &meta_strs, str[i]);
+		execute_meta_state_machine(&fsm, &meta_strs, str[i]);
 		if (fsm.current_state == error)
 			break ;
 		i++;
@@ -60,7 +60,7 @@ void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str)
 	fsm->len = ft_strlen(str);
 }
 
-void	exe_meta_state_mach(t_m_fsm *fsm, t_meta **metas, char c)
+void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c)
 {
 	if (fsm->current_state == idle)
 		state_idle_meta(fsm, metas, c);
