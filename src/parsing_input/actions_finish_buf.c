@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 17:09:52 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:13:53 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,11 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 {
 	t_token	*new_token;
 	t_token	*prev;
-	char	*buf;
 
 	if (fsm->buf_size != 0)
 	{
-		buf = get_final_buffer(fsm->buf, fsm->buf_size, fsm->type, fsm->meta);
-		if (!buf)
-			parsing_error(fsm, 0);
-		new_token = create_node(buf, fsm->type, fsm);
+		fsm->buf[fsm->buf_size] = '\0';
+		new_token = create_node(fsm->buf, fsm->type, fsm);
 		if (!new_token)
 			parsing_error(fsm, 0);
 		if (*tokens == NULL)
@@ -48,25 +45,6 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 		init_state_machine(fsm);
 		get_next_type(fsm, c);
 	}
-}
-
-/* Modify buffer if meta characters should be interpreted */
-char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta)
-{
-	char	*buffer;
-
-	buf[buf_size] = '\0';
-	if (meta == true && type != limiter)
-	{
-		buffer = meta_interpret(buf);
-		if (!buffer)
-			return (NULL);
-	}
-	else
-		buffer = buf;
-	if (ft_strlen(buffer) == 0 && (type == infile || type == outfile))
-		printf("minishell: %s: ambiguous redirect");
-	return (buffer);
 }
 
 /* Create a node of chained list (token) */

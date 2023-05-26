@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 16:14:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/26 13:52:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ t_fsm	create_state_machine(char *input)
 {
 	t_fsm	fsm;
 
-	fsm = (t_fsm){0};
+	fsm.buf = NULL;
+	fsm.buf_size = 0;
 	fsm.input_size = ft_strlen(input);
 	fsm.current_state = idle;
 	fsm.type = command;

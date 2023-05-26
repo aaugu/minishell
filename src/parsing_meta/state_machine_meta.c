@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/25 14:06:37 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/26 14:24:44 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "../../includes/parsing_meta_state_machine.h"
 #include "../../libft/libft.h"
 
-void	create_meta_state_machine(t_m_fsm *fsm, char **env, int env_size);
+void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *s);
 void	exe_meta_state_mach(t_m_fsm *fsm, t_meta **metas, char c);
 void	clear_meta_state_machine(t_m_fsm *fsm);
 
@@ -26,17 +26,18 @@ t_meta	*meta_state_machine(char *str, char **env, int env_size)
 	t_meta	*meta_strs;
 	int		i;
 
-	create_meta_state_machine(&fsm, env, env_size);
+	create_meta_fsm(&fsm, env, env_size, str);
 	if (!fsm.env)
 		return (NULL);
-	init_meta_state_machine(&fsm, ft_strlen(str));
+	init_meta_state_machine(&fsm);
 	meta_strs = NULL;
 	i = 0;
-	while (i++ <= ft_strlen(str))
+	while (i <= (int)ft_strlen(str))
 	{
 		exe_meta_state_mach(&fsm, &meta_strs, str[i]);
 		if (fsm.current_state == error)
 			break ;
+		i++;
 	}
 	clear_meta_state_machine(&fsm);
 	if (fsm.current_state == stop)
@@ -44,14 +45,19 @@ t_meta	*meta_state_machine(char *str, char **env, int env_size)
 	return (NULL);
 }
 
-void	create_meta_state_machine(t_m_fsm *fsm, char **env, int env_size)
+void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str)
 {
-	fsm = (t_m_fsm *){0};
+	fsm->buf = NULL;
+	fsm->buf_size = 0;
 	fsm->current_state = idle;
 	fsm->env_size = env_size;
-	fsm->env = ft_strs_copy(env, env_size);
+	fsm->env = ft_strs_copy((const char **)env, env_size);
 	if (!fsm->env)
-		g_exit_code = print_err("minishell: malloc() failed: %s\n", errno);
+	{
+		printf("minishell: malloc() failed: %s\n", strerror(errno));
+		g_exit_code = errno;
+	}
+	fsm->len = ft_strlen(str);
 }
 
 void	exe_meta_state_mach(t_m_fsm *fsm, t_meta **metas, char c)
@@ -62,6 +68,8 @@ void	exe_meta_state_mach(t_m_fsm *fsm, t_meta **metas, char c)
 		state_dollar(fsm, metas, c);
 	else if (fsm->current_state == chars)
 		state_chars(fsm, metas, c);
+	else if (fsm->current_state == stop)
+		return ;
 }
 
 void	clear_meta_state_machine(t_m_fsm *fsm)

@@ -37,7 +37,8 @@ SRCS_FILES = 	main.c \
                 parsing_input/state_idle.c \
                 parsing_input/state_pipe.c \
                 parsing_input/state_quotes.c \
-                parsing_input/actions_finish.c \
+                parsing_input/actions_finish_buf.c \
+				parsing_input/actions_finish_utils.c \
                 parsing_input/actions_modify.c \
 				parsing_input/parsing_error.c \
 
