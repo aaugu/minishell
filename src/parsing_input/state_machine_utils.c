@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_tokens.c                                     :+:      :+:    :+:   */
+/*   state_machine_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 10:42:21 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:18:29 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../../includes/parsing_input.h"
+#include <stdbool.h>
+#include "../../includes/parsing_input_state_machine.h"
+#include "../../libft/libft.h"
 
-void	clear_tokens(t_token **tokens)
+/* Initialize start values of t_fsm state machine */
+void	init_state_machine(t_fsm *fsm)
 {
-	t_token	*next;
-
-	if (!*tokens)
-		return ;
-	while (*tokens != NULL)
-	{
-		next = (*tokens)->next;
-		if ((*tokens)->content)
-			free((*tokens)->content);
-		free(*tokens);
-		*tokens = next;
-	}
+	if (fsm->buf)
+		free(fsm->buf);
+	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
+	if (!fsm->buf)
+		parsing_error(fsm, 0);
+	fsm->buf_size = 0;
+	fsm->meta = true;
 }

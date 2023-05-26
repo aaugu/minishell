@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_machine.h                                    :+:      :+:    :+:   */
+/*   parsing_input_state_machine.h                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:37:54 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:11:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STATE_MACHINE_H
-# define STATE_MACHINE_H
+#ifndef PARSING_INPUT_STATE_MACHINE_H
+# define PARSING_INPUT_STATE_MACHINE_H
 
 /******************************************************************************
 *							    INCLUDE										  *
 ******************************************************************************/
 
+# include "parsing_input.h"
 # include "parsing.h"
-
-/******************************************************************************
-*								ENUM									      *
-******************************************************************************/
-
-/* Differents possible states of state machine */
-typedef enum e_state
-{
-	idle,
-	less_than,
-	less_than_d,
-	greater_than,
-	greater_than_d,
-	quote_s,
-	quote_d,
-	s_pipe,
-	error,
-	stop,
-}			t_state;
 
 /******************************************************************************
 *								STRUCTS									      *
@@ -50,6 +32,7 @@ typedef struct s_fsm
 	int				buf_size;
 	int				input_size;
 	int				meta;
+	int				quotes;
 	enum e_type		type;
 }					t_fsm;
 
@@ -80,10 +63,6 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add_idle(t_fsm *fsm, t_token **tokens, char c);
 void	finish_stop(t_fsm *fsm, t_token **tokens, char c);
-
-/* ---------------------------------- UTILS ----------------------------------*/
-t_token	*create_node(char *buffer, t_type type, t_fsm *fsm);
-t_token	*lst_last(t_token *token);
 
 /* ------------------------------ ERROR MESSAGES -----------------------------*/
 void	parsing_error(t_fsm *fsm, char *c);
