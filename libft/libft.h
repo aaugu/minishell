@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:44:02 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 14:27:20 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/30 13:15:34 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,6 @@ char			*ft_strrev(char *str);
 int				ft_strs_len(char **strs);
 void			ft_strs_free(char **strs, int size);
 char			**ft_strs_copy(const char **src, int size);
+int				ft_strcmp(const char *s1, const char *s2);
 
 #endif
