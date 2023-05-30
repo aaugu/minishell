@@ -25,6 +25,7 @@
         "libft.h": "c",
         "parsing_meta_state_machine.h": "c",
         "errno.h": "c",
-        "__locale": "c"
+        "__locale": "c",
+        "sstream": "c"
     }
 }
