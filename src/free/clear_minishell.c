@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 10:07:08 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/30 12:49:30 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,5 @@ void	clear_minishell(t_data *data)
 		free(data->user_input);
 	if (data->fd_array)
 		free(data->fd_array);
+	exit(g_exit_code);
 }
