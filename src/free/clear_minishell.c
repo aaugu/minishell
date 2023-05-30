@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:18:29 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:07:08 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 
 void	clear_minishell(t_data *data)
 {
-	if (data->tokens)
-		clear_tokens(data->tokens);
 	if (data->envp)
 		ft_strs_free(data->envp, ft_strs_len(data->envp));
 	if (data->cmd)

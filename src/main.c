@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:18:29 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:09:39 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	**ft_copy_env(char **env)
 
 static void	ft_good_input(t_data *data)
 {
-	t_token *token;
+	t_token	*token;
 
 	if (ft_strlen(data->user_input) > 0)
 	{

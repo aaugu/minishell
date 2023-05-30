@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/25 13:50:04 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/30 09:53:09 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
-#include "print_error.h"
-#include "../../libft/libft.h"
+#include "../../includes/print_error.h"
 #include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 
 int		remove_env_variable(char ***env, int env_size, char *variable);
 int		print_err(char *message, int errnum);
