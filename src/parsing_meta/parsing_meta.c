@@ -6,11 +6,10 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 15:24:58 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:21:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "../../includes/parsing_meta.h"
 #include "../../includes/parsing_meta_state_machine.h"
 #include "../../libft/libft.h"
@@ -55,6 +54,7 @@ void	clear_meta_strs(t_meta *meta_strs)
 		meta_strs = next;
 	}
 }
+
 /*
 #include <stdio.h>
 

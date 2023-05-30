@@ -12,13 +12,15 @@ CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
 RM = rm -f
 
 SRCS_FILES = 	main.c \
-				tools/signal.c \
-				tools/utils.c \
 				built/builtins.c\
 				built/cd.c\
 				built/echo.c\
 				built/export.c\
 				built/pwd.c\
+				built-ins/cmd_env.c \
+				built-ins/cmd_exit.c \
+				built-ins/cmd_unset.c \
+				errors/print_error.c \
 				exec/child.c \
 				exec/cmd.c \
 				exec/count.c \
@@ -29,6 +31,7 @@ SRCS_FILES = 	main.c \
 				exec/path.c \
 				exec/pipe.c \
 				free/clear_tokens.c \
+				free/clear_minishell.c \
                 parsing_input/actions_finish_buf.c \
 				parsing_input/actions_finish_utils.c \
                 parsing_input/actions_modify.c \
@@ -41,7 +44,7 @@ SRCS_FILES = 	main.c \
                 parsing_input/state_machine.c \
                 parsing_input/state_pipe.c \
                 parsing_input/state_quotes.c \
-				parsing_meta/actions \
+				parsing_meta/actions.c \
 				parsing_meta/parsing_error_meta.c \
 				parsing_meta/parsing_meta.c \
 				parsing_meta/state_chars.c \
@@ -49,6 +52,8 @@ SRCS_FILES = 	main.c \
 				parsing_meta/state_idle.c \
 				parsing_meta/state_machine_meta_utils.c \
 				parsing_meta/state_machine_meta.c \
+				tools/signal.c \
+				tools/utils.c \
 
 SRCS = $(addprefix ./src/, $(SRCS_FILES))
 OBJS = $(SRCS:%.c=%.o)

@@ -6,19 +6,17 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:16:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 14:23:02 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:24:07 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-//
 #include <stdio.h>
-//
 #include "../../includes/parsing_meta_state_machine.h"
 #include "../../libft/libft.h"
 
-t_meta	*create_node(char *buffer, t_m_fsm *fsm);
-t_meta	*lst_last(t_meta *meta_strs);
+t_meta	*create_node_meta(char *buffer, t_m_fsm *fsm);
+t_meta	*lst_last_meta(t_meta *meta_strs);
 
 /* Add char to current buffer */
 void	add_to_buf_meta(t_m_fsm *fsm, char c)
@@ -34,21 +32,21 @@ void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs)
 
 	if (fsm->buf_size != 0)
 	{
-		new_meta = create_node(fsm->buf, fsm);
+		new_meta = create_node_meta(fsm->buf, fsm);
 		if (!new_meta)
 			parsing_error_meta(&(fsm->current_state));
 		if (*meta_strs == NULL)
 			*meta_strs = new_meta;
 		else
 		{
-			last = lst_last(*meta_strs);
+			last = lst_last_meta(*meta_strs);
 			last->next = new_meta;
 		}
 		init_meta_state_machine(fsm);
 	}
 }
 
-t_meta	*create_node(char *buffer, t_m_fsm *fsm)
+t_meta	*create_node_meta(char *buffer, t_m_fsm *fsm)
 {
 	t_meta	*meta;
 
@@ -65,7 +63,7 @@ t_meta	*create_node(char *buffer, t_m_fsm *fsm)
 }
 
 /* Get the last element of a chained list */
-t_meta	*lst_last(t_meta *meta_strs)
+t_meta	*lst_last_meta(t_meta *meta_strs)
 {
 	while (meta_strs->next != NULL)
 		meta_strs = meta_strs->next;

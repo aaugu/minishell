@@ -26,6 +26,7 @@
         "parsing_meta_state_machine.h": "c",
         "errno.h": "c",
         "__locale": "c",
-        "sstream": "c"
+        "sstream": "c",
+        "parsing_input.h": "c"
     }
 }
