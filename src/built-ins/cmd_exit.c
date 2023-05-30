@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 13:51:20 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/30 14:04:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	get_exit_code(t_data *data, char **cmd_args)
 	else if (ft_strcmp(cmd_args[1], code))
 	{
 		g_exit_code = 255;
-		printf("minishell: exit: %s: numeric argument required", cmd_args[1]);
+		printf("minishell: exit: %s: numeric argument required\n", cmd_args[1]);
 		free(code);
 		clear_minishell(data);
 	}
 	else
-		g_exit_code = print_err("minishell: exit: too many arguments", 0);
+		g_exit_code = print_err("minishell: exit: too many arguments\n", 0);
 	free(code);
 }
