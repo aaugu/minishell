@@ -100,14 +100,13 @@ int					ft_is_builtins(t_token *token);
 void				ft_which_builtins(t_data *data, t_token *token, pid_t *pid);
 void				ft_which_builtins_child(t_data *data);
 
-void				cmd_env(t_data *data);
+void				cmd_env(char **env, int env_size, char **cmd_args);
 void				cmd_exit(t_data *data);
 int					ft_cd(t_data *data);
 int					ft_pwd(void);
-void				cmd_unset(t_data *data);
+void				cmd_unset(char **env, int env_size, char **cmd_args);
 int					ft_export(t_data *data);
 void				ft_echo(t_data *data);
-
 
 /* ---------------------------- EXECUTION -----------------------------------*/
 //child.c

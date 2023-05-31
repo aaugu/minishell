@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:10 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 11:00:56 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 15:15:39 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ If no flags or parameters are specified, the env command displays your current
 environment, showing one Name=Value pair per line.
 */
 
-void	cmd_env(t_data *data)
+void	cmd_env(char **env, int env_size, char **cmd_args)
 {
 	int	i;
 
-	if (ft_strs_len(data->cmd) == 1)
+	if (ft_strs_len(cmd_args) == 1)
 	{
 		i = 0;
-		while (i++ < data->env_size)
+		while (i++ < env_size)
 		{
-			if (data->envp[i])
-				printf("%s\n", data->envp[i]);
+			if (env[i])
+				printf("%s\n", env[i]);
 		}
 	}
 	else

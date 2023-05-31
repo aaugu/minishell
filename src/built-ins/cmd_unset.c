@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 13:39:27 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 15:15:39 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ Unsetting a variable or function that was not previously set shall not be
 considered an error and does not cause the shell to abort.
  */
 
-void	cmd_unset(t_data *data)
+void	cmd_unset(char **env, int env_size, char **cmd_args)
 {
 	int		i;
 	int		res;
 
-	if (ft_strs_len(data->cmd) <= 1)
+	if (ft_strs_len(cmd_args) <= 1)
 		g_exit_code = print_err("unset: not enough arguments\n", 0);
 	else
 	{
 		i = 0;
-		while (++i < ft_strs_len(data->cmd))
+		while (++i < ft_strs_len(cmd_args))
 		{
-			res = remove_env_variable(&data->envp, data->env_size, data->cmd[i]);
+			res = remove_env_variable(&env, env_size, cmd_args[i]);
 			if (res == -1)
 			{
 				g_exit_code = print_err("minishell: malloc() failed: %s\n", \
@@ -63,7 +63,6 @@ int	remove_env_variable(char ***env, int env_size, char *variable)
 		return (-1);
 	while (i < env_size)
 	{
-		printf("test [%d]\n", i);
 		if (ft_strnstr((*env)[i], var, ft_strlen(var)))
 		{
 			free((*env)[i]);

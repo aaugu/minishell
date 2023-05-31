@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 11:47:13 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 15:16:04 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_which_builtins_child(t_data *data)
 	else if (data->is_builtin == 5)
 		ft_pwd();
 	else if (data->is_builtin == 6)
-		cmd_env(data);
+		cmd_env(data->envp, data->env_size, data->cmd);
 	else if (data->is_builtin == 7)
 		ft_echo(data);
 }
@@ -37,7 +37,7 @@ void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 	pid2 = pid;
 	error = 0;
 	if (data->is_builtin == 1)
-		cmd_unset(data);
+		cmd_unset(data->envp, data->env_size, data->cmd);
 	else if (data->is_builtin == 2)
 		error = ft_cd(data);
 	else if (data->is_builtin == 3)
