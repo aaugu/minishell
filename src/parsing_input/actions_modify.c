@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 12:00:41 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	add_to_buf(t_fsm *fsm, char c)
 }
 
 /* Change state and add on-going type */
-void	change_state_and_type(t_fsm *fsm, t_state state, t_type type, char c)
+void	change_state_and_type(t_fsm *fsm, t_state state, t_type type)
 {
-	if (state == idle && c == '\'')
-		fsm->meta = false;
 	if (state)
 		fsm->current_state = state;
 	if (type)
@@ -35,5 +33,5 @@ void	change_state_and_type(t_fsm *fsm, t_state state, t_type type, char c)
 void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c)
 {
 	add_to_buf(fsm, c);
-	change_state_and_type(fsm, state, type, c);
+	change_state_and_type(fsm, state, type);
 }

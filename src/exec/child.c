@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 13:25:31 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 14:20:16 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,22 @@ void	ft_fd_error(t_token *token, t_data *d, int flag)
 {
 	if (flag == ERR_OPEN_LESS)
 	{
-		write(2, token->next->content, ft_strlen(token->next->content));
-		write(2, ": No such file or directory\n", 28);
+		if (ft_strlen(token->next->content) != 0)
+		{
+			write(2, "minishell: ", 11);
+			write(2, token->next->content, ft_strlen(token->next->content));
+			write(2, ": No such file or directory\n", 28);
+		}
 		ft_free_child(token, d);
 		exit(4);
 	}
 	else if (flag == ERR_OPEN_GREAT)
 	{
-		write(2, token->next->content, ft_strlen(token->next->content));
-		write(2, ": Permission denied\n", 20);
+		if (ft_strlen(token->next->content) != 0)
+		{
+			write(2, token->next->content, ft_strlen(token->next->content));
+			write(2, ": Permission denied\n", 20);
+		}
 		ft_free_child(token, d);
 		exit(4);
 	}
@@ -110,7 +117,7 @@ void	ft_less_child(t_data *d, t_token *tmp, int less)
 	int		fd;
 
 	fd = -1;
-	if (tmp->type == redir_in && tmp->next->content)
+	if (tmp->type == redir_in)
 	{
 		fd = open(tmp->next->content, O_RDONLY);
 		if (fd == -1)
@@ -132,9 +139,9 @@ void	ft_great_child(t_data *d, t_token *token, int great)
 	int		fd;
 
 	fd = -1;
-	if (token->type == redir_out_ap && token->next->content)
+	if (token->type == redir_out_ap)
 		fd = open(token->next->content, O_WRONLY | O_APPEND | O_CREAT, 0640);
-	else if (token->type == redir_out && token->next->content)
+	else if (token->type == redir_out)
 		fd = open(token->next->content, O_WRONLY | O_TRUNC | O_CREAT, 0640);
 	if (fd == -1)
 		ft_child_error(token, d, ERR_OPEN_GREAT);
@@ -238,5 +245,8 @@ void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 		free(d->cmd_path);
 	d->cmd_path = NULL;
 	if (d->cmd)
+	{
 		ft_free_double(d->cmd);
+		d->cmd = NULL;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:41:22 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/26 11:28:08 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:40:43 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,8 @@ void	ft_ctrlc(int sig)
 void	ft_ctrld(t_data *data)
 {
 	printf("exit\n");
-	rl_clear_history();
-	ft_free_double(data->envp);
-	exit(EXIT_SUCCESS);
+	g_exit_code = 0;
+	clear_minishell(data);
 }
 
 void	ft_quit(int sig)

@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:18:50 by lvogt             #+#    #+#             */
-/*   Updated: 2023/03/06 13:24:31 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:48:04 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ char	*ft_strchr(const char *s, int c)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == c)
-			return ((char *)&s[i]);
+		if (s[i] == (char)c)
+			return ((char *)(&s[i]));
 		i++;
 	}
-	return ((char *)&s[i]);
+	if (s[i] == (char)c)
+		return ((char *)(&s[i]));
+	return (NULL);
 }

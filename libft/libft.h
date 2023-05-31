@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:44:02 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/30 13:15:34 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:55:05 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,6 @@
 
 # include "ft_printf.h"
 # include "get_next_line.h"
-
-typedef struct s_split	t_split;
-
-struct					s_split
-{
-	char				k;
-	int					i;
-	int					j;
-	int					wordlen;
-	char				next_stop_char;
-	char				*next_stop;
-	char				**str;
-	char				*start;
-};
 
 /* ************************************************************************** */
 /*                                                                            */
@@ -88,7 +74,7 @@ void			*ft_calloc(size_t nmemb, size_t size);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s1, char const *set);
-char			**ft_split(char *s, char c);
+char			**ft_split(char const *s, char c);
 char			*ft_itoa(int n);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void			ft_striteri(char *s, void (*f)(unsigned int, char *));

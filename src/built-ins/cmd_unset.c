@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 12:01:34 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:39:27 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	cmd_unset(t_data *data)
 		}
 	}
 }
-
 
 int	remove_env_variable(char ***env, int env_size, char *variable)
 {
