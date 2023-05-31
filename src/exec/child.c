@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 13:32:29 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 11:37:47 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,5 +227,8 @@ void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 		free(d->cmd_path);
 	d->cmd_path = NULL;
 	if (d->cmd)
+	{
 		ft_free_double(d->cmd);
+		d->cmd = NULL;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 11:58:04 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	state_less_than(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '>')
 	{
 		finish_add(fsm, tokens, c);
-		change_state_and_type(fsm, greater_than, redir_out, c);
+		change_state_and_type(fsm, greater_than, redir_out);
 	}
 	else if (c == '|')
 		parsing_error(fsm, &c);

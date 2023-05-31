@@ -27,6 +27,13 @@
         "errno.h": "c",
         "__locale": "c",
         "sstream": "c",
-        "parsing_input.h": "c"
+        "parsing_input.h": "c",
+        "__split_buffer": "c",
+        "array": "c",
+        "bitset": "c",
+        "initializer_list": "c",
+        "iterator": "c",
+        "utility": "c",
+        "vector": "c"
     }
 }

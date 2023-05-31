@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 15:45:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 12:00:54 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,16 @@ void	state_idle(t_fsm *fsm, t_token **tokens, char c)
 	if (c == '\'' || c == '\"')
 		fsm->quotes = true;
 	if (c == '<')
-		change_state_and_type(fsm, less_than, redir_in, c);
+		change_state_and_type(fsm, less_than, redir_in);
 	else if (c == '>')
-		change_state_and_type(fsm, greater_than, redir_out, c);
+		change_state_and_type(fsm, greater_than, redir_out);
 	else if (c == '|')
-		change_state_and_type(fsm, s_pipe, t_pipe, c);
+		change_state_and_type(fsm, s_pipe, t_pipe);
 	else if (c == '\'')
+	{
+		fsm->meta = false;
 		fsm->current_state = quote_s;
+	}
 	else if (c == '\"')
 		fsm->current_state = quote_d;
 	else if (c == '\0')

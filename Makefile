@@ -12,6 +12,7 @@ CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
 RM = rm -f
 
 SRCS_FILES = 	main.c \
+				meta_interpret.c \
 				built/builtins.c\
 				built/cd.c\
 				built/echo.c\

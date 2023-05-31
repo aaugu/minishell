@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 12:51:03 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:08:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	ft_good_input(t_data *data)
 	{
 		add_history(data->user_input);
 		token = parsing(data->user_input);
+		meta_interpret(token, data->envp, data->env_size);
 		ft_executor(token, data);
 		if (data->user_input)
 			free(data->user_input);
@@ -84,6 +85,7 @@ static char	*find_trash_path(char **envp)
 static void	ft_readline(char **envp, t_data *data)
 {
 	data->envp = ft_copy_env(envp);
+	data->env_size = ft_strs_len(data->envp);
 	data->trash_path = find_trash_path(data->envp);
 	data->exit_code = 0;
 	signal(SIGINT, ft_ctrlc);
