@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:32:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 13:07:37 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:20:05 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ void	meta_interpret(t_token *t, char **env, int env_size)
 				print_err("minishell: malloc() failed: %s\n", 0);
 				return ;
 			}
-			if (ft_strlen(buf) == 0 && (t->type == infile || \
-			t->type == outfile))
+			if (!ft_strlen(buf) && (t->type == infile || t->type == outfile))
 			{
 				printf("minishell: %s: ambiguous redirect\n", t->content);
 				g_exit_code = 1;
