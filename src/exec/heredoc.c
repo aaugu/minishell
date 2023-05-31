@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/26 11:45:52 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:12:56 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,39 @@
 
 /* ft_do_heredoc:
  *	Récupère l'input du heredoc
- *	Vérifie si l'input est le Limiter puis stop le heredoc de ce cas.
+ *	Vérifie si l'input est le Limiter puis stop le heredoc dans ce cas.
  *	Expande les variables d'env si besoin (ainsi que $?)
  *	Écrie dans le pipe (servant de heredoc) l'input.
  */
-static void	ft_do_heredoc(t_token *tmp, t_data *data, int i)
+static void	ft_do_heredoc(t_token *tmp, t_data *d, int i)
 {
 	while (1)
 	{
-		ft_sig_n_input(data);
-		if (data->heredoc.str)
+		ft_sig_n_input(d);
+		if (d->heredoc.str)
 		{
-			if (ft_strlen(data->heredoc.str) > 0)
+			if (ft_strlen(d->heredoc.str) > 0)
 			{
-				if (ft_strncmp(data->heredoc.str, tmp->next->content,
+				if (ft_strncmp(d->heredoc.str, tmp->next->content,
 						ft_strlen(tmp->next->content)) == 0
 					&& ft_strlen(tmp->next->content)
-					== ft_strlen(data->heredoc.str))
+					== ft_strlen(d->heredoc.str))
 					break ;
-				if (data->heredoc.flag_doc == 1
-					&& i == data->heredoc.here_doc_nbr - 1)
+				if (d->heredoc.flag_doc == 1
+					&& i == d->heredoc.here_doc_nbr - 1)
 				{	
-					// if (tmp->next->quote == false);
-					// 	var_modif(data->heredoc.str);
-					write(data->heredoc.here_docfd[1],
-						data->heredoc.str, ft_strlen(data->heredoc.str));
-					write(data->heredoc.here_docfd[1], "\n", 1);
+					if (tmp->next->quotes == false)
+						d->heredoc.str = parsing_meta(d->heredoc.str, d->envp, d->env_size);
+					write(d->heredoc.here_docfd[1],
+						d->heredoc.str, ft_strlen(d->heredoc.str));
+					write(d->heredoc.here_docfd[1], "\n", 1);
 				}
 			}
 		}
 		else
-			ft_exit_doc(tmp, data);
+			ft_exit_doc(tmp, d);
 	}
-	ft_exit_doc(tmp, data);
+	ft_exit_doc(tmp, d);
 }
 
 int	ft_is_doc_last(t_token *token)
