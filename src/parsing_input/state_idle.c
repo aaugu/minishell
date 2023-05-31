@@ -6,11 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 12:00:54 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:32:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include <stdio.h>
 #include "../../includes/parsing_input_state_machine.h"
 
 /* Will set current state according to char and decide which action to perform
@@ -20,7 +21,10 @@ void	state_idle(t_fsm *fsm, t_token **tokens, char c)
 	if (c == '<' || c == '>' || c == '|')
 		finish_add(fsm, tokens, c);
 	if (c == '\'' || c == '\"')
+	{
+		printf("je change quote en true\n");
 		fsm->quotes = true;
+	}
 	if (c == '<')
 		change_state_and_type(fsm, less_than, redir_in);
 	else if (c == '>')
@@ -30,10 +34,10 @@ void	state_idle(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '\'')
 	{
 		fsm->meta = false;
-		fsm->current_state = quote_s;
+		change_state_quotes_true(fsm, quote_s);
 	}
 	else if (c == '\"')
-		fsm->current_state = quote_d;
+		change_state_quotes_true(fsm, quote_d);
 	else if (c == '\0')
 		finish_stop(fsm, tokens, c);
 	else if (c == ' ')

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 11:57:44 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:33:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
 void	add_to_buf(t_fsm *fsm, char c);
 void	change_state_and_type(t_fsm *fsm, t_state state, t_type type);
 void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c);
+void	change_state_quotes_true(t_fsm *fsm, t_state state);
 
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add(t_fsm *fsm, t_token **tokens, char c);
