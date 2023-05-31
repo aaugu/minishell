@@ -6,12 +6,16 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 13:32:29 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/26 15:24:34 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_exec_cmd:
+ *	Ne fait rien dans les cas des builtin unset et cd ou exit sans option.
+ *	
+ */
 void	ft_exec_cmd(t_token *tmp, t_data *data)
 {
 	if ((data->is_builtin > 0 && data->is_builtin < 3)
@@ -191,7 +195,11 @@ void	ft_redirection(t_token *tmp, t_data *data)
 	ft_pipe_child(data, tmp);
 }
 
-
+/* ft_exec_child:
+ *	Setup les redirections
+ *	Ferme les FD si pipe_nbr > 0
+ *	Execute la commande
+ */
 void	ft_exec_child(t_data *data, t_token *tmp)
 {
 	t_token	*tmp2;
@@ -208,7 +216,10 @@ void	ft_exec_child(t_data *data, t_token *tmp)
 	exit(EXIT_SUCCESS);
 }
 
-
+/* ft_process_child:
+ *	Cherche la commande, lance le builtin adéquat si besoin.
+ *	
+ */
 void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 {
 	d->cmd = ft_find_cmd(tmp);

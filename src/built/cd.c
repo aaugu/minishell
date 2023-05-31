@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:52:48 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 13:17:38 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/26 12:14:08 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ char	*ft_new_cd(t_data *data)
 	if (!data->cmd[1])
 	{
 		new_cd = ft_getenv(data->envp, "HOME=");
-		printf("enafsdgasgv = %s\n", new_cd);
 		if (new_cd == NULL)
 		{
 			write(2, "cd: No home directory found\n", 28);

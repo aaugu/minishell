@@ -6,12 +6,18 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/17 14:27:00 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/26 11:45:52 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_do_heredoc:
+ *	Récupère l'input du heredoc
+ *	Vérifie si l'input est le Limiter puis stop le heredoc de ce cas.
+ *	Expande les variables d'env si besoin (ainsi que $?)
+ *	Écrie dans le pipe (servant de heredoc) l'input.
+ */
 static void	ft_do_heredoc(t_token *tmp, t_data *data, int i)
 {
 	while (1)
@@ -28,7 +34,9 @@ static void	ft_do_heredoc(t_token *tmp, t_data *data, int i)
 					break ;
 				if (data->heredoc.flag_doc == 1
 					&& i == data->heredoc.here_doc_nbr - 1)
-				{
+				{	
+					// if (tmp->next->quote == false);
+					// 	var_modif(data->heredoc.str);
 					write(data->heredoc.here_docfd[1],
 						data->heredoc.str, ft_strlen(data->heredoc.str));
 					write(data->heredoc.here_docfd[1], "\n", 1);
@@ -60,7 +68,9 @@ int	ft_is_doc_last(t_token *token)
 		return (1);
 	return (0);
 }
-
+/* ft_heredoc_nbr:
+ * Compte le nombre de heredoc dans l'input.
+ */
 int	ft_heredoc_nbr(t_token *t)
 {
 	t_token	*tmp;
@@ -79,12 +89,19 @@ int	ft_heredoc_nbr(t_token *t)
 	return (i);
 }
 
+/* ft_do_child_doc:
+ *	Lance l'écriture du heredoc.
+ */
 static void	ft_do_child_doc(pid_t *p, int i, t_data *d, t_token *t)
 {
 	free(p);
 	ft_do_heredoc(t, d, i);
 }
 
+/* ft_doc_parent_process:
+ *	Attend la fin du process (heredoc).
+ *	Récupère l'exit code.
+ */
 static void	ft_doc_parent_process(pid_t *p, int i, t_data *d)
 {
 	int	status;
@@ -94,12 +111,16 @@ static void	ft_doc_parent_process(pid_t *p, int i, t_data *d)
 		d->exit_code = WEXITSTATUS(status);
 }
 
-static void	ft_heredoc_child(t_data *c, pid_t *p, t_token *tmp, pid_t *p2)
+/* ft_heredoc_child:
+ *	Ouvre autant de Heredoc que necésssaire grâce au fork.
+ *	Récupère l'input et l'exit code. Puis passe au heredoc suivant.
+ */
+static void	ft_heredoc_child(t_data *d, pid_t *p, t_token *tmp, pid_t *p2)
 {
 	int	i;
 
 	i = 0;
-	while (i < c->heredoc.here_doc_nbr)
+	while (i < d->heredoc.here_doc_nbr)
 	{
 		while (tmp->type != heredoc)
 			tmp = tmp->next;
@@ -109,17 +130,21 @@ static void	ft_heredoc_child(t_data *c, pid_t *p, t_token *tmp, pid_t *p2)
 		if (p[i] == 0)
 		{
 			free(p2);
-			ft_do_child_doc(p, i, c, tmp);
+			ft_do_child_doc(p, i, d, tmp);
 		}
 		else if (p[i] > 0)
 		{
-			ft_doc_parent_process(p, i, c);
+			ft_doc_parent_process(p, i, d);
 			tmp = tmp->next;
 			i++;
 		}
 	}
 }
 
+/* ft_heredoc:
+ *	Ouvre un pipe qui servira de heredoc.
+ *	Lance autant de heredoc que nécessaire.
+ */
 void	ft_heredoc(t_token *token, t_data *data, pid_t *pid2)
 {
 	t_token	*tmp;

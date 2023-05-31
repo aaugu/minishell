@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 11:03:56 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 10:17:22 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_which_builtins_child(t_data *data, t_token *token)
 	if (data->is_builtin == 3)
 		/*ft_exit(data, token, NULL);*/ printf("test exit 1\n");
 	else if (data->is_builtin == 4 && !data->cmd[1])
-		/*ft_export(data);*/ printf("test export 1\n");
+		ft_export(data);
 	else if (data->is_builtin == 5)
 		ft_pwd();
 	else if (data->is_builtin == 6)
@@ -39,6 +39,9 @@ void	ft_which_builtins_child(t_data *data, t_token *token)
 	}
 }
 
+/* ft_which_builtins:
+ *	Lance le bultin unset, cd, exit ou export.
+ */
 void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 {
 	t_token	*tmp;
@@ -55,7 +58,7 @@ void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 	else if (data->is_builtin == 3)
 		/*ft_exit(data, token, pid);*/ printf("test exit 2\n");
 	else if (data->is_builtin == 4)
-		/*error = ft_export(data);*/ printf("test export 2\n");
+		error = ft_export(data);
 	data->exit_code = error;
 }
 

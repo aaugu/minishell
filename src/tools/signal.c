@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:41:22 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/05 11:41:30 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/26 11:28:08 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,10 @@ void	ft_quit(int sig)
 	exit(3);
 }
 
+/* ft_sig_n_input:
+ *	Écoute la présence d'un signal d'interruption
+ *	Save l'input dans data->heredoc.str.
+ */
 void	ft_sig_n_input(t_data *data)
 {
 	signal(SIGINT, ft_quit);
