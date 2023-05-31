@@ -6,12 +6,19 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 13:25:12 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/26 14:52:56 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_exec_command:
+ *	Regarde la présence et le nombre de heredoc.
+ *	Si la derniere redirection est un heredoc.
+ *	Regarde la présence de builtins et le definit si besoin.
+ *	Lance la creation des Heredoc.
+ *	
+ */
 static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
 {
 	t_token	*tmp;
@@ -36,7 +43,9 @@ static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
 		tmp = tmp->next;
 	}
 }
-
+/* ft_wait:
+ *	Attend la fin de chaque process et enregistre le dernier exit_code.
+ */
 void	ft_wait(pid_t *pid, t_data *data)
 {
 	pid_t	wpid;
@@ -53,6 +62,11 @@ void	ft_wait(pid_t *pid, t_data *data)
 	}
 }
 
+/* ft_command:
+ *	Si besoin créé les pipe et stock le FD dans un tableau.
+ *	Lance l'execution des commands.
+ *	Attend la fin de chaque process. 
+ */
 static void	ft_command(t_token *token, t_data *data)
 {
 	pid_t	*pid;
@@ -76,7 +90,10 @@ static void	ft_command(t_token *token, t_data *data)
 	if (data->fd_array != NULL)
 		free(data->fd_array);
 }
-
+/* ft_check_pwd:
+ *	Vérifie le chemin d'accès absolu du répertoire de travail courant.
+ *	Si il n'est pas présent change le répertoire de travail courant vers la Trash.
+ */
 void	ft_check_pwd(t_data *data)
 {
 	char	pwd[1024];
@@ -89,7 +106,13 @@ void	ft_check_pwd(t_data *data)
 	else
 		return ;
 }
-
+/* ft_executor:
+ *	Reçois le User-Input parsé sour la forme d'une structure token. 
+ *	Compte le nombre de pipe ainsi que de commande.
+ *	Puis ràz la cmd_path et le child.
+ *	Lance l'execution de la commande puis check le PWD.
+ *	Passe sur la trash si besoin.
+ */
 void	ft_executor(t_token *token, t_data *data)
 {
 	data->pipe_nbr = ft_pipe_count(token);

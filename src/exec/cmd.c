@@ -6,12 +6,15 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 13:17:41 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:56:11 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_getenv:
+ *	Récupère la ligne ciblé par var dans l'environement.
+ */
 char	*ft_getenv(char **envp, char *var)
 {
 	char	*find;
@@ -30,6 +33,11 @@ char	*ft_getenv(char **envp, char *var)
 	return (NULL);
 }
 
+/* ft_launcher:
+ *	Retire le "." du début de la commande.
+ *	Join avec le chemin du répertoire de travail courant.
+ *	Return : la chaine de caractère qui permet l'access de la commande.
+ */
 char	*ft_launcher(t_data *data)
 {
 	char	*pwd;
@@ -49,6 +57,12 @@ char	*ft_launcher(t_data *data)
 	return (NULL);
 }
 
+/* find_cmd_path:
+ *	Regarde si la commande commence par "./" puis lance le programe dans minishell.
+ *	Regarde si la commande commence par "/" puis verifie accesibilité.
+ *	Sinon verifi pour chaque path l'accesibilité.
+ *	Return : la chaine de caractère qui permet l'access de la commande.
+ */
 char	*find_cmd_path(t_data *data)
 {
 	int		i;
@@ -78,6 +92,11 @@ char	*find_cmd_path(t_data *data)
 	return (NULL);
 }
 
+/* ft_builtins_or_cmd:
+ *	Si la commande n'est pas un builtin -> cherche la path de la commande.
+ *	Si cmd_nbr est de 1 lance le builtin unset, cd, exit ou export. (donc pas de pipe)
+ *	Si cmd_nbr est autre ne fait que unset, cd ou export.
+ */
 void	ft_builtins_or_cmd(t_data *d, t_token *tmp, pid_t *pid)
 {
 	if (d->is_builtin > 0 && d->is_builtin < 5)
@@ -93,6 +112,9 @@ void	ft_builtins_or_cmd(t_data *d, t_token *tmp, pid_t *pid)
 	}
 }
 
+/* ft_full_str:
+ *	Join la commande avec ses options séparé par un espace. 
+ */
 char	*ft_full_str(t_token *token)
 {
 	t_token	*tmp;
@@ -111,6 +133,10 @@ char	*ft_full_str(t_token *token)
 	return (NULL);
 }
 
+/* ft_find_cmd:
+ *	Recherche une commande et ses options pour les returnes
+ *	sous la forme d'un tableau de char.
+ */
 char	**ft_find_cmd(t_token *token)
 {
 	t_token	*tmp;

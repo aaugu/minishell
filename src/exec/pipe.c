@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:52:13 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/22 10:31:55 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/26 11:06:54 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int	*ft_set_pipe(t_data *data)
 	return (fd_array);
 }
 
+/* ft_pipe_doc:
+ *	Génère un pipe qui servira de à l'écriture et la lecture du herecdoc.
+ */
 void	ft_pipe_doc(t_data *data)
 {
 	if (data->heredoc.flag_doc == 1)

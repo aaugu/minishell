@@ -3,42 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/30 10:26:11 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 15:16:04 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_which_builtins_child(t_data *data, t_token *token)
+void	ft_which_builtins_child(t_data *data)
 {
-	int	exit_code;
-
-	if (data->is_builtin == 3)
-		/*ft_exit(data, token, NULL);*/ printf("test exit 1\n");
-	else if (data->is_builtin == 4 && !data->cmd[1])
-		/*ft_export(data);*/ printf("test export 1\n");
+	if (data->is_builtin == 4 && !data->cmd[1])
+		ft_export(data);
 	else if (data->is_builtin == 5)
 		ft_pwd();
 	else if (data->is_builtin == 6)
-		/*ft_env(data);*/ printf("test env\n");
+		cmd_env(data->envp, data->env_size, data->cmd);
 	else if (data->is_builtin == 7)
 		ft_echo(data);
-	if (data->is_builtin == 3)
-	{
-		exit_code = data->exit_code;
-		ft_free_child(token, data);
-		exit(exit_code);
-	}
-	else
-	{
-		ft_free_child(token, data);
-		exit(EXIT_SUCCESS);
-	}
 }
 
+/* ft_which_builtins:
+ *	Lance le bultin unset, cd, exit ou export.
+ */
 void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 {
 	t_token	*tmp;
@@ -49,13 +37,13 @@ void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 	pid2 = pid;
 	error = 0;
 	if (data->is_builtin == 1)
-		/*error = ft_unset(data);*/ printf("test unset\n");
+		cmd_unset(data->envp, data->env_size, data->cmd);
 	else if (data->is_builtin == 2)
 		error = ft_cd(data);
 	else if (data->is_builtin == 3)
-		/*ft_exit(data, token, pid);*/ printf("test exit 2\n");
+		cmd_exit(data);
 	else if (data->is_builtin == 4)
-		/*error = ft_export(data);*/ printf("test export 2\n");
+		error = ft_export(data);
 	data->exit_code = error;
 }
 

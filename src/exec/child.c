@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 11:37:47 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 14:20:16 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_exec_cmd:
+ *	Ne fait rien dans les cas des builtin unset et cd ou exit sans option.
+ *	
+ */
 void	ft_exec_cmd(t_token *tmp, t_data *data)
 {
 	if ((data->is_builtin > 0 && data->is_builtin < 3)
@@ -20,7 +24,7 @@ void	ft_exec_cmd(t_token *tmp, t_data *data)
 	while (tmp->type != command)
 		tmp = tmp->next;
 	if (data->is_builtin > 3 || (data->is_builtin == 3 && data->cmd[1]))
-		ft_which_builtins_child(data, tmp);
+		ft_which_builtins_child(data);
 	else if (!data->cmd_path)
 	{
 		ft_cmd_error(data);
@@ -38,15 +42,22 @@ void	ft_fd_error(t_token *token, t_data *d, int flag)
 {
 	if (flag == ERR_OPEN_LESS)
 	{
-		write(2, token->next->content, ft_strlen(token->next->content));
-		write(2, ": No such file or directory\n", 28);
+		if (ft_strlen(token->next->content) != 0)
+		{
+			write(2, "minishell: ", 11);
+			write(2, token->next->content, ft_strlen(token->next->content));
+			write(2, ": No such file or directory\n", 28);
+		}
 		ft_free_child(token, d);
 		exit(4);
 	}
 	else if (flag == ERR_OPEN_GREAT)
 	{
-		write(2, token->next->content, ft_strlen(token->next->content));
-		write(2, ": Permission denied\n", 20);
+		if (ft_strlen(token->next->content) != 0)
+		{
+			write(2, token->next->content, ft_strlen(token->next->content));
+			write(2, ": Permission denied\n", 20);
+		}
 		ft_free_child(token, d);
 		exit(4);
 	}
@@ -191,7 +202,11 @@ void	ft_redirection(t_token *tmp, t_data *data)
 	ft_pipe_child(data, tmp);
 }
 
-
+/* ft_exec_child:
+ *	Setup les redirections
+ *	Ferme les FD si pipe_nbr > 0
+ *	Execute la commande
+ */
 void	ft_exec_child(t_data *data, t_token *tmp)
 {
 	t_token	*tmp2;
@@ -208,7 +223,10 @@ void	ft_exec_child(t_data *data, t_token *tmp)
 	exit(EXIT_SUCCESS);
 }
 
-
+/* ft_process_child:
+ *	Cherche la commande, lance le builtin adéquat si besoin.
+ *	
+ */
 void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 {
 	d->cmd = ft_find_cmd(tmp);
