@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 15:15:39 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 15:50:54 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,13 @@ int	remove_env_variable(char ***env, int env_size, char *variable)
 		return (-1);
 	while (i < env_size)
 	{
-		if (ft_strnstr((*env)[i], var, ft_strlen(var)))
+		if ((*env)[i])
 		{
-			free((*env)[i]);
-			(*env)[i] = NULL;
+			if (!ft_strncmp((*env)[i], var, ft_strlen(var)) && (*env)[i])
+			{
+				free((*env)[i]);
+				(*env)[i] = NULL;
+			}
 		}
 		i++;
 	}
