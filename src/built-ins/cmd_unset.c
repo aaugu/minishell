@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/22 13:31:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 12:01:34 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <errno.h>
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
-#include "../../libft/libft.h"
+#include "../../includes/print_error.h"
 #include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 
 int		remove_env_variable(char ***env, int env_size, char *variable);
 int		print_err(char *message, int errnum);
@@ -27,19 +29,19 @@ Unsetting a variable or function that was not previously set shall not be
 considered an error and does not cause the shell to abort.
  */
 
-void	cmd_unset(char **env, int env_size, char **cmd_args)
+void	cmd_unset(t_data *data)
 {
 	int		i;
 	int		res;
 
-	if (ft_strs_len(cmd_args) <= 1)
+	if (ft_strs_len(data->cmd) <= 1)
 		g_exit_code = print_err("unset: not enough arguments\n", 0);
 	else
 	{
 		i = 0;
-		while (++i < ft_strs_len(cmd_args))
+		while (++i < ft_strs_len(data->cmd))
 		{
-			res = remove_env_variable(&env, env_size, cmd_args[i]);
+			res = remove_env_variable(&data->envp, data->env_size, data->cmd[i]);
 			if (res == -1)
 			{
 				g_exit_code = print_err("minishell: malloc() failed: %s\n", \
@@ -50,19 +52,6 @@ void	cmd_unset(char **env, int env_size, char **cmd_args)
 	}
 }
 
-int	print_err(char *message, int errnum)
-{
-	if (errnum != 0)
-	{
-		printf(message, strerror(errnum));
-		return (errnum);
-	}
-	else
-	{
-		printf("%s", message);
-		return (1);
-	}
-}
 
 int	remove_env_variable(char ***env, int env_size, char *variable)
 {
@@ -75,6 +64,7 @@ int	remove_env_variable(char ***env, int env_size, char *variable)
 		return (-1);
 	while (i < env_size)
 	{
+		printf("test [%d]\n", i);
 		if (ft_strnstr((*env)[i], var, ft_strlen(var)))
 		{
 			free((*env)[i]);

@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins.h                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 11:05:05 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 12:47:40 by aaugu            ###   ########.fr       */
+/*   Created: 2023/01/26 11:44:44 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/30 13:15:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_INS_H
-# define BUILT_INS_H
+#include "libft.h"
 
-# include "minishell.h"
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
 
-void	cmd_exit(t_data *data, char **cmd_args, int cmd_nbr);
-void	cmd_env(char **env, int env_size, char **cmd_args);
-void	cmd_unset(char **env, int env_size, char **cmd_args);
-
-#endif
+	i = 0;
+	while ((s1[i] != '\0' || s2[i] != '\0') && s1[i] == s2[i])
+	{
+		i++;
+	}
+	return (s1[i] - s2[i]);
+}

@@ -11,7 +11,7 @@
         "type_traits": "c",
         "history.h": "c",
         "fcntl.h": "c",
-        "state_machine.h": "c",
+        "input_state_machine.h": "c",
         "__bit_reference": "c",
         "__hash_table": "c",
         "__string": "c",
@@ -22,6 +22,11 @@
         "ft_printf.h": "c",
         "get_next_line.h": "c",
         "stdarg.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "parsing_meta_state_machine.h": "c",
+        "errno.h": "c",
+        "__locale": "c",
+        "sstream": "c",
+        "parsing_input.h": "c"
     }
 }

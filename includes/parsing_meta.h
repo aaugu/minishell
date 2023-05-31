@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_machine_utils.c                              :+:      :+:    :+:   */
+/*   parsing_meta.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:01:22 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 14:02:04 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/26 14:50:31 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include "../../includes/state_machine.h"
-#include "../../libft/libft.h"
+#ifndef PARSING_META_H
+# define PARSING_META_H
 
-/* Initialize start values of t_fsm state machine */
-void	init_state_machine(t_fsm *fsm)
+typedef struct s_meta
 {
-	if (fsm->buf)
-		free(fsm->buf);
-	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
-	if (!fsm->buf)
-		parsing_error(fsm, 0);
-	fsm->buf_size = 0;
-	fsm->meta = true;
-}
+	char			*content;
+	struct s_meta	*next;
+}					t_meta;
+
+char	*parsing_meta(char *s, char **env, int env_size);
+
+#endif

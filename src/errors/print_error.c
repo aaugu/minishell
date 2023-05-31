@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins.h                                        :+:      :+:    :+:   */
+/*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 11:05:05 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 12:47:40 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 15:23:09 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/30 10:06:48 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_INS_H
-# define BUILT_INS_H
+#include <stdio.h>
+#include <string.h>
+#include "../../includes/print_error.h"
 
-# include "minishell.h"
-
-void	cmd_exit(t_data *data, char **cmd_args, int cmd_nbr);
-void	cmd_env(char **env, int env_size, char **cmd_args);
-void	cmd_unset(char **env, int env_size, char **cmd_args);
-
-#endif
+int	print_err(char *message, int errnum)
+{
+	if (errnum != 0)
+	{
+		printf(message, strerror(errnum));
+		return (errnum);
+	}
+	else
+	{
+		printf("%s", message);
+		return (1);
+	}
+}

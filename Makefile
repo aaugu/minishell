@@ -12,13 +12,15 @@ CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
 RM = rm -f
 
 SRCS_FILES = 	main.c \
-				tools/signal.c \
-				tools/utils.c \
 				built/builtins.c\
 				built/cd.c\
 				built/echo.c\
 				built/export.c\
 				built/pwd.c\
+				built-ins/cmd_env.c \
+				built-ins/cmd_exit.c \
+				built-ins/cmd_unset.c \
+				errors/print_error.c \
 				exec/child.c \
 				exec/cmd.c \
 				exec/count.c \
@@ -29,18 +31,29 @@ SRCS_FILES = 	main.c \
 				exec/path.c \
 				exec/pipe.c \
 				free/clear_tokens.c \
-				parsing/parsing.c \
-                parsing/state_machine.c \
-                parsing/state_machine_utils.c \
-                parsing/state_less.c \
-                parsing/state_greater.c \
-                parsing/state_idle.c \
-                parsing/state_pipe.c \
-                parsing/state_quotes.c \
-                parsing/actions_finish.c \
-                parsing/actions_modify.c \
-                parsing/lists_utils.c \
-				parsing/parsing_error.c \
+				free/clear_minishell.c \
+                parsing_input/actions_finish_buf.c \
+				parsing_input/actions_finish_utils.c \
+                parsing_input/actions_modify.c \
+				parsing_input/parsing_error.c \
+				parsing_input/parsing_input.c \
+                parsing_input/state_greater.c \
+                parsing_input/state_idle.c \
+                parsing_input/state_less.c \
+                parsing_input/state_machine_utils.c \
+                parsing_input/state_machine.c \
+                parsing_input/state_pipe.c \
+                parsing_input/state_quotes.c \
+				parsing_meta/actions.c \
+				parsing_meta/parsing_error_meta.c \
+				parsing_meta/parsing_meta.c \
+				parsing_meta/state_chars.c \
+				parsing_meta/state_dollar.c \
+				parsing_meta/state_idle.c \
+				parsing_meta/state_machine_meta_utils.c \
+				parsing_meta/state_machine_meta.c \
+				tools/signal.c \
+				tools/utils.c \
 
 SRCS = $(addprefix ./src/, $(SRCS_FILES))
 OBJS = $(SRCS:%.c=%.o)

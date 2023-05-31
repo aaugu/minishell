@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins.h                                        :+:      :+:    :+:   */
+/*   state_idle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 11:05:05 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 12:47:40 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 16:38:26 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/26 15:25:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_INS_H
-# define BUILT_INS_H
+#include "../../includes/parsing_meta_state_machine.h"
 
-# include "minishell.h"
-
-void	cmd_exit(t_data *data, char **cmd_args, int cmd_nbr);
-void	cmd_env(char **env, int env_size, char **cmd_args);
-void	cmd_unset(char **env, int env_size, char **cmd_args);
-
-#endif
+void	state_idle_meta(t_m_fsm *fsm, t_meta **meta_strs, char c)
+{
+	if (c == '$')
+	{
+		finish_buf_meta(fsm, meta_strs);
+		add_to_buf_meta(fsm, c);
+		fsm->current_state = dollar;
+	}
+	else if (c == '\0')
+		fsm->current_state = stop;
+	else
+		add_to_buf_meta(fsm, c);
+}

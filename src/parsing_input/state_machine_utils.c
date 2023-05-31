@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_ins.h                                        :+:      :+:    :+:   */
+/*   state_machine_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/17 11:05:05 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 12:47:40 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
+/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_INS_H
-# define BUILT_INS_H
+#include <stdbool.h>
+#include "../../includes/parsing_input_state_machine.h"
+#include "../../libft/libft.h"
 
-# include "minishell.h"
-
-void	cmd_exit(t_data *data, char **cmd_args, int cmd_nbr);
-void	cmd_env(char **env, int env_size, char **cmd_args);
-void	cmd_unset(char **env, int env_size, char **cmd_args);
-
-#endif
+/* Initialize start values of t_fsm state machine */
+void	init_state_machine(t_fsm *fsm)
+{
+	if (fsm->buf)
+		free(fsm->buf);
+	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
+	if (!fsm->buf)
+		parsing_error(fsm, 0);
+	fsm->buf_size = 0;
+	fsm->meta = true;
+}

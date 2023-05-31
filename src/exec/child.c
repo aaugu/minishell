@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/26 15:24:34 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:25:31 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_exec_cmd(t_token *tmp, t_data *data)
 	while (tmp->type != command)
 		tmp = tmp->next;
 	if (data->is_builtin > 3 || (data->is_builtin == 3 && data->cmd[1]))
-		ft_which_builtins_child(data, tmp);
+		ft_which_builtins_child(data);
 	else if (!data->cmd_path)
 	{
 		ft_cmd_error(data);
@@ -110,7 +110,7 @@ void	ft_less_child(t_data *d, t_token *tmp, int less)
 	int		fd;
 
 	fd = -1;
-	if (tmp->type == redir_in)
+	if (tmp->type == redir_in && tmp->next->content)
 	{
 		fd = open(tmp->next->content, O_RDONLY);
 		if (fd == -1)
@@ -132,9 +132,9 @@ void	ft_great_child(t_data *d, t_token *token, int great)
 	int		fd;
 
 	fd = -1;
-	if (token->type == redir_out_ap)
+	if (token->type == redir_out_ap && token->next->content)
 		fd = open(token->next->content, O_WRONLY | O_APPEND | O_CREAT, 0640);
-	else if (token->type == redir_out)
+	else if (token->type == redir_out && token->next->content)
 		fd = open(token->next->content, O_WRONLY | O_TRUNC | O_CREAT, 0640);
 	if (fd == -1)
 		ft_child_error(token, d, ERR_OPEN_GREAT);

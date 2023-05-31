@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 10:35:12 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 10:57:48 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-#include "../includes/parsing.h"
+#include "../includes/parsing_input.h"
 
 static char	**ft_copy_env(char **env)
 {
@@ -40,7 +40,7 @@ static char	**ft_copy_env(char **env)
 
 static void	ft_good_input(t_data *data)
 {
-	t_token *token;
+	t_token	*token;
 
 	if (ft_strlen(data->user_input) > 0)
 	{
@@ -84,6 +84,7 @@ static char	*find_trash_path(char **envp)
 static void	ft_readline(char **envp, t_data *data)
 {
 	data->envp = ft_copy_env(envp);
+	data->env_size = ft_strs_len(data->envp);
 	data->trash_path = find_trash_path(data->envp);
 	data->exit_code = 0;
 	signal(SIGINT, ft_ctrlc);

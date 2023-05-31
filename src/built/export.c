@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 10:20:25 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 10:57:22 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,19 +187,17 @@ void	sort_env_alph(char **env_copy, int count)
 	}
 }
 
-void	ft_env_alph_order(char **env)
+void	ft_env_alph_order(t_data *data)
 {
 	int		i;
 	int		count;
 	char	**copy;
 
-	count = 0;
+	count = data->env_size;
 	i = -1;
-	while (env[count])
-		count++;
 	copy = malloc((count + 1) * sizeof(char *));
 	while (++i < count)
-		copy[i] = env[i];
+		copy[i] = data->envp[i];
 	copy[count] = NULL;
 	sort_env_alph(copy, count);
 	i = -1;
@@ -216,7 +214,7 @@ int	ft_export(t_data *data)
 
 	line = 0;
 	if (!data->cmd[1])
-		ft_env_alph_order(data->envp);
+		ft_env_alph_order(data);
 	else if (data->cmd[1])
 	{
 		export_nbr = ft_export_nbr(data);
@@ -227,6 +225,7 @@ int	ft_export(t_data *data)
 			export = ft_add(line, export_nbr, data);
 			ft_free_double(data->envp);
 			data->envp = export;
+			data->env_size = ft_strs_len(data->envp);
 		}
 	}
 	return (0);

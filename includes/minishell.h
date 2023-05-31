@@ -33,7 +33,7 @@
 # include <sys/wait.h>
 
 # include "../libft/libft.h"
-# include "parsing.h"
+# include "parsing_input.h"
 
 /******************************************************************************
 *								MACROS										  *
@@ -72,6 +72,7 @@ typedef struct s_heredoc
 typedef struct s_data
 {
 	char			**envp;
+	int				env_size;
 	char			*user_input;
 	int				exit_code;
 	char			**cmd;
@@ -97,12 +98,13 @@ typedef struct s_data
 //builtin.c
 int					ft_is_builtins(t_token *token);
 void				ft_which_builtins(t_data *data, t_token *token, pid_t *pid);
-void				ft_which_builtins_child(t_data *data, t_token *token);
+void				ft_which_builtins_child(t_data *data);
 
-int					ft_env(t_data *data);
+void				cmd_env(t_data *data);
+void				cmd_exit(t_data *data);
 int					ft_cd(t_data *data);
 int					ft_pwd(void);
-int					ft_unset(t_data *data);
+void				cmd_unset(t_data *data);
 int					ft_export(t_data *data);
 void				ft_echo(t_data *data);
 
