@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 16:32:26 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:38:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,7 @@ void	state_idle(t_fsm *fsm, t_token **tokens, char c)
 	if (c == '<' || c == '>' || c == '|')
 		finish_add(fsm, tokens, c);
 	if (c == '\'' || c == '\"')
-	{
-		printf("je change quote en true\n");
 		fsm->quotes = true;
-	}
 	if (c == '<')
 		change_state_and_type(fsm, less_than, redir_in);
 	else if (c == '>')
