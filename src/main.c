@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 16:15:08 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:39:57 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,10 @@ static void	ft_good_input(t_data *data)
 	{
 		add_history(data->user_input);
 		token = parsing(data->user_input);
-		if (token)
-		{
-			while (token)
-			{
-				printf("%s : type %d / quotes %d\n", token->content, token->type, token->quotes);
-				token = token->next;
-			}
-		}
 		meta_interpret(token, data->envp, data->env_size);
-		// ft_executor(token, data);
-		// if (data->user_input)
-		// 	free(data->user_input);
+		ft_executor(token, data);
+		if (data->user_input)
+			free(data->user_input);
 	}
 }
 
