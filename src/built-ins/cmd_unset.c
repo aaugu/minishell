@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 09:53:09 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 11:56:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	cmd_unset(char **env, int env_size, char **cmd_args)
 		}
 	}
 }
-
 
 int	remove_env_variable(char ***env, int env_size, char *variable)
 {

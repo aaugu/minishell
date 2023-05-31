@@ -72,6 +72,7 @@ typedef struct s_heredoc
 typedef struct s_data
 {
 	char			**envp;
+	int				env_size;
 	char			*user_input;
 	int				exit_code;
 	char			**cmd;
@@ -151,6 +152,9 @@ void				ft_free_child(t_token *token, t_data *d);
 
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
+
+void		meta_interpret(t_token *token, char **env, int env_size);
+
 void		rl_replace_line(const char *, int);
 void		rl_clear_history(void);
 
