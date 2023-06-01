@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_exit.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 11:21:40 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/01 14:46:39 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_exit_code(t_data *data);
 /*
 Exit in bash : The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is returned to the parent,
-here it is 
+here it is
  */
 void	cmd_exit(t_data *data)
 {
@@ -40,7 +40,10 @@ void	get_exit_code(t_data *data)
 
 	code = ft_itoa(ft_atoi(data->cmd[1]));
 	if (!code)
+	{
 		g_exit_code = print_err("minishell: malloc() failed: %s\n", errno);
+		clear_minishell(data);
+	}
 	else if (!ft_strcmp(data->cmd[1], code) && ft_strs_len(data->cmd) == 2)
 	{
 		g_exit_code = ft_atoi(data->cmd[1]);
