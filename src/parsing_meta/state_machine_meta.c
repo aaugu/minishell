@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 15:23:44 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 14:11:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,4 @@ void	clear_meta_state_machine(t_m_fsm *fsm)
 		free(fsm->buf);
 	if (fsm->env)
 		ft_strs_free(fsm->env, fsm->env_size);
-	fsm = (t_m_fsm *){0};
 }

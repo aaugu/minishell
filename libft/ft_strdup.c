@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:28:20 by lvogt             #+#    #+#             */
-/*   Updated: 2022/10/14 09:28:24 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:12:58 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,3 +29,4 @@ char	*ft_strdup(const char *src)
 	ptr[i] = '\0';
 	return (ptr);
 }
+
