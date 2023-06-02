@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 16:08:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 11:00:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	clear_meta_strs(t_meta *meta_strs)
 		meta_strs = next;
 	}
 }
+
 /*
 #include <stdio.h>
 
@@ -64,9 +65,9 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	interpreted_str = parsing_meta("qwertyuiop", env, 34);
-	printf("BEFORE :%s\nAFTER :%s\n", "qwertyuiop", interpreted_str);
+	printf("%s\n%s\n", "qwertyuiop", interpreted_str);
 	// interpreted_str = parsing_meta("$$bla$PATH$NOPE bouh$LANG", env, 34);
-	// printf("BEFORE :%s\nAFTER :%s\n", "$$bla$PATH$NOPE bouh$LANG", interpreted_str);
+	// printf("%s\n%s\n", "$$bla$PATH$NOPE bouh$LANG", interpreted_str);
 	return (0);
 }
 */
