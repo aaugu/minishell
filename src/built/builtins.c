@@ -6,12 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/02 10:30:04 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:32:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/built-ins.h"
+#include "../../includes/built_ins.h"
 
 void	ft_which_builtins_child(t_data *data)
 {
