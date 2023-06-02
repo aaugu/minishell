@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/01 14:46:39 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:46:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	get_exit_code(t_data *data)
 	code = ft_itoa(ft_atoi(data->cmd[1]));
 	if (!code)
 	{
-		g_exit_code = print_err("minishell: malloc() failed: %s\n", errno);
+		g_exit_code = print_err("minishell: malloc() failed:", errno);
 		clear_minishell(data);
 	}
 	else if (!ft_strcmp(data->cmd[1], code) && ft_strs_len(data->cmd) == 2)

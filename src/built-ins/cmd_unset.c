@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 10:04:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:46:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	is_var_present(char ***env, int env_size, char *variable)
 	var = ft_strjoin(variable, "=");
 	if (!var)
 	{
-		g_exit_code = print_err("minishell: malloc() failed: %s\n", errno);
+		g_exit_code = print_err("minishell: malloc() failed:", errno);
 		return (-1);
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:32:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 13:20:05 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:46:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	meta_interpret(t_token *t, char **env, int env_size)
 			buf = parsing_meta(t->content, env, env_size);
 			if (!buf)
 			{
-				print_err("minishell: malloc() failed: %s\n", 0);
+				print_err("minishell: malloc() failed:", errno);
 				return ;
 			}
 			if (!ft_strlen(buf) && (t->type == infile || t->type == outfile))
