@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:32:26 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ void	state_greater_than(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '|')
 		return ;
 	else if (c == '\'')
-		fsm->current_state = quote_s;
+		change_state_quotes_true(fsm, quote_s);
 	else if (c == '\"')
-		fsm->current_state = quote_d;
+		change_state_quotes_true(fsm, quote_d);
 	else if (c == ' ')
 		fsm->current_state = idle;
 	else if (c == '\0')
@@ -45,9 +45,9 @@ void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c)
 	if (c == '>' || c == '<' || c == '|')
 		parsing_error(fsm, &c);
 	else if (c == '\'')
-		fsm->current_state = quote_s;
+		change_state_quotes_true(fsm, quote_s);
 	else if (c == '\"')
-		fsm->current_state = quote_d;
+		change_state_quotes_true(fsm, quote_d);
 	else if (c == '\0')
 		finish_stop(fsm, tokens, c);
 	else if (c == ' ')

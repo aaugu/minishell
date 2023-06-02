@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 15:13:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:17:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../../libft/libft.h"
 
 char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta);
-t_token	*create_node(char *buffer, t_type type, t_fsm *fsm);
+t_token	*create_node(t_fsm *fsm);
 t_token	*lst_last(t_token *token);
 void	get_next_type(t_fsm *fsm, char c);
 
@@ -31,7 +31,7 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 	if (fsm->buf_size != 0)
 	{
 		fsm->buf[fsm->buf_size] = '\0';
-		new_token = create_node(fsm->buf, fsm->type, fsm);
+		new_token = create_node(fsm);
 		if (!new_token)
 			parsing_error(fsm, 0);
 		if (*tokens == NULL)
@@ -48,7 +48,7 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 }
 
 /* Create a node of chained list (token) */
-t_token	*create_node(char *buffer, t_type type, t_fsm *fsm)
+t_token	*create_node(t_fsm *fsm)
 {
 	t_token	*token;
 
@@ -56,12 +56,13 @@ t_token	*create_node(char *buffer, t_type type, t_fsm *fsm)
 	token = (t_token *)malloc(sizeof(t_token));
 	if (!token)
 		parsing_error(fsm, 0);
-	if (buffer)
-		token->content = ft_strdup(buffer);
+	if (fsm->buf)
+		token->content = ft_strdup(fsm->buf);
 	if (!token->content)
 		parsing_error(fsm, 0);
-	token->type = type;
+	token->type = fsm->type;
 	token->meta = fsm->meta;
+	token->quotes = fsm->quotes;
 	token->next = NULL;
 	token->prev = NULL;
 	return (token);
