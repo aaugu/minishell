@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 10:55:09 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 11:18:04 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:09:03 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ft_strs_free(char **strs, int size)
 	int	i;
 
 	i = 0;
-	while (i < size && strs[i])
+	while (i < size)
 	{
 		if (strs[i])
 			free(strs[i]);

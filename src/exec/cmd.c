@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 13:56:11 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/02 13:46:16 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,17 @@ char	*ft_full_str(t_token *token)
 {
 	t_token	*tmp;
 	char	*str;
+	char	*tmp2;
 
 	tmp = token;
 	str = ft_strdup(tmp->content);
 	while (tmp->next && tmp->next->type == option)
 	{
 		tmp = tmp->next;
-		str = ft_strjoin(str, " ");
-		str = ft_strjoin(str, tmp->content);
+		tmp2 = ft_strjoin(str, " ");
+		free(str);
+		str = ft_strjoin(tmp2, tmp->content);
+		free(tmp2);
 	}
 	if (str)
 			return (str);
