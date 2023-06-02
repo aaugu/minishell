@@ -6,11 +6,12 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 16:12:56 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:50:49 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/parsing_meta.h"
 
 /* ft_do_heredoc:
  *	Récupère l'input du heredoc

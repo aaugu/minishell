@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 15:40:02 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/05/31 16:50:21 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ typedef struct s_token
 
 t_token	*parsing(char *input);
 void	clear_tokens(t_token **tokens);
-char	*parsing_meta(char *s, char **env, int env_size);
 
 #endif
