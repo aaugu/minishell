@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/26 14:52:56 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/02 13:39:55 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,8 @@ void	ft_executor(t_token *token, t_data *data)
 	data->child = 0;
 	ft_command(token, data);
 	ft_check_pwd(data);
+	ft_free_double(data->all_path);
+	data->all_path = NULL;
+	ft_free_double(data->cmd);
+	data->cmd = NULL;
 }
