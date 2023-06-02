@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:10 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 15:15:39 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:23:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,11 @@ void	cmd_env(char **env, int env_size, char **cmd_args)
 	if (ft_strs_len(cmd_args) == 1)
 	{
 		i = 0;
-		while (i++ < env_size)
+		while (i < env_size)
 		{
 			if (env[i])
 				printf("%s\n", env[i]);
+			i++;
 		}
 	}
 	else

@@ -6,12 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 11:39:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:27:05 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parsing_input.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
 void	clear_minishell(t_data *data)
 {

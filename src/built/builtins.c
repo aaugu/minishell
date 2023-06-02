@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 15:16:04 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/02 10:32:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/built_ins.h"
 
 void	ft_which_builtins_child(t_data *data)
 {
@@ -37,7 +38,7 @@ void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 	pid2 = pid;
 	error = 0;
 	if (data->is_builtin == 1)
-		cmd_unset(data->envp, data->env_size, data->cmd);
+		cmd_unset(data);
 	else if (data->is_builtin == 2)
 		error = ft_cd(data);
 	else if (data->is_builtin == 3)
