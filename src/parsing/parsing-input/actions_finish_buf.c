@@ -6,15 +6,15 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 16:17:52 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:39:07 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../includes/parsing_input_state_machine.h"
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../libft/libft.h"
+#include "../../../includes/parsing_input_state_machine.h"
+#include "../../../includes/parsing_meta_state_machine.h"
+#include "../../../libft/libft.h"
 
 char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta);
 t_token	*create_node(t_fsm *fsm);

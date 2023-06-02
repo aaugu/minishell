@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 16:33:32 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:39:43 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing_input_state_machine.h"
+#include "../../../includes/parsing_input_state_machine.h"
 
 /* Will set current state according to char and decide which action to perform
 if needed */

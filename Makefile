@@ -12,15 +12,14 @@ CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
 RM = rm -f
 
 SRCS_FILES = 	main.c \
-				meta_interpret.c \
-				built/builtins.c\
-				built/cd.c\
-				built/echo.c\
-				built/export.c\
-				built/pwd.c\
+				built-ins/builtins.c \
+				built-ins/cd.c \
 				built-ins/cmd_env.c \
 				built-ins/cmd_exit.c \
 				built-ins/cmd_unset.c \
+				built-ins/echo.c \
+				built-ins/export.c \
+				built-ins/pwd.c \
 				errors/print_error.c \
 				exec/child.c \
 				exec/cmd.c \
@@ -33,26 +32,33 @@ SRCS_FILES = 	main.c \
 				exec/pipe.c \
 				free/clear_tokens.c \
 				free/clear_minishell.c \
-                parsing_input/actions_finish_buf.c \
-				parsing_input/actions_finish_utils.c \
-                parsing_input/actions_modify.c \
-				parsing_input/parsing_error.c \
-				parsing_input/parsing_input.c \
-                parsing_input/state_greater.c \
-                parsing_input/state_idle.c \
-                parsing_input/state_less.c \
-                parsing_input/state_machine_utils.c \
-                parsing_input/state_machine.c \
-                parsing_input/state_pipe.c \
-                parsing_input/state_quotes.c \
-				parsing_meta/actions.c \
-				parsing_meta/parsing_error_meta.c \
-				parsing_meta/parsing_meta.c \
-				parsing_meta/state_chars.c \
-				parsing_meta/state_dollar.c \
-				parsing_meta/state_idle.c \
-				parsing_meta/state_machine_meta_utils.c \
-				parsing_meta/state_machine_meta.c \
+				parsing/meta_interpret.c \
+                parsing/parsing-input/actions_finish_buf.c \
+				parsing/parsing-input/actions_finish_utils.c \
+                parsing/parsing-input/actions_modify.c \
+				parsing/parsing-input/parsing_error.c \
+				parsing/parsing-input/parsing_input.c \
+                parsing/parsing-input/state_greater.c \
+                parsing/parsing-input/state_idle.c \
+                parsing/parsing-input/state_less.c \
+                parsing/parsing-input/state_machine_utils.c \
+                parsing/parsing-input/state_machine.c \
+                parsing/parsing-input/state_pipe.c \
+                parsing/parsing-input/state_quotes.c \
+				parsing/parsing-meta/actions.c \
+				parsing/parsing-meta/parsing_error_meta.c \
+				parsing/parsing-meta/parsing_meta.c \
+				parsing/parsing-meta/state_chars.c \
+				parsing/parsing-meta/state_dollar.c \
+				parsing/parsing-meta/state_idle.c \
+				parsing/parsing-meta/state_machine_meta.c \
+				parsing/parsing-heredoc/actions.c \
+				parsing/parsing-heredoc/parsing_error_heredoc.c \
+				parsing/parsing-heredoc/parsing_heredoc.c \
+				parsing/parsing-heredoc/state_chars.c \
+				parsing/parsing-heredoc/state_dollar.c \
+				parsing/parsing-heredoc/state_idle.c \
+				parsing/parsing-heredoc/state_machine_heredoc.c \
 				tools/signal.c \
 				tools/utils.c \
 

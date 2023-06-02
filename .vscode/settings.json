@@ -34,6 +34,9 @@
         "initializer_list": "c",
         "iterator": "c",
         "utility": "c",
-        "vector": "c"
+        "vector": "c",
+        "parsing_input_state_machine.h": "c",
+        "parsing_meta.h": "c",
+        "print_error.h": "c"
     }
 }

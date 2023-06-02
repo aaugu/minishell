@@ -6,15 +6,16 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 14:11:59 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:48:34 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include "../../includes/minishell.h"
-#include "../../includes/parsing_meta.h"
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../libft/libft.h"
+#include <stdlib.h>
+#include "../../../includes/minishell.h"
+#include "../../../includes/parsing_meta.h"
+#include "../../../includes/parsing_meta_state_machine.h"
+#include "../../../libft/libft.h"
 
 void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *s);
 void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c);
@@ -58,6 +59,16 @@ void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str)
 		g_exit_code = errno;
 	}
 	fsm->len = ft_strlen(str);
+}
+
+void	init_meta_state_machine(t_m_fsm *fsm)
+{
+	if (fsm->buf)
+		free(fsm->buf);
+	fsm->buf = (char *)ft_calloc(fsm->len, sizeof(char));
+	if (!fsm->buf)
+		parsing_error_meta(&(fsm->current_state));
+	fsm->buf_size = 0;
 }
 
 void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c)

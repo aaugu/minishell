@@ -6,13 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 14:11:31 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:34:27 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/parsing_meta.h"
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../libft/libft.h"
+#include "../../../includes/parsing_meta.h"
+#include "../../../includes/parsing_meta_state_machine.h"
+#include "../../../libft/libft.h"
 
 
 char	*parsing_meta(char *s, char **env, int env_size)
