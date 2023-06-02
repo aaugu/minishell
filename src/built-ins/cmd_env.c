@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:10 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 10:23:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 15:14:36 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	cmd_env(char **env, int env_size, char **cmd_args)
 	}
 	else
 	{
-		printf("env: too many arguments");
+		printf("env: too many arguments\n");
 		g_exit_code = 1;
 	}
 }
