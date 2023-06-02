@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 10:55:00 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 11:25:36 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static void	ft_good_input(t_data *data)
 		ft_executor(token, data);
 		if (data->user_input)
 			free(data->user_input);
+		if (token)
+			clear_tokens(&token);
 	}
 }
 

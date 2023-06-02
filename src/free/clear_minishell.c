@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 10:27:05 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/02 14:14:27 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ void	clear_minishell(t_data *data)
 		ft_strs_free(data->envp, data->env_size);
 	if (data->cmd)
 		ft_strs_free(data->cmd, ft_strs_len(data->cmd));
+	if (data->all_path)
+		ft_strs_free(data->all_path, ft_strs_len(data->all_path));
 	if (data->user_input)
 		free(data->user_input);
+	if (data->cmd_path)
+		free(data->cmd_path);
+	if (data->trash_path)
+		free(data->trash_path);
 	if (data->fd_array)
 		free(data->fd_array);
 	exit(g_exit_code);
