@@ -5,16 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 15:30:35 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:10:26 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
+/*   Updated: 2023/06/05 16:10:31 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-#include "../../../includes/parsing_meta_state_machine.h"
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
 #include "../../../libft/libft.h"
 
-void	get_var_content(t_m_fsm *fsm);
 char	*find_var_content(char *var, t_m_fsm *fsm);
 
 void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)

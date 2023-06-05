@@ -45,20 +45,17 @@ SRCS_FILES = 	main.c \
                 parsing/parsing-input/state_machine.c \
                 parsing/parsing-input/state_pipe.c \
                 parsing/parsing-input/state_quotes.c \
-				parsing/parsing-meta/actions.c \
-				parsing/parsing-meta/parsing_error_meta.c \
-				parsing/parsing-meta/parsing_meta.c \
-				parsing/parsing-meta/state_chars.c \
-				parsing/parsing-meta/state_dollar.c \
-				parsing/parsing-meta/state_idle.c \
-				parsing/parsing-meta/state_machine_meta.c \
-				parsing/parsing-heredoc/actions.c \
-				parsing/parsing-heredoc/parsing_error_heredoc.c \
-				parsing/parsing-heredoc/parsing_heredoc.c \
-				parsing/parsing-heredoc/state_chars.c \
-				parsing/parsing-heredoc/state_dollar.c \
-				parsing/parsing-heredoc/state_idle.c \
-				parsing/parsing-heredoc/state_machine_heredoc.c \
+				parsing/parsing-meta-heredoc/actions.c \
+				parsing/parsing-meta-heredoc/parsing_error_meta.c \
+				parsing/parsing-meta-heredoc/parsing_meta.c \
+				parsing/parsing-meta-heredoc/parsing_heredoc.c \
+				parsing/parsing-meta-heredoc/state_chars.c \
+				parsing/parsing-meta-heredoc/state_chars_heredoc.c \
+				parsing/parsing-meta-heredoc/state_dollar.c \
+				parsing/parsing-meta-heredoc/state_dollar_heredoc.c \
+				parsing/parsing-meta-heredoc/state_idle.c \
+				parsing/parsing-meta-heredoc/state_machine_heredoc.c \
+				parsing/parsing-meta-heredoc/state_machine_meta.c \
 				tools/signal.c \
 				tools/utils.c \
 

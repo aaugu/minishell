@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_error_meta.c                               :+:      :+:    :+:   */
+/*   state_idle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/26 11:11:22 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:38:44 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 16:38:26 by aaugu             #+#    #+#             */
+/*   Updated: 2023/06/05 15:45:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <errno.h>
-#include "../../../includes/parsing_meta_state_machine.h"
-#include "../../../includes/minishell.h"
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
 
-/* Handles error in state machine : Delivers error message and set state of 
-state machine to error */
-void	parsing_error_meta(t_state *current_state)
+void	state_idle_meta(t_m_fsm *fsm, t_meta **meta_strs, char c)
 {
-	printf("minishell: malloc() failed: %s\n", strerror(errno));
-	g_exit_code = errno;
-	*current_state = error;
+	if (c == '$')
+	{
+		finish_buf_meta(fsm, meta_strs);
+		add_to_buf_meta(fsm, c);
+		fsm->current_state = dollar;
+	}
+	else if (c == '\0')
+	{
+		finish_buf_meta(fsm, meta_strs);
+		fsm->current_state = stop;
+	}
+	else
+		add_to_buf_meta(fsm, c);
 }

@@ -6,12 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:32:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:41:36 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 15:50:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing_input.h"
-#include "../../includes/parsing_meta.h"
+#include "../../includes/parsing_meta_heredoc.h"
 #include "../../includes/print_error.h"
 #include "../../includes/minishell.h"
 

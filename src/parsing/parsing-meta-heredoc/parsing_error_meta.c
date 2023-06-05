@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_error_heredoc.c                            :+:      :+:    :+:   */
+/*   parsing_error_meta.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 15:30:22 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:10:09 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/26 11:11:22 by aaugu             #+#    #+#             */
+/*   Updated: 2023/06/05 15:45:29 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <errno.h>
-#include "../../../includes/parsing_meta_state_machine.h"
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
 #include "../../../includes/minishell.h"
 
 /* Handles error in state machine : Delivers error message and set state of

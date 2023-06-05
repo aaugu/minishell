@@ -3,92 +3,105 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 08:37:43 by lvogt             #+#    #+#             */
-/*   Updated: 2023/04/25 13:28:21 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:09:06 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "get_next_line.h"
 
-static void	free_buffer(t_read *prb)
-{
-	if (prb->buf != NULL)
-	{
-		free(prb->buf);
-		prb->buf = NULL;
-	}
-}
 
-static char	*ft_realloc(t_line *line)
-{
-	char	*new_buf;
-	size_t	new_size;
-
-	new_size = line->size + 1;
-	new_buf = malloc((new_size + 1) * sizeof(char));
-	if (line->buf)
-	{
-		if (new_buf)
-			ft_memcpy(new_buf, line->buf, line->size);
-		free(line->buf);
-	}
-	line->buf = new_buf;
-	line->size = new_size;
-	return (new_buf);
-}
-
-static int	read_file(int fd, t_read *reserve)
-{
-	if (!reserve->buf)
-		reserve->buf = malloc(BUFFER_SIZE);
-	if (reserve->pos >= reserve->size)
-	{
-		reserve->size = read(fd, reserve->buf, BUFFER_SIZE);
-		if (reserve->size < 1)
-			return (0);
-		reserve->pos = 0;
-	}
-	return (reserve->buf[reserve->pos++]);
-}
-
-static int	put_line(t_line *line, char c)
-{
-	if (line->pos >= line->size)
-	{
-		if (ft_realloc(line) == NULL)
-			return (0);
-	}
-	line->buf[line->pos++] = c;
-	if (c == '\n')
-		return (0);
-	return (1);
-}
+int		ft_get_line_break(int fd, char **stash);
+char	*ft_get_line(char **stash);
+void	ft_free(char **p);
 
 char	*get_next_line(int fd)
 {
-	int				c;
-	t_line			line;
-	static t_read	reserve;
+	static char	*stash;
+	char		*line;
+	int			read_bytes;
 
-	if (fd < 0 || read(fd, line.buf, 0) < 0)
-		return (0);
-	line.buf = 0;
-	line.pos = 0;
-	line.size = 0;
-	while (1)
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
+	if (!stash)
+		stash = ft_strdup("");
+	if (!stash)
+		return (NULL);
+	read_bytes = ft_get_line_break(fd, &stash);
+	if ((read_bytes == -1) || (read_bytes == 0 && !ft_strlen(stash)))
 	{
-		c = read_file(fd, &reserve);
-		if (c == 0)
-			break ;
-		if (put_line(&line, c) == 0)
-			break ;
+		ft_free(&stash);
+		return (NULL);
 	}
-	if (line.pos == 0)
-		free_buffer(&reserve);
-	else
-		line.buf[line.pos] = 0;
-	return (line.buf);
+	line = ft_get_line(&stash);
+	if (!line)
+	{
+		ft_free(&stash);
+		return (NULL);
+	}
+	return (line);
+}
+
+// Until a '\n' is found in stash, read and then append buff on stash
+int	ft_get_line_break(int fd, char **stash)
+{
+	char	*buff;
+	char	*temp;
+	ssize_t	read_bytes;
+
+	read_bytes = 1;
+	buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (-1);
+	while (!ft_strchr(*stash, '\n'))
+	{
+		read_bytes = read(fd, buff, BUFFER_SIZE);
+		if (read_bytes == -1 || read_bytes == 0)
+			break ;
+		buff[read_bytes] = '\0';
+		temp = ft_strjoin(*stash, buff);
+		if (!temp)
+		{
+			read_bytes = -1;
+			break ;
+		}
+		free(*stash);
+		*stash = temp;
+	}
+	free(buff);
+	return ((int)read_bytes);
+}
+
+// Manipulating stash to get the line
+// And delete the line part from it and getting checkpoint
+char	*ft_get_line(char **stash)
+{
+	char	*line;
+	char	*temp;
+	int		i;
+
+	i = 0;
+	while ((*stash)[i] != '\n' && (*stash)[i])
+		i++;
+	line = ft_substr(*stash, 0, i + 1);
+	if (!line)
+		return (NULL);
+	temp = ft_substr(*stash, i + 1, ft_strlen(*stash) - i + 1);
+	if (!temp)
+	{
+		ft_free(&line);
+		return (NULL);
+	}
+	free(*stash);
+	*stash = temp;
+	return (line);
+}
+
+void	ft_free(char **p)
+{
+	free(*p);
+	*p = NULL;
 }

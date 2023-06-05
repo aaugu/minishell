@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_heredoc.c                                  :+:      :+:    :+:   */
+/*   parsing_meta.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/02 15:30:28 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:17:45 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
+/*   Updated: 2023/06/05 16:13:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parsing_meta.h"
-#include "../../../includes/parsing_meta_state_machine.h"
+#include "../../../includes/parsing_meta_heredoc.h"
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
 #include "../../../libft/libft.h"
 
-
-char	*parsing_meta_heredoc(char *s, char **env, int env_size)
+char	*parsing_meta(char *s, char **env, int env_size)
 {
 	char	*interpreted_str;
 	char	*tmp;
@@ -42,19 +41,19 @@ char	*parsing_meta_heredoc(char *s, char **env, int env_size)
 	return (interpreted_str);
 }
 
-// /*
-// #include <stdio.h>
+/*
+#include <stdio.h>
 
-// int	main(int ac, char **av, char **env)
-// {
-// 	char	*interpreted_str;
+int	main(int ac, char **av, char **env)
+{
+	char	*interpreted_str;
 
-// 	(void) ac;
-// 	(void) av;
-// 	interpreted_str = parsing_meta("qwertyuiop", env, 34);
-// 	printf("%s\n%s\n", "qwertyuiop", interpreted_str);
-// 	// interpreted_str = parsing_meta("$$bla$PATH$NOPE bouh$LANG", env, 34);
-// 	// printf("%s\n%s\n", "$$bla$PATH$NOPE bouh$LANG", interpreted_str);
-// 	return (0);
-// }
-// */
+	(void) ac;
+	(void) av;
+	interpreted_str = parsing_meta("qwertyuiop", env, 34);
+	printf("%s\n%s\n", "qwertyuiop", interpreted_str);
+	// interpreted_str = parsing_meta("$$bla$PATH$NOPE bouh$LANG", env, 34);
+	// printf("%s\n%s\n", "$$bla$PATH$NOPE bouh$LANG", interpreted_str);
+	return (0);
+}
+*/
