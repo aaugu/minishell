@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 16:33:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 15:21:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 ******************************************************************************/
 
 # include "parsing_input.h"
-# include "parsing.h"
+# include "parsing_states.h"
 
 /******************************************************************************
 *								STRUCTS									      *
@@ -43,7 +43,7 @@ typedef struct s_fsm
 t_token	*state_machine(char *input);
 void	init_state_machine(t_fsm *fsm);
 
-/* Each function will set current state and decide to perform an action if 
+/* Each function will set current state and decide to perform an action if
 needed */
 void	state_idle(t_fsm *fsm, t_token **tokens, char c);
 void	state_less_than(t_fsm *fsm, t_token **tokens, char c);

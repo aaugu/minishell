@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:34:27 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 15:17:22 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*parsing_meta(char *s, char **env, int env_size)
 		if (meta_strs->content)
 			free(meta_strs->content);
 		free(meta_strs);
-		meta_strs = meta_strs->next;
+		meta_strs = next;
 	}
 	return (interpreted_str);
 }
