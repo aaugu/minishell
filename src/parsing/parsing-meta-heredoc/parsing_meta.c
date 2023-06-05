@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:13:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:40:55 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "../../../includes/parsing_meta_heredoc_state_machine.h"
 #include "../../../libft/libft.h"
 
+/*
+After parsing input
+Parsing to interpret env variable call ($), it will separate into element
+strings (state machine will change string to variable content if found in
+environment) in a chained list, and re-combine all as one string */
 char	*parsing_meta(char *s, char **env, int env_size)
 {
 	char	*interpreted_str;

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:39:16 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:35:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c)
 	change_state_and_type(fsm, state, type);
 }
 
+/* Change state and set quotes as true */
 void	change_state_quotes_true(t_fsm *fsm, t_state state)
 {
 	fsm->current_state = state;

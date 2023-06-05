@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:31:01 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:06:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:43:23 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 void	execute_heredoc_state_machine(t_m_fsm *fsm, t_meta **metas, char c);
 
+/* Finite state machine. Will loop on each char to know how to separate and
+interpret as meta char each element in a lineary way. */
 t_meta	*heredoc_state_machine(char *str, char **env, int env_size)
 {
 	t_m_fsm	fsm;
@@ -42,6 +44,8 @@ t_meta	*heredoc_state_machine(char *str, char **env, int env_size)
 	return (NULL);
 }
 
+/* Tells state machine what to do depending on current state. Method flexible,
+as it is easy to modify and add conditions based on the state you're in. */
 void	execute_heredoc_state_machine(t_m_fsm *fsm, t_meta **metas, char c)
 {
 	if (fsm->current_state == idle)

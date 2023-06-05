@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:47:10 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:43:30 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 
 void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c);
 
+/* Finite state machine. Will loop on each char to know how to separate and
+interpret as meta char each element in a lineary way. */
 t_meta	*meta_state_machine(char *str, char **env, int env_size)
 {
 	t_m_fsm	fsm;
@@ -44,6 +46,7 @@ t_meta	*meta_state_machine(char *str, char **env, int env_size)
 	return (NULL);
 }
 
+/* Create base of finite state machine */
 void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str)
 {
 	fsm->buf = NULL;
@@ -59,6 +62,7 @@ void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str)
 	fsm->len = ft_strlen(str);
 }
 
+/* Initialize start values of t_fsm state machine */
 void	init_meta_state_machine(t_m_fsm *fsm)
 {
 	if (fsm->buf)
@@ -69,6 +73,8 @@ void	init_meta_state_machine(t_m_fsm *fsm)
 	fsm->buf_size = 0;
 }
 
+/* Tells state machine what to do depending on current state. Method flexible,
+as it is easy to modify and add conditions based on the state you're in. */
 void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c)
 {
 	if (fsm->current_state == idle)
@@ -81,6 +87,7 @@ void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c)
 		return ;
 }
 
+/* Clear allocated memory of finite state machine */
 void	clear_meta_state_machine(t_m_fsm *fsm)
 {
 	if (fsm->buf)

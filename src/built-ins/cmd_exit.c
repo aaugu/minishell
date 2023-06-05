@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:26:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:47:21 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	cmd_exit(t_data *data)
 	}
 }
 
+/* Set exit code depending on number of arguments and if they are numerical*/
 void	get_exit_code(t_data *data)
 {
 	char	*code;
