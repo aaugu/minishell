@@ -47,12 +47,11 @@ SRCS_FILES = 	main.c \
                 parsing/parsing-input/state_quotes.c \
 				parsing/parsing-meta-heredoc/actions.c \
 				parsing/parsing-meta-heredoc/parsing_error_meta.c \
-				parsing/parsing-meta-heredoc/parsing_meta.c \
 				parsing/parsing-meta-heredoc/parsing_heredoc.c \
-				parsing/parsing-meta-heredoc/state_chars.c \
+				parsing/parsing-meta-heredoc/parsing_meta.c \
 				parsing/parsing-meta-heredoc/state_chars_heredoc.c \
+				parsing/parsing-meta-heredoc/state_chars.c \
 				parsing/parsing-meta-heredoc/state_dollar.c \
-				parsing/parsing-meta-heredoc/state_dollar_heredoc.c \
 				parsing/parsing-meta-heredoc/state_idle.c \
 				parsing/parsing-meta-heredoc/state_machine_heredoc.c \
 				parsing/parsing-meta-heredoc/state_machine_meta.c \
