@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 14:16:16 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:45:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
+/* Handles the clear of every allocated memory in program */
 void	clear_minishell(t_data *data)
 {
 	rl_clear_history();

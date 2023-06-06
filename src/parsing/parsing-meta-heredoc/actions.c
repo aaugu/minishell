@@ -6,14 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:16:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/30 10:24:07 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:28:33 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../libft/libft.h"
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
+#include "../../../libft/libft.h"
 
 t_meta	*create_node_meta(char *buffer, t_m_fsm *fsm);
 t_meta	*lst_last_meta(t_meta *meta_strs);
@@ -25,6 +25,8 @@ void	add_to_buf_meta(t_m_fsm *fsm, char c)
 	fsm->buf_size++;
 }
 
+/* Finish buffer, create a node of meta list and set its content. Then reset
+state machine */
 void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs)
 {
 	t_meta	*new_meta;
@@ -46,6 +48,7 @@ void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs)
 	}
 }
 
+/* Create a node of chained list (meta) */
 t_meta	*create_node_meta(char *buffer, t_m_fsm *fsm)
 {
 	t_meta	*meta;

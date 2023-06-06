@@ -6,12 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 10:46:16 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:47:21 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../../includes/minishell.h"
+#include "../../includes/built_ins.h"
 #include "../../includes/print_error.h"
 #include "../../libft/libft.h"
 
@@ -34,6 +35,7 @@ void	cmd_exit(t_data *data)
 	}
 }
 
+/* Set exit code depending on number of arguments and if they are numerical*/
 void	get_exit_code(t_data *data)
 {
 	char	*code;

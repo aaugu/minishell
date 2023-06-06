@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_machine_meta_utils.c                         :+:      :+:    :+:   */
+/*   state_machine_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/23 16:31:28 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 13:23:17 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
+/*   Updated: 2023/06/02 15:39:47 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../libft/libft.h"
+#include <stdbool.h>
+#include "../../../includes/parsing_input_state_machine.h"
+#include "../../../libft/libft.h"
 
-void	init_meta_state_machine(t_m_fsm *fsm)
+/* Initialize start values of t_fsm state machine */
+void	init_state_machine(t_fsm *fsm)
 {
 	if (fsm->buf)
 		free(fsm->buf);
-	fsm->buf = (char *)ft_calloc(fsm->len, sizeof(char));
+	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
 	if (!fsm->buf)
-		parsing_error_meta(&(fsm->current_state));
+		parsing_error(fsm, 0);
 	fsm->buf_size = 0;
+	fsm->meta = true;
 }

@@ -6,17 +6,17 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 13:52:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:39:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../includes/parsing_input_state_machine.h"
-#include "../../includes/parsing_input.h"
-#include "../../libft/libft.h"
+#include "../../../includes/parsing_input_state_machine.h"
+#include "../../../includes/parsing_input.h"
+#include "../../../libft/libft.h"
 
-t_fsm	create_state_machine(char *input);
+void	create_state_machine(t_fsm *fsm, char *input);
 void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c);
 void	clear_state_machine(t_fsm *fsm);
 void	clear_parsing_error(t_fsm *fsm, t_token **tokens);
@@ -29,7 +29,7 @@ t_token	*state_machine(char *input)
 	t_fsm	fsm;
 	int		i;
 
-	fsm = create_state_machine(input);
+	create_state_machine(&fsm, input);
 	init_state_machine(&fsm);
 	tokens = NULL;
 	i = 0;
@@ -71,19 +71,18 @@ void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c)
 		state_pipe(fsm, tokens, c);
 }
 
-t_fsm	create_state_machine(char *input)
+/* Create base of finite state machine */
+void	create_state_machine(t_fsm *fsm, char *input)
 {
-	t_fsm	fsm;
-
-	fsm.buf = NULL;
-	fsm.buf_size = 0;
-	fsm.input_size = ft_strlen(input);
-	fsm.current_state = idle;
-	fsm.type = command;
-	fsm.quotes = false;
-	return (fsm);
+	fsm->buf = NULL;
+	fsm->buf_size = 0;
+	fsm->input_size = ft_strlen(input);
+	fsm->current_state = idle;
+	fsm->type = command;
+	fsm->quotes = false;
 }
 
+/* Clear allocated memory of finite state machine */
 void	clear_state_machine(t_fsm *fsm)
 {
 	if (fsm->buf)
@@ -91,6 +90,8 @@ void	clear_state_machine(t_fsm *fsm)
 	fsm = (t_fsm *){0};
 }
 
+/* If an error is encountered, clear allocated memory of finite state machine
+and tokens */
 void	clear_parsing_error(t_fsm *fsm, t_token **tokens)
 {
 	clear_state_machine(fsm);

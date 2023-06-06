@@ -6,17 +6,18 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 14:40:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:39:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../libft/libft.h"
+#include "../../../includes/minishell.h"
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
+#include "../../../libft/libft.h"
 
-void	get_var_content(t_m_fsm *fsm);
 char	*find_var_content(char *var, t_m_fsm *fsm);
 
+/* Will set current state according to char and decide which action to perform
+if needed */
 void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 {
 	if (c == '$' || c == ' ' || c == '\0')

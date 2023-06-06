@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:09:46 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:49:23 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	cmd_unset(t_data *data)
 		remove_var_env(data);
 }
 
+/* Will try to remove the env variables passed as arguments if found */
 void	remove_var_env(t_data *d)
 {
 	int		i;
@@ -64,6 +65,7 @@ void	remove_var_env(t_data *d)
 	}
 }
 
+/* Check if env variable is present in environment and, if found, free it*/
 int	is_var_present(char ***env, int env_size, char *variable)
 {
 	int		i;
@@ -91,6 +93,7 @@ int	is_var_present(char ***env, int env_size, char *variable)
 	return (false);
 }
 
+/* Re create env with env variables left */
 char	**get_new_env(t_data *data, int new_size)
 {
 	char	**new_env;
