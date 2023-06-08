@@ -133,13 +133,16 @@ int					ft_is_cmd(t_token *token);
 int					ft_pipe_count(t_token *token);
 int					ft_cmd_count(t_token *token);
 //error.c
-void				ft_exit_doc(t_token *token, t_data *data);
 void				ft_cmd_error(t_data *data);
 void				ft_too_much_pipe(int *fd_array, int pipe_nbr);
+void				ft_fd_error(t_token *token, t_data *d, int flag);
 //exec.c
 void				ft_executor(t_token *token, t_data *data);
 //file.c
 void				ft_close_fd(int *fd_array, int pipe_nbr);
+//heredoc_utils.c
+void				ft_exit_doc(t_token *token, t_data *data);
+void				ft_write_in_doc(t_token *t, t_data *d);
 //heredoc.c
 void				ft_heredoc(t_token *token, t_data *data, pid_t *pid2);
 int					ft_heredoc_nbr(t_token *t);

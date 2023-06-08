@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/07 11:19:39 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:36:25 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,10 @@ static void	ft_command(t_token *token, t_data *data)
 	ft_wait(pid, data);
 	free(pid);
 	if (data->fd_array != NULL)
+	{
 		free(data->fd_array);
+		data->fd_array = NULL;
+	}
 }
 
 /* ft_check_pwd:
