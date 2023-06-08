@@ -6,12 +6,39 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:27:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/02 13:12:34 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/07 12:04:23 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_launcher:
+ *	Retire le "." du début de la commande.
+ *	Join avec le chemin du répertoire de travail courant.
+ *	Return : la chaine de caractère qui permet l'access de la commande.
+ */
+char	*ft_launcher(t_data *data)
+{
+	char	*pwd;
+	char	*tmp;
+	char	*tmp2;
+
+	pwd = ft_getenv(data->envp, "PWD=");
+	if (pwd != NULL)
+	{
+		tmp2 = ft_strtrim(data->cmd[0], ".");
+		tmp = ft_strjoin(pwd, tmp2);
+		free(tmp2);
+		free(pwd);
+		if (access(tmp, X_OK | F_OK) == 0)
+			return (tmp);
+	}
+	return (NULL);
+}
+
+/* ft_join:
+ *	Ajoute un à la fin de chaque path.
+ */
 char	**ft_join(char **path)
 {
 	int		i;
@@ -27,6 +54,10 @@ char	**ft_join(char **path)
 	return (path);
 }
 
+/* ft_find_path:
+ *	Recherche la path dans l'environement et l'adapte
+ *	pour la rendre utilisable par le programme.
+ */
 char	**ft_find_path(t_data *data)
 {
 	char	*trim;

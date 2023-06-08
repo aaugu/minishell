@@ -6,53 +6,15 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:52:48 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/26 12:14:08 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:16:26 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_oldpwd(t_data *data, char *old_cd)
-{
-	int		i;
-	char	**old_pwd;
-
-	i = 0;
-	while (data->envp[i])
-			i++;
-	old_pwd = (char **)malloc(sizeof(char *) * (i + 2));
-	if (!old_pwd)
-		return ;
-	i = 0;
-	while (data->envp[i])
-	{
-		old_pwd[i] = ft_strdup(data->envp[i]);
-		i++;
-	}
-	old_pwd[i++] = ft_strjoin("OLDPWD=", old_cd);
-	old_pwd[i] = NULL;
-	ft_free_double(data->envp);
-	data->envp = old_pwd;
-}
-
-void	ft_change_oldpwd(t_data *data, char *old_cd)
-{
-	int	i;
-
-	i = 0;
-	while (data->envp[i]
-		&& ft_strncmp(data->envp[i], "OLDPWD=", 4) != 0)
-		i++;
-	if (!data->envp[i]
-		|| ft_strncmp(data->envp[i], "OLDPWD=", 4 != 0))
-		ft_oldpwd(data, old_cd);
-	else
-	{
-		free(data->envp[i]);
-		data->envp[i] = ft_strjoin("OLDPWD=", old_cd);
-	}
-}
-
+/* ft_change_pwd:
+ *	remplace la ligne PWD dans l'env par la nouvelle desti
+ */
 void	ft_change_pwd(t_data *data, char *new_cd)
 {
 	int		i;
@@ -68,6 +30,10 @@ void	ft_change_pwd(t_data *data, char *new_cd)
 	data->envp[i] = ft_strjoin("PWD=", new_cd);
 }
 
+/* ft_new_cd:
+ *	si une destination est donné, return cette desti
+ *	si rien est donné, cherche la présence de Home dans l'env.
+ */
 char	*ft_new_cd(t_data *data)
 {
 	char	*new_cd;
@@ -86,6 +52,10 @@ char	*ft_new_cd(t_data *data)
 	return (new_cd);
 }
 
+/* ft_cd_dont_exec:
+ *	Dans le cas ou cd est dans un Pipe 
+ *	ne fait que vérifier la possibilité de cd.
+ */
 int	ft_cd_dont_exec(t_data *data)
 {
 	int	fd;
@@ -99,12 +69,16 @@ int	ft_cd_dont_exec(t_data *data)
 			write (2, data->cmd[1], ft_strlen(data->cmd[1]));
 			write (2, ": no such file or directory\n", 28);
 			return (1);
-		}   
+		}
 		close(fd);
 	}
 	return (0);
 }
 
+/* ft_do_cd:
+ *	change le cdw pour la desti
+ *	puis change le pwd dans l'env
+ */
 int	ft_do_cd(char *n_cd, char *o_pwd, t_data *data)
 {
 	char	new_pwd[1024];
@@ -126,6 +100,10 @@ int	ft_do_cd(char *n_cd, char *o_pwd, t_data *data)
 	return (0);
 }
 
+/* ft_cd:
+ *	récupère le cwd et enregistre la destination.
+ *	change de comportement en fonction du nombre de cmd
+ */
 int	ft_cd(t_data *data)
 {
 	char	*new_cd;

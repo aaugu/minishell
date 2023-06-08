@@ -6,12 +6,15 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:35:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/05 11:35:59 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/06 15:33:54 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_close_fd:
+ *	Ferme les fd correspondant au in/out pour chaque pipe.
+ */
 void	ft_close_fd(int *fd_array, int pipe_nbr)
 {
 	int	i;

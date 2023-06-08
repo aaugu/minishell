@@ -6,12 +6,15 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:52:13 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/26 11:06:54 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/07 12:16:16 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_is_next_pipe:
+ *	test si il reste des pipes dans les tokens suivant
+ */
 static int	ft_is_next_pipe(t_token *token)
 {
 	t_token	*tmp;
@@ -24,6 +27,9 @@ static int	ft_is_next_pipe(t_token *token)
 	return (0);
 }
 
+/* ft_is_prev_pipe:
+ *	test si il y a des pipe dans les tokens précédent
+ */
 int	ft_is_prev_pipe(t_token *token)
 {
 	t_token	*tmp;
@@ -36,6 +42,9 @@ int	ft_is_prev_pipe(t_token *token)
 	return (0);
 }
 
+/* ft_pipe_child:
+ *	redirige les entrée et sortie standare vers le fd adéquat. 
+ */
 void	ft_pipe_child(t_data *data, t_token *token)
 {
 	if (data->great_mark == 0 && ft_is_next_pipe(token) == 1)
@@ -51,16 +60,9 @@ void	ft_pipe_child(t_data *data, t_token *token)
 	}
 }
 
-void	ft_too_much_pipe(int *fd_array, int pipe_nbr)
-{
-	write(2, "Minishell: pipe: environment limit.", 35);
-	write(2, " Use a better terminal or use less pipe.\n", 41);
-	if (fd_array)
-		ft_close_fd(fd_array, pipe_nbr);
-	if (fd_array)
-		free(fd_array);
-}
-
+/* ft_set_pipe:
+ *	Génère tout les pipes demandé par l'input.
+ */
 int	*ft_set_pipe(t_data *data)
 {
 	int	*fd_array;

@@ -106,6 +106,19 @@ int					ft_pwd(void);
 int					ft_export(t_data *data);
 void				ft_echo(t_data *data);
 
+//utils.c
+void				ft_oldpwd(t_data *data, char *old_cd);
+void				ft_change_oldpwd(t_data *data, char *old_cd);
+int					len_equal(char *str);
+int					ft_only_digit(char *str);
+int					ft_other_than_alnum(char *str);
+int					ft_digit_equal(char *str);
+int					ft_export_nbr(t_data *data);
+char				**copy_exist(t_data *data, int line, int nbr, int *i);
+char				*ft_dup_export(char **export, t_data *d, int *i, int j);
+int					ft_does_it_exist(int i, int j, char **export, t_data *data);
+char				**ft_add(int line, int export_nbr, t_data *data);
+
 /* ---------------------------- EXECUTION -----------------------------------*/
 //child.c
 void				ft_process_child(t_data *d, t_token *tmp, pid_t *p);
@@ -123,6 +136,7 @@ int					ft_cmd_count(t_token *token);
 //error.c
 void				ft_exit_doc(t_token *token, t_data *data);
 void				ft_cmd_error(t_data *data);
+void				ft_too_much_pipe(int *fd_array, int pipe_nbr);
 //exec.c
 void				ft_executor(t_token *token, t_data *data);
 //file.c
@@ -133,13 +147,18 @@ int					ft_heredoc_nbr(t_token *t);
 int					ft_is_doc_last(t_token *token);
 //path.c
 char				**ft_find_path(t_data *data);
+char				*ft_launcher(t_data *data);
+
 //pipe.c
 void				ft_pipe_doc(t_data *data);
 int					*ft_set_pipe(t_data *data);
 void				ft_pipe_child(t_data *data, t_token *token);
+//redir.c
+void				ft_redirection(t_token *tmp, t_data *data);
+
 /* ------------------------------ TOOLS -------------------------------------*/
 //utils.c
-void		ft_title(void);
+void				ft_title(void);
 //signal.c
 void				*ft_free_double(char **str);
 void				ft_ctrlc(int sig);
@@ -151,11 +170,7 @@ void				ft_free_child(t_token *token, t_data *d);
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
 
-void		meta_interpret(t_token *token, char **env, int env_size);
-
-void		rl_replace_line(const char *, int);
-void		rl_clear_history(void);
-
-void		clear_minishell(t_data *data);
+void				meta_interpret(t_token *token, char **env, int env_size);
+void				clear_minishell(t_data *data);
 
 #endif

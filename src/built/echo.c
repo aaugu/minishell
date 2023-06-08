@@ -6,12 +6,15 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:40:25 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/09 10:50:17 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:30:07 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+/* ft_print_echo:
+ *	print chaque element demandé suivi par un " " puis finit par un \n.
+ */
 static void	ft_print_echo(t_data *data)
 {
 	int	i;
@@ -27,7 +30,11 @@ static void	ft_print_echo(t_data *data)
 		i++;
 	}
 }
-
+/* ft_echo:
+ *	print un \n si rien est demander.
+ *	si un -n est demander print chaque element demandé suivi par un " ".
+ *	sans /n à la fin sinon l'ajoutera.
+ */
 void	ft_echo(t_data *data)
 {
 	int	i;

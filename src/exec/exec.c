@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/02 13:39:55 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/07 11:19:39 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  *	Si la derniere redirection est un heredoc.
  *	Regarde la présence de builtins et le definit si besoin.
  *	Lance la creation des Heredoc.
- *	
+ *	Puis lance le child process pour executer pipe, builtin et commande.
  */
 static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
 {
@@ -43,6 +43,7 @@ static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
 		tmp = tmp->next;
 	}
 }
+
 /* ft_wait:
  *	Attend la fin de chaque process et enregistre le dernier exit_code.
  */
@@ -90,6 +91,7 @@ static void	ft_command(t_token *token, t_data *data)
 	if (data->fd_array != NULL)
 		free(data->fd_array);
 }
+
 /* ft_check_pwd:
  *	Vérifie le chemin d'accès absolu du répertoire de travail courant.
  *	Si il n'est pas présent change le répertoire de travail courant vers la Trash.
@@ -106,6 +108,7 @@ void	ft_check_pwd(t_data *data)
 	else
 		return ;
 }
+
 /* ft_executor:
  *	Reçois le User-Input parsé sour la forme d'une structure token. 
  *	Compte le nombre de pipe ainsi que de commande.

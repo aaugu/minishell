@@ -14,8 +14,11 @@ RM = rm -f
 SRCS_FILES = 	main.c \
 				meta_interpret.c \
 				built/builtins.c\
+				built/cd_utils.c\
 				built/cd.c\
 				built/echo.c\
+				built/export_utils_1.c\
+				built/export_utils_2.c\
 				built/export.c\
 				built/pwd.c\
 				built-ins/cmd_env.c \
@@ -31,6 +34,7 @@ SRCS_FILES = 	main.c \
 				exec/heredoc.c \
 				exec/path.c \
 				exec/pipe.c \
+				exec/redir.c \
 				free/clear_tokens.c \
 				free/clear_minishell.c \
                 parsing_input/actions_finish_buf.c \

@@ -3,16 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/02 10:32:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:16:26 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/built_ins.h"
 
+/* ft_which_builtins_child:
+ *	Gère export sans option, pwd, env et echo.
+ */
 void	ft_which_builtins_child(t_data *data)
 {
 	if (data->is_builtin == 4 && !data->cmd[1])
@@ -26,13 +29,13 @@ void	ft_which_builtins_child(t_data *data)
 }
 
 /* ft_which_builtins:
- *	Lance le bultin unset, cd, exit ou export.
+ *	Lance le bultin unset, cd, exit ou export avec/sans option.
  */
 void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 {
 	t_token	*tmp;
-	pid_t *pid2;
-	int	error;
+	pid_t	*pid2;
+	int		error;
 
 	tmp = token;
 	pid2 = pid;
@@ -48,6 +51,9 @@ void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 	data->exit_code = error;
 }
 
+/* ft_len:
+ *	Mesure la longeur du content de la struc token jusqu'à un potentiel ' '.
+ */
 int	ft_len(t_token *token)
 {
 	t_token	*tmp;
@@ -60,31 +66,36 @@ int	ft_len(t_token *token)
 	return (i);
 }
 
-
+/* ft_is_builtins:
+ *	Donne une valeur à data->is_builtin en fonction
+ *	de quel builtin est appelé par la commande
+ *	unset = 1 ; cd = 2 ; exit = 3 ; export = 4
+ *	pwd = 5 ; env = 6 ; echo = 7 ; -1 si pas un builtin
+ */
 int	ft_is_builtins(t_token *token)
 {
-	t_token	*tmp;
+	t_token	*t;
 
-	tmp = token;
-	if (tmp && tmp->type == t_pipe)
-		tmp = tmp->next;
-	while ((tmp && tmp->type != command) && (tmp && tmp->type != t_pipe))
-		tmp = tmp->next;
-	if (tmp && tmp->content && tmp->type == command)
+	t = token;
+	if (t && t->type == t_pipe)
+		t = t->next;
+	while ((t && t->type != command) && (t && t->type != t_pipe))
+		t = t->next;
+	if (t && t->content && t->type == command)
 	{
-		if (ft_strcmp_caps((tmp->content), "unset", 5) == 0 && ft_len(tmp) == 5)
+		if (ft_cmp_caps((t->content), "unset", 5) == 0 && ft_len(t) == 5)
 			return (1);
-		else if (ft_strcmp_caps((tmp->content), "cd", 2) == 0 && ft_len(tmp) == 2)
+		else if (ft_cmp_caps((t->content), "cd", 2) == 0 && ft_len(t) == 2)
 			return (2);
-		else if (ft_strcmp_caps((tmp->content), "exit", 4) == 0 && ft_len(tmp) == 4)
+		else if (ft_cmp_caps((t->content), "exit", 4) == 0 && ft_len(t) == 4)
 			return (3);
-		else if (ft_strcmp_caps((tmp->content), "export", 6) == 0 && ft_len(tmp) == 6)
+		else if (ft_cmp_caps((t->content), "export", 6) == 0 && ft_len(t) == 6)
 			return (4);
-		if (ft_strcmp_caps((tmp->content), "pwd", 3) == 0 && ft_len(tmp) == 3)
+		else if (ft_cmp_caps((t->content), "pwd", 3) == 0 && ft_len(t) == 3)
 			return (5);
-		else if (ft_strcmp_caps((tmp->content), "env", 3) == 0 && ft_len(tmp) == 3)
+		else if (ft_cmp_caps((t->content), "env", 3) == 0 && ft_len(t) == 3)
 			return (6);
-		else if (ft_strcmp_caps((tmp->content), "echo", 4) == 0 && ft_len(tmp) == 4)
+		else if (ft_cmp_caps((t->content), "echo", 4) == 0 && ft_len(t) == 4)
 			return (7);
 	}
 	return (-1);
