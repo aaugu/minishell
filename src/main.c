@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:26:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 10:19:55 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,11 @@ static void	ft_readline(char **envp, t_data *data)
 	data->exit_code = 0;
 	signal(SIGINT, ft_ctrlc);
 	signal(SIGQUIT, SIG_IGN);
+	g_exit_code = 0;
 	while (1)
 	{
-		g_exit_code = 0;
+		g_exit_code = data->exit_code;
+		//printf("%d\n", g_exit_code);
 		data->user_input = readline("minishell > ");
 		if (data->user_input)
 		{

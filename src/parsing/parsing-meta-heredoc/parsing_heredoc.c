@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:30:28 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:41:10 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 10:39:09 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ Parsing of heredoc content :
 Parsing to interpret env variable call ($), it will separate into element
 strings (state machine will change string to variable content if found in
 environment) in a chained list, and re-combine all as one string */
-char	*parsing_meta_heredoc(char *s, char **env, int env_size)
+char	*parsing_heredoc(char *s, char **env, int env_size)
 {
 	char	*interpreted_str;
 	char	*tmp;

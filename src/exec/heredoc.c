@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/05 16:23:28 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 10:38:05 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
  *	Vérifie si l'input est le Limiter puis stop le heredoc dans ce cas.
  *	Expande les variables d'env si besoin (ainsi que $?)
  *	Écrie dans le pipe (servant de heredoc) l'input.
+ *	
  */
-static void	ft_do_heredoc(t_token *tmp, t_data *d, int i)
+static void	ft_do_heredoc(t_token *t, t_data *d, int i)
 {
 	while (1)
 	{
@@ -28,16 +29,16 @@ static void	ft_do_heredoc(t_token *tmp, t_data *d, int i)
 		{
 			if (ft_strlen(d->heredoc.str) > 0)
 			{
-				if (ft_strncmp(d->heredoc.str, tmp->next->content,
-						ft_strlen(tmp->next->content)) == 0
-					&& ft_strlen(tmp->next->content)
+				if (ft_strncmp(d->heredoc.str, t->next->content,
+						ft_strlen(t->next->content)) == 0
+					&& ft_strlen(t->next->content)
 					== ft_strlen(d->heredoc.str))
 					break ;
 				if (d->heredoc.flag_doc == 1
 					&& i == d->heredoc.here_doc_nbr - 1)
 				{
-					if (tmp->next->quotes == false)
-						d->heredoc.str = parsing_meta(d->heredoc.str, d->envp, d->env_size);
+					if (t->next->quotes == false)
+						d->heredoc.str = parsing_heredoc(d->heredoc.str, d->envp, d->env_size);
 					write(d->heredoc.here_docfd[1],
 						d->heredoc.str, ft_strlen(d->heredoc.str));
 					write(d->heredoc.here_docfd[1], "\n", 1);
@@ -45,49 +46,9 @@ static void	ft_do_heredoc(t_token *tmp, t_data *d, int i)
 			}
 		}
 		else
-			ft_exit_doc(tmp, d);
+			ft_exit_doc(t, d);
 	}
-	ft_exit_doc(tmp, d);
-}
-
-int	ft_is_doc_last(t_token *token)
-{
-	t_token	*tmp;
-	int		type;
-
-	tmp = token;
-	if (tmp->type == t_pipe)
-		tmp = tmp->next;
-	type = -1;
-	while (tmp && tmp->type != t_pipe)
-	{
-		if (tmp->type == redir_in || tmp->type == heredoc)
-			type = tmp->type;
-		tmp = tmp->next;
-	}
-	if (type == heredoc)
-		return (1);
-	return (0);
-}
-/* ft_heredoc_nbr:
- * Compte le nombre de heredoc dans l'input.
- */
-int	ft_heredoc_nbr(t_token *t)
-{
-	t_token	*tmp;
-	int		i;
-
-	tmp = t;
-	i = 0;
-	if (tmp->type == t_pipe)
-		tmp = tmp->next;
-	while (tmp && tmp->type != t_pipe)
-	{
-		if (tmp->type == heredoc)
-			i++;
-		tmp = tmp->next;
-	}
-	return (i);
+	ft_exit_doc(t, d);
 }
 
 /* ft_do_child_doc:

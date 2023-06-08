@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/14 09:23:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/05/31 15:50:28 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/07 13:36:30 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	ft_strcmp_caps(const char *s1, const char *s2, size_t n)
+int	ft_cmp_caps(const char *s1, const char *s2, size_t n)
 {
 	char	*s1_upper;
 	char	*s2_upper;

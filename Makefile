@@ -12,14 +12,17 @@ CPPFLAGS = -I$(HOME)/.brew/opt/readline/include
 RM = rm -f
 
 SRCS_FILES = 	main.c \
-				built-ins/builtins.c \
-				built-ins/cd.c \
+				built-ins/builtins.c\
+				built-ins/cd_utils.c\
+				built-ins/cd.c\
 				built-ins/cmd_env.c \
 				built-ins/cmd_exit.c \
 				built-ins/cmd_unset.c \
-				built-ins/echo.c \
-				built-ins/export.c \
-				built-ins/pwd.c \
+				built-ins/echo.c\
+				built-ins/export_utils_1.c\
+				built-ins/export_utils_2.c\
+				built-ins/export.c\
+				built-ins/pwd.c\
 				errors/print_error.c \
 				exec/child.c \
 				exec/cmd.c \
@@ -30,6 +33,7 @@ SRCS_FILES = 	main.c \
 				exec/heredoc.c \
 				exec/path.c \
 				exec/pipe.c \
+				exec/redir.c \
 				free/clear_tokens.c \
 				free/clear_minishell.c \
 				parsing/meta_interpret.c \
