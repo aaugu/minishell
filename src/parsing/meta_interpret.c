@@ -6,15 +6,17 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:32:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 10:46:16 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:44:44 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/parsing_input.h"
-#include "../includes/parsing_meta.h"
-#include "../includes/print_error.h"
-#include "../includes/minishell.h"
+#include "../../includes/parsing_input.h"
+#include "../../includes/parsing_meta_heredoc.h"
+#include "../../includes/print_error.h"
+#include "../../includes/minishell.h"
 
+/* If needed, will interpret meta chars in token list elements to change them
+as env variables */
 void	meta_interpret(t_token *t, char **env, int env_size)
 {
 	char	*buf;

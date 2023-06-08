@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_machine_utils.c                              :+:      :+:    :+:   */
+/*   parsing_error_meta.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/23 14:16:25 by aaugu            ###   ########.fr       */
+/*   Created: 2023/05/26 11:11:22 by aaugu             #+#    #+#             */
+/*   Updated: 2023/06/05 15:45:29 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
-#include "../../includes/parsing_input_state_machine.h"
-#include "../../libft/libft.h"
+#include <stdio.h>
+#include <errno.h>
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
+#include "../../../includes/minishell.h"
 
-/* Initialize start values of t_fsm state machine */
-void	init_state_machine(t_fsm *fsm)
+/* Handles error in state machine : Delivers error message and set state of
+state machine to error */
+void	parsing_error_meta(t_state *current_state)
 {
-	if (fsm->buf)
-		free(fsm->buf);
-	fsm->buf = (char *)ft_calloc(fsm->input_size, sizeof(char));
-	if (!fsm->buf)
-		parsing_error(fsm, 0);
-	fsm->buf_size = 0;
-	fsm->meta = true;
+	printf("minishell: malloc() failed: %s\n", strerror(errno));
+	g_exit_code = errno;
+	*current_state = error;
 }

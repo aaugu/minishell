@@ -6,22 +6,21 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/31 16:17:52 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:29:14 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../../includes/parsing_input_state_machine.h"
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../libft/libft.h"
+#include "../../../includes/parsing_input_state_machine.h"
+#include "../../../libft/libft.h"
 
 char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta);
 t_token	*create_node(t_fsm *fsm);
 t_token	*lst_last(t_token *token);
 void	get_next_type(t_fsm *fsm, char c);
 
-/* Finish buffer, create a node of tokens list and set its content. Then reset 
+/* Finish buffer, create a node of tokens list and set its content. Then reset
 state machine. Get type of next node.*/
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 {
@@ -76,7 +75,7 @@ t_token	*lst_last(t_token *token)
 	return (token);
 }
 
-/* Define type of element depending on previous type saved */
+/* Define type of next element depending on previous type saved */
 void	get_next_type(t_fsm *fsm, char c)
 {
 	if (fsm->type == redir_in || fsm->type == heredoc || fsm->type == redir_out \

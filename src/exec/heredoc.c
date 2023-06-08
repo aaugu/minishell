@@ -6,12 +6,12 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/08 10:03:06 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/08 10:38:05 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include "../../includes/parsing_meta.h"
+#include "../../includes/parsing_meta_heredoc.h"
 
 /* ft_do_heredoc:
  *	Récupère l'input du heredoc
@@ -36,10 +36,9 @@ static void	ft_do_heredoc(t_token *t, t_data *d, int i)
 					break ;
 				if (d->heredoc.flag_doc == 1
 					&& i == d->heredoc.here_doc_nbr - 1)
-				{	
+				{
 					if (t->next->quotes == false)
-						d->heredoc.str = parsing_meta(d->heredoc.str,
-								d->envp, d->env_size);
+						d->heredoc.str = parsing_heredoc(d->heredoc.str, d->envp, d->env_size);
 					write(d->heredoc.here_docfd[1],
 						d->heredoc.str, ft_strlen(d->heredoc.str));
 					write(d->heredoc.here_docfd[1], "\n", 1);

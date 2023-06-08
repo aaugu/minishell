@@ -6,12 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:10 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:14:36 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 15:26:45 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../../includes/minishell.h"
+#include "../../includes/built_ins.h"
 #include "../../libft/libft.h"
 
 /*

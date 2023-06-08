@@ -6,16 +6,18 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:38:09 by aaugu             #+#    #+#             */
-/*   Updated: 2023/05/26 14:45:12 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:39:41 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
-#include "../../includes/parsing_meta_state_machine.h"
-#include "../../includes/minishell.h"
-#include "../../includes/print_error.h"
-#include "../../libft/libft.h"
+#include "../../../includes/parsing_meta_heredoc_state_machine.h"
+#include "../../../includes/minishell.h"
+#include "../../../includes/print_error.h"
+#include "../../../libft/libft.h"
 
+/* Will set current state according to char and decide which action to perform
+if needed */
 void	state_dollar(t_m_fsm *fsm, t_meta **meta_strs, char c)
 {
 	if (c == '?' || c == '$')
