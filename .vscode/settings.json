@@ -36,6 +36,8 @@
         "utility": "c",
         "vector": "c",
         "parsing_input_state_machine.h": "c",
-        "print_error.h": "c"
+        "print_error.h": "c",
+        "parsing_meta_heredoc.h": "c",
+        "locale": "c"
     }
 }
