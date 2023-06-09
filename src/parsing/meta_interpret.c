@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:32:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:44:44 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:12:31 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 /* If needed, will interpret meta chars in token list elements to change them
 as env variables */
-void	meta_interpret(t_token *t, char **env, int env_size)
+void	meta_interpret(t_data *data, t_token *t)
 {
 	char	*buf;
 
@@ -25,11 +25,11 @@ void	meta_interpret(t_token *t, char **env, int env_size)
 	{
 		if (ft_strchr(t->content, '$') && t->meta == true && t->type != limiter)
 		{
-			buf = parsing_meta(t->content, env, env_size);
+			buf = parsing_meta(t->content, data->envp, data->env_size);
 			if (!buf)
 			{
 				print_err("minishell: malloc() failed:", errno);
-				return ;
+				clear_minishell(data);
 			}
 			if (!ft_strlen(buf) && (t->type == infile || t->type == outfile))
 			{

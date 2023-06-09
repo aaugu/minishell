@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:30:35 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:41:22 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:18:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 if needed */
 void	state_chars_heredoc(t_m_fsm *fsm, t_meta **meta_strs, char c)
 {
-	if (c == '$' || c == ' ' || c == '\0' || c == '\'' || c == '\"')
+	if (c == '$' || c == ' ' || c == '\0' || c == '\'' || c == '\"' || c == '/' \
+		|| c == '-')
 	{
 		fsm->buf[fsm->buf_size] = '\0';
 		get_var_content(fsm);
@@ -31,7 +32,7 @@ void	state_chars_heredoc(t_m_fsm *fsm, t_meta **meta_strs, char c)
 		add_to_buf_meta(fsm, c);
 		fsm->current_state = dollar;
 	}
-	else if (c == ' ' || c == '\'' || c == '\"')
+	else if (c == ' ' || c == '\'' || c == '\"' || c == '/' || c == '-')
 	{
 		add_to_buf_meta(fsm, c);
 		fsm->current_state = idle;

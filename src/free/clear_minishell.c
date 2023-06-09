@@ -6,14 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:45:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:38:18 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parsing_input.h"
-#include <readline/readline.h>
-#include <readline/history.h>
 
 /* Handles the clear of every allocated memory in program */
 void	clear_minishell(t_data *data)

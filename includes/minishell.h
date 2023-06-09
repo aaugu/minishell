@@ -172,7 +172,10 @@ void				ft_free_child(t_token *token, t_data *d);
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
 
-void				meta_interpret(t_token *token, char **env, int env_size);
+void				meta_interpret(t_data *data, t_token *t);
 void				clear_minishell(t_data *data);
+
+void				rl_replace_line(const char *, int);
+void				rl_clear_history(void);
 
 #endif

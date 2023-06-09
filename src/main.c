@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 10:19:55 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:12:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static void	ft_good_input(t_data *data)
 	if (ft_strlen(data->user_input) > 0)
 	{
 		add_history(data->user_input);
-		token = parsing(data->user_input);
+		token = parsing_input(data->user_input, data->envp, data->env_size);
 		if (!token)
 			clear_minishell(data);
-		meta_interpret(token, data->envp, data->env_size);
+		meta_interpret(data, token);
 		ft_executor(token, data);
 		if (data->user_input)
 			free(data->user_input);
