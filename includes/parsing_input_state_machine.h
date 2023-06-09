@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:21:46 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:02:41 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ typedef struct s_fsm
 	int				meta;
 	int				quotes;
 	enum e_type		type;
+	char			**env;
+	int				env_size;
 }					t_fsm;
 
 /******************************************************************************
 *							    FUNCTIONS									  *
 ******************************************************************************/
 
-t_token	*state_machine(char *input);
+t_token	*state_machine(char *input, char **envp, int env_size);
 void	init_state_machine(t_fsm *fsm);
 
 /* Each function will set current state and decide to perform an action if

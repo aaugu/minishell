@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:39:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:03:19 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 /* Parsing to retrieve each separate elements (tokens) of user input as an 
 element of the command and store them in a chained list. */
-t_token	*parsing(char *input)
+t_token	*parsing_input(char *input, char **env, int env_size)
 {
 	t_token	*tokens;
 
-	tokens = state_machine(input);
+	tokens = state_machine(input, env, env_size);
 	if (!tokens)
 		return (NULL);
 	return (tokens);
