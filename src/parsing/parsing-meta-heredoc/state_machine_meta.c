@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:43:30 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:09:53 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_meta	*meta_state_machine(char *str, char **env, int env_size)
 	while (i <= (int)ft_strlen(str))
 	{
 		execute_meta_state_machine(&fsm, &meta_strs, str[i]);
-		if (fsm.current_state == error)
+		if (fsm.current_state == error || fsm.current_state == stop)
 			break ;
 		i++;
 	}

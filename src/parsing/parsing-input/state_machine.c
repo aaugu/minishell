@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:39:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:47:56 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,20 @@
 #include "../../../includes/parsing_input.h"
 #include "../../../libft/libft.h"
 
-void	create_state_machine(t_fsm *fsm, char *input);
+void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input);
 void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c);
 void	clear_state_machine(t_fsm *fsm);
 void	clear_parsing_error(t_fsm *fsm, t_token **tokens);
 
 /* Finite state machine. Will loop on each char to know how to separate each
 token in a lineary way. */
-t_token	*state_machine(char *input)
+t_token	*state_machine(char *input, char **envp, int env_size)
 {
 	t_token	*tokens;
 	t_fsm	fsm;
 	int		i;
 
-	create_state_machine(&fsm, input);
+	create_state_machine(&fsm, envp, env_size, input);
 	init_state_machine(&fsm);
 	tokens = NULL;
 	i = 0;
@@ -72,7 +72,7 @@ void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c)
 }
 
 /* Create base of finite state machine */
-void	create_state_machine(t_fsm *fsm, char *input)
+void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input)
 {
 	fsm->buf = NULL;
 	fsm->buf_size = 0;
@@ -80,6 +80,8 @@ void	create_state_machine(t_fsm *fsm, char *input)
 	fsm->current_state = idle;
 	fsm->type = command;
 	fsm->quotes = false;
+	fsm->env_size = env_size;
+	fsm->env = ft_strs_copy((const char **)env, env_size);
 }
 
 /* Clear allocated memory of finite state machine */
