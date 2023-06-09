@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 08:37:43 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/05 16:09:06 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:28:22 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "get_next_line.h"
-
 
 int		ft_get_line_break(int fd, char **stash);
 char	*ft_get_line(char **stash);

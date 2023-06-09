@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 10:40:25 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/07 14:30:07 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/08 15:03:25 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,15 @@ static void	ft_print_echo(t_data *data)
 	i = 1;
 	while (data->cmd[i])
 	{
-		printf("%s", data->cmd[i++]);
-		if (!data->cmd[i])
+		printf("%s", data->cmd[i]);
+		if (!data->cmd[i + 1])
 			printf("\n");
 		else
 			printf(" ");
 		i++;
 	}
 }
+
 /* ft_echo:
  *	print un \n si rien est demander.
  *	si un -n est demander print chaque element demandé suivi par un " ".
