@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 14:44:39 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 16:00:17 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,12 @@ static void	ft_good_input(t_data *data)
 		add_history(data->user_input);
 		token = parsing_input(data->user_input, data->envp, data->env_size);
 		if (!token)
-			clear_minishell(data);
-		meta_interpret(data, token);
-		ft_executor(token, data);
+			clear_minishell(data, g_exit_code);
+		if (ft_strlen(token->content) != 0)
+		{	
+			meta_interpret(data, token);
+			ft_executor(token, data);
+		}
 		if (data->user_input)
 			free(data->user_input);
 		if (token)

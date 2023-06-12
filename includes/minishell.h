@@ -180,7 +180,7 @@ void				set_signals_noninteractive_heredoc(void);
 //exemple2.c
 
 void				meta_interpret(t_data *data, t_token *t);
-void				clear_minishell(t_data *data);
+void				clear_minishell(t_data *data, int exit_code);
 
 void				rl_replace_line(const char *str, int i);
 void				rl_clear_history(void);

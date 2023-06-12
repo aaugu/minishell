@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:31:01 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:43:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:22:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ t_meta	*heredoc_state_machine(char *str, char **env, int env_size)
 	i = 0;
 	while (i <= (int)ft_strlen(str))
 	{
-		execute_heredoc_state_machine(&fsm, &meta_strs, str[i]);
 		if (fsm.current_state == error)
 			break ;
+		else
+			execute_heredoc_state_machine(&fsm, &meta_strs, str[i]);
 		i++;
 	}
 	clear_meta_state_machine(&fsm);

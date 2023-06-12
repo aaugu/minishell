@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:49:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 12:56:22 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	remove_var_env(t_data *d)
 		if (res > 0)
 			count ++;
 		else if (res == -1)
-			clear_minishell(d);
+			clear_minishell(d, g_exit_code);
 	}
 	if (count > 0)
 	{
@@ -102,7 +102,7 @@ char	**get_new_env(t_data *data, int new_size)
 
 	new_env = (char **)malloc(sizeof(char *) * (new_size + 1));
 	if (!new_env)
-		clear_minishell(data);
+		clear_minishell(data, EXIT_FAILURE);
 	new_env[new_size] = NULL;
 	i = 0;
 	j = 0;
@@ -114,7 +114,7 @@ char	**get_new_env(t_data *data, int new_size)
 			if (!new_env[j++])
 			{
 				ft_strs_free(new_env, new_size);
-				clear_minishell(data);
+				clear_minishell(data, EXIT_FAILURE);
 				return (NULL);
 			}
 		}

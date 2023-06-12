@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:10 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 15:26:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:07:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ If no flags or parameters are specified, the env command displays your current
 environment, showing one Name=Value pair per line.
 */
 
-void	cmd_env(char **env, int env_size, char **cmd_args)
+int	cmd_env(char **env, int env_size, char **cmd_args)
 {
 	int	i;
 
@@ -31,15 +31,16 @@ void	cmd_env(char **env, int env_size, char **cmd_args)
 		i = 0;
 		while (i < env_size)
 		{
-			if (env[i])
+			if (env[i] && strchr(env[i], '='))
 				printf("%s\n", env[i]);
 			i++;
 		}
+		return (0);
 	}
 	else
 	{
 		printf("env: too many arguments\n");
-		g_exit_code = 1;
+		return (1);
 	}
 }
 

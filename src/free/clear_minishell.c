@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 13:38:18 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 12:47:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/parsing_input.h"
 
 /* Handles the clear of every allocated memory in program */
-void	clear_minishell(t_data *data)
+void	clear_minishell(t_data *data, int exit_code)
 {
 	rl_clear_history();
 	if (data->envp)
@@ -31,5 +31,5 @@ void	clear_minishell(t_data *data)
 		free(data->trash_path);
 	if (data->fd_array)
 		free(data->fd_array);
-	exit(g_exit_code);
+	exit(exit_code);
 }

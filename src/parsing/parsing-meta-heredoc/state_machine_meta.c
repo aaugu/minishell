@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 13:09:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:22:10 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,10 @@ t_meta	*meta_state_machine(char *str, char **env, int env_size)
 	i = 0;
 	while (i <= (int)ft_strlen(str))
 	{
-		execute_meta_state_machine(&fsm, &meta_strs, str[i]);
 		if (fsm.current_state == error || fsm.current_state == stop)
 			break ;
+		else
+			execute_meta_state_machine(&fsm, &meta_strs, str[i]);
 		i++;
 	}
 	clear_meta_state_machine(&fsm);
@@ -55,10 +56,7 @@ void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str)
 	fsm->env_size = env_size;
 	fsm->env = ft_strs_copy((const char **)env, env_size);
 	if (!fsm->env)
-	{
-		printf("minishell: malloc() failed: %s\n", strerror(errno));
-		g_exit_code = errno;
-	}
+		parsing_error_meta(&(fsm->current_state));
 	fsm->len = ft_strlen(str);
 }
 

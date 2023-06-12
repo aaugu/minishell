@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:15:38 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 12:56:31 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 16:00:28 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ void	*ft_free_double(char **str)
 void	ft_ctrld(t_data *data)
 {
 	printf("exit\n");
-	g_exit_code = 0;
-	clear_minishell(data);
+	clear_minishell(data, g_exit_code = 0);
 }

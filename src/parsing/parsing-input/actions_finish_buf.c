@@ -6,12 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:29:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:03:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "../../../includes/parsing_input_state_machine.h"
 #include "../../../libft/libft.h"
 
@@ -27,7 +28,7 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 	t_token	*new_token;
 	t_token	*prev;
 
-	if (fsm->buf_size != 0)
+	if (fsm->buf_size != 0 || c == '\0')
 	{
 		fsm->buf[fsm->buf_size] = '\0';
 		new_token = create_node(fsm);

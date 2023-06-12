@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:41:22 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 13:23:02 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 16:00:22 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	signal_print_newline(int signal)
 	(void)signal;
 	write(1, "\n", 1);
 	rl_on_new_line();
+	g_exit_code = 130;
 }
 
 void	set_signals_noninteractive(void)
