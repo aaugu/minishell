@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:31:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/08 13:54:00 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 10:27:37 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@
  */
 void	ft_free_child_doc(t_data *data, t_token *token)
 {
-	if (data->heredoc.flag_doc == 1)
-	{
-		close(data->heredoc.here_docfd[0]);
-		close(data->heredoc.here_docfd[1]);
-	}
+	close(data->heredoc.here_docfd[0]);
+	close(data->heredoc.here_docfd[1]);
 	ft_free_double(data->envp);
 	if (data->all_path)
 		ft_free_double(data->all_path);
@@ -51,4 +48,5 @@ void	ft_write_in_doc(t_token *t, t_data *d)
 		d->heredoc.str = parsing_heredoc(d->heredoc.str, d->envp, d->env_size);
 	write(d->heredoc.here_docfd[1], d->heredoc.str, ft_strlen(d->heredoc.str));
 	write(d->heredoc.here_docfd[1], "\n", 1);
+	free(d->heredoc.str);
 }

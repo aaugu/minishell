@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/08 11:36:25 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 11:24:40 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,16 @@ static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
 
 	tmp = t;
 	while (tmp)
-	{
+	{	
+		d->heredoc.ctrlc = 0;
 		d->heredoc.here_doc_nbr = ft_heredoc_nbr(tmp);
 		d->heredoc.flag_doc = ft_is_doc_last(tmp);
 		if (d->child == 0 || tmp->type == t_pipe)
 		{
 			d->is_builtin = ft_is_builtins(tmp);
 			ft_heredoc(tmp, d, pid);
-			ft_process_child(d, tmp, pid);
+			if (d->heredoc.ctrlc == 0)
+				ft_process_child(d, tmp, pid);
 			if (d->heredoc.flag_doc == 1)
 			{
 				close(d->heredoc.here_docfd[1]);

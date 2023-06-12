@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/08 14:34:43 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 11:22:26 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ static void	ft_do_heredoc(t_token *t, t_data *d, int i)
 					ft_write_in_doc(t, d);
 			}
 		}
-		else
-			ft_exit_doc(t, d);
+		else if (d->heredoc.str == NULL)
+			break ;
 	}
 	ft_exit_doc(t, d);
 }
@@ -61,7 +61,10 @@ static void	ft_doc_parent_process(pid_t *p, int i, t_data *d)
 {
 	int	status;
 
+	d->heredoc.ctrlc = 0;
 	waitpid(p[i], &status, 0);
+	if (WIFSIGNALED(status))
+		d->heredoc.ctrlc = 1;
 	if (WIFEXITED(status))
 		d->exit_code = WEXITSTATUS(status);
 }
