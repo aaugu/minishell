@@ -6,12 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 13:47:56 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:16:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <stdio.h>
 #include "../../../includes/parsing_input_state_machine.h"
 #include "../../../includes/parsing_input.h"
 #include "../../../libft/libft.h"
@@ -35,12 +36,13 @@ t_token	*state_machine(char *input, char **envp, int env_size)
 	i = 0;
 	while (i <= (int)ft_strlen(input))
 	{
-		execute_state_machine(&fsm, &tokens, input[i]);
 		if (fsm.current_state == error)
 		{
 			clear_parsing_error(&fsm, &tokens);
 			return (NULL);
 		}
+		else
+			execute_state_machine(&fsm, &tokens, input[i]);
 		i++;
 	}
 	clear_state_machine(&fsm);
@@ -82,6 +84,8 @@ void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input)
 	fsm->quotes = false;
 	fsm->env_size = env_size;
 	fsm->env = ft_strs_copy((const char **)env, env_size);
+	if (!fsm->env)
+		parsing_error(fsm, NULL);
 }
 
 /* Clear allocated memory of finite state machine */
@@ -89,6 +93,11 @@ void	clear_state_machine(t_fsm *fsm)
 {
 	if (fsm->buf)
 		free(fsm->buf);
+	if (fsm->env)
+	{
+		ft_strs_free(fsm->env, fsm->env_size);
+		fsm->env = NULL;
+	}
 	fsm = (t_fsm *){0};
 }
 

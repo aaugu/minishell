@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:41:22 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 11:30:37 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:23:27 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_ctrld(t_data *data)
 {
 	printf("exit\n");
 	g_exit_code = 0;
-	clear_minishell(data);
+	clear_minishell(data, EXIT_SUCCESS);
 }
 
 /* ft_quit:
@@ -44,7 +44,7 @@ void	ft_quit(int sig)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	exit(1);
+	exit(EXIT_FAILURE);
 }
 
 /* ft_sig_n_input:
