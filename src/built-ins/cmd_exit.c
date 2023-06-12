@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:47:21 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 12:56:48 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	cmd_exit(t_data *data)
 	{
 		printf("exit\n");
 		if (ft_strs_len(data->cmd) == 1)
-			clear_minishell(data);
+			clear_minishell(data, EXIT_SUCCESS);
 		else if (ft_strs_len(data->cmd) >= 2)
 			get_exit_code(data);
 	}
@@ -43,23 +43,23 @@ void	get_exit_code(t_data *data)
 	code = ft_itoa(ft_atoi(data->cmd[1]));
 	if (!code)
 	{
-		g_exit_code = print_err("minishell: malloc() failed:", errno);
-		clear_minishell(data);
+		data->exit_code = print_err("minishell: malloc() failed:", errno);
+		clear_minishell(data, data->exit_code);
 	}
 	else if (!ft_strcmp(data->cmd[1], code) && ft_strs_len(data->cmd) == 2)
 	{
-		g_exit_code = ft_atoi(data->cmd[1]);
+		data->exit_code = ft_atoi(data->cmd[1]);
 		free(code);
-		clear_minishell(data);
+		clear_minishell(data, data->exit_code);
 	}
 	else if (ft_strcmp(data->cmd[1], code))
 	{
-		g_exit_code = 255;
+		data->exit_code = 255;
 		printf("minishell: exit: %s: numeric argument required\n", data->cmd[1]);
 		free(code);
-		clear_minishell(data);
+		clear_minishell(data, data->exit_code);
 	}
 	else
-		g_exit_code = print_err("minishell: exit: too many arguments\n", 0);
+		data->exit_code = print_err("minishell: exit: too many arguments\n", 0);
 	free(code);
 }

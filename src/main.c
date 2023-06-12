@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/09 12:05:05 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 15:17:27 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	ft_good_input(t_data *data)
 		add_history(data->user_input);
 		token = parsing_input(data->user_input, data->envp, data->env_size);
 		if (!token)
-			clear_minishell(data);
+			clear_minishell(data, g_exit_code);
 		meta_interpret(data, token);
 		ft_executor(token, data);
 		if (data->user_input)
