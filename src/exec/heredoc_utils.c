@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:31:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 10:27:37 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 12:53:37 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,26 @@ void	ft_write_in_doc(t_token *t, t_data *d)
 	write(d->heredoc.here_docfd[1], d->heredoc.str, ft_strlen(d->heredoc.str));
 	write(d->heredoc.here_docfd[1], "\n", 1);
 	free(d->heredoc.str);
+}
+
+/* ft_quit:
+ *	gère le signal d'interruption durant l'écriture du heredoc
+ */
+void	ft_quit(int sig)
+{
+	(void)sig;
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
+	exit(1);
+}
+
+/* ft_sig_n_input:
+ *	Écoute la présence d'un signal d'interruption
+ *	Save l'input dans data->heredoc.str.
+ */
+void	ft_sig_n_input(t_data *data)
+{
+	signal(SIGINT, ft_quit);
+	data->heredoc.str = readline(">");
 }

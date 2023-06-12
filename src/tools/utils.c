@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:15:38 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/09 13:12:47 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/12 12:56:31 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,14 @@ void	*ft_free_double(char **str)
 	}
 	str = NULL;
 	return (NULL);
+}
+
+/* ft_ctrld:
+ *	Dans le cas ou l'input_user est stopé par un ctrl-d ferme minishell.
+ */
+void	ft_ctrld(t_data *data)
+{
+	printf("exit\n");
+	g_exit_code = 0;
+	clear_minishell(data);
 }
