@@ -66,6 +66,7 @@ typedef struct s_heredoc
 	int				here_docfd[2];
 	int				here_doc_nbr;
 	bool			flag_doc;
+	bool			ctrlc;
 	char			*str;
 }					t_heredoc;
 
@@ -161,13 +162,19 @@ void				ft_redirection(t_token *tmp, t_data *data);
 /* ------------------------------ TOOLS -------------------------------------*/
 //utils.c
 void				ft_title(void);
-//signal.c
 void				*ft_free_double(char **str);
+
+//signal.c
 void				ft_ctrlc(int sig);
 void				ft_ctrld(t_data *data);
 void				ft_quit(int sig);
 void				ft_sig_n_input(t_data *data);
 void				ft_free_child(t_token *token, t_data *d);
+
+// signal.c test
+void		set_signals_interactive(void);
+void		set_signals_noninteractive(void);
+void		set_signals_noninteractive_heredoc(void);
 
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c

@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:15:38 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/07 13:08:50 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/09 13:12:47 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,23 @@ char	*ft_getenv(char **envp, char *var)
 		}
 		i++;
 	}
+	return (NULL);
+}
+
+/* ft_free_double:
+ * fontion qui free un char **
+ */
+void	*ft_free_double(char **str)
+{
+	int	i;
+
+	i = 0;
+	if (str)
+	{
+		while (str[i])
+			free(str[i++]);
+		free(str);
+	}
+	str = NULL;
 	return (NULL);
 }
