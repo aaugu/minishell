@@ -172,9 +172,9 @@ void				ft_sig_n_input(t_data *data);
 void				ft_free_child(t_token *token, t_data *d);
 
 // signal.c test
-void		set_signals_interactive(void);
-void		set_signals_noninteractive(void);
-void		set_signals_noninteractive_heredoc(void);
+void				set_signals_interactive(void);
+void				set_signals_noninteractive(void);
+void				set_signals_noninteractive_heredoc(void);
 
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
@@ -182,7 +182,7 @@ void		set_signals_noninteractive_heredoc(void);
 void				meta_interpret(t_data *data, t_token *t);
 void				clear_minishell(t_data *data, int exit_code);
 
-void				rl_replace_line(const char *, int);
+void				rl_replace_line(const char *str, int i);
 void				rl_clear_history(void);
 
 #endif

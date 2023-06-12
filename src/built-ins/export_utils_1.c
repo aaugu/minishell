@@ -72,6 +72,8 @@ int	ft_other_than_alnum(char *str)
 	}
 	if (str[i] && str[i] == '=')
 		return (0);
+	else if (!str[i])
+		return (0);
 	return (1);
 }
 

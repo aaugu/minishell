@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 15:17:27 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/12 16:00:17 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ static void	ft_good_input(t_data *data)
 		token = parsing_input(data->user_input, data->envp, data->env_size);
 		if (!token)
 			clear_minishell(data, g_exit_code);
-		meta_interpret(data, token);
-		ft_executor(token, data);
+		if (ft_strlen(token->content) != 0)
+		{	
+			meta_interpret(data, token);
+			ft_executor(token, data);
+		}
 		if (data->user_input)
 			free(data->user_input);
 		if (token)
@@ -93,13 +96,10 @@ static void	ft_readline(char **envp, t_data *data)
 	data->env_size = ft_strs_len(data->envp);
 	data->trash_path = find_trash_path(data->envp);
 	data->exit_code = 0;
-	// signal(SIGINT, ft_ctrlc);
-	// signal(SIGQUIT, SIG_IGN);
 	g_exit_code = 0;
 	while (1)
 	{
 		g_exit_code = data->exit_code;
-		//printf("%d\n", g_exit_code);
 		set_signals_interactive();
 		data->user_input = readline("minishell > ");
 		set_signals_noninteractive();
