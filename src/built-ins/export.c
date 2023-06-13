@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 14:45:15 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/13 12:05:59 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int	ft_export(t_data *data)
 	else if (data->cmd[1])
 	{
 		export_nbr = ft_export_nbr(data);
+		if (export_nbr == -1)
+			return (1);
 		if (data->cmd_nbr == 1)
 		{
 			while (data->envp[line])

@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 11:14:47 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:34:46 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_exec_cmd(t_token *tmp, t_data *data)
 		tmp = tmp->next;
 	if (data->is_builtin > 3)
 		ft_which_builtins_child(data);
+	
 	else if (!data->cmd_path)
 	{
 		ft_cmd_error(data);

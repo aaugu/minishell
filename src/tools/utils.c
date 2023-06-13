@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:15:38 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 16:00:28 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/13 13:27:37 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,15 @@ void	*ft_free_double(char **str)
 void	ft_ctrld(t_data *data)
 {
 	printf("exit\n");
-	clear_minishell(data, g_exit_code = 0);
+	g_exit_code = 0;
+	clear_minishell(data, g_exit_code);
+}
+
+void	ft_swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
 }

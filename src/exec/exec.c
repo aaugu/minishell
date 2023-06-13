@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 15:54:29 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/13 13:01:36 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ void	ft_wait(pid_t *pid, t_data *data)
 	while (i < data->pipe_nbr + 1)
 	{
 		wpid = waitpid(pid[i], &status, 0);
-		if (WIFSIGNALED(status))
-			data->exit_code = 130;
-		printf("\n\n%d\n\n", data->exit_code);
-		if (WIFEXITED(status))
+		if (WIFEXITED(status) && g_exit_code == 0)
 			data->exit_code = WEXITSTATUS(status);
 		i++;
 	}
@@ -91,6 +88,7 @@ static void	ft_command(t_token *token, t_data *data)
 	ft_exec_command(token, data, pid);
 	if (data->pipe_nbr > 0)
 		ft_close_fd(data->fd_array, data->pipe_nbr);
+
 	ft_wait(pid, data);
 	free(pid);
 	if (data->fd_array != NULL)
