@@ -6,11 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:39:47 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/13 13:26:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
+#include <stdio.h>
 #include "../../../includes/parsing_input_state_machine.h"
 #include "../../../libft/libft.h"
 
@@ -24,4 +25,13 @@ void	init_state_machine(t_fsm *fsm)
 		parsing_error(fsm, 0);
 	fsm->buf_size = 0;
 	fsm->meta = true;
+}
+
+void	create_content_empty_token(t_fsm *fsm, t_token **tokens)
+{
+	if (tokens)
+		clear_tokens(tokens);
+	*tokens = NULL;
+	init_state_machine(fsm);
+	finish_buf(fsm, tokens, '\0');
 }

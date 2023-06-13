@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 15:54:29 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/13 11:11:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_wait(pid_t *pid, t_data *data)
 		wpid = waitpid(pid[i], &status, 0);
 		if (WIFSIGNALED(status))
 			data->exit_code = 130;
-		printf("\n\n%d\n\n", data->exit_code);
 		if (WIFEXITED(status))
 			data->exit_code = WEXITSTATUS(status);
 		i++;

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 15:16:12 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/13 13:46:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input);
 void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c);
 void	clear_state_machine(t_fsm *fsm);
-void	clear_parsing_error(t_fsm *fsm, t_token **tokens);
 
 /* Finite state machine. Will loop on each char to know how to separate each
 token in a lineary way. */
@@ -36,19 +35,21 @@ t_token	*state_machine(char *input, char **envp, int env_size)
 	i = 0;
 	while (i <= (int)ft_strlen(input))
 	{
-		if (fsm.current_state == error)
-		{
-			clear_parsing_error(&fsm, &tokens);
-			return (NULL);
-		}
+		if (fsm.current_state == error || fsm.current_state == malloc_err)
+			break ;
 		else
 			execute_state_machine(&fsm, &tokens, input[i]);
 		i++;
 	}
+	if (fsm.current_state == error)
+		create_content_empty_token(&fsm, &tokens);
+	else if (fsm.current_state == malloc_err)
+	{
+		clear_tokens(&tokens);
+		tokens = NULL;
+	}
 	clear_state_machine(&fsm);
-	if (fsm.current_state == stop)
-		return (tokens);
-	return (NULL);
+	return (tokens);
 }
 
 /* Tells state machine what to do depending on current state. Method flexible,
@@ -101,10 +102,10 @@ void	clear_state_machine(t_fsm *fsm)
 	fsm = (t_fsm *){0};
 }
 
-/* If an error is encountered, clear allocated memory of finite state machine
-and tokens */
-void	clear_parsing_error(t_fsm *fsm, t_token **tokens)
-{
-	clear_state_machine(fsm);
-	clear_tokens(tokens);
-}
+// /* If an error is encountered, clear allocated memory of finite state machine
+// and tokens */
+// void	clear_parsing_error(t_fsm *fsm, t_token **tokens)
+// {
+// 	clear_state_machine(fsm);
+// 	clear_tokens(tokens);
+// }
