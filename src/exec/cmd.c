@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/07 12:10:56 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 09:47:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../libft/libft.h"
+
+char	**fill_cmd_with_args(t_token *cmd, int size);
 
 /* find_cmd_path:
  *	Regarde si la commande commence par "./"
@@ -69,30 +72,6 @@ void	ft_builtins_or_cmd(t_data *d, t_token *tmp, pid_t *pid)
 	}
 }
 
-/* ft_full_str:
- *	Join la commande avec ses options séparé par un espace. 
- */
-char	*ft_full_str(t_token *token)
-{
-	t_token	*tmp;
-	char	*str;
-	char	*tmp2;
-
-	tmp = token;
-	str = ft_strdup(tmp->content);
-	while (tmp->next && tmp->next->type == option)
-	{
-		tmp = tmp->next;
-		tmp2 = ft_strjoin(str, " ");
-		free(str);
-		str = ft_strjoin(tmp2, tmp->content);
-		free(tmp2);
-	}
-	if (str)
-		return (str);
-	return (NULL);
-}
-
 /* ft_find_cmd:
  *	Recherche une commande et ses options pour les returnes
  *	sous la forme d'un tableau de char.
@@ -100,23 +79,50 @@ char	*ft_full_str(t_token *token)
 char	**ft_find_cmd(t_token *token)
 {
 	t_token	*tmp;
-	char	**cmd;
-	char	*str;
+	t_token	*cmd;
+	char	**cmd_args;
+	int		size;
 
+	cmd_args = NULL;
 	tmp = token;
-	if (tmp && tmp->type == t_pipe)
+	if (tmp && tmp->type != command)
 		tmp = tmp->next;
-	while (tmp && tmp->type != t_pipe && tmp->type != command)
-		tmp = tmp->next;
-	if (tmp && tmp->type == command)
+	cmd = tmp;
+	tmp = tmp->next;
+	size = 1;
+	while (tmp && tmp->type == option)
 	{
-		str = ft_full_str(tmp);
-		cmd = ft_split(str, ' ');
-		free(str);
-		if (cmd)
-			return (cmd);
+		size++;
+		tmp = tmp->next;
 	}
-	return (NULL);
+	cmd_args = fill_cmd_with_args(cmd, size);
+	if (!cmd_args)
+		return (NULL);
+	return (cmd_args);
+}
+
+char	**fill_cmd_with_args(t_token *cmd, int size)
+{
+	char	**cmd_args;
+	int		i;
+
+	cmd_args = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!cmd_args)
+		return (NULL);
+	cmd_args[size] = NULL;
+	i = 0;
+	while (i < size)
+	{
+		cmd_args[i] = ft_strdup(cmd->content);
+		if (!cmd_args[i])
+		{
+			ft_strs_free(cmd_args, size);
+			return (NULL);
+		}
+		i++;
+		cmd = cmd->next;
+	}
+	return (cmd_args);
 }
 
 /* ft_is_cmd:

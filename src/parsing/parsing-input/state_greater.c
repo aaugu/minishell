@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_greater.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:39:37 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 11:02:52 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_greater_than(t_fsm *fsm, t_token **tokens, char c)
+void	state_greater_than(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 {
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(fsm, tokens, c);
@@ -25,9 +25,9 @@ void	state_greater_than(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '|')
 		return ;
 	else if (c == '\'')
-		change_state_quotes_true(fsm, quote_s);
+		change_state_quotes_true(fsm, quote_s, last_exit);
 	else if (c == '\"')
-		change_state_quotes_true(fsm, quote_d);
+		change_state_quotes_true(fsm, quote_d, last_exit);
 	else if (c == ' ')
 		fsm->current_state = idle;
 	else if (c == '\0')
@@ -38,16 +38,16 @@ void	state_greater_than(t_fsm *fsm, t_token **tokens, char c)
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c)
+void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c, int last_e)
 {
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(fsm, tokens, c);
 	if (c == '>' || c == '<' || c == '|')
 		parsing_error(fsm, &c);
 	else if (c == '\'')
-		change_state_quotes_true(fsm, quote_s);
+		change_state_quotes_true(fsm, quote_s, last_e);
 	else if (c == '\"')
-		change_state_quotes_true(fsm, quote_d);
+		change_state_quotes_true(fsm, quote_d, last_e);
 	else if (c == '\0')
 		finish_stop(fsm, tokens, c);
 	else if (c == ' ')

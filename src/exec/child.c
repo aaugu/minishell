@@ -6,11 +6,12 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/13 15:34:46 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 11:00:49 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../includes/print_error.h"
 
 /* ft_exec_cmd:
  *	Ne fait rien dans les cas des builtin unset et cd ou exit sans option.
@@ -26,7 +27,6 @@ void	ft_exec_cmd(t_token *tmp, t_data *data)
 		tmp = tmp->next;
 	if (data->is_builtin > 3)
 		ft_which_builtins_child(data);
-	
 	else if (!data->cmd_path)
 	{
 		ft_cmd_error(data);
@@ -64,7 +64,8 @@ void	ft_free_child(t_token *token, t_data *d)
 	ft_free_double(d->envp);
 	while (token && token->prev)
 		token = token->prev;
-	clear_tokens(&token);
+	if (token)
+		clear_tokens(&token);
 	rl_clear_history();
 	free(d->user_input);
 }
@@ -97,6 +98,11 @@ void	ft_exec_child(t_data *data, t_token *tmp)
 void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 {
 	d->cmd = ft_find_cmd(tmp);
+	if (!d->cmd)
+	{
+		d->exit_code = print_err("minishell: malloc() failed:", errno);
+		exit(errno);
+	}
 	ft_builtins_or_cmd(d, tmp, p);
 	p[d->child] = fork();
 	if (p[d->child] < 0)
@@ -113,7 +119,7 @@ void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 	d->cmd_path = NULL;
 	if (d->cmd)
 	{
-		ft_free_double(d->cmd);
+		ft_strs_free(d->cmd, ft_strs_len(d->cmd));
 		d->cmd = NULL;
 	}
 }

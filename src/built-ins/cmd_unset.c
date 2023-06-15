@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 12:56:22 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/13 11:10:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include "../../libft/libft.h"
 
 void	remove_var_env(t_data *d);
-int		is_var_present(char ***env, int env_size, char *variable);
+int		is_var_present(t_data *data, char *variable);
 char	**get_new_env(t_data *data, int new_size);
 
 /*
@@ -33,13 +33,13 @@ considered an error and does not cause the shell to abort.
 void	cmd_unset(t_data *data)
 {
 	if (ft_strs_len(data->cmd) <= 1)
-		g_exit_code = print_err("unset: not enough arguments\n", 0);
+		data->exit_code = print_err("unset: not enough arguments\n", 0);
 	else
 		remove_var_env(data);
 }
 
 /* Will try to remove the env variables passed as arguments if found */
-void	remove_var_env(t_data *d)
+void	remove_var_env(t_data *data)
 {
 	int		i;
 	int		res;
@@ -48,25 +48,25 @@ void	remove_var_env(t_data *d)
 
 	i = 0;
 	count = 0;
-	while (++i < ft_strs_len(d->cmd))
+	while (++i < ft_strs_len(data->cmd))
 	{
-		res = is_var_present(&d->envp, d->env_size, (d->cmd)[i]);
+		res = is_var_present(data, (data->cmd)[i]);
 		if (res > 0)
 			count ++;
 		else if (res == -1)
-			clear_minishell(d, g_exit_code);
+			clear_minishell(data, EXIT_FAILURE);
 	}
 	if (count > 0)
 	{
-		new_env = get_new_env(d, d->env_size - count);
-		ft_strs_free(d->envp, d->env_size);
-		d->envp = new_env;
-		d->env_size -= count;
+		new_env = get_new_env(data, data->env_size - count);
+		ft_strs_free(data->envp, data->env_size);
+		data->envp = new_env;
+		data->env_size -= count;
 	}
 }
 
 /* Check if env variable is present in environment and, if found, free it*/
-int	is_var_present(char ***env, int env_size, char *variable)
+int	is_var_present(t_data *data, char *variable)
 {
 	int		i;
 	char	*var;
@@ -74,16 +74,16 @@ int	is_var_present(char ***env, int env_size, char *variable)
 	var = ft_strjoin(variable, "=");
 	if (!var)
 	{
-		g_exit_code = print_err("minishell: malloc() failed:", errno);
+		data->exit_code = print_err("minishell: malloc() failed:", errno);
 		return (-1);
 	}
 	i = 0;
-	while (i < env_size)
+	while (i < data->env_size)
 	{
-		if (ft_strnstr((*env)[i], var, ft_strlen(var)))
+		if (ft_strnstr(data->envp[i], var, ft_strlen(var)))
 		{
-			free((*env)[i]);
-			(*env)[i] = NULL;
+			free(data->envp[i]);
+			data->envp[i] = NULL;
 			free(var);
 			return (true);
 		}

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 09:55:57 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:39:22 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/13 12:06:54 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ void	parsing_error(t_fsm *fsm, char *s)
 		else
 			printf("minishell: syntax error near unexpected token `%c'\n", s[0]);
 		g_exit_code = 258;
+		fsm->current_state = error;
 	}
 	else
 	{
 		printf("minishell: malloc() failed: %s\n", strerror(errno));
 		g_exit_code = errno;
+		fsm->current_state = malloc_err;
 	}
-	fsm->current_state = error;
 }

@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/13 16:09:58 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 11:18:01 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,26 @@ static char	**ft_copy_env(char **env)
 	return (copy_env);
 }
 
-static void	ft_good_input(t_data *data)
+static void	ft_good_input(t_data *d)
 {
-	t_token	*token;
+	t_token	*t;
 
-	token = NULL;
-	if (ft_strlen(data->user_input) > 0)
+	t = NULL;
+	if (ft_strlen(d->user_input) > 0)
 	{
-		add_history(data->user_input);
-		token = parsing_input(data->user_input, data->envp, data->env_size);
-		if (!token)
-			clear_minishell(data, g_exit_code);
-		if (ft_strlen(token->content) != 0)
+		add_history(d->user_input);
+		t = parsing_input(d->user_input, d->envp, d->env_size, d->exit_code);
+		if (!t)
+			clear_minishell(d, g_exit_code);
+		if (ft_strlen(t->content) != 0)
 		{	
-			meta_interpret(data, token);
-			ft_executor(token, data);
+			meta_interpret(d, t);
+			ft_executor(t, d);
 		}
-		if (data->user_input)
-			free(data->user_input);
-		if (token)
-			clear_tokens(&token);
+		if (d->user_input)
+			free(d->user_input);
+		if (t)
+			clear_tokens(&t);
 	}
 }
 
@@ -98,18 +98,18 @@ static void	ft_readline(char **envp, t_data *data)
 	data->exit_code = 0;
 	while (1)
 	{	
-		if (g_exit_code != 0)
-		{
-			data->exit_code = g_exit_code;
-			g_exit_code = 0;
-		}
-		printf("g_exit = %d\n", g_exit_code);
-		printf("data->exit = %d\n", data->exit_code);
 		set_signals_interactive();
 		data->user_input = readline("minishell > ");
 		set_signals_noninteractive();
 		if (data->user_input)
+		{
+			if (g_exit_code != 0)
+			{
+				data->exit_code = g_exit_code;
+				g_exit_code = 0;
+			}
 			ft_good_input(data);
+		}
 		else
 			ft_ctrld(data);
 	}

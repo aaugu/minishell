@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/13 13:01:36 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:59:31 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ static void	ft_command(t_token *token, t_data *data)
 	ft_exec_command(token, data, pid);
 	if (data->pipe_nbr > 0)
 		ft_close_fd(data->fd_array, data->pipe_nbr);
-
 	ft_wait(pid, data);
 	free(pid);
 	if (data->fd_array != NULL)
