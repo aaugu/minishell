@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:31:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 14:34:18 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:55:06 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,24 +52,13 @@ void	ft_write_in_doc(t_token *t, t_data *d)
 	free(d->heredoc.str);
 }
 
-/* ft_quit:
- *	gère le signal d'interruption durant l'écriture du heredoc
- */
-void	ft_quit(int sig)
-{
-	(void)sig;
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	exit(1);
-}
-
 /* ft_sig_n_input:
  *	Écoute la présence d'un signal d'interruption
  *	Save l'input dans data->heredoc.str.
  */
 void	ft_sig_n_input(t_data *data)
 {
-	signal(SIGINT, ft_quit);
+	set_signals_interactive_hd();
 	data->heredoc.str = readline(">");
+	set_signals_noninteractive();
 }
