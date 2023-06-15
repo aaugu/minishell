@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 10:44:12 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:52:35 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_env_alph_order(t_data *data)
 	if (!copy)
 	{
 		data->exit_code = print_err("minishell: malloc() failed:", errno);
-		clear_minishell(data, data->exit_code);
+		exit(errno);
 	}
 	while (++i < data->env_size)
 		copy[i] = data->envp[i];
