@@ -6,12 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:32:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 13:31:02 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:35:40 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing_input.h"
-#include "../../includes/parsing_meta_heredoc.h"
+#include "../../includes/parsing_meta.h"
 #include "../../includes/print_error.h"
 #include "../../includes/minishell.h"
 
@@ -23,7 +23,7 @@ void	meta_interpret(t_data *d, t_token *t)
 
 	while (t)
 	{
-		if (ft_strnstr(t->content, "$", 1) && t->meta == true && \
+		if (ft_strchr(t->content, '$') && t->meta == true && \
 			t->type != limiter)
 		{
 			buf = parsing_meta(t->content, d->envp, d->env_size, d->exit_code);

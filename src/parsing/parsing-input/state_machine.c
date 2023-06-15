@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 11:03:28 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:25:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c, int last_e)
 	else if (fsm->current_state == greater_than_d)
 		state_greater_than_d(fsm, tokens, c, last_e);
 	else if (fsm->current_state == quote_s)
-		state_quote_s(fsm, c);
+		state_quote_s(fsm, c, last_e);
 	else if (fsm->current_state == quote_d)
-		state_quote_d(fsm, c);
+		state_quote_d(fsm, c, last_e);
 	else if (fsm->current_state == s_pipe)
 		state_pipe(fsm, tokens, c, last_e);
 }
@@ -83,6 +83,7 @@ void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input)
 	fsm->current_state = idle;
 	fsm->type = command;
 	fsm->quotes = false;
+	fsm->simple_quotes = false;
 	fsm->env_size = env_size;
 	fsm->env = ft_strs_copy((const char **)env, env_size);
 	if (!fsm->env)
