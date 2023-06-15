@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions_modify.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 14:42:24 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:27:13 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c)
 }
 
 /* Change state and set quotes as true */
-void	change_state_quotes_true(t_fsm *fsm, t_state state)
+void	change_state_quotes_true(t_fsm *fsm, t_state state, int last_exit)
 {
 	char	*meta_str;
 
@@ -49,7 +49,7 @@ void	change_state_quotes_true(t_fsm *fsm, t_state state)
 	fsm->quotes = true;
 	if (fsm->meta == true && ft_strchr(fsm->buf, '$'))
 	{
-		meta_str = parsing_meta(fsm->buf, fsm->env, fsm->env_size);
+		meta_str = parsing_meta(fsm->buf, fsm->env, fsm->env_size, last_exit);
 		if (!meta_str)
 			parsing_error(fsm, NULL);
 		free(fsm->buf);

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 15:30:35 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 13:18:00 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 11:16:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	state_chars_heredoc(t_m_fsm *fsm, t_meta **meta_strs, char c)
 	if (c == '$' || c == ' ' || c == '\0' || c == '\'' || c == '\"' || c == '/' \
 		|| c == '-')
 	{
-		fsm->buf[fsm->buf_size] = '\0';
 		get_var_content(fsm);
 		if (fsm->current_state == error)
 			return ;

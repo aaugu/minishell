@@ -6,7 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/06/15 10:52:35 by aaugu            ###   ########.fr       */
+=======
+/*   Updated: 2023/06/13 12:05:59 by lvogt            ###   ########.fr       */
+>>>>>>> b4fe9ea5019adf4b1ce9f1fc6e63a5e4fd9d308f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +113,8 @@ int	ft_export(t_data *data)
 	else if (data->cmd[1])
 	{
 		export_nbr = ft_export_nbr(data);
+		if (export_nbr == -1)
+			return (1);
 		if (data->cmd_nbr == 1)
 		{
 			while (data->envp[line])

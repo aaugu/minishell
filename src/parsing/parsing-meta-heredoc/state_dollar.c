@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_dollar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:38:09 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/05 16:39:41 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:19:59 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_dollar(t_m_fsm *fsm, t_meta **meta_strs, char c)
+void	state_dollar(t_m_fsm *fsm, t_meta **meta_strs, char c, int last_exit)
 {
 	if (c == '?' || c == '$')
 		fsm->current_state = idle;
 	if (c == '?')
 	{
 		free(fsm->buf);
-		fsm->buf = ft_itoa(g_exit_code);
+		fsm->buf = ft_itoa(last_exit);
 		if (!fsm->buf)
 		{
 			parsing_error_meta(&(fsm->current_state));
