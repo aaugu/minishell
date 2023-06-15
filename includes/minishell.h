@@ -171,11 +171,12 @@ void				ft_ctrld(t_data *data);
 void				ft_quit(int sig);
 void				ft_sig_n_input(t_data *data);
 void				ft_free_child(t_token *token, t_data *d);
+void				ignore_sigquit(void);
 
 // signal.c test
 void				set_signals_interactive(void);
+void				set_signals_interactive_hd(void);
 void				set_signals_noninteractive(void);
-void				set_signals_noninteractive_heredoc(void);
 
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c

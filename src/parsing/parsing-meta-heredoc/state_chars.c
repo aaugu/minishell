@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 14:09:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:07:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 	if (c == '$' || c == ' ' || c == '\0' || c == '\'' || c == '\"' || c == '/' \
 		|| c == '-')
 	{
-		fsm->buf[fsm->buf_size] = '\0';
 		get_var_content(fsm);
 		if (fsm->current_state == error)
 			return ;
