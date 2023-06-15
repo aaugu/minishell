@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 11:22:26 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:19:13 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,10 @@ static void	ft_doc_parent_process(pid_t *p, int i, t_data *d)
 	d->heredoc.ctrlc = 0;
 	waitpid(p[i], &status, 0);
 	if (WIFSIGNALED(status))
+	{
 		d->heredoc.ctrlc = 1;
+		d->exit_code = 1;
+	}
 	if (WIFEXITED(status))
 		d->exit_code = WEXITSTATUS(status);
 }
@@ -82,6 +85,7 @@ static void	ft_heredoc_child(t_data *d, pid_t *p, t_token *tmp, pid_t *p2)
 	{
 		while (tmp->type != heredoc)
 			tmp = tmp->next;
+		ignore_sigquit();
 		p[i] = fork();
 		if (p[i] < 0)
 			return ;

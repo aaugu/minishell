@@ -1,6 +1,6 @@
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 INCLUDE = -I includes -I libft
 LIB = -Llibft -lft -lreadline
@@ -62,6 +62,7 @@ SRCS_FILES = 	main.c \
 				parsing/parsing-meta-heredoc/state_machine_heredoc.c \
 				parsing/parsing-meta-heredoc/state_machine_meta.c \
 				tools/signal.c \
+				tools/heredoc_signal.c \
 				tools/utils.c \
 
 SRCS = $(addprefix ./src/, $(SRCS_FILES))
