@@ -104,7 +104,7 @@ void				ft_which_builtins_child(t_data *data);
 int					ft_cd(t_data *data);
 int					ft_pwd(void);
 int					ft_export(t_data *data);
-void				ft_echo(t_data *data);
+int					ft_echo(t_data *data);
 
 //utils.c
 void				ft_oldpwd(t_data *data, char *old_cd);
@@ -163,6 +163,7 @@ void				ft_redirection(t_token *tmp, t_data *data);
 //utils.c
 void				ft_title(void);
 void				*ft_free_double(char **str);
+void				ft_swap(int *a, int *b);
 
 //signal.c
 void				ft_ctrlc(int sig);

@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 10:28:11 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:23:14 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ After parsing input
 Parsing to interpret env variable call ($), it will separate into element
 strings (state machine will change string to variable content if found in
 environment) in a chained list, and re-combine all as one string */
-char	*parsing_meta(char *s, char **env, int env_size)
+char	*parsing_meta(char *s, char **env, int env_size, int last_exit)
 {
 	char	*interpreted_str;
 	char	*tmp;
 	t_meta	*meta_strs;
 	t_meta	*next;
 
-	meta_strs = meta_state_machine(s, env, env_size);
+	meta_strs = meta_state_machine(s, env, env_size, last_exit);
 	interpreted_str = ft_strdup("");
 	if (!interpreted_str)
 		return (NULL);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_less.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/02 15:39:43 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:42:18 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /* Will set current state according to char and decide which action to perform
 if needed */
-void	state_less_than(t_fsm *fsm, t_token **tokens, char c)
+void	state_less_than(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 {
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(fsm, tokens, c);
@@ -28,9 +28,9 @@ void	state_less_than(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '|')
 		parsing_error(fsm, &c);
 	else if (c == '\'')
-		change_state_quotes_true(fsm, quote_s);
+		change_state_quotes_true(fsm, quote_s, last_exit);
 	else if (c == '\"')
-		change_state_quotes_true(fsm, quote_d);
+		change_state_quotes_true(fsm, quote_d, last_exit);
 	else if (c == ' ')
 		return ;
 	else if (c == '\0')
@@ -39,16 +39,16 @@ void	state_less_than(t_fsm *fsm, t_token **tokens, char c)
 		finish_add_idle(fsm, tokens, c);
 }
 
-void	state_less_than_d(t_fsm *fsm, t_token **tokens, char c)
+void	state_less_than_d(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 {
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(fsm, tokens, c);
 	if (c == '<' || c == '>' || c == '|')
 		parsing_error(fsm, &c);
 	else if (c == '\'')
-		change_state_quotes_true(fsm, quote_s);
+		change_state_quotes_true(fsm, quote_s, last_exit);
 	else if (c == '\"')
-		change_state_quotes_true(fsm, quote_d);
+		change_state_quotes_true(fsm, quote_d, last_exit);
 	else if (c == '\0')
 		finish_stop(fsm, tokens, c);
 	else if (c == ' ')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/13 14:16:55 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 11:18:01 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,26 @@ static char	**ft_copy_env(char **env)
 	return (copy_env);
 }
 
-static void	ft_good_input(t_data *data)
+static void	ft_good_input(t_data *d)
 {
-	t_token	*tokens;
+	t_token	*t;
 
-	tokens = NULL;
-	if (ft_strlen(data->user_input) > 0)
+	t = NULL;
+	if (ft_strlen(d->user_input) > 0)
 	{
-		add_history(data->user_input);
-		tokens = parsing_input(data->user_input, data->envp, data->env_size);
-		if (!tokens)
-			clear_minishell(data, g_exit_code);
-		if (ft_strlen(tokens->content) != 0)
+		add_history(d->user_input);
+		t = parsing_input(d->user_input, d->envp, d->env_size, d->exit_code);
+		if (!t)
+			clear_minishell(d, g_exit_code);
+		if (ft_strlen(t->content) != 0)
 		{	
-			meta_interpret(data, tokens);
-			ft_executor(tokens, data);
+			meta_interpret(d, t);
+			ft_executor(t, d);
 		}
-		if (data->user_input)
-			free(data->user_input);
-		if (tokens)
-			clear_tokens(&tokens);
+		if (d->user_input)
+			free(d->user_input);
+		if (t)
+			clear_tokens(&t);
 	}
 }
 
@@ -96,17 +96,18 @@ static void	ft_readline(char **envp, t_data *data)
 	data->env_size = ft_strs_len(data->envp);
 	data->trash_path = find_trash_path(data->envp);
 	data->exit_code = 0;
-	g_exit_code = 0;
 	while (1)
-	{
-		g_exit_code = data->exit_code;
+	{	
 		set_signals_interactive();
 		data->user_input = readline("minishell > ");
 		set_signals_noninteractive();
 		if (data->user_input)
 		{
 			if (g_exit_code != 0)
+			{
 				data->exit_code = g_exit_code;
+				g_exit_code = 0;
+			}
 			ft_good_input(data);
 		}
 		else

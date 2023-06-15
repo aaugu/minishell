@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine_meta.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 15:22:10 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 11:10:45 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 #include "../../../includes/parsing_meta_heredoc_state_machine.h"
 #include "../../../libft/libft.h"
 
-void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c);
+void	execute_meta_s_m(t_m_fsm *fsm, t_meta **metas, char c, int last_e);
 
 /* Finite state machine. Will loop on each char to know how to separate and
 interpret as meta char each element in a lineary way. */
-t_meta	*meta_state_machine(char *str, char **env, int env_size)
+t_meta	*meta_state_machine(char *str, char **env, int env_size, int last_exit)
 {
 	t_m_fsm	fsm;
 	t_meta	*meta_strs;
@@ -38,7 +38,7 @@ t_meta	*meta_state_machine(char *str, char **env, int env_size)
 		if (fsm.current_state == error || fsm.current_state == stop)
 			break ;
 		else
-			execute_meta_state_machine(&fsm, &meta_strs, str[i]);
+			execute_meta_s_m(&fsm, &meta_strs, str[i], last_exit);
 		i++;
 	}
 	clear_meta_state_machine(&fsm);
@@ -73,12 +73,12 @@ void	init_meta_state_machine(t_m_fsm *fsm)
 
 /* Tells state machine what to do depending on current state. Method flexible,
 as it is easy to modify and add conditions based on the state you're in. */
-void	execute_meta_state_machine(t_m_fsm *fsm, t_meta **metas, char c)
+void	execute_meta_s_m(t_m_fsm *fsm, t_meta **metas, char c, int last_e)
 {
 	if (fsm->current_state == idle)
 		state_idle_meta(fsm, metas, c);
 	else if (fsm->current_state == dollar)
-		state_dollar(fsm, metas, c);
+		state_dollar(fsm, metas, c, last_e);
 	else if (fsm->current_state == chars)
 		state_chars(fsm, metas, c);
 	else if (fsm->current_state == stop)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/13 11:11:59 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:59:31 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ void	ft_wait(pid_t *pid, t_data *data)
 	while (i < data->pipe_nbr + 1)
 	{
 		wpid = waitpid(pid[i], &status, 0);
-		if (WIFSIGNALED(status))
-			data->exit_code = 130;
-		if (WIFEXITED(status))
+		if (WIFEXITED(status) && g_exit_code == 0)
 			data->exit_code = WEXITSTATUS(status);
 		i++;
 	}

@@ -112,6 +112,7 @@ int	ft_export_nbr(t_data *data)
 			write(2, "minishell: export: ", 19);
 			write(2, data->cmd[i], ft_strlen(data->cmd[i]));
 			write(2, ": not a valid identifier\n", 25);
+			export_nbr = -1;
 		}
 		i++;
 	}
