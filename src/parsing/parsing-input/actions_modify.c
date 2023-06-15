@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 15:40:31 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:46:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../../../includes/parsing_meta.h"
 #include "../../../libft/libft.h"
 
-void	change_buf_var_content(t_fsm *fsm, int last_exit);
+void	change_buf_to_var_content(t_fsm *fsm, int last_exit);
 
 /* Add char to current buffer */
 void	add_to_buf(t_fsm *fsm, char c)
@@ -50,10 +50,10 @@ void	change_state_quotes(t_fsm *fsm, t_state state, int last_exit)
 	fsm->current_state = state;
 	fsm->quotes = true;
 	if (fsm->meta == true && ft_strchr(fsm->buf, '$'))
-		change_buf_var_content(fsm, last_exit);
+		change_buf_to_var_content(fsm, last_exit);
 }
 
-void	change_buf_var_content(t_fsm *fsm, int last_exit)
+void	change_buf_to_var_content(t_fsm *fsm, int last_exit)
 {
 	char	*meta_str;
 
