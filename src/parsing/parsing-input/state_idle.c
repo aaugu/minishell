@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_idle.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 10:42:18 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:32:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	state_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 		change_state_and_type(fsm, s_pipe, t_pipe);
 	else if (c == '\'')
 	{
-		fsm->meta = false;
+		if (fsm->buf_size == 0)
+			fsm->meta = false;
 		change_state_quotes_true(fsm, quote_s, last_exit);
 	}
 	else if (c == '\"')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   meta_interpret.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 10:32:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 10:34:54 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:31:02 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	meta_interpret(t_data *d, t_token *t)
 
 	while (t)
 	{
-		if (ft_strchr(t->content, '$') && t->meta == true && t->type != limiter)
+		if (ft_strnstr(t->content, "$", 1) && t->meta == true && \
+			t->type != limiter)
 		{
 			buf = parsing_meta(t->content, d->envp, d->env_size, d->exit_code);
 			if (!buf)

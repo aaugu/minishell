@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions_modify.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 10:27:13 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:30:02 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	change_state_quotes_true(t_fsm *fsm, t_state state, int last_exit)
 
 	fsm->current_state = state;
 	fsm->quotes = true;
-	if (fsm->meta == true && ft_strchr(fsm->buf, '$'))
+	if (fsm->meta == true && ft_strnstr(fsm->buf, "$", 1))
 	{
 		meta_str = parsing_meta(fsm->buf, fsm->env, fsm->env_size, last_exit);
 		if (!meta_str)
