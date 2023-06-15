@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 10:42:18 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:20:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	state_pipe(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 	else if (c == '|')
 		parsing_error(fsm, &c);
 	else if (c == '\'')
-		change_state_quotes_true(fsm, quote_s, last_exit);
+		change_state_quotes(fsm, quote_s, last_exit);
 	else if (c == '\"')
-		change_state_quotes_true(fsm, quote_d, last_exit);
+		change_state_quotes(fsm, quote_d, last_exit);
 	else if (c == ' ')
 		fsm->current_state = idle;
 	else if (c == '\0')

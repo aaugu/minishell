@@ -6,12 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 10:07:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:38:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
-#include "../../../includes/parsing_meta_heredoc_state_machine.h"
+#include "../../../includes/parsing_meta_state_machine.h"
 #include "../../../libft/libft.h"
 
 char	*find_var_content(char *var, t_m_fsm *fsm);
@@ -33,7 +33,7 @@ void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 		add_to_buf_meta(fsm, c);
 		fsm->current_state = dollar;
 	}
-	else if (c == ' ' || c == '/' || c == '-')
+	else if (c == ' ' || c == '\'' || c == '\"' || c == '/' || c == '-')
 	{
 		add_to_buf_meta(fsm, c);
 		fsm->current_state = idle;

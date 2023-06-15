@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine_meta.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 11:10:45 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 13:39:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <stdlib.h>
 #include "../../../includes/minishell.h"
-#include "../../../includes/parsing_meta_heredoc.h"
-#include "../../../includes/parsing_meta_heredoc_state_machine.h"
+#include "../../../includes/parsing_meta.h"
+#include "../../../includes/parsing_meta_state_machine.h"
 #include "../../../libft/libft.h"
 
 void	execute_meta_s_m(t_m_fsm *fsm, t_meta **metas, char c, int last_e);

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 11:34:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:35:03 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,18 @@ void	print_with_quotes(t_data *data, char *s)
 		i++;
 	str = ft_substr(s, 0, i + 1);
 	if (!str)
+	{
 		data->exit_code = print_err("minishell: malloc() failed:", errno);
+		exit(errno);
+	}
 	printf("%s", str);
 	printf("\"");
 	free(str);
-	str = ft_strchr((const char *)s, '=') + 1;
-	printf("%s", str);
+	if (s[++i] != '\0')
+	{
+		str = ft_strchr((const char *)s, '=') + 1;
+		printf("%s", str);
+	}
 	printf("\"\n");
 }
 
@@ -83,7 +89,7 @@ void	ft_env_alph_order(t_data *data)
 	while (++i < data->env_size)
 	{
 		printf("declare -x ");
-		if (ft_strchr(copy[i], '=') != copy[i])
+		if (!ft_strnstr(copy[i], "=", 1))
 			print_with_quotes(data, copy[i]);
 		else
 			printf("%s\n", copy[i]);

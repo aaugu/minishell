@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_meta_heredoc_state_machine.h               :+:      :+:    :+:   */
+/*   parsing_meta_state_machine.h                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:08:12 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 11:00:18 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 14:33:34 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_META_HEREDOC_STATE_MACHINE_H
-# define PARSING_META_HEREDOC_STATE_MACHINE_H
+#ifndef PARSING_META_STATE_MACHINE_H
+# define PARSING_META_STATE_MACHINE_H
 
 /******************************************************************************
 *							    INCLUDE										  *
