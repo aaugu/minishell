@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/12 14:45:15 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 10:44:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "../../includes/minishell.h"
+#include "../../libft/libft.h"
+#include "../../includes/print_error.h"
+
+void	print_with_quotes(t_data *data, char *s)
+{
+	int		i;
+	char	*str;
+
+	i = 0;
+	while (s[i] != '=')
+		i++;
+	str = ft_substr(s, 0, i + 1);
+	if (!str)
+		data->exit_code = print_err("minishell: malloc() failed:", errno);
+	printf("%s", str);
+	printf("\"");
+	free(str);
+	str = ft_strchr((const char *)s, '=') + 1;
+	printf("%s", str);
+	printf("\"\n");
+}
 
 /* sort_env_alph:
  *	échange les lignes en les comparants avec ft_strncmp.
@@ -44,19 +66,28 @@ void	sort_env_alph(char **env_copy, int count)
 void	ft_env_alph_order(t_data *data)
 {
 	int		i;
-	int		count;
 	char	**copy;
 
-	count = data->env_size;
 	i = -1;
-	copy = malloc((count + 1) * sizeof(char *));
-	while (++i < count)
+	copy = malloc((data->env_size + 1) * sizeof(char *));
+	if (!copy)
+	{
+		data->exit_code = print_err("minishell: malloc() failed:", errno);
+		clear_minishell(data, data->exit_code);
+	}
+	while (++i < data->env_size)
 		copy[i] = data->envp[i];
-	copy[count] = NULL;
-	sort_env_alph(copy, count);
+	copy[data->env_size] = NULL;
+	sort_env_alph(copy, data->env_size);
 	i = -1;
-	while (++i < count)
-		printf("declare -x %s\n", copy[i]);
+	while (++i < data->env_size)
+	{
+		printf("declare -x ");
+		if (ft_strchr(copy[i], '=') != copy[i])
+			print_with_quotes(data, copy[i]);
+		else
+			printf("%s\n", copy[i]);
+	}
 	free(copy);
 }
 
