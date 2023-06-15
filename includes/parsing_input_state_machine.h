@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/08 13:02:41 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/13 12:07:30 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_fsm
 
 t_token	*state_machine(char *input, char **envp, int env_size);
 void	init_state_machine(t_fsm *fsm);
+void	create_content_empty_token(t_fsm *fsm, t_token **tokens);
 
 /* Each function will set current state and decide to perform an action if
 needed */

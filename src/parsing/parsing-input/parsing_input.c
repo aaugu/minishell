@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 14:58:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/13 14:13:34 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ t_token	*parsing_input(char *input, char **env, int env_size)
 	t_token	*tokens;
 
 	tokens = state_machine(input, env, env_size);
-	if (!tokens)
-		return (NULL);
 	return (tokens);
 }
 
@@ -32,10 +30,10 @@ t_token	*parsing_input(char *input, char **env, int env_size)
 	6-redir_out\n7-redir_out_ap\n8-outfile\n9-t_pipe\n\n");
 	if (tokens)
 	{
-		while ((*tokens))
+		while (tokens)
 		{
-			printf("%d : %s\n", (*tokens)->type, (*tokens)->content);
-			(*tokens) = (*tokens)->next;
+			printf("%d : %s\n", tokens->type, tokens->content);
+			tokens = tokens->next;
 		}
 	}
 */
