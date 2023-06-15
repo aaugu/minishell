@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:31:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 15:13:46 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/15 15:51:28 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ft_exit_doc(t_token *token, t_data *data)
 void	ft_write_in_doc(t_token *t, t_data *d)
 {
 	if (t->next->quotes == false)
-		d->heredoc.str = parsing_heredoc(d->heredoc.str, d->envp, d->env_size, d->exit_code);
+		d->heredoc.str = parsing_heredoc(d->heredoc.str, d->envp,
+				d->env_size, d->exit_code);
 	write(d->heredoc.here_docfd[1], d->heredoc.str, ft_strlen(d->heredoc.str));
 	write(d->heredoc.here_docfd[1], "\n", 1);
 	free(d->heredoc.str);
