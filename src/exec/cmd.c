@@ -6,11 +6,12 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/13 16:14:49 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 09:47:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "../../libft/libft.h"
 
 char	**fill_cmd_with_args(t_token *cmd, int size);
 
@@ -112,7 +113,7 @@ char	**fill_cmd_with_args(t_token *cmd, int size)
 	i = 0;
 	while (i < size)
 	{
-		cmd_args[i] = cmd->content;
+		cmd_args[i] = ft_strdup(cmd->content);
 		if (!cmd_args[i])
 		{
 			ft_strs_free(cmd_args, size);

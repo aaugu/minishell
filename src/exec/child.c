@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/13 16:14:34 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/15 09:44:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,9 @@ void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 	if (d->cmd && d->is_builtin < 0)
 		free(d->cmd_path);
 	d->cmd_path = NULL;
-	// if (d->cmd)
-	// {
-	// 	ft_strs_free(d->cmd, ft_strs_len(d->cmd));
-	// 	d->cmd = NULL;
-	// }
+	if (d->cmd)
+	{
+		ft_strs_free(d->cmd, ft_strs_len(d->cmd));
+		d->cmd = NULL;
+	}
 }
