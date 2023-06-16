@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:10:58 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/13 13:24:10 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/16 14:10:37 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ft_child_error(t_token *token, t_data *d, int flag)
 		write(2, d->cmd[0], ft_strlen(d->cmd[0]));
 		write(2, ": command not found\n", 20);
 		ft_free_child(token, d);
-		exit(5);
+		exit(127);
 	}
 	else if (flag == ERR_OPEN_LESS || flag == ERR_OPEN_GREAT
 		|| flag == ERR_DUP2)
