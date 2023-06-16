@@ -98,7 +98,7 @@ typedef struct s_data
 /* ---------------------------- BUILTINS ------------------------------------*/
 //builtin.c
 int					ft_is_builtins(t_token *token);
-void				ft_which_builtins(t_data *data, t_token *token, pid_t *pid);
+void				ft_which_builtins(t_data *data);
 void				ft_which_builtins_child(t_data *data);
 
 int					ft_cd(t_data *data);
@@ -126,7 +126,7 @@ void				ft_child_error(t_token *token, t_data *d, int flag);
 //count.c
 int					ft_mark_count(t_token *token, t_type type);
 //cmd.c
-void				ft_builtins_or_cmd(t_data *d, t_token *tmp, pid_t *pid);
+void				ft_builtins_or_cmd(t_data *d);
 char				**ft_find_cmd(t_token *token);
 char				*ft_getenv(char **envp, char *var);
 int					ft_is_cmd(t_token *token);

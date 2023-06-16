@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 09:47:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:33:56 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,13 @@ char	*find_cmd_path(t_data *data)
  *	(donc pas de pipe)
  *	Si cmd_nbr est autre ne fait que unset, cd ou export.
  */
-void	ft_builtins_or_cmd(t_data *d, t_token *tmp, pid_t *pid)
+void	ft_builtins_or_cmd(t_data *d)
 {
 	if (d->is_builtin > 0 && d->is_builtin < 5)
 	{
 		if (d->cmd_nbr == 1 || d->is_builtin == 1
 			|| d->is_builtin == 2 || (d->is_builtin == 4 && d->cmd[1]))
-			ft_which_builtins(d, tmp, pid);
+			ft_which_builtins(d);
 	}
 	else if (d->cmd && d->is_builtin < 0)
 	{
