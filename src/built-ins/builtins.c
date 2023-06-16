@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 10:29:13 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:51:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,10 @@ void	ft_which_builtins_child(t_data *data)
 /* ft_which_builtins:
  *	Lance le bultin unset, cd, exit ou export avec/sans option.
  */
-void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
+void	ft_which_builtins(t_data *data)
 {
-	t_token	*tmp;
-	pid_t	*pid2;
 	int		error;
 
-	tmp = token;
-	pid2 = pid;
 	error = 0;
 	if (data->is_builtin == 1)
 		error = cmd_unset(data);
