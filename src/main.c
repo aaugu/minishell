@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 16:01:42 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/16 11:36:17 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,7 @@ static void	ft_readline(char **envp, t_data *data)
 	data->trash_path = find_trash_path(data->envp);
 	data->exit_code = 0;
 	while (1)
-	{	
-		if (data->exit_code != 0)
-			g_exit_code = 0;
+	{
 		set_signals_interactive();
 		data->user_input = readline("minishell > ");
 		set_signals_noninteractive();

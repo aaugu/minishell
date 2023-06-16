@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 10:51:52 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:59:20 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_which_builtins_child(t_data *data)
 		cmd_env(data->envp, data->env_size, data->cmd);
 	else if (data->is_builtin == 7)
 		error = ft_echo(data);
-	data->exit_code = error;
+	g_exit_code = error;
 }
 
 /* ft_which_builtins:
@@ -48,7 +48,7 @@ void	ft_which_builtins(t_data *data)
 		error = cmd_exit(data);
 	else if (data->is_builtin == 4 && data->cmd[1])
 		error = ft_export(data);
-	data->exit_code = error;
+	g_exit_code = error;
 }
 
 /* ft_len:
