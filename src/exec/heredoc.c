@@ -6,20 +6,19 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:35:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 15:19:13 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/16 09:55:59 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/* ft_do_heredoc:
+/* ft_do_child_doc:
  *	Récupère l'input du heredoc
  *	Vérifie si l'input est le Limiter puis stop le heredoc dans ce cas.
  *	Expande les variables d'env si besoin (ainsi que $?)
  *	Écrie dans le pipe (servant de heredoc) l'input.
- *	
  */
-static void	ft_do_heredoc(t_token *t, t_data *d, int i)
+static void	ft_do_child_doc(int i, t_data *d, t_token *t)
 {
 	while (1)
 	{
@@ -42,15 +41,6 @@ static void	ft_do_heredoc(t_token *t, t_data *d, int i)
 			break ;
 	}
 	ft_exit_doc(t, d);
-}
-
-/* ft_do_child_doc:
- *	Lance l'écriture du heredoc.
- */
-static void	ft_do_child_doc(pid_t *p, int i, t_data *d, t_token *t)
-{
-	free(p);
-	ft_do_heredoc(t, d, i);
 }
 
 /* ft_doc_parent_process:
@@ -92,7 +82,7 @@ static void	ft_heredoc_child(t_data *d, pid_t *p, t_token *tmp, pid_t *p2)
 		if (p[i] == 0)
 		{
 			free(p2);
-			ft_do_child_doc(p, i, d, tmp);
+			ft_do_child_doc(i, d, tmp);
 		}
 		else if (p[i] > 0)
 		{
