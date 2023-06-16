@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 10:33:56 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/16 15:40:51 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,9 @@ char	**ft_find_cmd(t_token *token)
 
 	cmd_args = NULL;
 	tmp = token;
-	if (tmp && tmp->type != command)
+	if (tmp && tmp->type == t_pipe)
+		tmp = tmp->next;
+	while (tmp && tmp->type != t_pipe && tmp->type != command)
 		tmp = tmp->next;
 	cmd = tmp;
 	tmp = tmp->next;
