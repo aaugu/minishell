@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 10:47:55 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:57:43 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	ft_wait(pid_t *pid, t_data *data)
 	while (i < data->pipe_nbr + 1)
 	{
 		wpid = waitpid(pid[i], &status, 0);
-		if (WIFEXITED(status) && g_exit_code == 0 && data->exit_code == 0)
+		if (WIFEXITED(status) && g_exit_code == 0)
 			data->exit_code = WEXITSTATUS(status);
 		i++;
 	}
