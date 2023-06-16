@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 15:35:03 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 11:51:37 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_env_alph_order(t_data *data)
 	while (++i < data->env_size)
 	{
 		printf("declare -x ");
-		if (!ft_strnstr(copy[i], "=", 1))
+		if (ft_strchr(copy[i], '='))
 			print_with_quotes(data, copy[i]);
 		else
 			printf("%s\n", copy[i]);
