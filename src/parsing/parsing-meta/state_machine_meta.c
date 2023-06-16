@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 13:39:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:20:39 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	init_meta_state_machine(t_m_fsm *fsm)
 {
 	if (fsm->buf)
 		free(fsm->buf);
-	fsm->buf = (char *)ft_calloc(fsm->len, sizeof(char));
+	fsm->buf = (char *)ft_calloc(fsm->len + 1, sizeof(char));
 	if (!fsm->buf)
 		parsing_error_meta(&(fsm->current_state));
 	fsm->buf_size = 0;
