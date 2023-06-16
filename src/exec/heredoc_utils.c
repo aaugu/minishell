@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:31:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 15:55:06 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 09:52:45 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 #include "../../includes/parsing_meta.h"
+#include "../../includes/parsing_input.h"
 
 /* ft_free_child_doc:
  *	free tout ce qu'il faut 

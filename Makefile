@@ -58,7 +58,8 @@ SRCS_FILES = 	main.c \
 				parsing/parsing-meta/state_dollar.c \
 				parsing/parsing-meta/state_idle.c \
 				parsing/parsing-meta/state_machine_meta.c \
-				tools/signal.c \
+				tools/signal_inter.c \
+				tools/signal_no_inter.c \
 				tools/heredoc_signal.c \
 				tools/utils.c \
 
