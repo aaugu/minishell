@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/13 11:10:12 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:30:03 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ If neither -f nor -v is specified, name refers to a variable.
 Unsetting a variable or function that was not previously set shall not be
 considered an error and does not cause the shell to abort.
  */
-void	cmd_unset(t_data *data)
+int	cmd_unset(t_data *data)
 {
 	if (ft_strs_len(data->cmd) <= 1)
 		data->exit_code = print_err("unset: not enough arguments\n", 0);
 	else
 		remove_var_env(data);
+	return (data->exit_code);
 }
 
 /* Will try to remove the env variables passed as arguments if found */

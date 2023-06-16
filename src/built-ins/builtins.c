@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 11:37:47 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:29:13 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	ft_which_builtins(t_data *data, t_token *token, pid_t *pid)
 	pid2 = pid;
 	error = 0;
 	if (data->is_builtin == 1)
-		cmd_unset(data);
+		error = cmd_unset(data);
 	else if (data->is_builtin == 2)
 		error = ft_cd(data);
 	else if (data->is_builtin == 3)
-		cmd_exit(data);
+		error = cmd_exit(data);
 	else if (data->is_builtin == 4 && data->cmd[1])
 		error = ft_export(data);
 	data->exit_code = error;

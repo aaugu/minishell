@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 12:56:48 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 10:42:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ Exit in bash : The exit() function causes normal process termination and the
 least significant byte of status (i.e., status & 0xFF) is returned to the parent,
 here it is
  */
-void	cmd_exit(t_data *data)
+int	cmd_exit(t_data *data)
 {
 	if (data->cmd_nbr == 1)
 	{
@@ -33,6 +33,7 @@ void	cmd_exit(t_data *data)
 		else if (ft_strs_len(data->cmd) >= 2)
 			get_exit_code(data);
 	}
+	return (data->exit_code);
 }
 
 /* Set exit code depending on number of arguments and if they are numerical*/
