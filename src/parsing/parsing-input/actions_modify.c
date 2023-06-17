@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 15:46:46 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/17 22:14:34 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,12 @@ void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c)
 }
 
 /* Change state and set quotes as true */
-void	change_state_quotes(t_fsm *fsm, t_state state, int last_exit)
+void	change_state_quotes(t_fsm *fsm, t_state state)
 {
-	if (fsm->current_state == idle && state == quote_s && fsm->quotes == false)
+	if (state == quote_s && fsm->quotes == false)
 		fsm->meta = false;
-	fsm->current_state = state;
 	fsm->quotes = true;
-	if (fsm->meta == true && ft_strchr(fsm->buf, '$'))
-		change_buf_to_var_content(fsm, last_exit);
+	fsm->current_state = state;
 }
 
 void	change_buf_to_var_content(t_fsm *fsm, int last_exit)

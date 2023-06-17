@@ -49,6 +49,7 @@ SRCS_FILES = 	main.c \
                 parsing/parsing-input/state_less.c \
                 parsing/parsing-input/state_machine_utils.c \
                 parsing/parsing-input/state_machine.c \
+				parsing/parsing-input/state_meta_chars.c \
                 parsing/parsing-input/state_pipe.c \
                 parsing/parsing-input/state_quotes.c \
 				parsing/parsing-meta/actions.c \
@@ -67,7 +68,7 @@ SRCS = $(addprefix ./src/, $(SRCS_FILES))
 OBJS = $(SRCS:%.c=%.o)
 
 %.o : %.c
-			@$(CC) $(FLAGS) -c $< -o $@
+			@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
 
 all:		$(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/16 10:19:39 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/17 22:07:10 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 /* Initialize start values of t_fsm state machine */
 void	init_state_machine(t_fsm *fsm)
 {
+	if (fsm->save)
+		free(fsm->save);
+	fsm->save = NULL;
 	if (fsm->buf)
 		free(fsm->buf);
 	fsm->buf = (char *)ft_calloc(fsm->input_size + 1, sizeof(char));

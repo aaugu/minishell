@@ -6,15 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 15:25:46 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/17 22:00:23 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdbool.h>
 #include <stdio.h>
+#include <stdbool.h>
 #include "../../../includes/parsing_input_state_machine.h"
-#include "../../../includes/parsing_input.h"
 #include "../../../libft/libft.h"
 
 void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input);
@@ -35,6 +33,7 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
 	i = 0;
 	while (i <= (int)ft_strlen(input))
 	{
+		printf("buffer : %s / state %d\n", fsm.buf, fsm.current_state);
 		if (fsm.current_state == error || fsm.current_state == malloc_err)
 			break ;
 		else
@@ -57,21 +56,23 @@ as it is easy to modify and add conditions based on the state you're in. */
 void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c, int last_e)
 {
 	if (fsm->current_state == idle)
-		state_idle(fsm, tokens, c, last_e);
+		state_idle(fsm, tokens, c);
 	else if (fsm->current_state == less_than)
-		state_less_than(fsm, tokens, c, last_e);
+		state_less_than(fsm, tokens, c);
 	else if (fsm->current_state == less_than_d)
-		state_less_than_d(fsm, tokens, c, last_e);
+		state_less_than_d(fsm, tokens, c);
 	else if (fsm->current_state == greater_than)
-		state_greater_than(fsm, tokens, c, last_e);
+		state_greater_than(fsm, tokens, c);
 	else if (fsm->current_state == greater_than_d)
-		state_greater_than_d(fsm, tokens, c, last_e);
+		state_greater_than_d(fsm, tokens, c);
 	else if (fsm->current_state == quote_s)
-		state_quote_s(fsm, c, last_e);
+		state_quote_s(fsm, c);
 	else if (fsm->current_state == quote_d)
 		state_quote_d(fsm, c, last_e);
 	else if (fsm->current_state == s_pipe)
-		state_pipe(fsm, tokens, c, last_e);
+		state_pipe(fsm, tokens, c);
+	else if (fsm->current_state == meta_chars)
+		state_meta_chars(fsm, tokens, c, last_e);
 }
 
 /* Create base of finite state machine */
@@ -83,7 +84,7 @@ void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input)
 	fsm->current_state = idle;
 	fsm->type = command;
 	fsm->quotes = false;
-	fsm->simple_quotes = false;
+	fsm->save = NULL;
 	fsm->env_size = env_size;
 	fsm->env = ft_strs_copy((const char **)env, env_size);
 	if (!fsm->env)
@@ -95,6 +96,8 @@ void	clear_state_machine(t_fsm *fsm)
 {
 	if (fsm->buf)
 		free(fsm->buf);
+	if (fsm->save)
+		free(fsm->buf);
 	if (fsm->env)
 	{
 		ft_strs_free(fsm->env, fsm->env_size);
@@ -102,11 +105,3 @@ void	clear_state_machine(t_fsm *fsm)
 	}
 	fsm = (t_fsm *){0};
 }
-
-// /* If an error is encountered, clear allocated memory of finite state machine
-// and tokens */
-// void	clear_parsing_error(t_fsm *fsm, t_token **tokens)
-// {
-// 	clear_state_machine(fsm);
-// 	clear_tokens(tokens);
-// }
