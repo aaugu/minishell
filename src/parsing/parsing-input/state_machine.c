@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 22:00:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/17 23:32:23 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
 	i = 0;
 	while (i <= (int)ft_strlen(input))
 	{
-		printf("buffer : %s / state %d\n", fsm.buf, fsm.current_state);
+		printf("char %c :\n", input[i]);
+		printf("beg state %d buffer : %s\n", fsm.current_state, fsm.buf);
 		if (fsm.current_state == error || fsm.current_state == malloc_err)
 			break ;
 		else
 			execute_state_machine(&fsm, &tokens, input[i], last_exit);
 		i++;
+		printf("end state %d buffer : %s\n", fsm.current_state, fsm.buf);
 	}
 	if (fsm.current_state == error)
 		create_content_empty_token(&fsm, &tokens);

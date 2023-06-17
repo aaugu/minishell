@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/16 15:58:15 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/18 00:06:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ static void	ft_good_input(t_data *d)
 		if (!t)
 			clear_minishell(d, g_exit_code);
 		if (ft_strlen(t->content) != 0)
-		{	
-			meta_interpret(d, t);
+		{
 			ft_executor(t, d);
 		}
 		else if(ft_strlen(t->content) == 0 && !t->next)

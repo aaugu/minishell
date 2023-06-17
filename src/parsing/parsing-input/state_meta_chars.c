@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 21:05:24 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 22:22:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 00:08:54 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 
 void	state_meta_chars(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 {
-	if (c == '?' || c == '$')
-		add_to_buf(fsm, c);
-	if (c == '\'' || c == '\"')
+	// if (c == '?' || c == '$')
+	// 	add_to_buf(fsm, c);
+	if (c == '\'')
 		fsm->buf[fsm->buf_size - 1] = '\0';
 	if ((c == '?' || c == '\0' || c == '\'' || c == '\"' || c == '/' || c == '-'
 		|| c == '<' || c == '>' || c == '|') && fsm->meta == true)
@@ -44,7 +44,7 @@ void	state_meta_chars(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 	else
 	{
 		add_to_buf(fsm, c);
-		fsm->current_state = idle;
+
 	}
 }
 
