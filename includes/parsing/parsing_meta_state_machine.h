@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 22:38:41 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 22:54:21 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 00:11:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,26 @@
 
 # include "parsing_states.h"
 # include "parsing_meta_heredoc.h"
+
+/******************************************************************************
+*								STRUCTS									      *
+******************************************************************************/
+
+typedef struct s_meta
+{
+	char			*content;
+	struct s_meta	*next;
+}					t_meta;
+
+typedef struct s_m_fsm
+{
+	enum e_state	current_state;
+	char			*buf;
+	char			**env;
+	int				buf_size;
+	int				env_size;
+	int				len;
+}					t_m_fsm;
 
 /******************************************************************************
 *							    FUNCTIONS									  *
