@@ -6,32 +6,93 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:03:34 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 16:36:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 21:26:29 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdbool.h>
+#include <stdio.h>
 #include "parsing_input_state_machine.h"
+#include "libft.h"
 
-/* Combination of change_state_and_type() and add_to_buf() */
-void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c)
+void	interpret_var(t_fsm *fsm);
+char	*find_env_var_content(char *var_name, t_fsm *fsm);
+
+void	interpret_var_join(t_fsm *fsm)
 {
-	add_to_buf(fsm, c);
-	change_state_and_type(fsm, state, type);
+	char	*tmp;
+
+	if (fsm->tmp_size > 1)
+		interpret_var(fsm);
+	if (!fsm->tmp)
+		return ;
+	tmp = ft_strjoin(fsm->buf, fsm->tmp);
+	if (!tmp)
+	{
+		parsing_error(fsm, NULL);
+		return ;
+	}
+	join_var_to_buf(fsm, tmp);
+	free(tmp);
 }
 
-/* Change state and add on-going type */
-void	change_state_and_type(t_fsm *fsm, t_state state, t_type type)
+void	interpret_var(t_fsm *fsm)
 {
-	if (state)
-		fsm->current_state = state;
-	if (type)
-		fsm->type = type;
+	char	*var;
+	char	*tmp;
+
+	tmp = ft_strjoin(fsm->tmp + 1, "=");
+	if (!tmp)
+	{
+		parsing_error(fsm, NULL);
+		free(tmp);
+		return ;
+	}
+	var = find_env_var_content(tmp, fsm);
+	if (!var)
+	{
+		parsing_error(fsm, NULL);
+		return ;
+	}
+	free(tmp);
+	free(fsm->tmp);
+	fsm->tmp = var;
+	fsm->tmp_size = ft_strlen(var);
 }
 
-/* Change state and set quotes as true */
-void	change_state_quotes(t_fsm *fsm, t_state state)
+char	*find_env_var_content(char *var_name, t_fsm *fsm)
 {
-	fsm->quotes = true;
-	fsm->current_state = state;
+	int		i;
+	char	*var_content;
+
+	var_content = ft_strdup("");
+	if (!var_content)
+		return (NULL);
+	i = -1;
+	while (++i < fsm->env_size)
+	{
+		if (ft_strnstr(fsm->env[i], var_name, ft_strlen(var_name)))
+		{
+			free(var_content);
+			var_content = ft_strdup(fsm->env[i] + ft_strlen(var_name));
+			if (!var_content)
+				return (NULL);
+			break ;
+		}
+	}
+	return (var_content);
+}
+
+void	join_var_to_buf(t_fsm *fsm, char *tmp)
+{
+	free(fsm->buf);
+	fsm->buf = (char *)ft_calloc((ft_strlen(fsm->tmp) + fsm->input_size + 1),
+			sizeof(char));
+	if (!fsm->buf)
+	{
+		parsing_error(fsm, NULL);
+		return ;
+	}
+	ft_strlcpy(fsm->buf, tmp, ft_strlen(tmp) + 1);
+	fsm->buf_size = ft_strlen(fsm->buf);
+	reset_tmp_buf(fsm);
 }

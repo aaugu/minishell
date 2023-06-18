@@ -6,23 +6,28 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 21:05:24 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 16:54:10 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 21:25:53 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parsing_input_state_machine.h"
+#include "parsing_input_state_machine.h"
+#include "libft.h"
+#include "minishell.h"
 
 void	tmp_empty_stop_char(t_fsm *fsm, t_token **tokens, char c);
+void	tmp_exit_code_stop_char(t_fsm *fsm, int last_exit);
 void	tmp_filled_stop_char(t_fsm *fsm, t_token **tokens, char c);
 
-void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c)
+void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit)
 {
 	if (fsm->tmp_size == 1)
 	{
 		if (c == '-' || c == '\'' || c == '\"' || c == '$' || c == '/'
-			|| c == '?' || c == ' ' || c == '<' || c == '>' || c == '|'
-			|| c == '\0')
+			|| c == ' ' || c == '<' || c == '>' || c == '|' || c == '\0'
+			|| ft_isdigit(c))
 			tmp_empty_stop_char(fsm, tokens, c);
+		else if (c == '?')
+			tmp_exit_code_stop_char(fsm, last_exit);
 		else
 			add_to_tmp_buf(fsm, c);
 	}
@@ -30,7 +35,7 @@ void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c)
 	{
 		if (c == '-' || c == '\'' || c == '\"' || c == '$' || c == '/'
 			|| c == '?' || c == ' ' || c == '<' || c == '>' || c == '|'
-			|| c == '\0')
+			|| c == '\0' || ft_isdigit(c))
 			tmp_filled_stop_char(fsm, tokens, c);
 		else
 			add_to_tmp_buf(fsm, c);
@@ -40,19 +45,17 @@ void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c)
 void	tmp_empty_stop_char(t_fsm *fsm, t_token **tokens, char c)
 {
 	if (c == '-' || c == '\'' || c == '\"' || c == '$' || c == ' ' || c == '<'
-		|| c == '>' || c == '|' || c == '\0')
+		|| c == '>' || c == '|' || c == '\0' || ft_isdigit(c))
 		fsm->tmp[fsm->tmp_size - 1] = '\0';
-	if (c == '/' || c == '?')
+	if (c == '/')
 		add_to_tmp_buf(fsm, c);
 	if (c == ' ' || c == '<' || c == '>' || c == '|' || c == '\0')
 		add_to_buf(fsm, '$');
 	if (c == '<' || c == '>' || c == '|')
 		finish_add(fsm, tokens, c);
-	if (c == '-' || c == '$' || c == ' ' || c == '/' || c == '?')
+	if (c == '-' || c == '$' || c == ' ' || c == '/' || ft_isdigit(c))
 		fsm->current_state = idle;
-	if (c == '?')
-		interpret_var_join(fsm);
-	else if (c == '\'')
+	if (c == '\'')
 		change_state_quotes(fsm, quote_s);
 	else if (c == '\"')
 		change_state_quotes(fsm, quote_d);
@@ -73,7 +76,7 @@ void	tmp_filled_stop_char(t_fsm *fsm, t_token **tokens, char c)
 		add_to_buf(fsm, c);
 	if (c == '<' || c == '>' || c == '|')
 		finish_add(fsm, tokens, c);
-	if (c == '-' || c == ' ' || c == '/' || c == '?')
+	if (c == '-' || c == ' ' || c == '/' || c == '?' || ft_isdigit(c))
 		fsm->current_state = idle;
 	if (c == '$')
 		add_to_tmp_buf(fsm, c);
@@ -89,4 +92,17 @@ void	tmp_filled_stop_char(t_fsm *fsm, t_token **tokens, char c)
 		change_state_and_type(fsm, s_pipe, t_pipe);
 	else if (c == '\0')
 		finish_stop(fsm, tokens, c);
+}
+
+void	tmp_exit_code_stop_char(t_fsm *fsm, int last_exit)
+{
+	free(fsm->tmp);
+	fsm->tmp = ft_itoa(last_exit);
+	if (!fsm->tmp)
+	{
+		parsing_error(fsm, NULL);
+		return ;
+	}
+	join_var_to_buf(fsm, fsm->tmp);
+	fsm->current_state = idle;
 }

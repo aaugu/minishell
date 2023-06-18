@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:57:48 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 16:52:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 17:45:47 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_token
 *							    FUNCTIONS									  *
 ******************************************************************************/
 
-t_token	*parsing_input(char *input, char **env, int env_size);
+t_token	*parsing_input(char *input, char **env, int env_size, int last_exit);
 void	clear_tokens(t_token **tokens);
 
 #endif

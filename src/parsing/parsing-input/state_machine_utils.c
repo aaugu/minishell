@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 16:41:53 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 21:26:57 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,14 @@ void	create_content_empty_token(t_fsm *fsm, t_token **tokens)
 	*tokens = NULL;
 	init_state_machine(fsm);
 	finish_buf(fsm, tokens, '\0');
+}
+
+void	reset_tmp_buf(t_fsm *fsm)
+{
+	if (fsm->tmp)
+		free(fsm->tmp);
+	fsm->tmp = (char *)ft_calloc(fsm->input_size + 1, sizeof(char));
+	if (!fsm->tmp)
+		parsing_error(fsm, 0);
+	fsm->tmp_size = 0;
 }
