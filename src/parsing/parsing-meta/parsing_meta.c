@@ -6,13 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:02:29 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 23:04:01 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 01:05:18 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parsing_meta.h"
-#include "../../../includes/parsing_meta_state_machine.h"
-#include "../../../libft/libft.h"
+#include "parsing_meta.h"
+#include "parsing_meta_state_machine.h"
+#include "libft.h"
+#include <stdio.h>
 
 /*
 After parsing input
@@ -26,7 +27,11 @@ char	*parsing_meta(char *s, char **env, int env_size, int last_exit)
 	t_meta	*meta_strs;
 	t_meta	*next;
 
+	meta_strs = NULL;
 	meta_strs = meta_state_machine(s, env, env_size, last_exit);
+	if (!meta_strs)
+		return (NULL);
+	// printf("content %s\n", meta_strs->content);
 	interpreted_str = ft_strdup("");
 	if (!interpreted_str)
 		return (NULL);

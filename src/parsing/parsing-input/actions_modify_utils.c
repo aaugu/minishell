@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 16:03:34 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 21:26:29 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 01:14:39 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	interpret_var(t_fsm *fsm)
 	if (!tmp)
 	{
 		parsing_error(fsm, NULL);
-		free(tmp);
 		return ;
 	}
 	var = find_env_var_content(tmp, fsm);

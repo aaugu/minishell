@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:16:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 00:40:36 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 01:35:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	add_to_buf_meta(t_m_fsm *fsm, char c)
 
 /* Finish buffer, create a node of meta list and set its content. Then reset
 state machine */
-void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs)
+void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs, char c)
 {
 	t_meta	*new_meta;
 	t_meta	*last;
 
-	if (fsm->buf_size != 0)
+	if (fsm->buf_size != 0 || (c == '\0' && *meta_strs == NULL))
 	{
 		new_meta = create_node_meta(fsm->buf, fsm);
 		if (!new_meta)
@@ -48,9 +48,9 @@ void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs)
 	}
 }
 
-void	finish_state_meta(t_m_fsm *fsm, t_meta **meta_strs, int state)
+void	finish_state_meta(t_m_fsm *fsm, t_meta **meta_strs, int state, char c)
 {
-	finish_buf_meta(fsm, meta_strs);
+	finish_buf_meta(fsm, meta_strs, c);
 	fsm->current_state = state;
 }
 
@@ -62,11 +62,17 @@ t_meta	*create_node_meta(char *buffer, t_m_fsm *fsm)
 	meta = NULL;
 	meta = (t_meta *)malloc(sizeof(t_meta));
 	if (!meta)
+	{
 		parsing_error_meta(&(fsm->current_state));
-	if (buffer)
-		meta->content = ft_strdup(buffer);
+		return (NULL);
+	}
+	meta->content = ft_strdup(buffer);
 	if (!meta->content)
+	{
+		free(meta);
 		parsing_error_meta(&(fsm->current_state));
+		return (NULL);
+	}
 	meta->next = NULL;
 	return (meta);
 }

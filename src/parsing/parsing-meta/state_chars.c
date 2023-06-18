@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 00:42:46 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 01:36:08 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 		get_var_content(fsm);
 		if (fsm->current_state == error)
 			return ;
-		finish_state_meta(fsm, meta_strs, idle);
+		finish_state_meta(fsm, meta_strs, stop, c);
 	}
 	else if (ft_isalnum(c) || c == '_')
 		add_to_buf_meta(fsm, c);
@@ -39,7 +39,7 @@ void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 		get_var_content(fsm);
 		if (fsm->current_state == error)
 			return ;
-		finish_state_meta(fsm, meta_strs, idle);
+		finish_state_meta(fsm, meta_strs, idle, c);
 		add_to_buf_meta(fsm, c);
 	}
 }
@@ -53,23 +53,18 @@ void	get_var_content(t_m_fsm *fsm)
 	if (!var)
 	{
 		parsing_error_meta(&(fsm->current_state));
-		free(var);
 		return ;
 	}
 	buf = find_var_content(var, fsm);
+	if (!buf)
+	{
+		parsing_error_meta(&(fsm->current_state));
+		return ;
+	}
 	free(var);
 	free(fsm->buf);
-	if (buf)
-	{
-		fsm->buf = buf;
-		fsm->buf_size = ft_strlen(buf);
-	}
-	else
-	{
-		fsm->buf = ft_strdup("");
-		if (!fsm->buf)
-			parsing_error_meta(&(fsm->current_state));
-	}
+	fsm->buf = buf;
+	fsm->buf_size = ft_strlen(buf);
 }
 
 char	*find_var_content(char *var, t_m_fsm *fsm)
@@ -77,18 +72,19 @@ char	*find_var_content(char *var, t_m_fsm *fsm)
 	int		i;
 	char	*buf;
 
-	buf = NULL;
+	buf = ft_strdup("");
+	if (!buf)
+		return (NULL);
 	i = 0;
 	while (i < fsm->env_size)
 	{
 		if (ft_strnstr(fsm->env[i], var, ft_strlen(var)))
 		{
+			free(buf);
 			buf = ft_strdup(fsm->env[i] + ft_strlen(var));
+
 			if (!buf)
-			{
-				parsing_error_meta(&(fsm->current_state));
 				return (NULL);
-			}
 			break ;
 		}
 		i++;

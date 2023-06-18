@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:08:12 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 00:40:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 01:33:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c);
 
 /* --------------------------------- ACTIONS ---------------------------------*/
 void	add_to_buf_meta(t_m_fsm *fsm, char c);
-void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs);
-void	finish_state_meta(t_m_fsm *fsm, t_meta **meta_strs, int state);
+void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs, char c);
+void	finish_state_meta(t_m_fsm *fsm, t_meta **meta_strs, int state, char c);
 void	get_var_content(t_m_fsm *fsm);
 
 void	parsing_error_meta(t_state *current_state);
