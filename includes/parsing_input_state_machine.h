@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 15:55:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:53:34 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,17 @@ void	state_quote_s(t_fsm *fsm, char c);
 void	state_quote_d(t_fsm *fsm, char c);
 void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
 void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c);
-void	state_dollar_quote(t_fsm *fsm, t_token **tokens, char c);
+void	state_dollar_quotes(t_fsm *fsm, t_token **tokens, char c);
 
 /* --------------------------------- ACTIONS ---------------------------------*/
 void	add_to_buf(t_fsm *fsm, char c);
+void	add_to_tmp_buf(t_fsm *fsm, char c);
+void	reset_tmp_buf(t_fsm *fsm);
 void	change_state_and_type(t_fsm *fsm, t_state state, t_type type);
 void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c);
 void	change_state_quotes(t_fsm *fsm, t_state state);
 void	change_buf_to_var_content(t_fsm *fsm);
+void	interpret_var_join(t_fsm *fsm);
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add_state(t_fsm *fsm, t_token **tokens, char c, int state);

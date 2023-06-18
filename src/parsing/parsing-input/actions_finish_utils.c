@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 13:32:00 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:36:19 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parsing_input_state_machine.h"
+#include "parsing_input_state_machine.h"
 
 /* Combination of finish_buf() and add_to_buff() */
 void	finish_add(t_fsm *fsm, t_token **tokens, char c)

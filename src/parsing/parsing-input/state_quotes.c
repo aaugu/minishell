@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:39 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 15:54:58 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:56:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void	state_quote_s(t_fsm *fsm, char c)
 if needed */
 void	state_quote_d(t_fsm *fsm, char c)
 {
-	if ((c == '?' || c == '\0' || c == '\'' || c == '/' || c == '-'))
-	{
-		change_buf_to_var_content(fsm);
-	}
+	// if ((c == '?' || c == '\0' || c == '\'' || c == '/' || c == '-'))
+	// {
+	// 	change_buf_to_var_content(fsm);
+	// }
 	if (c == '$')
 		state_type_add_buf(fsm, dollar_quotes, fsm->type, c);
 	else if (c == '\"')

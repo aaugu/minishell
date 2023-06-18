@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 15:55:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:00:19 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c)
 	else if (fsm->current_state == dollar_idle)
 		state_dollar_idle(fsm, tokens, c);
 	else if (fsm->current_state == dollar_quotes)
-		state_dollar_quote(fsm, tokens, c);
+		state_dollar_quotes(fsm, tokens, c);
 }
 
 /* Create base of finite state machine */

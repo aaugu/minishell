@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 11:16:52 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:41:53 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,7 @@ void	init_state_machine(t_fsm *fsm)
 	if (!fsm->buf)
 		parsing_error(fsm, 0);
 	fsm->buf_size = 0;
-	if (fsm->tmp)
-		free(fsm->tmp);
-	fsm->tmp = (char *)ft_calloc(fsm->input_size + 1, sizeof(char));
-	if (!fsm->tmp)
-		parsing_error(fsm, 0);
-	fsm->buf_size = 0;
+	reset_tmp_buf(fsm);
 	fsm->quotes = false;
 }
 

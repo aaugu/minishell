@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 11:45:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:55:05 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	ft_good_input(t_data *d)
 	if (ft_strlen(d->user_input) > 0)
 	{
 		add_history(d->user_input);
-		t = parsing_input(d->user_input, d->envp, d->env_size, d->exit_code);
+		t = parsing_input(d->user_input, d->envp, d->env_size);
 		if (!t)
 			clear_minishell(d, g_exit_code);
 		if (ft_strlen(t->content) != 0)

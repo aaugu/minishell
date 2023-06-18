@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 11:44:51 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 16:02:58 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include "../../../includes/parsing_input_state_machine.h"
 
-void	change_to_meta_chars(t_fsm *fsm, int state, int type, char c);
+void	change_state_dollar_idle(t_fsm *fsm, int state, int type, char c);
 
 /* Will set current state according to char and decide which action to perform
 if needed */
@@ -37,12 +37,12 @@ void	state_idle(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == ' ')
 		finish_buf(fsm, tokens, c);
 	else if (c == '$')
-		change_to_meta_chars(fsm, dollar_idle, fsm->type, c);
+		change_state_dollar_idle(fsm, dollar_idle, fsm->type, c);
 	else
 		add_to_buf(fsm, c);
 }
 
-void	change_to_meta_chars(t_fsm *fsm, int state, int type, char c)
+void	change_state_dollar_idle(t_fsm *fsm, int state, int type, char c)
 {
 	fsm->tmp[fsm->tmp_size] = c;
 	fsm->tmp_size++;
