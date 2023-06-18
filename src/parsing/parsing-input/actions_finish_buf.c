@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 22:28:11 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 11:44:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ t_token	*create_node(t_fsm *fsm)
 	if (!token->content)
 		parsing_error(fsm, 0);
 	token->type = fsm->type;
-	token->meta = fsm->meta;
 	token->quotes = fsm->quotes;
 	token->next = NULL;
 	token->prev = NULL;

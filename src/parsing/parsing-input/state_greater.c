@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 21:36:18 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 13:36:31 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	state_greater_than(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '\0')
 		parsing_error(fsm, "newline");
 	else
-		finish_add_idle(fsm, tokens, c);
+		finish_add_state(fsm, tokens, c, idle);
 }
 
 /* Will set current state according to char and decide which action to perform
@@ -53,5 +53,5 @@ void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == ' ')
 		fsm->current_state = idle;
 	else
-		finish_add_idle(fsm, tokens, c);
+		finish_add_state(fsm, tokens, c, idle);
 }

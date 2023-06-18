@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:30:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 21:27:54 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 13:32:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	finish_stop(t_fsm *fsm, t_token **tokens, char c)
 }
 
 /* Combination of finish_add() and set current state to idle */
-void	finish_add_idle(t_fsm *fsm, t_token **tokens, char c)
+void	finish_add_state(t_fsm *fsm, t_token **tokens, char c, int state)
 {
 	finish_add(fsm, tokens, c);
-	fsm->current_state = idle;
+	fsm->current_state = state;
 }

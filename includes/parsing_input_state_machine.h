@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 21:58:04 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 13:45:05 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@
 typedef struct s_fsm
 {
 	enum e_state	current_state;
-	char			*buf;
-	int				buf_size;
-	int				input_size;
-	int				meta;
 	int				quotes;
 	enum e_type		type;
-	char			*save;
+	int				input_size;
+	char			*buf;
+	int				buf_size;
+	char			*tmp;
+	int				tmp_size;
 	char			**env;
 	int				env_size;
 }					t_fsm;
@@ -57,7 +57,8 @@ void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c);
 void	state_quote_s(t_fsm *fsm, char c);
 void	state_quote_d(t_fsm *fsm, char c, int last_exit);
 void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
-void	state_meta_chars(t_fsm *fsm, t_token **tokens, char c, int last_exit);
+void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit);
+void	state_dollar_quote(t_fsm *fsm, t_token **tokens, char c, int last_exit);
 
 /* --------------------------------- ACTIONS ---------------------------------*/
 void	add_to_buf(t_fsm *fsm, char c);
@@ -67,7 +68,7 @@ void	change_state_quotes(t_fsm *fsm, t_state state);
 void	change_buf_to_var_content(t_fsm *fsm, int last_exit);
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add(t_fsm *fsm, t_token **tokens, char c);
-void	finish_add_idle(t_fsm *fsm, t_token **tokens, char c);
+void	finish_add_state(t_fsm *fsm, t_token **tokens, char c, int state);
 void	finish_stop(t_fsm *fsm, t_token **tokens, char c);
 
 /* ------------------------------ ERROR MESSAGES -----------------------------*/

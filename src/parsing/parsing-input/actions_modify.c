@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 10:03:33 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/17 23:49:55 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 13:40:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,26 +45,6 @@ void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c)
 /* Change state and set quotes as true */
 void	change_state_quotes(t_fsm *fsm, t_state state)
 {
-	if (state == quote_s && fsm->quotes == false)
-		fsm->meta = false;
 	fsm->quotes = true;
 	fsm->current_state = state;
-}
-
-void	change_buf_to_var_content(t_fsm *fsm, int last_exit)
-{
-	char	*meta_str;
-
-	meta_str = parsing_meta(fsm->buf, fsm->env, fsm->env_size, last_exit);
-	if (!meta_str)
-		parsing_error(fsm, NULL);
-	free(fsm->buf);
-	fsm->buf = NULL;
-	fsm->buf = (char *)ft_calloc((ft_strlen(meta_str) + fsm->input_size \
-	+ 1), sizeof(char));
-	if (!fsm->buf)
-		parsing_error(fsm, NULL);
-	ft_strlcpy(fsm->buf, meta_str, ft_strlen(meta_str) + 1);
-	free(meta_str);
-	fsm->buf_size = ft_strlen(fsm->buf);
 }
