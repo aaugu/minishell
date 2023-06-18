@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 21:05:24 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 15:52:20 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 15:54:24 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../../includes/parsing_input_state_machine.h"
 #include "../../../libft/libft.h"
 
-void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit)
+void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c)
 {
 	if (fsm->tmp_size == 1)
 	{

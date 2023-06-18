@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 11:37:18 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 15:55:33 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 #include "../../../libft/libft.h"
 
 void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input);
-void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c, int last_e);
+void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c);
 void	clear_state_machine(t_fsm *fsm);
 
 /* Finite state machine. Will loop on each char to know how to separate each
 token in a lineary way. */
-t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
+t_token	*state_machine(char *input, char **envp, int env_size)
 {
 	t_token	*tokens;
 	t_fsm	fsm;
@@ -36,7 +36,7 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
 		if (fsm.current_state == error || fsm.current_state == malloc_err)
 			break ;
 		else
-			execute_state_machine(&fsm, &tokens, input[i], last_exit);
+			execute_state_machine(&fsm, &tokens, input[i]);
 		i++;
 	}
 	if (fsm.current_state == error)
@@ -52,7 +52,7 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
 
 /* Tells state machine what to do depending on current state. Method flexible,
 as it is easy to modify and add conditions based on the state you're in. */
-void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c, int last_e)
+void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c)
 {
 	if (fsm->current_state == idle)
 		state_idle(fsm, tokens, c);
@@ -67,13 +67,13 @@ void	execute_state_machine(t_fsm *fsm, t_token **tokens, char c, int last_e)
 	else if (fsm->current_state == quote_s)
 		state_quote_s(fsm, c);
 	else if (fsm->current_state == quote_d)
-		state_quote_d(fsm, c, last_e);
+		state_quote_d(fsm, c);
 	else if (fsm->current_state == s_pipe)
 		state_pipe(fsm, tokens, c);
 	else if (fsm->current_state == dollar_idle)
-		state_dollar_idle(fsm, tokens, c, last_e);
+		state_dollar_idle(fsm, tokens, c);
 	else if (fsm->current_state == dollar_quotes)
-		state_dollar_quote(fsm, tokens, c, last_e);
+		state_dollar_quote(fsm, tokens, c);
 }
 
 /* Create base of finite state machine */
