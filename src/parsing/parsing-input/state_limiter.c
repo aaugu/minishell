@@ -6,12 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:37:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 22:58:08 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 00:30:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing_input_state_machine.h"
-
 
 void	state_limiter_no_quotes(t_fsm *fsm, t_token **tokens, char c)
 {

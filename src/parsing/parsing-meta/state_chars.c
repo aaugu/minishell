@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 00:19:49 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 00:42:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 		get_var_content(fsm);
 		if (fsm->current_state == error)
 			return ;
-		finish_buf_meta(fsm, meta_strs);
-		fsm->current_state = stop;
+		finish_state_meta(fsm, meta_strs, idle);
 	}
 	else if (ft_isalnum(c) || c == '_')
 		add_to_buf_meta(fsm, c);
@@ -40,9 +39,8 @@ void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 		get_var_content(fsm);
 		if (fsm->current_state == error)
 			return ;
-		finish_buf_meta(fsm, meta_strs);
+		finish_state_meta(fsm, meta_strs, idle);
 		add_to_buf_meta(fsm, c);
-		fsm->current_state = idle;
 	}
 }
 

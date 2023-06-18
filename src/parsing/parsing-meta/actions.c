@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:16:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 23:03:06 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 00:40:36 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs)
 		}
 		init_meta_state_machine(fsm);
 	}
+}
+
+void	finish_state_meta(t_m_fsm *fsm, t_meta **meta_strs, int state)
+{
+	finish_buf_meta(fsm, meta_strs);
+	fsm->current_state = state;
 }
 
 /* Create a node of chained list (meta) */
