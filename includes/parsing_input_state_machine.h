@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 20:23:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/18 22:56:08 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ typedef struct s_fsm
 ******************************************************************************/
 
 t_token	*state_machine(char *input, char **envp, int env_size, int last_exit);
+void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input);
 void	init_state_machine(t_fsm *fsm);
+void	clear_state_machine(t_fsm *fsm);
 void	create_content_empty_token(t_fsm *fsm, t_token **tokens);
 
 /* Each function will set current state and decide to perform an action if
@@ -58,8 +60,11 @@ void	state_quote_s(t_fsm *fsm, char c);
 void	state_quote_d(t_fsm *fsm, char c);
 void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
 void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit);
-void	state_dollar_quotes(t_fsm *fsm, char c, int last_e);
+void	state_dollar_quotes(t_fsm *fsm, char c, int last_exit);
 void	state_meta_chars(t_fsm *fsm, char c);
+void	state_limiter_no_quotes(t_fsm *fsm, t_token **tokens, char c);
+void	state_limiter_quotes_s(t_fsm *fsm, t_token **tokens, char c);
+void	state_limiter_quotes_d(t_fsm *fsm, t_token **tokens, char c);
 
 /* --------------------------------- ACTIONS ---------------------------------*/
 void	add_to_buf(t_fsm *fsm, char c);

@@ -41,8 +41,8 @@ SRCS_FILES = 	main.c \
 				parsing/meta_interpret.c \
                 parsing/parsing-input/actions_finish_buf.c \
 				parsing/parsing-input/actions_finish_utils.c \
-				parsing/parsing-input/actions_modify.c \
                 parsing/parsing-input/actions_modify_utils.c \
+				parsing/parsing-input/actions_modify.c \
 				parsing/parsing-input/parsing_error.c \
 				parsing/parsing-input/parsing_input.c \
 				parsing/parsing-input/state_dollar_idle.c \
@@ -50,6 +50,7 @@ SRCS_FILES = 	main.c \
                 parsing/parsing-input/state_greater.c \
                 parsing/parsing-input/state_idle.c \
                 parsing/parsing-input/state_less.c \
+				parsing/parsing-input/state_limiter.c \
                 parsing/parsing-input/state_machine_utils.c \
                 parsing/parsing-input/state_machine.c \
                 parsing/parsing-input/state_pipe.c \
