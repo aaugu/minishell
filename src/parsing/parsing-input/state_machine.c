@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 23:12:13 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 01:44:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,12 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
 	init_state_machine(&fsm);
 	tokens = NULL;
 	loop_state_machine(&fsm, &tokens, input, last_exit);
+	if (fsm.current_state == error || fsm.current_state == malloc_err)
+		clear_tokens(&tokens);
 	if (fsm.current_state == error)
-	{
-		clear_tokens(&tokens);
 		create_content_empty_token(&fsm, &tokens);
-	}
 	else if (fsm.current_state == malloc_err)
-	{
-		clear_tokens(&tokens);
 		tokens = NULL;
-	}
 	clear_state_machine(&fsm);
 	return (tokens);
 }
