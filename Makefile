@@ -38,7 +38,6 @@ SRCS_FILES = 	main.c \
 				exec/redir.c \
 				free/clear_tokens.c \
 				free/clear_minishell.c \
-				parsing/meta_interpret.c \
                 parsing/parsing-input/actions_finish_buf.c \
 				parsing/parsing-input/actions_finish_utils.c \
                 parsing/parsing-input/actions_modify_utils.c \

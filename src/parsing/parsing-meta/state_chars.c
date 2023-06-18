@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 13:38:59 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 00:19:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,30 @@ char	*find_var_content(char *var, t_m_fsm *fsm);
 if needed */
 void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c)
 {
-	if (c == '$' || c == ' ' || c == '\0' || c == '\'' || c == '\"' || c == '/' \
-		|| c == '-')
-	{
-		get_var_content(fsm);
-		if (fsm->current_state == error)
-			return ;
-		finish_buf_meta(fsm, meta_strs);
-	}
 	if (c == '$')
 	{
 		add_to_buf_meta(fsm, c);
 		fsm->current_state = dollar;
 	}
-	else if (c == ' ' || c == '\'' || c == '\"' || c == '/' || c == '-')
+	else if (c == '\0')
 	{
+		get_var_content(fsm);
+		if (fsm->current_state == error)
+			return ;
+		finish_buf_meta(fsm, meta_strs);
+		fsm->current_state = stop;
+	}
+	else if (ft_isalnum(c) || c == '_')
+		add_to_buf_meta(fsm, c);
+	else
+	{
+		get_var_content(fsm);
+		if (fsm->current_state == error)
+			return ;
+		finish_buf_meta(fsm, meta_strs);
 		add_to_buf_meta(fsm, c);
 		fsm->current_state = idle;
 	}
-	else if (c == '\0')
-		fsm->current_state = stop;
-	else
-		add_to_buf_meta(fsm, c);
 }
 
 void	get_var_content(t_m_fsm *fsm)
