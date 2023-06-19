@@ -6,12 +6,13 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 15:19:42 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 18:40:11 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #include "libft.h"
+#include "print_error.h"
 
 char	**fill_cmd_with_args(t_token *cmd, int size);
 
@@ -76,7 +77,7 @@ void	ft_builtins_or_cmd(t_data *d)
  *	Recherche une commande et ses options pour les returnes
  *	sous la forme d'un tableau de char.
  */
-char	**ft_find_cmd(t_token *token)
+char	**ft_find_cmd(t_token *token, t_data *d)
 {
 	t_token	*tmp;
 	t_token	*cmd;
@@ -89,8 +90,9 @@ char	**ft_find_cmd(t_token *token)
 		tmp = tmp->next;
 	while (tmp && tmp->type != t_pipe && tmp->type != command)
 		tmp = tmp->next;
+	if (!tmp)
+		return (NULL);
 	cmd = tmp;
-	tmp = tmp->next;
 	size = 1;
 	while (tmp && tmp->type == option)
 	{
@@ -99,7 +101,7 @@ char	**ft_find_cmd(t_token *token)
 	}
 	cmd_args = fill_cmd_with_args(cmd, size);
 	if (!cmd_args)
-		return (NULL);
+		exit_print_error(d, errno);
 	return (cmd_args);
 }
 
