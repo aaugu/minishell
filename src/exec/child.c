@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 15:19:11 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 18:32:29 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,7 @@ void	ft_exec_child(t_data *data, t_token *tmp)
  */
 void	ft_process_child(t_data *d, t_token *tmp, pid_t *p)
 {
-	d->cmd = ft_find_cmd(tmp);
-	if (!d->cmd)
-	{
-		d->exit_code = print_err("minishell: malloc() failed:", errno);
-		exit(errno);
-	}
+	d->cmd = ft_find_cmd(tmp, d);
 	ft_builtins_or_cmd(d);
 	p[d->child] = fork();
 	if (p[d->child] < 0)

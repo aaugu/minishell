@@ -128,7 +128,7 @@ void				ft_child_error(t_token *token, t_data *d, int flag);
 int					ft_mark_count(t_token *token, t_type type);
 //cmd.c
 void				ft_builtins_or_cmd(t_data *d);
-char				**ft_find_cmd(t_token *token);
+char				**ft_find_cmd(t_token *token, t_data *data);
 char				*ft_getenv(char **envp, char *var);
 int					ft_is_cmd(t_token *token);
 //count.c
