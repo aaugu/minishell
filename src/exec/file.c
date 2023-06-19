@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:35:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/06 15:33:54 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_close_fd:
  *	Ferme les fd correspondant au in/out pour chaque pipe.

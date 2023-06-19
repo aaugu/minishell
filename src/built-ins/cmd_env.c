@@ -6,14 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:10 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 15:07:46 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../includes/minishell.h"
-#include "../../includes/built_ins.h"
-#include "../../libft/libft.h"
+#include "minishell.h"
+#include "built_ins.h"
+#include "libft.h"
 
 /*
 Env in bash : Displays the current environment or sets the environment for the

@@ -6,13 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 01:36:08 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:11:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/minishell.h"
-#include "../../../includes/parsing_meta_state_machine.h"
-#include "../../../libft/libft.h"
+#include "minishell.h"
+#include "parsing_meta_state_machine.h"
+#include "libft.h"
 
 char	*find_var_content(char *var, t_m_fsm *fsm);
 

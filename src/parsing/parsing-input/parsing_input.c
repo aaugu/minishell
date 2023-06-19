@@ -6,14 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 17:42:47 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:10:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../../includes/parsing_input.h"
-#include "../../../includes/parsing_input_state_machine.h"
-#include "../../../libft/libft.h"
+#include "parsing_input.h"
+#include "parsing_input_state_machine.h"
+#include "libft.h"
 
 /* Parsing to retrieve each separate elements (tokens) of user input as an
 element of the command and store them in a chained list. */

@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 15:40:51 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../libft/libft.h"
+#include "minishell.h"
+#include "libft.h"
 
 char	**fill_cmd_with_args(t_token *cmd, int size);
 

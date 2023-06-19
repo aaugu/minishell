@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:10:58 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/17 17:16:35 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_cmd_error:
  *	Ecrit un message dans la sortie erreur pour un  command not found.

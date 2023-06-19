@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 14:52:13 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/07 12:16:16 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_is_next_pipe:
  *	test si il reste des pipes dans les tokens suivant

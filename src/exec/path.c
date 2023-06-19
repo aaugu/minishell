@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:27:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 11:13:55 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_launcher:
  *	Retire le "." du début de la commande.

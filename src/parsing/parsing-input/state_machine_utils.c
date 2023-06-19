@@ -6,14 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 12:52:40 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:10:50 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdio.h>
-#include "../../../includes/parsing_input_state_machine.h"
-#include "../../../libft/libft.h"
+#include "parsing_input_state_machine.h"
+#include "libft.h"
 
 /* Create base of finite state machine */
 void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input)

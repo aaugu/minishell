@@ -6,14 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 11:16:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 01:35:16 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:11:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "../../../includes/parsing_meta_state_machine.h"
-#include "../../../libft/libft.h"
+#include "parsing_meta_state_machine.h"
+#include "libft.h"
 
 t_meta	*create_node_meta(char *buffer, t_m_fsm *fsm);
 t_meta	*lst_last_meta(t_meta *meta_strs);

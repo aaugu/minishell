@@ -6,13 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:31:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 01:38:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/parsing_meta.h"
-#include "../../includes/parsing_input.h"
+#include "minishell.h"
+#include "parsing_meta.h"
+#include "parsing_input.h"
 
 /* ft_free_child_doc:
  *	free tout ce qu'il faut

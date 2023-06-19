@@ -6,13 +6,13 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 13:52:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdbool.h>
 #include <stdio.h>
-#include "../../../includes/parsing_input_state_machine.h"
+#include "parsing_input_state_machine.h"
 
 void	change_state_dollar_idle(t_fsm *fsm, int state, int type, char c);
 

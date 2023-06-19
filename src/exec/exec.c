@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/17 17:17:23 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_exec_command:
  *	Regarde la présence et le nombre de heredoc.

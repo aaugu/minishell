@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/15 14:52:29 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/15 15:19:38 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	signal_reset_prompt_hd(int signo)
 {

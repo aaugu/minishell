@@ -32,7 +32,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-# include "../libft/libft.h"
+# include "libft.h"
 # include "parsing_input.h"
 
 /******************************************************************************

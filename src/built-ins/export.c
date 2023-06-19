@@ -6,14 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 11:51:37 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:42 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../includes/minishell.h"
-#include "../../libft/libft.h"
-#include "../../includes/print_error.h"
+#include "minishell.h"
+#include "libft.h"
+#include "print_error.h"
 
 void	print_with_quotes(t_data *data, char *s)
 {

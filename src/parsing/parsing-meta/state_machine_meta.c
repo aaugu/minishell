@@ -6,16 +6,16 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 01:11:06 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:11:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <stdlib.h>
-#include "../../../includes/minishell.h"
-#include "../../../includes/parsing_meta.h"
-#include "../../../includes/parsing_meta_state_machine.h"
-#include "../../../libft/libft.h"
+#include "minishell.h"
+#include "parsing_meta.h"
+#include "parsing_meta_state_machine.h"
+#include "libft.h"
 
 void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str);
 void	init_meta_state_machine(t_m_fsm *fsm);

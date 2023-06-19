@@ -6,11 +6,11 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:38:26 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 01:36:26 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/parsing_meta_state_machine.h"
+#include "parsing_meta_state_machine.h"
 
 /* Will set current state according to char and decide which action to perform
 if needed */
