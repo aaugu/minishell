@@ -54,7 +54,6 @@ SRCS_FILES = 	main.c \
                 parsing/parsing-input/state_machine.c \
                 parsing/parsing-input/state_pipe.c \
                 parsing/parsing-input/state_quotes.c \
-				parsing/parsing-input/state_space.c \
 				parsing/parsing-meta/actions.c \
 				parsing/parsing-meta/parsing_error_meta.c \
 				parsing/parsing-meta/parsing_meta.c \

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 00:51:15 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 01:37:46 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "parsing_input.h"
 #include "parsing_input_state_machine.h"
 #include "libft.h"
+#include "minishell.h"
+
+void	check_end_syntax_error(t_token **tokens);
 
 /* Parsing to retrieve each separate elements (tokens) of user input as an
 element of the command and store them in a chained list. */
@@ -22,8 +25,40 @@ t_token	*parsing_input(char *input, char **env, int env_size, int last_exit)
 	t_token	*tokens;
 
 	tokens = state_machine(input, env, env_size, last_exit);
-
+	if (tokens && tokens->content != NULL)
+	{
+		check_end_syntax_error(&tokens);
+		if (!tokens)
+		{
+			printf("minishell: malloc() failed: %s\n", strerror(errno));
+			g_exit_code = errno;
+		}
+	}
 	return (tokens);
+}
+
+void	check_end_syntax_error(t_token **tokens)
+{
+	t_token	*tmp;
+
+	if (tokens)
+		tmp = lst_last(*tokens);
+	if (!ft_strcmp(tmp->content, "|"))
+		printf("minishell: syntax error near unexpected token `|'\n");
+	else if (!ft_strcmp(tmp->content, "<"))
+		printf("minishell: syntax error near unexpected token `<'\n");
+	else if (!ft_strcmp(tmp->content, ">"))
+		printf("minishell: syntax error near unexpected token `>'\n");
+	if (!ft_strcmp(tmp->content, "|") || !ft_strcmp(tmp->content, "<")
+		|| !ft_strcmp(tmp->content, ">"))
+	{
+		clear_tokens(tokens);
+
+		*tokens = (t_token *)malloc(sizeof(t_token));
+		(*tokens)->content = NULL;
+		(*tokens)->next = NULL;
+		g_exit_code = 258;
+	}
 }
 
 /* Pour afficher chaque élément séparé avec son type
