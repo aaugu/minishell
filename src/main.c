@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:22:00 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 17:54:56 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,13 @@ static void	ft_good_input(t_data *d)
 	{
 		add_history(d->user_input);
 		t = parsing_input(d->user_input, d->envp, d->env_size, d->exit_code);
+		prinf("%p\n", t);
 		if (!t)
 			clear_minishell(d, g_exit_code);
-		if (t && t->content)
+		else if (t && t->content != NULL)
+		{
 			ft_executor(t, d);
+		}
 		// else if (ft_strlen(t->content) == 0 && !t->next)
 		if (d->user_input)
 			free(d->user_input);
@@ -111,6 +114,7 @@ static void	ft_readline(char **envp, t_data *data)
 		}
 		else
 			ft_ctrld(data);
+		printf("ici\n");
 	}
 }
 

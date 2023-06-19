@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 11:22:46 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:10:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 17:02:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	create_content_empty_token(t_fsm *fsm, t_token **tokens)
 	*tokens = (t_token *)malloc(sizeof(t_token));
 	if (!*tokens)
 		parsing_error(fsm, 0);
-	(*tokens)->content = NULL;
+	*tokens = (t_token *){0};
 }
 
 void	reset_tmp_buf(t_fsm *fsm)
