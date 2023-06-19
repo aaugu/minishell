@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/16 15:58:15 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:02:17 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ static void	ft_good_input(t_data *d)
 		t = parsing_input(d->user_input, d->envp, d->env_size, d->exit_code);
 		if (!t)
 			clear_minishell(d, g_exit_code);
-		if (ft_strlen(t->content) != 0)
+		if (t->content != NULL)
 		{	
 			meta_interpret(d, t);
 			ft_executor(t, d);
 		}
-		else if(ft_strlen(t->content) == 0 && !t->next)
+		else if (ft_strlen(t->content) == 0 && !t->next)
 			ft_executor(t, d);
 		if (d->user_input)
 			free(d->user_input);
@@ -100,6 +100,7 @@ static void	ft_readline(char **envp, t_data *data)
 	data->exit_code = 0;
 	while (1)
 	{
+		termios_remove_ctrl();
 		set_signals_interactive();
 		data->user_input = readline("minishell > ");
 		set_signals_noninteractive();

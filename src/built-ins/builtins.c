@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:01:39 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 10:59:20 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 12:47:40 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_len(t_token *token)
 
 	i = 0;
 	tmp = token;
-	while (tmp->content[i] && tmp->content[i] != ' ')
+	while (tmp->content[i])
 		i++;
 	return (i);
 }

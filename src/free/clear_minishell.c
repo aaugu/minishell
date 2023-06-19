@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_minishell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:54:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/12 12:47:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/16 16:23:58 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	clear_minishell(t_data *data, int exit_code)
 		free(data->trash_path);
 	if (data->fd_array)
 		free(data->fd_array);
+	termios_restore_ctrl();
 	exit(exit_code);
 }

@@ -26,6 +26,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
+# include <termios.h>
 # include <limits.h>
 # include <fcntl.h>
 # include <sys/stat.h>
@@ -176,6 +177,8 @@ void				set_signals_interactive(void);
 void				set_signals_interactive_hd(void);
 void				set_signals_noninteractive(void);
 
+void				termios_remove_ctrl(void);
+void				termios_restore_ctrl(void);
 /* ------------------------------ PARSER ------------------------------------*/
 //exemple2.c
 
