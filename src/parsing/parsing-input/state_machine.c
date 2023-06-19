@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 14:40:14 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:02:17 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ void	exe_state_machine_two(t_fsm *fsm, t_token **tokens, char c, int last_e)
 		state_dollar_idle(fsm, tokens, c, last_e);
 	else if (fsm->current_state == dollar_quotes)
 		state_dollar_quotes(fsm, c, last_e);
-	else if (fsm->current_state == meta_chars)
-		state_meta_chars(fsm, c);
 	else if (fsm->current_state == limiter_no_quotes)
 		state_limiter_no_quotes(fsm, tokens, c);
 	else if (fsm->current_state == limiter_quotes_s)

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:10:52 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 00:12:34 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:02:28 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef enum e_state
 	dollar,
 	dollar_idle,
 	dollar_quotes,
-	meta_chars,
 	chars,
 	error,
 	malloc_err,
