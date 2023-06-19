@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 02:57:59 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 03:09:30 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	loop_state_machine(t_fsm *fsm, t_token **tokens, char *str, int last_e)
 	i = 0;
 	while (i <= (int)ft_strlen(str))
 	{
-		printf("buf %s\n", fsm->tmp);
 		if (fsm->current_state == error || fsm->current_state == malloc_err)
 			break ;
 		else
