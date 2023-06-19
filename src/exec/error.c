@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:10:58 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 23:12:04 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
  */
 void	ft_cmd_error(t_data *data)
 {
-	write(2, "minishell: ", 11);
 	if (!data->cmd[0])
 		write(2, " ", 1);
 	else
@@ -33,7 +32,6 @@ void	ft_child_error(t_token *token, t_data *d, int flag)
 {
 	if (flag == ERR_EXECVE)
 	{
-		write(2, "minishell: ", 11);
 		write(2, d->cmd[0], ft_strlen(d->cmd[0]));
 		write(2, ": command not found\n", 20);
 		ft_free_child(token, d);

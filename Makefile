@@ -1,6 +1,6 @@
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 INCLUDE = -I includes -I libft
 LIB = -Llibft -lft -lreadline
@@ -54,6 +54,7 @@ SRCS_FILES = 	main.c \
                 parsing/parsing-input/state_machine.c \
                 parsing/parsing-input/state_pipe.c \
                 parsing/parsing-input/state_quotes.c \
+				parsing/parsing-input/state_space.c \
 				parsing/parsing-meta/actions.c \
 				parsing/parsing-meta/parsing_error_meta.c \
 				parsing/parsing-meta/parsing_meta.c \

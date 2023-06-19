@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:10:52 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:02:28 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 21:51:41 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum e_state
 	quote_s,
 	quote_d,
 	s_pipe,
+	space,
 	dollar,
 	dollar_idle,
 	dollar_quotes,
