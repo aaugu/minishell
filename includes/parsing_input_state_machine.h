@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 14:28:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 18:01:41 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit);
 void	create_state_machine(t_fsm *fsm, char **env, int env_size, char *input);
 void	init_state_machine(t_fsm *fsm);
 void	clear_state_machine(t_fsm *fsm);
-void	create_content_empty_token(t_fsm *fsm, t_token **tokens);
+t_token	*create_content_empty_token(t_fsm *fsm);
 
 /* Each function will set current state and decide to perform an action if
 needed */
