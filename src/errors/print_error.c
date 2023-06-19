@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 15:23:09 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 18:41:41 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,10 @@ int	print_err(char *message, int errnum)
 		printf("%s", message);
 		return (1);
 	}
+}
+
+void	exit_print_error(t_data *d, int errnum)
+{
+	d->exit_code = print_err("minishell: malloc() failed:", errnum);
+	exit(errno);
 }

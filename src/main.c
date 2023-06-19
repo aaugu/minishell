@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:22:00 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 17:59:25 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static void	ft_good_input(t_data *d)
 			clear_minishell(d, g_exit_code);
 		if (t && t->content)
 			ft_executor(t, d);
-		// else if (ft_strlen(t->content) == 0 && !t->next)
 		if (d->user_input)
 			free(d->user_input);
 		if (t)
