@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:59:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 22:37:50 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 02:53:52 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	specials_or_meta_chars(t_fsm *fsm, char c, int last_exit);
 
 void	state_dollar_quotes(t_fsm *fsm, char c, int last_exit)
 {
+	printf("char %c\n", c);
 	if (c == '\"')
 	{
 		interpret_var_join(fsm);

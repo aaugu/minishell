@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 01:44:12 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 02:57:59 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "libft.h"
 
 void	loop_state_machine(t_fsm *fsm, t_token **tokens, char *str, int last_e);
-void	exe_state_machine_one(t_fsm *fsm, t_token **tokens, char c);
+void	exe_state_machine_one(t_fsm *fsm, t_token **tokens, char c, int last_e);
 void	exe_state_machine_two(t_fsm *fsm, t_token **tokens, char c, int last_e);
 
 /* Finite state machine. Will loop on each char to know how to separate each
@@ -47,20 +47,18 @@ void	loop_state_machine(t_fsm *fsm, t_token **tokens, char *str, int last_e)
 	i = 0;
 	while (i <= (int)ft_strlen(str))
 	{
+		printf("buf %s\n", fsm->tmp);
 		if (fsm->current_state == error || fsm->current_state == malloc_err)
 			break ;
 		else
-		{
-			exe_state_machine_one(fsm, tokens, str[i]);
-			exe_state_machine_two(fsm, tokens, str[i], last_e);
-		}
+			exe_state_machine_one(fsm, tokens, str[i], last_e);
 		i++;
 	}
 }
 
 /* Tells state machine what to do depending on current state. Method flexible,
 as it is easy to modify and add conditions based on the state you're in. */
-void	exe_state_machine_one(t_fsm *fsm, t_token **tokens, char c)
+void	exe_state_machine_one(t_fsm *fsm, t_token **tokens, char c, int last_e)
 {
 	if (fsm->current_state == idle)
 		state_idle(fsm, tokens, c);
@@ -76,6 +74,8 @@ void	exe_state_machine_one(t_fsm *fsm, t_token **tokens, char c)
 		state_quote_s(fsm, c);
 	else if (fsm->current_state == quote_d)
 		state_quote_d(fsm, c);
+	else
+		exe_state_machine_two(fsm, tokens, c, last_e);
 }
 
 void	exe_state_machine_two(t_fsm *fsm, t_token **tokens, char c, int last_e)
