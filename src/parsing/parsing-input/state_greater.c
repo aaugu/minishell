@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:53:20 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 22:10:54 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 00:28:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	state_greater_than(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '>')
 		state_type_add_buf(fsm, greater_than_d, redir_out_ap, c);
 	else if (c == '|')
-		return ;
+		parsing_error(fsm, "newline");
 	else if (c == '\'')
 		change_state_quotes(fsm, quote_s);
 	else if (c == '\"')
@@ -50,11 +50,11 @@ void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '\0')
 		finish_stop(fsm, tokens, c);
 	else if (c == '\'')
-		change_state_quotes(fsm, limiter_quotes_s);
+		change_state_quotes(fsm, quote_s);
 	else if (c == '\"')
-		change_state_quotes(fsm, limiter_quotes_d);
+		change_state_quotes(fsm, quote_d);
 	else if (c == ' ')
-		fsm->current_state = limiter_no_quotes;
+		fsm->current_state = space;
 	else if (c == '$')
 		finish_add_tmp_state(fsm, tokens, c, dollar_idle);
 	else
