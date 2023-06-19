@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:37:55 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:11:25 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:14:00 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char	*find_var_content(char *var, t_m_fsm *fsm)
 		{
 			free(buf);
 			buf = ft_strdup(fsm->env[i] + ft_strlen(var));
-
 			if (!buf)
 				return (NULL);
 			break ;
