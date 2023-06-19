@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:03:10 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 18:40:11 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 19:30:40 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ char	**ft_find_cmd(t_token *token, t_data *d)
 	if (!tmp)
 		return (NULL);
 	cmd = tmp;
+	tmp = tmp->next;
 	size = 1;
 	while (tmp && tmp->type == option)
 	{
