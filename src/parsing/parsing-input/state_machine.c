@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:02:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 18:05:11 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "parsing_input_state_machine.h"
 #include "libft.h"
 
-void	loop_state_machine(t_fsm *fsm, t_token **tokens, char *str, int last_e);
 void	exe_state_machine_one(t_fsm *fsm, t_token **tokens, char c, int last_e);
 void	exe_state_machine_two(t_fsm *fsm, t_token **tokens, char c, int last_e);
 
@@ -25,34 +24,28 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
 {
 	t_token	*tokens;
 	t_fsm	fsm;
+	int		i;
 
 	create_state_machine(&fsm, envp, env_size, input);
 	init_state_machine(&fsm);
 	tokens = NULL;
-	loop_state_machine(&fsm, &tokens, input, last_exit);
+	i = 0;
+	while (i <= (int)ft_strlen(input))
+	{
+		if (fsm.current_state == error || fsm.current_state == malloc_err)
+			break ;
+		else
+			exe_state_machine_one(&fsm, &tokens, input[i], last_exit);
+		i++;
+	}
 	if (fsm.current_state == error || fsm.current_state == malloc_err)
 		clear_tokens(&tokens);
 	if (fsm.current_state == error)
-		create_content_empty_token(&fsm, &tokens);
+		tokens = create_content_empty_token(&fsm);
 	else if (fsm.current_state == malloc_err)
 		tokens = NULL;
 	clear_state_machine(&fsm);
 	return (tokens);
-}
-
-void	loop_state_machine(t_fsm *fsm, t_token **tokens, char *str, int last_e)
-{
-	int	i;
-
-	i = 0;
-	while (i <= (int)ft_strlen(str))
-	{
-		if (fsm->current_state == error || fsm->current_state == malloc_err)
-			break ;
-		else
-			exe_state_machine_one(fsm, tokens, str[i], last_e);
-		i++;
-	}
 }
 
 /* Tells state machine what to do depending on current state. Method flexible,

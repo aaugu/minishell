@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 13:55:03 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 16:55:37 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 	t_token	*new_token;
 	t_token	*prev;
 
-	if (fsm->buf_size || (fsm->buf_size == 0 && fsm->quotes == true)
-		|| (c == '\0' && *tokens == NULL))
+	if ((fsm->buf_size == 0 && *tokens) || (c == '\0' && *tokens == NULL)
+		|| fsm->buf_size)
 	{
 		new_token = create_node(fsm);
 		if (!new_token)
