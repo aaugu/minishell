@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:42:21 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 18:08:48 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 19:01:47 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,8 @@ void	clear_tokens(t_token **tokens)
 		return ;
 	while (*tokens != NULL)
 	{
-		if ((*tokens)->next)
-			next = (*tokens)->next;
-		if ((*tokens)->content != NULL)
+		next = (*tokens)->next;
+		if ((*tokens)->content)
 			free((*tokens)->content);
 		free(*tokens);
 		*tokens = next;
