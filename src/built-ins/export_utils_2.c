@@ -48,26 +48,27 @@ char	*ft_dup_export(char **export, t_data *d, int *i, int j)
 /* ft_does_it_exist:
  *	renvoie le numéro de la ligne si l'export demandé existe déjà.
  */
-int    ft_does_it_exist(int i, int j, char **export, t_data *data)
+int	ft_does_it_exist(int i, int j, char **export, t_data *data)
 {
-    int    n;
+	int	n;
 
-    n = 0;
-    while (n < i)
-    {
-        if (ft_strncmp(export[n], data->cmd[j], len_equal(data->cmd[j])) == 0)
-        {
-            if (ft_strchr(data->cmd[j], '=') == 0)
-            {
-                if (len_equal(export[n]) == len_equal(data->cmd[j]))
-                    return (n);
-            }
-            else if (len_equal(export[n]) == len_equal(ft_strtrim(data->cmd[j], "=")))
-                return (n);
-        }
-        n++;
-    }
-    return (-1);
+	n = 0;
+	while (n < i)
+	{
+		if (ft_strncmp(export[n], data->cmd[j], len_equal(data->cmd[j])) == 0)
+		{
+			if (ft_strchr(data->cmd[j], '=') == 0)
+			{
+				if (len_equal(export[n]) == len_equal(data->cmd[j]))
+					return (n);
+			}
+			else if (len_equal(export[n])
+				== len_equal(ft_strtrim(data->cmd[j], "=")))
+				return (n);
+		}
+		n++;
+	}
+	return (-1);
 }
 
 /* ft_add:
