@@ -6,18 +6,21 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:44:53 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/16 10:20:39 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:11:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include <stdlib.h>
-#include "../../../includes/minishell.h"
-#include "../../../includes/parsing_meta.h"
-#include "../../../includes/parsing_meta_state_machine.h"
-#include "../../../libft/libft.h"
+#include "minishell.h"
+#include "parsing_meta.h"
+#include "parsing_meta_state_machine.h"
+#include "libft.h"
 
+void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *str);
+void	init_meta_state_machine(t_m_fsm *fsm);
 void	execute_meta_s_m(t_m_fsm *fsm, t_meta **metas, char c, int last_e);
+void	clear_meta_state_machine(t_m_fsm *fsm);
 
 /* Finite state machine. Will loop on each char to know how to separate and
 interpret as meta char each element in a lineary way. */

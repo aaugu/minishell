@@ -6,12 +6,12 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 16:24:46 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:19:11 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/print_error.h"
+#include "minishell.h"
+#include "print_error.h"
 
 /* ft_exec_cmd:
  *	Ne fait rien dans les cas des builtin unset et cd ou exit sans option.

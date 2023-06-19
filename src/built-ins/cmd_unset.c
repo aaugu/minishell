@@ -6,7 +6,7 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:01:35 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:18:50 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdio.h>
-#include "../../includes/print_error.h"
-#include "../../includes/minishell.h"
-#include "../../includes/built_ins.h"
-#include "../../libft/libft.h"
+#include "print_error.h"
+#include "minishell.h"
+#include "built_ins.h"
+#include "libft.h"
 
 void	remove_var_env(t_data *d);
 int		is_var_present(t_data *data, char *variable);

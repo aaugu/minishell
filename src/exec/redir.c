@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_less_child:
  *	Ouvre le fichier donné en in puis redirige stdin par son fd. 

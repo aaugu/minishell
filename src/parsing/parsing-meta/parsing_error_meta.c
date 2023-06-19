@@ -6,14 +6,14 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 11:11:22 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 13:38:45 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:25 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <errno.h>
-#include "../../../includes/parsing_meta_state_machine.h"
-#include "../../../includes/minishell.h"
+#include "parsing_meta_state_machine.h"
+#include "minishell.h"
 
 /* Handles error in state machine : Delivers error message and set state of
 state machine to error */

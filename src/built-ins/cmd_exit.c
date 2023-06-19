@@ -6,15 +6,15 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:15 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/16 16:27:21 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:18:26 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include "../../includes/minishell.h"
-#include "../../includes/built_ins.h"
-#include "../../includes/print_error.h"
-#include "../../libft/libft.h"
+#include "minishell.h"
+#include "built_ins.h"
+#include "print_error.h"
+#include "libft.h"
 
 void	get_exit_code(t_data *data);
 

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 11:31:41 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 09:52:45 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-#include "../../includes/parsing_meta.h"
-#include "../../includes/parsing_input.h"
+#include "minishell.h"
+#include "parsing_meta.h"
+#include "parsing_input.h"
 
 /* ft_free_child_doc:
- *	free tout ce qu'il faut 
+ *	free tout ce qu'il faut
  */
 void	ft_free_child_doc(t_data *data, t_token *token)
 {

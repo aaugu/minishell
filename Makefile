@@ -38,15 +38,18 @@ SRCS_FILES = 	main.c \
 				exec/redir.c \
 				free/clear_tokens.c \
 				free/clear_minishell.c \
-				parsing/meta_interpret.c \
                 parsing/parsing-input/actions_finish_buf.c \
 				parsing/parsing-input/actions_finish_utils.c \
-                parsing/parsing-input/actions_modify.c \
+                parsing/parsing-input/actions_modify_utils.c \
+				parsing/parsing-input/actions_modify.c \
 				parsing/parsing-input/parsing_error.c \
 				parsing/parsing-input/parsing_input.c \
+				parsing/parsing-input/state_dollar_idle.c \
+				parsing/parsing-input/state_dollar_quotes.c \
                 parsing/parsing-input/state_greater.c \
                 parsing/parsing-input/state_idle.c \
                 parsing/parsing-input/state_less.c \
+				parsing/parsing-input/state_limiter.c \
                 parsing/parsing-input/state_machine_utils.c \
                 parsing/parsing-input/state_machine.c \
                 parsing/parsing-input/state_pipe.c \
@@ -67,7 +70,7 @@ SRCS = $(addprefix ./src/, $(SRCS_FILES))
 OBJS = $(SRCS:%.c=%.o)
 
 %.o : %.c
-			@$(CC) $(FLAGS) -c $< -o $@
+			@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
 
 all:		$(NAME)
 

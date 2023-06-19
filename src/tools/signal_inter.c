@@ -6,11 +6,11 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:41:22 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 14:59:22 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:20:25 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 void	signal_reset_prompt(int signo)
 {

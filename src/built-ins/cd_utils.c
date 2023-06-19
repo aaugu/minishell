@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_oldpwd:
  *	Modifie l'env pour ajouter une ligne OLDPWD

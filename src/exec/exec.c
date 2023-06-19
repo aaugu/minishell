@@ -6,11 +6,11 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:15:04 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 10:51:33 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:20:00 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_exec_command:
  *	Regarde la présence et le nombre de heredoc.
@@ -25,7 +25,7 @@ static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
 
 	tmp = t;
 	while (tmp)
-	{	
+	{
 		d->heredoc.ctrlc = 0;
 		d->heredoc.here_doc_nbr = ft_heredoc_nbr(tmp);
 		d->heredoc.flag_doc = ft_is_doc_last(tmp);
@@ -51,14 +51,13 @@ static void	ft_exec_command(t_token *t, t_data *d, pid_t *pid)
  */
 void	ft_wait(pid_t *pid, t_data *data)
 {
-	pid_t	wpid;
 	int		i;
 	int		status;
 
 	i = 0;
 	while (i < data->pipe_nbr + 1)
 	{
-		wpid = waitpid(pid[i], &status, 0);
+		waitpid(pid[i], &status, 0);
 		if (WIFEXITED(status) && g_exit_code == 0)
 			data->exit_code = WEXITSTATUS(status);
 		i++;
@@ -68,7 +67,7 @@ void	ft_wait(pid_t *pid, t_data *data)
 /* ft_command:
  *	Si besoin créé les pipe et stock le FD dans un tableau.
  *	Lance l'execution des commands.
- *	Attend la fin de chaque process. 
+ *	Attend la fin de chaque process.
  */
 static void	ft_command(t_token *token, t_data *data)
 {
@@ -115,7 +114,7 @@ void	ft_check_pwd(t_data *data)
 }
 
 /* ft_executor:
- *	Reçois le User-Input parsé sour la forme d'une structure token. 
+ *	Reçois le User-Input parsé sour la forme d'une structure token.
  *	Compte le nombre de pipe ainsi que de commande.
  *	Puis ràz la cmd_path et le child.
  *	Lance l'execution de la commande puis check le PWD.

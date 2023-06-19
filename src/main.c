@@ -6,12 +6,12 @@
 /*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:02:17 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:22:00 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-#include "../includes/parsing_input.h"
+#include "minishell.h"
+#include "parsing_input.h"
 
 static char	**ft_copy_env(char **env)
 {
@@ -49,13 +49,9 @@ static void	ft_good_input(t_data *d)
 		t = parsing_input(d->user_input, d->envp, d->env_size, d->exit_code);
 		if (!t)
 			clear_minishell(d, g_exit_code);
-		if (t->content != NULL)
-		{	
-			meta_interpret(d, t);
+		if (t && t->content)
 			ft_executor(t, d);
-		}
-		else if (ft_strlen(t->content) == 0 && !t->next)
-			ft_executor(t, d);
+		// else if (ft_strlen(t->content) == 0 && !t->next)
 		if (d->user_input)
 			free(d->user_input);
 		if (t)
