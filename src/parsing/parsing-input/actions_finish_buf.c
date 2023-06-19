@@ -3,22 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   actions_finish_buf.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/16 13:24:01 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 13:55:03 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include "../../../includes/parsing_input_state_machine.h"
-#include "../../../libft/libft.h"
+#include "parsing_input_state_machine.h"
+#include "parsing_meta.h"
+#include "libft.h"
+#include "minishell.h"
 
-char	*get_final_buffer(char *buf, int buf_size, t_type type, int meta);
 t_token	*create_node(t_fsm *fsm);
 t_token	*lst_last(t_token *token);
+void	check_ambiguous_redirect(t_token *new_token);
 void	get_next_type(t_fsm *fsm, char c);
 
 /* Finish buffer, create a node of tokens list and set its content. Then reset
@@ -61,7 +63,6 @@ t_token	*create_node(t_fsm *fsm)
 	if (!token->content)
 		parsing_error(fsm, 0);
 	token->type = fsm->type;
-	token->meta = fsm->meta;
 	token->quotes = fsm->quotes;
 	token->next = NULL;
 	token->prev = NULL;
@@ -79,7 +80,7 @@ t_token	*lst_last(t_token *token)
 /* Define type of next element depending on previous type saved */
 void	get_next_type(t_fsm *fsm, char c)
 {
-	if (fsm->type == redir_in || fsm->type == heredoc || fsm->type == redir_out \
+	if (fsm->type == redir_in || fsm->type == heredoc || fsm->type == redir_out
 		|| fsm->type == redir_out_ap)
 	{
 		if (fsm->type == redir_in && c == '>')

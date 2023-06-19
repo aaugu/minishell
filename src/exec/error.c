@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 15:10:58 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/16 14:10:37 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "minishell.h"
 
 /* ft_cmd_error:
  *	Ecrit un message dans la sortie erreur pour un  command not found.
@@ -43,11 +43,11 @@ void	ft_child_error(t_token *token, t_data *d, int flag)
 		|| flag == ERR_DUP2)
 		ft_fd_error(token, d, flag);
 	else if (flag == ERR_PID)
-		;
+		return ;
 }
 
 /* ft_too_much_pipe:
- *	Ecrit un message d'erreur si la limit d'ouverture de pipe est atteinte 
+ *	Ecrit un message d'erreur si la limit d'ouverture de pipe est atteinte
  */
 void	ft_too_much_pipe(int *fd_array, int pipe_nbr)
 {

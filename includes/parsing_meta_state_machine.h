@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 14:08:12 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/15 14:33:34 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 01:33:51 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,17 @@ typedef struct s_m_fsm
 ******************************************************************************/
 
 t_meta	*meta_state_machine(char *str, char **env, int env_size, int last_exit);
-t_meta	*heredoc_state_machine(char *str, char **env, int env_size, int last_e);
-
-/* ------------------------------ FSM FUNCTIONS ------------------------------*/
-void	create_meta_fsm(t_m_fsm *fsm, char **env, int env_size, char *s);
 void	init_meta_state_machine(t_m_fsm *fsm);
-void	clear_meta_state_machine(t_m_fsm *fsm);
 
-/* ------------------------------ COMMON STATES ------------------------------*/
+/* ---------------------------------- STATES ---------------------------------*/
 void	state_idle_meta(t_m_fsm *fsm, t_meta **meta_strs, char c);
 void	state_dollar(t_m_fsm *fsm, t_meta **meta_strs, char c, int last_exit);
-
-/* ------------------------------ SPECIFIC STATE -----------------------------*/
 void	state_chars(t_m_fsm *fsm, t_meta **meta_strs, char c);
-void	state_chars_heredoc(t_m_fsm *fsm, t_meta **meta_strs, char c);
 
 /* --------------------------------- ACTIONS ---------------------------------*/
 void	add_to_buf_meta(t_m_fsm *fsm, char c);
-void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs);
+void	finish_buf_meta(t_m_fsm *fsm, t_meta **meta_strs, char c);
+void	finish_state_meta(t_m_fsm *fsm, t_meta **meta_strs, int state, char c);
 void	get_var_content(t_m_fsm *fsm);
 
 void	parsing_error_meta(t_state *current_state);
