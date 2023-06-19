@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:09:42 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:18:50 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,29 @@ considered an error and does not cause the shell to abort.
  */
 int	cmd_unset(t_data *data)
 {
-	if (ft_strs_len(data->cmd) <= 1)
-		data->exit_code = print_err("unset: not enough arguments\n", 0);
-	else
-		remove_var_env(data);
+	int	prob;
+	int	i;
+
+	i = 1;
+	prob = 0;
+	while (data->cmd[i])
+	{
+		if (ft_strs_len(data->cmd) <= 1)
+			data->exit_code = 0;
+		else if (data->cmd[i] && (ft_isalpha(data->cmd[i][0]) == 0
+			&& data->cmd[i][0] != '_'))
+		{
+			write(2, "minishell: unset: ", 18);
+			write(2, data->cmd[i], ft_strlen(data->cmd[i]));
+			write(2, ": not a valid identifier\n", 25);
+			prob = 1;
+		}
+		else
+			remove_var_env(data);
+		if (prob == 1)
+			data->exit_code = 1;
+	i++;
+	}
 	return (data->exit_code);
 }
 
@@ -79,9 +98,11 @@ int	is_var_present(t_data *data, char *variable)
 		return (-1);
 	}
 	i = 0;
-	while (i < data->env_size)
+	while (data->envp[i])
 	{
-		if (ft_strnstr(data->envp[i], var, ft_strlen(var)))
+		if (ft_strnstr(data->envp[i], var, ft_strlen(var))
+			|| (ft_strncmp(data->envp[i], variable, ft_strlen(variable)) == 0
+				&& ft_strlen(data->envp[i]) == ft_strlen(variable)))
 		{
 			free(data->envp[i]);
 			data->envp[i] = NULL;

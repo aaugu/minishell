@@ -55,7 +55,8 @@ int	ft_does_it_exist(int i, int j, char **export, t_data *data)
 	n = 0;
 	while (n < i)
 	{
-		if (ft_strncmp(export[n], data->cmd[j], len_equal(data->cmd[j])) == 0)
+		if (ft_strncmp(export[n], data->cmd[j], len_equal(data->cmd[j])) == 0
+			&& ft_strlen(export[n]) == ft_strlen(data->cmd[j]))
 			return (n);
 		n++;
 	}

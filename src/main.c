@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 10:58:27 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:10:07 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:22:00 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	ft_good_input(t_data *d)
 			clear_minishell(d, g_exit_code);
 		if (t && t->content)
 			ft_executor(t, d);
+		// else if (ft_strlen(t->content) == 0 && !t->next)
 		if (d->user_input)
 			free(d->user_input);
 		if (t)
@@ -95,6 +96,7 @@ static void	ft_readline(char **envp, t_data *data)
 	data->exit_code = 0;
 	while (1)
 	{
+		termios_remove_ctrl();
 		set_signals_interactive();
 		data->user_input = readline("minishell > ");
 		set_signals_noninteractive();

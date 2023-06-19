@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   child.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:50:08 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 15:09:32 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 15:19:11 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_exec_cmd(t_token *tmp, t_data *data)
 	}
 	else if (data->cmd_path)
 	{
+		termios_restore_ctrl();
 		execve(data->cmd_path, data->cmd, data->envp);
 		ft_child_error(tmp, data, ERR_EXECVE);
 	}
