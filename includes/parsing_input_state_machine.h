@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 22:56:08 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 14:28:45 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,12 @@ void	state_type_add_buf(t_fsm *fsm, t_state state, t_type type, char c);
 void	change_state_quotes(t_fsm *fsm, t_state state);
 void	change_buf_to_var_content(t_fsm *fsm);
 void	interpret_var_join(t_fsm *fsm);
-void	join_var_to_buf(t_fsm *fsm, char *tmp);
+void	join_var_to_buf(t_fsm *fsm, char *save);
 void	tmp_exit_code_stop_char(t_fsm *fsm, int last_exit);
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add_state(t_fsm *fsm, t_token **tokens, char c, int state);
+void	finish_add_tmp_state(t_fsm *fsm, t_token **tokens, char c, int state);
 void	finish_stop(t_fsm *fsm, t_token **tokens, char c);
 
 /* ------------------------------ ERROR MESSAGES -----------------------------*/

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:42:25 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/18 13:36:58 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 14:29:36 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	state_pipe(t_fsm *fsm, t_token **tokens, char c)
 		fsm->current_state = idle;
 	else if (c == '\0')
 		parsing_error(fsm, "newline");
+	else if (c == '$')
+		finish_add_tmp_state(fsm, tokens, c, dollar_idle);
 	else
 		finish_add_state(fsm, tokens, c, idle);
 }
