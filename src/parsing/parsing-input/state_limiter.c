@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:37:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 00:30:16 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 11:19:12 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	state_limiter_quotes_s(t_fsm *fsm, t_token **tokens, char c)
 	if (c == '\'')
 	{
 		finish_buf(fsm, tokens, c);
-		fsm->current_state = limiter_no_quotes;
+		fsm->current_state = idle;
 	}
 	else
 		add_to_buf(fsm, c);
@@ -52,7 +52,7 @@ void	state_limiter_quotes_d(t_fsm *fsm, t_token **tokens, char c)
 	if (c == '\"')
 	{
 		finish_buf(fsm, tokens, c);
-		fsm->current_state = limiter_no_quotes;
+		fsm->current_state = idle;
 	}
 	else
 		add_to_buf(fsm, c);

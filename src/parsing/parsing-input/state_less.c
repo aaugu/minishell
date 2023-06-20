@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_less.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 09:51:18 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/20 11:22:09 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	state_less_than_d(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '\0')
 		finish_stop(fsm, tokens, c);
 	else if (c == ' ')
-		fsm->current_state = idle;
+		return ;
 	else
 		finish_add_state(fsm, tokens, c, limiter_no_quotes);
 }
