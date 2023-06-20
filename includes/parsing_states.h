@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/26 15:10:52 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 00:57:17 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 10:02:28 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 typedef enum e_state
 {
 	idle,
+	space,
 	less_than,
 	less_than_d,
 	greater_than,

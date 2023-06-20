@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_input_state_machine.h                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 09:39:34 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/20 10:06:32 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_token	*create_content_empty_token(t_fsm *fsm);
 /* Each function will set current state and decide to perform an action if
 needed */
 void	state_idle(t_fsm *fsm, t_token **tokens, char c);
+void	state_space(t_fsm *fsm, t_token **tokens, char c);
 void	state_less_than(t_fsm *fsm, t_token **tokens, char c);
 void	state_less_than_d(t_fsm *fsm, t_token **tokens, char c);
 void	state_greater_than(t_fsm *fsm, t_token **tokens, char c);
