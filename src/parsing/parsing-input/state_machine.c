@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
+/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 09:54:12 by lvogt            ###   ########.fr       */
+/*   Updated: 2023/06/20 10:07:10 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,6 @@ void	exe_state_machine_two(t_fsm *fsm, t_token **tokens, char c, int last_e)
 		state_limiter_quotes_s(fsm, tokens, c);
 	else if (fsm->current_state == limiter_quotes_d)
 		state_limiter_quotes_d(fsm, tokens, c);
+	else if (fsm->current_state == space)
+		state_space(fsm, tokens, c);
 }
