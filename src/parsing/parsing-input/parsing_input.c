@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_input.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 11:18:11 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 01:37:46 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 09:55:24 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,23 @@ void	check_end_syntax_error(t_token **tokens)
 	t_token	*tmp;
 
 	if (tokens)
-		tmp = lst_last(*tokens);
-	if (!ft_strcmp(tmp->content, "|"))
-		printf("minishell: syntax error near unexpected token `|'\n");
-	else if (!ft_strcmp(tmp->content, "<"))
-		printf("minishell: syntax error near unexpected token `<'\n");
-	else if (!ft_strcmp(tmp->content, ">"))
-		printf("minishell: syntax error near unexpected token `>'\n");
-	if (!ft_strcmp(tmp->content, "|") || !ft_strcmp(tmp->content, "<")
-		|| !ft_strcmp(tmp->content, ">"))
 	{
-		clear_tokens(tokens);
-
-		*tokens = (t_token *)malloc(sizeof(t_token));
-		(*tokens)->content = NULL;
-		(*tokens)->next = NULL;
-		g_exit_code = 258;
+		tmp = lst_last(*tokens);
+		if (!ft_strcmp(tmp->content, "|"))
+			printf("minishell: syntax error near unexpected token `|'\n");
+		else if (!ft_strcmp(tmp->content, "<") || !ft_strcmp(tmp->content, ">")
+			|| !ft_strcmp(tmp->content, "<<") || !ft_strcmp(tmp->content, ">>"))
+			printf("minishell: syntax error near unexpected token `newline'\n");
+		if (!ft_strcmp(tmp->content, "|") || !ft_strcmp(tmp->content, "<")
+			|| !ft_strcmp(tmp->content, ">") || !ft_strcmp(tmp->content, "<<")
+			|| !ft_strcmp(tmp->content, ">>"))
+		{
+			clear_tokens(tokens);
+			*tokens = (t_token *)malloc(sizeof(t_token));
+			(*tokens)->content = NULL;
+			(*tokens)->next = NULL;
+			g_exit_code = 258;
+		}
 	}
 }
 

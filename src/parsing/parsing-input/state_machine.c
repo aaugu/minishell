@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_machine.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 00:56:48 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 09:54:12 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ t_token	*state_machine(char *input, char **envp, int env_size, int last_exit)
 		else
 			exe_state_machine_one(&fsm, &tokens, input[i], last_exit);
 		i++;
-		// printf("char %c / tmp : %s / state %d\n", input[i], fsm.tmp, fsm.current_state);
 	}
 	if (fsm.current_state == error || fsm.current_state == malloc_err)
 		clear_tokens(&tokens);

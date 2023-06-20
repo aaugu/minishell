@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_input_state_machine.h                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 01:14:40 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 09:39:34 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c);
 void	state_quote_s(t_fsm *fsm, char c);
 void	state_quote_d(t_fsm *fsm, char c);
 void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
-void	state_spaces(t_fsm *fsm, t_token **tokens, char c);
 void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit);
 void	state_dollar_quotes(t_fsm *fsm, char c, int last_exit);
 void	state_meta_chars(t_fsm *fsm, char c);

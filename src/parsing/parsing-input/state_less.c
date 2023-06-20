@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   state_less.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 09:55:31 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 00:53:00 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 09:51:18 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ void	state_less_than_d(t_fsm *fsm, t_token **tokens, char c)
 {
 	if (c == ' ' || c == '\'' || c == '\"')
 		finish_buf(fsm, tokens, c);
-	if (c == '<' || c == '>' || c == '|')
+	if (c == '>' || c == '|')
 		parsing_error(fsm, &c);
+	else if (c == '<')
+		parsing_error(fsm, "newline");
 	else if (c == '\'')
 		change_state_quotes(fsm, limiter_quotes_s);
 	else if (c == '\"')
