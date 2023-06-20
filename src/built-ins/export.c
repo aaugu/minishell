@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 11:22:33 by lvogt             #+#    #+#             */
-/*   Updated: 2023/06/19 15:09:42 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 22:54:02 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	ft_env_alph_order(t_data *data)
  *	si rien n'est demandé print l'env dans l'ordre alphabétique
  *	dans l'autre cas compte le nombre d'export demandé
  *	si nous ne sommes pas dans le cas de pipe
- *	ajoute la ligne 
+ *	ajoute la ligne
  */
 int	ft_export(t_data *data)
 {

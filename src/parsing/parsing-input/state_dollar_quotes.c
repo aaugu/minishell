@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 15:59:36 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 15:01:35 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 23:23:15 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	dollar_quotes_filled(t_fsm *fsm, char c)
 	else
 	{
 		interpret_var_join(fsm);
+		add_to_buf(fsm, c);
 		fsm->current_state = quote_d;
 	}
 }

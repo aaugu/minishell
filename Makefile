@@ -1,6 +1,6 @@
 NAME = minishell
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 INCLUDE = -I includes -I libft
 LIB = -Llibft -lft -lreadline

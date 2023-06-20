@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 16:38:09 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 11:55:32 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 23:48:49 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,15 @@ void	state_dollar(t_m_fsm *fsm, t_meta **meta_strs, char c, int last_exit)
 {
 	if (c == '?')
 		meta_exit_code(fsm, meta_strs, last_exit, c);
-	else if (c == '$' || ft_isdigit(c) || (!ft_isalpha(c) && c != '_'))
+	else if (c == '\0')
+		finish_state_meta(fsm, meta_strs, stop, c);
+	else if (ft_isdigit(c) || c == '$')
 	{
 		fsm->buf[0] = '\0';
 		finish_state_meta(fsm, meta_strs, idle, c);
 	}
-	else if (c == '\0')
-		finish_state_meta(fsm, meta_strs, stop, c);
 	else if (ft_isalpha(c) || c == '_')
 	{
-		fsm->buf[0] = '\0';
 		add_to_buf_meta(fsm, c);
 		fsm->current_state = chars;
 	}
