@@ -57,13 +57,7 @@ int	ft_does_it_exist(int i, int j, char **export, t_data *data)
 	{
 		if (ft_strncmp(export[n], data->cmd[j], len_equal(data->cmd[j])) == 0)
 		{
-			if (ft_strchr(data->cmd[j], '=') == 0)
-			{
-				if (len_equal(export[n]) == len_equal(data->cmd[j]))
-					return (n);
-			}
-			else if (len_equal(export[n])
-				== len_equal(ft_strtrim(data->cmd[j], "=")))
+			if (len_equal(export[n]) == len_equal(data->cmd[j]))
 				return (n);
 		}
 		n++;
