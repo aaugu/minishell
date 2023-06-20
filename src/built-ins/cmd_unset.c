@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_unset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
+/*   By: lvogt <marvin@42lausanne.ch>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 11:02:17 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 17:55:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 09:30:33 by lvogt            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int	cmd_unset(t_data *data)
 		else if (data->cmd[i] && (ft_isalpha(data->cmd[i][0]) == 0
 			&& data->cmd[i][0] != '_'))
 		{
-			write(2, "minishell: unset: `", 18);
+			write(2, "minishell: unset: `", 19);
 			write(2, data->cmd[i], ft_strlen(data->cmd[i]));
-			write(2, "': not a valid identifier\n", 25);
+			write(2, "': not a valid identifier\n", 26);
 			prob = 1;
 		}
 		else
