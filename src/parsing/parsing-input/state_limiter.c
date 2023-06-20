@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:37:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 11:19:12 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 13:28:16 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	state_limiter_no_quotes(t_fsm *fsm, t_token **tokens, char c)
 {
 	if (c == '\0')
 		finish_stop(fsm, tokens, c);
-	if (c == '>' || c == '<' || c == '|' || c == ' ')
+	if (c == '>' || c == '<' || c == '|')
 		finish_add(fsm, tokens, c);
 	if (c == '<')
 		change_state_and_type(fsm, less_than, redir_in);
@@ -28,6 +28,11 @@ void	state_limiter_no_quotes(t_fsm *fsm, t_token **tokens, char c)
 		change_state_quotes(fsm, limiter_quotes_s);
 	else if (c == '\"')
 		change_state_quotes(fsm, limiter_quotes_d);
+	else if (c == ' ')
+	{
+		finish_buf(fsm, tokens, c);
+		fsm->current_state = idle;
+	}
 	else
 		add_to_buf(fsm, c);
 }

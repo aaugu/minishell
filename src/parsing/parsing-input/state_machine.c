@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:54:32 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 10:07:10 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 13:24:45 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ void	exe_state_machine_one(t_fsm *fsm, t_token **tokens, char c, int last_e)
 	else if (fsm->current_state == greater_than_d)
 		state_greater_than_d(fsm, tokens, c);
 	else if (fsm->current_state == quote_s)
-		state_quote_s(fsm, c);
+		state_quote_s(fsm, tokens, c);
 	else if (fsm->current_state == quote_d)
-		state_quote_d(fsm, c);
+		state_quote_d(fsm, tokens, c);
 	else
 		exe_state_machine_two(fsm, tokens, c, last_e);
 }

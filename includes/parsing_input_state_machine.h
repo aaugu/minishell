@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 10:06:32 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 13:20:19 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	state_less_than(t_fsm *fsm, t_token **tokens, char c);
 void	state_less_than_d(t_fsm *fsm, t_token **tokens, char c);
 void	state_greater_than(t_fsm *fsm, t_token **tokens, char c);
 void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c);
-void	state_quote_s(t_fsm *fsm, char c);
-void	state_quote_d(t_fsm *fsm, char c);
+void	state_quote_s(t_fsm *fsm, t_token **tokens, char c);
+void	state_quote_d(t_fsm *fsm, t_token **tokens, char c);
 void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
 void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit);
 void	state_dollar_quotes(t_fsm *fsm, char c, int last_exit);
