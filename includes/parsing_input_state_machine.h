@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 11:51:45 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 18:01:41 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 01:14:40 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	state_greater_than_d(t_fsm *fsm, t_token **tokens, char c);
 void	state_quote_s(t_fsm *fsm, char c);
 void	state_quote_d(t_fsm *fsm, char c);
 void	state_pipe(t_fsm *fsm, t_token **tokens, char c);
+void	state_spaces(t_fsm *fsm, t_token **tokens, char c);
 void	state_dollar_idle(t_fsm *fsm, t_token **tokens, char c, int last_exit);
 void	state_dollar_quotes(t_fsm *fsm, char c, int last_exit);
 void	state_meta_chars(t_fsm *fsm, char c);
@@ -77,6 +78,9 @@ void	change_buf_to_var_content(t_fsm *fsm);
 void	interpret_var_join(t_fsm *fsm);
 void	join_var_to_buf(t_fsm *fsm, char *save);
 void	tmp_exit_code_stop_char(t_fsm *fsm, int last_exit);
+t_token	*create_node(t_fsm *fsm);
+t_token	*lst_last(t_token *token);
+void	get_next_type(t_fsm *fsm, char c);
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add(t_fsm *fsm, t_token **tokens, char c);
 void	finish_add_state(t_fsm *fsm, t_token **tokens, char c, int state);

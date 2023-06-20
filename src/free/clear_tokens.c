@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 10:42:21 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 19:01:47 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 01:37:43 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	clear_tokens(t_token **tokens)
 {
 	t_token	*next;
 
-	if (!*tokens)
-		return ;
 	while (*tokens != NULL)
 	{
 		next = (*tokens)->next;

@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:59:19 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/19 16:55:37 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/19 21:48:54 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,6 @@
 #include "libft.h"
 #include "minishell.h"
 
-t_token	*create_node(t_fsm *fsm);
-t_token	*lst_last(t_token *token);
-void	check_ambiguous_redirect(t_token *new_token);
-void	get_next_type(t_fsm *fsm, char c);
-
 /* Finish buffer, create a node of tokens list and set its content. Then reset
 state machine. Get type of next node.*/
 void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
@@ -30,8 +25,7 @@ void	finish_buf(t_fsm *fsm, t_token **tokens, char c)
 	t_token	*new_token;
 	t_token	*prev;
 
-	if ((fsm->buf_size == 0 && *tokens) || (c == '\0' && *tokens == NULL)
-		|| fsm->buf_size)
+	if ((c == '\0' && *tokens == NULL) || fsm->buf_size)
 	{
 		new_token = create_node(fsm);
 		if (!new_token)
