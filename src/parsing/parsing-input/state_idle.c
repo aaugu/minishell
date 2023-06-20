@@ -6,7 +6,7 @@
 /*   By: aaugu <aaugu@student.42lausanne.ch>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 13:25:13 by aaugu             #+#    #+#             */
-/*   Updated: 2023/06/20 10:08:33 by aaugu            ###   ########.fr       */
+/*   Updated: 2023/06/20 10:13:01 by aaugu            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ void	state_space(t_fsm *fsm, t_token **tokens, char c)
 	else if (c == '$')
 		change_state_dollar_idle(fsm, dollar_idle, fsm->type, c);
 	else
-		add_to_buf(fsm, c);
+		state_type_add_buf(fsm, idle, fsm->type, c);
 }
